@@ -25,6 +25,10 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
         </div>
     </div>
 </div>
+<svelte:head>
+    <title>Light University - The next generation of education</title>
+    <meta name="description" content="The next generation of education - powered by the government of Lumina">
+</svelte:head>
 <style lang="stylus">
 @import "variables"
 
@@ -34,14 +38,14 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
     align-items center
     .inner
         display flex
+        gap 16px
         flex-direction column
         align-items flex-start
-        gap 16px
         width 100%
         justify-content center
         max-width 1200px
         &.padding
-            padding 140px 0
+            padding 140px 16px
         h1
             font-size 50px
             max-width 600px
