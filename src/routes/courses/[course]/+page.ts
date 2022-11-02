@@ -1,0 +1,10 @@
+import type { PageLoad } from "./$types"
+
+
+export const load: PageLoad = async ({ params }) => {
+    return {
+        props: {
+            course: params.course
+        }
+    }
+}

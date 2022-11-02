@@ -26,12 +26,12 @@
 		"vite": "^3.1.0"
 	},
 	"dependencies": {
-        "marked": "^4.0.19",
-        "postcss": "8.4.12",
-        "schema-dts": "^1.1.0",
-        "stylus": "0.55.0",
-        "svelte-markdown": "^0.2.3",
-        "svelte-material-icons": "^2.0.2"
-    },
+		"marked": "^4.0.19",
+		"postcss": "8.4.12",
+		"schema-dts": "^1.1.0",
+		"stylus": "0.55.0",
+		"svelte-markdown": "^0.2.3",
+		"svelte-material-icons": "^2.0.2"
+	},
 	"type": "module"
 }

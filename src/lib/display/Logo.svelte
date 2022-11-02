@@ -1,10 +1,12 @@
 <script lang="ts">
-import Reiterate from "svelte-material-icons/Reiterate.svelte"
+import LogoIcon from "./LogoIcon.svelte";
+
+export let size = "1em";
 
 </script>
 <a href="/" class="logo">
     <div class="icon">
-        <Reiterate/>
+        <LogoIcon {size}/>
     </div>
 </a>
 <style lang="stylus">

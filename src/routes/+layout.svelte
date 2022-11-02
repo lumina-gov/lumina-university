@@ -45,5 +45,11 @@
         min-height 100%
         font-family  'Noto Sans'
         font-weight 500
+        display flex
+        flex-direction column
 
+main
+    display flex
+    flex-direction column
+    flex 1
 </style>

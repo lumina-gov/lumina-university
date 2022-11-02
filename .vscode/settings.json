@@ -2,10 +2,10 @@
     "files.exclude": {
         "**/.vscode": true,
     },
-    // "eslint.validate": [
-    //     "javascript",
-    //     "svelte"
-    // ],
+    "eslint.validate": [
+        "javascript",
+        "svelte"
+    ],
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode",
         // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
@@ -13,5 +13,5 @@
     "editor.codeActionsOnSave": {
         "source.fixAll": true
     },
-    // "svelte.enable-ts-plugin": true,
+    "svelte.enable-ts-plugin": true,
 }

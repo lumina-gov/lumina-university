@@ -1,28 +1,38 @@
 <script lang="ts">
-import AccountPicker from "$lib/controls/AccountPicker.svelte";
-    import Icon from "$lib/display/Icon.svelte";
+import Icon from "$lib/display/Icon.svelte"
 import Logo from "$lib/display/Logo.svelte"
-import Profile from "$lib/display/Profile.svelte";
+import Profile from "$lib/display/Profile.svelte"
 import Slash from "svelte-material-icons/SlashForward.svelte"
-
-let project_name = "lumina-site"
 </script>
 <header>
     <div class="left">
-        <Logo/>
-        <Icon icon={Slash} opacity="0.2" size="18px"/>
-        <AccountPicker/>
-        <Icon icon={Slash} opacity="0.2" size="18px"/>
-        <div class="project">{ project_name }</div>
+        <Logo size="48px"/>
+        <div class="text">
+            <div class="light">
+                Light
+            </div>
+            <div class="university">
+                University
+            </div>
+        </div>
+        <!-- <Icon icon={Slash} opacity="0.2" size="24px"/> -->
+        <!-- <AccountPicker/> -->
     </div>
     <div class="right">
-        <a href="/about">Deployments</a>
-        <a href="/">Settings</a>
         <Profile/>
     </div>
 </header>
 <style lang="stylus">
 @import "variables"
+
+.text
+    font-weight 800
+    text-transform uppercase
+    .light
+        font-size 22px
+        letter-spacing 5px
+    .university
+        font-size 14px
 
 .left
     align-items center
