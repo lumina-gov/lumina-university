@@ -1,58 +1,49 @@
-<script>
-	import Header from '$lib/header/Header.svelte';
-  import { webVitals } from '$lib/vitals';
-  import { browser } from '$app/env';
-  import { page } from '$app/stores';
-  import '../app.css';
+<script lang="ts">
+    import AlertBar from "./AlertBar.svelte"
+    import Header from "./Header.svelte"
+    import PageLoaderBar from "./PageLoaderBar.svelte"
 
-  let analyticsId = import.meta.env.VERCEL_ANALYTICS_ID;
-
-  $: if (browser && analyticsId) {
-    webVitals({
-      path: $page.url.pathname,
-      params: $page.params,
-      analyticsId
-    })
-  }
 </script>
-
-<Header />
-
+<Header/>
 <main>
-	<slot />
+	<slot/>
 </main>
+<PageLoaderBar/>
+<AlertBar/>
+<svelte:head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" defer>
+</svelte:head>
+<style lang="stylus">
+:global
+    @import 'normalise'
+    @import 'variables'
 
-<footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
+    html
+        display flex
+        min-height 100%
+        flex 1
+        margin 0
+        padding 0
 
-<style>
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
+    h1, h2, h3, h4, h5, h6
+        font-weight 700
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
+    a
+        text-decoration none
+        color $brand
+        &:hover
+            color lighten($brand, 10%)
 
-	footer a {
-		font-weight: bold;
-	}
+    body
+        background $dark_app
+        color white
+        flex 1
+        margin 0
+        padding 0
+        min-height 100%
+        font-family  'Noto Sans'
+        font-weight 500
 
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	}
 </style>
