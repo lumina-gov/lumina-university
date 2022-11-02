@@ -4,7 +4,9 @@ The codebase for Lumina's education platform, Light University.
 Powering the next generation of education.
 
 ## Built with
-- Svelte
+- Svelte - Frontend Framework
+- Typescript - Main programming language
+- Stylus - CSS Preprocessor
 
 ## How to run & develop
 Clone the git repository to your local machine
