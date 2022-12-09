@@ -1,0 +1,108 @@
+<script lang="ts">
+import Card from "$lib/cards/Card.svelte"
+import Settings from "svelte-material-icons/Settings.svelte"
+import Icon from "$lib/display/Icon.svelte"
+import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
+import Profile from "$lib/display/Profile.svelte"
+import type { User } from "firebase/auth"
+import { createEventDispatcher } from "svelte"
+
+const dispatch = createEventDispatcher<{ logout: void }>()
+
+export let user: User
+$: name = `${user.displayName}`
+$: email = user.email
+
+</script>
+<Card
+    reset_bg={true}>
+    <div class="account">
+        <Profile url={user.photoURL} size=48px/>
+        <div class="data">
+            <span class="name">
+                {name}
+            </span>
+            <span class="email">
+                {email}
+            </span>
+        </div>
+    </div>
+    <div class="links">
+        <a class="link" href="/dashboard/account">
+            <Icon icon={Settings} size="20px"/>
+            <span>
+                Account Settings
+            </span>
+        </a>
+        <div
+            class="link red"
+            on:click={() => dispatch("logout")}
+            role="button"
+            tabindex="0"
+            on:keypress={event => {
+                if (event.key === "Enter") {
+                    dispatch("logout")
+                }
+            }}>
+            <Icon icon={ExitToApp} size="20px"/>
+            <span>
+                Log Out
+            </span>
+        </div>
+    </div>
+</Card>
+<style lang="stylus">
+@import 'variables'
+
+.account
+    border-bottom 1px solid transparify(white, 12%)
+    padding 16px
+    width 100%
+    display flex
+    align-items center
+    gap 8px
+    .data
+        display flex
+        flex-direction column
+        gap 8px
+        line-height 1
+        .name
+            font-size 18px
+            font-weight 500
+            white-space pre-wrap
+            word-break break-all
+        .email
+            font-size 14px
+            white-space pre-wrap
+            word-break break-all
+            font-weight 500
+            opacity 0.5
+
+.links
+    width 100%
+    display flex
+    flex-direction column
+    padding 8px
+    gap 0px
+
+.link
+    display flex
+    align-items center
+    gap 8px
+    padding 8px
+    width 100%
+    border-radius 4px
+    cursor pointer
+    color white
+    font-size 16px
+    font-weight 600
+    opacity 0.5
+    &:hover
+        opacity 1
+        background transparify(white, 8%)
+    &.red
+        color $red
+        opacity 1
+        &:hover
+            color lighten($red, 20%)
+</style>

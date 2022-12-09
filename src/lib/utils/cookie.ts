@@ -6,8 +6,8 @@ export function delete_cookie(name: string) {
     set_cookie(name, null)
 }
 
-export function get_cookie_from_document (cookie_name: string) {
-    get_cookies_from_string(cookie_name, document.cookie)
+export function get_cookie_from_document (cookie_name: string): string | null {
+    return get_cookies_from_string(cookie_name, document.cookie)
 }
 
 export function get_cookies_from_string(cookie_name: string, cookies: string): string | null {

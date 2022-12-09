@@ -1,10 +1,12 @@
 <script lang="ts">
-    import AlertBar from "./AlertBar.svelte"
-    import Header from "./Header.svelte"
-    import PageLoaderBar from "./PageLoaderBar.svelte"
+    import type { PageData } from "./$types"
+import AlertBar from "./AlertBar.svelte"
+import Header from "./Header.svelte"
+import PageLoaderBar from "./PageLoaderBar.svelte"
 
+export let data: PageData
 </script>
-<Header/>
+<Header bind:user={data.user_container.user}/>
 <main>
 	<slot/>
 </main>

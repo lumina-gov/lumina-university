@@ -23,13 +23,13 @@ function handle_keyup(e: KeyboardEvent) {
 }
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <svelte:element
     this={tag}
     href={href}
     tabindex={disabled ? -1 : 0}
     on:click={clicked}
     on:keyup={handle_keyup}
+    role="button"
     class:hug
     class:disabled
     class="button {style}"

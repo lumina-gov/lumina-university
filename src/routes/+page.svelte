@@ -45,7 +45,7 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
         justify-content center
         max-width 1200px
         &.padding
-            padding 140px 16px
+            padding 140px 24px
         h1
             font-size 50px
             max-width 600px

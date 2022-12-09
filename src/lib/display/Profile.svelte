@@ -1,6 +1,7 @@
 <script lang="ts">
 export let size = "32px"
-export let url: string | undefined = undefined
+export let url: string | null = null
+
 $: profile_url = url ? url : "/assets/default-profile.svg"
 
 </script>
@@ -16,6 +17,8 @@ $: profile_url = url ? url : "/assets/default-profile.svg"
 .profile
     width var(--size)
     height var(--size)
+    min-width var(--size)
+    min-height var(--size)
     background transparify(white, 20%)
     background-size cover
     background-repeat no-repeat
