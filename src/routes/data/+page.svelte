@@ -1,33 +1,33 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
+import type { PageData } from "./$types"
 
-  export let data: PageData;
-  // see +page.ts
+export let data: PageData
+// see +page.ts
 </script>
 
 <svelte:head>
-  <title>Courses</title>
+    <title>Courses</title>
 </svelte:head>
 
 <main>
-  <h1>Courses:</h1>
+    <h1>Courses:</h1>
 
-  {#each data.courses as course}
-    <div class="course">
-      <h2>Course {course.id.slice(-2)}: {course.name}</h2>
-      <h2>Units:</h2>
+    {#each data.courses as course}
+        <div class="course">
+            <h2>Course { course.id.slice(-2) }: { course.name }</h2>
+            <h2>Units:</h2>
 
-      {#each course.units as unit}
-        <div class="unit">
-          <h2>{unit.id.slice(-2)}: {unit.name}</h2>
-          <p>Created on {new Date(unit.createdAt).toLocaleString()}</p>
+            {#each course.units as unit}
+                <div class="unit">
+                    <h2>{ unit.id.slice(-2) }: { unit.name }</h2>
+                    <p>Created on { new Date(unit.createdAt).toLocaleString() }</p>
+                </div>
+            {/each}
+
+            <p>Created on { new Date(course.createdAt).toLocaleString() }</p>
+            <!-- notice: no type warnings -->
         </div>
-      {/each}
-
-      <p>Created on {new Date(course.createdAt).toLocaleString()}</p>
-      <!-- notice: no type warnings -->
-    </div>
-  {/each}
+    {/each}
 </main>
 
 <style>
