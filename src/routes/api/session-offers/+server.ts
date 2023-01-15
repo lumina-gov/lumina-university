@@ -33,3 +33,4 @@ export const GET: RequestHandler = async () => {
     return json_as_response(session_offers)
 }
 
+export default {}

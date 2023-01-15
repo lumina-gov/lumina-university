@@ -16,9 +16,9 @@ let booking_session: SessionOfferWithTutor | null = null
 
 </script>
 {#if booking_session !== null}
-    <CentreScrim on:close={() => booking_session = null}>
+    <CentreScrim on:close={ () => booking_session = null }>
         <div class="card-wrapper">
-            <BookSession bind:session_offer={booking_session}/>
+            <BookSession bind:session_offer={ booking_session }/>
         </div>
     </CentreScrim>
 {/if}
@@ -33,14 +33,16 @@ let booking_session: SessionOfferWithTutor | null = null
         {#if authenticated}
             <h2>My sessions</h2>
             <p>Here are your upcoming sessions</p>
-            {#each sessions as session }
+            {#each sessions as session}
                 <todo/>
             {/each}
         {:else}
             <div class="card">
                 <h2>Sign up to get started</h2>
                 <p>Sign up for free and start learning today</p>
-                <a href="/signup" class="button">Sign up</a>
+                <a
+                    class="button"
+                    href="/signup">Sign up</a>
             </div>
         {/if}
     </div>
@@ -53,16 +55,16 @@ let booking_session: SessionOfferWithTutor | null = null
             <div class="session-offers">
                 {#each session_offers as session_offer}
                     <SessionOfferComp
-                        on:session={event => booking_session = event.detail}
+                        on:session={ event => booking_session = event.detail }
                         bind:session_offer/>
                 {/each}
             </div>
         {:else}
             <InfoBox
+                color="white"
                 icon={Info}
                 tag="Uh oh"
-                title="No tutoring sessions found"
-                color="white"/>
+                title="No tutoring sessions found"/>
         {/if}
     </div>
 </div>
@@ -90,7 +92,9 @@ let booking_session: SessionOfferWithTutor | null = null
     <div class="inner">
         <h2>Become a tutor</h2>
         <p>Share your knowledge and earn money</p>
-        <a href="/" class="button">Become a tutor</a>
+        <a
+            class="button"
+            href="/">Become a tutor</a>
     </div>
 </div>
 <style lang="stylus">
