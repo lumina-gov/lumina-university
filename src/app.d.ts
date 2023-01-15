@@ -14,6 +14,13 @@ declare global {
                 app: FirebaseApp
             }
         }
+
+        interface Error {
+            message: string
+            code: string
+            suberror?: Error
+        }
+
         // interface Platform {}
     }
 }

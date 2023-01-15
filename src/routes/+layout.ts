@@ -1,9 +1,9 @@
 import { browser } from "$app/environment"
 import { alerts_init } from "$lib/stores/alerts"
 import { get_cookie_from_document } from "$lib/utils/cookie"
-import { GoogleAuthProvider, signInWithCredential, type User } from "firebase/auth"
 import { auth, app } from "$lib/utils/firebase_web"
 import type { LayoutLoad } from "./$types"
+import { authenticate_user_from_credential } from "$lib/utils/auth"
 
 export const load: LayoutLoad = async ({ data, depends }) => {
     depends("app:user")
@@ -18,6 +18,7 @@ export const load: LayoutLoad = async ({ data, depends }) => {
     const alerts = alerts_init([])
 
     return {
+        auth_token,
         alerts,
         firebase: {
             app,
@@ -29,8 +30,3 @@ export const load: LayoutLoad = async ({ data, depends }) => {
     }
 }
 
-async function authenticate_user_from_credential(auth_token: string): Promise<User> {
-    const credential = GoogleAuthProvider.credential(auth_token)
-    const user_credential = await signInWithCredential(auth, credential)
-    return user_credential.user
-}

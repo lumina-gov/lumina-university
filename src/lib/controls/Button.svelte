@@ -4,6 +4,7 @@ import { createEventDispatcher, SvelteComponent } from "svelte"
 export let href: string | null = null
 export let left_icon: typeof SvelteComponent | null = null
 export let right_icon: typeof SvelteComponent | null = null
+export let openInNewTab = false
 export let style: "translucent" | "transparent" | "branded" = "branded"
 export let hug = false
 export let disabled = false
@@ -26,6 +27,7 @@ function handle_keyup(e: KeyboardEvent) {
 <svelte:element
     this={tag}
     href={href}
+    target={openInNewTab ? "_blank" : undefined}
     tabindex={disabled ? -1 : 0}
     on:click={clicked}
     on:keyup={handle_keyup}

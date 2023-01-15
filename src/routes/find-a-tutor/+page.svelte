@@ -1,16 +1,27 @@
 <script lang="ts">
 import InfoBox from "$lib/display/InfoBox.svelte"
 import type { PageData } from "./$types"
-import SessionOffer from "./SessionOffer.svelte"
+import SessionOfferComp from "./SessionOffer.svelte"
 import Info from "svelte-material-icons/Information.svelte"
+import CentreScrim from "$lib/controls/CentreScrim.svelte"
+import BookSession from "./BookSession.svelte"
+import type { SessionOfferWithTutor } from "$lib/types/session_offer"
 
 export let data: PageData
 
-let authenticated = false
+$: authenticated = data.user_container.user !== null
 let sessions: unknown[] = []
 let session_offers = data.session_offers
+let booking_session: SessionOfferWithTutor | null = null
 
 </script>
+{#if booking_session !== null}
+    <CentreScrim on:close={() => booking_session = null}>
+        <div class="card-wrapper">
+            <BookSession bind:session_offer={booking_session}/>
+        </div>
+    </CentreScrim>
+{/if}
 <div class="hero light">
     <div class="inner">
         <h1>Find a Tutor</h1>
@@ -41,7 +52,9 @@ let session_offers = data.session_offers
         {#if session_offers.length > 0}
             <div class="session-offers">
                 {#each session_offers as session_offer}
-                    <SessionOffer bind:session_offer/>
+                    <SessionOfferComp
+                        on:session={event => booking_session = event.detail}
+                        bind:session_offer/>
                 {/each}
             </div>
         {:else}
@@ -87,6 +100,10 @@ let session_offers = data.session_offers
     max-width 1200px
     width 100%
     padding 40px 16px
+
+.card-wrapper
+    width 100%
+    max-width 600px
 
 .session-offers
     display grid

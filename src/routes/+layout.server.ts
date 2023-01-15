@@ -1,12 +1,9 @@
-import { get_cookies_from_string } from "$lib/utils/cookie"
+import { get_auth_token_from_cookies } from "$lib/utils/auth"
 import type { LayoutServerLoad } from "./$types"
 
 
 export const load: LayoutServerLoad = async ({ request }) => {
-    const cookies = request.headers.get("cookie") || ""
-    const auth_token = get_cookies_from_string("token", cookies)
-
     return {
-        auth_token,
+        auth_token: get_auth_token_from_cookies(request),
     }
 }

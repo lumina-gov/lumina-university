@@ -1,43 +1,60 @@
 <script lang="ts">
 import { page } from "$app/stores"
-import PlayIcon from "$lib/display/PlayIcon.svelte"
-import { Status } from "$lib/types/course"
+import { UnitStatus, type Unit } from "$lib/types/unit"
 import CourseSidebar from "./CourseSidebar.svelte"
 
 $: course_slug = $page.params.course
 
-export let items = [
+export let items: Unit[] = [
     {
-        slug: "basics-of-energy",
+        id: "basics-of-energy",
         name: "Basics of Energy",
-        status: Status.Completed,
+        status: UnitStatus.Completed,
     },
     {
-        slug: "renewable-energy",
+        id: "renewable-energy",
         name: "Renewable Energy",
-        status: Status.InProgress
+        status: UnitStatus.InProgress,
+        subunits: [
+            {
+                id: "solar-energy",
+                name: "Solar Energy",
+                status: UnitStatus.InProgress,
+            },
+            {
+                id: "wind-energy",
+                name: "Wind Energy",
+                status: UnitStatus.NotStarted,
+            },
+            {
+                id: "geothermal-energy",
+                name: "Geothermal Energy",
+                status: UnitStatus.NotStarted,
+            },
+        ]
     },
     {
-        slug: "energy-storage",
+        id: "energy-storage",
         name: "Energy Storage",
-        status: Status.NotStarted
+        status: UnitStatus.NotStarted
     },
     {
-        slug: "electric-vehicles",
+        id: "electric-vehicles",
         name: "Electric Vehicles",
-        status: Status.NotStarted
+        status: UnitStatus.NotStarted
     },
     {
-        slug: "electric-transportation",
+        id: "electric-transportation",
         name: "Electric Transportation",
-        status: Status.NotStarted
+        status: UnitStatus.NotStarted
     },
     {
-        slug: "electricity-markets",
+        id: "electricity-markets",
         name: "Electricity Markets",
-        status: Status.NotStarted
+        status: UnitStatus.NotStarted
     },
 ]
+
 
 </script>
 <CourseSidebar

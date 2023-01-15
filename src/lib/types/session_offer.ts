@@ -8,6 +8,10 @@ export type SessionOffer = {
     max_hours: number
     created_at: Date
     is_active: boolean
+    tutor_user_id: string
+}
+
+export type SessionOfferWithTutor = SessionOffer & {
     tutor: {
         id: string
         name: string

@@ -4,10 +4,13 @@ import Button from "$lib/controls/Button.svelte"
 import Profile from "$lib/display/Profile.svelte"
 import SmallHeading from "$lib/display/SmallHeading.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import type { SessionOffer } from "$lib/types/session_offer"
+import type { SessionOfferWithTutor } from "$lib/types/session_offer"
+import { createEventDispatcher } from "svelte"
 import Calendar from "svelte-material-icons/Calendar.svelte"
 
-export let session_offer: SessionOffer
+let dispatch = createEventDispatcher<{ session: SessionOfferWithTutor }>()
+
+export let session_offer: SessionOfferWithTutor
 
 </script>
 <Card padding="16px" gap="16px" align_items_center={false}>
@@ -33,6 +36,7 @@ export let session_offer: SessionOffer
         { session_offer.description }
     </div>
     <Button
+        on:click={() => dispatch("session", session_offer)}
         right_icon={Calendar}
         style="translucent">
         Book Session

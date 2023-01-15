@@ -1,16 +1,16 @@
 <script lang="ts">
-import type { Prop } from "$lib/utils/typed_props"
+import type { Unit } from "$lib/types/unit"
 import CourseSidebarItem from "./CourseSidebarItem.svelte"
 
 export let course_slug: string
-export let items: Prop<CourseSidebarItem, "item">[] = []
+export let items: Unit[] = []
 </script>
 <div class="course-sidebar">
     {#each items as item}
         <CourseSidebarItem
-            {item}
             {course_slug}
-            />
+            {item}
+        />
     {/each}
 </div>
 <style lang="stylus">
