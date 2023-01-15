@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { PUBLIC_GRAPH_ENDPOINT } from "$env/static/public"
 import { onMount } from "svelte"
 
+let container: HTMLDivElement
 onMount(() => {
-    const container = document.getElementById("graphiql")
     const root = ReactDOM.createRoot(container)
     root.render(
         React.createElement(GraphiQL, {
@@ -33,15 +34,5 @@ onMount(() => {
 </svelte:head>
 
 <div
-    id="graphiql"
-    style:height="100vh"
-    style:width="100vw" />
-
-<style>
-  :global(body) {
-    margin: 0;
-  }
-  :global(header) {
-    display: none !important;
-  }
-</style>
+    bind:this={ container }
+    style:height="100%"/>
