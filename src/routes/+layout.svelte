@@ -1,22 +1,43 @@
 <script lang="ts">
-    import type { PageData } from "./$types"
-import AlertBar from "./AlertBar.svelte"
-import Header from "./Header.svelte"
-import PageLoaderBar from "./PageLoaderBar.svelte"
+  import type { PageData } from "./$types";
+  import AlertBar from "./AlertBar.svelte";
+  //   import Header from "./Header.svelte";
+  import PageLoaderBar from "./PageLoaderBar.svelte";
+  import { supabaseClient } from "$lib/db";
+  import { onMount } from "svelte";
+  import { invalidate } from "$app/navigation";
+  import { page } from "$app/stores";
 
-export let data: PageData
+  export let data: PageData;
+
+  onMount(() => {
+    const {
+      data: { subscription },
+    } = supabaseClient.auth.onAuthStateChange(() => {
+      invalidate("supabase:auth");
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  });
 </script>
-<Header bind:user={data.user_container.user}/>
+
+<!-- <Header bind:user={data.user_container.user} /> -->
 <main>
-	<slot/>
+  <slot />
 </main>
-<PageLoaderBar/>
-<AlertBar/>
+<PageLoaderBar />
+<AlertBar />
 <svelte:head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Noto Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" defer>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+    defer />
 </svelte:head>
+
 <style lang="stylus">
 :global
     @import 'normalise'

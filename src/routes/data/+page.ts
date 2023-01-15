@@ -25,14 +25,7 @@ export const load: PageLoad = async () => {
   // correct return type for `response`, so +page.svelte is typechecked properly.
 
   const response = await gquery(COURSES_QUERY, {})
-  if (response.error || !response.data)
-    throw error(501, {
-		message: response.error?.message ?? "No data returned!",
-		code: "GRAPHQL_ERROR"
-	} )
-  else {
-    return {
-      courses: response.data.courses,
-    }
+  return {
+    courses: response.data!.courses,
   }
 }
