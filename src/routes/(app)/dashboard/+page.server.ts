@@ -1,9 +1,19 @@
 import type { Actions } from "./$types"
-import { fail, redirect } from "@sveltejs/kit"
+import { ActionFailure, fail, redirect } from "@sveltejs/kit"
 import { getSupabase } from "@supabase/auth-helpers-sveltekit"
 
+type ActionResult = Promise<ActionFailure<{
+	error: string;
+	values: {
+		email: string;
+	}
+}> | {
+	success: true;
+	info?: string;
+}>
+
 export const actions: Actions = {
-	signin: async event => {
+	async signin(event): ActionResult {
 		const { request, cookies, url } = event
 		const { session, supabaseClient } = await getSupabase(event)
 		const formData = await request.formData()
@@ -23,10 +33,14 @@ export const actions: Actions = {
 					email,
 				},
 			})
+		} else {
+			return {
+				success: true
+			}
 		}
 	},
 
-	signup: async event => {
+	async signup(event): ActionResult {
 		const { request, cookies, url } = event
 		const { session, supabaseClient } = await getSupabase(event)
 		const formData = await request.formData()
@@ -51,12 +65,16 @@ export const actions: Actions = {
 			})
 		}
 		return {
-			info: "Confirm your email"
+			success: true,
+			info: "Check your email."
 		}
 	},
 
-	signout: async event => {
+	async signout(event): ActionResult {
 		const { supabaseClient } = await getSupabase(event)
 		await supabaseClient.auth.signOut()
+		return {
+			success: true,
+		}
 	},
 }
