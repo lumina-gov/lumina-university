@@ -1,11 +1,12 @@
 import type { LayoutLoad } from "./$types"
-import { getSupabase } from "@supabase/auth-helpers-sveltekit"
 import { alerts_init } from "$lib/stores/alerts"
 
-export const load: LayoutLoad = async event => {
-  const { session } = await getSupabase(event)
+export const load: LayoutLoad = async ({ data }) => {
   return {
-    session,
+    token: data.token,
     alerts: alerts_init([]),
+    user_container: {
+      user: null
+    }
   }
 }

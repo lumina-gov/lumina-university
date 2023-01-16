@@ -7,12 +7,7 @@ declare global {
         // interface Locals {}
         interface PageData {
             alerts: AlertsStore
-            session: import("@supabase/supabase-js").Session | null
-        }
-
-        interface Supabase {
-            Database: import("./DatabaseDefinitions").Database
-            SchemaName: "public"
+            token: string | null
         }
 
         interface Error {

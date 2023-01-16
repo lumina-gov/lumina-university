@@ -1,12 +1,8 @@
 <script lang="ts">
 import Button from "$lib/controls/Button.svelte"
 import Logo from "$lib/display/Logo.svelte"
-import { browserLocalPersistence, GoogleAuthProvider, signInWithPopup, type User } from "firebase/auth"
-import { FirebaseError } from "firebase/app"
-import { page } from "$app/stores"
-import { delete_cookie, set_cookie } from "$lib/utils/cookie"
-import { MessageType } from "$lib/types/message"
-import { goto, invalidate } from "$app/navigation"
+import { delete_cookie } from "$lib/utils/cookie"
+import { goto } from "$app/navigation"
 import ProfileButton from "$lib/controls/ProfileButton.svelte"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 import Inside from "$lib/controls/Inside.svelte"
@@ -27,7 +23,7 @@ function toggle(toggling: Dropdown) {
     }
 }
 
-export let user: User | null
+export let user: null
 
 async function logout() {
     delete_cookie("token")
@@ -36,31 +32,7 @@ async function logout() {
 }
 
 async function signin() {
-    const provider = new GoogleAuthProvider()
-    try {
-        let auth = $page.data.firebase.auth
-        await auth.setPersistence(browserLocalPersistence)
-
-        let result = await signInWithPopup(auth, provider)
-
-        const credential = GoogleAuthProvider.credentialFromResult(result)
-
-        let id_token = credential?.idToken || null
-        if (!id_token) {
-            $page.data.alerts.create_alert(MessageType.Error, "No id token")
-        }
-
-        set_cookie("token", id_token)
-        await invalidate("app:user")
-    } catch (error) {
-        if (error instanceof Error) {
-            $page.data.alerts.create_alert(MessageType.Error, error.message)
-        }
-
-        if (error instanceof FirebaseError){
-            // const credential = GoogleAuthProvider.credentialFromError(error)
-        }
-    }
+    throw new Error("Not implemented")
 }
 
 </script>
@@ -78,23 +50,27 @@ async function signin() {
         <!-- <Icon icon={Slash} opacity="0.2" size="24px"/> -->
         <!-- <AccountPicker/> -->
     </div>
-    <ClickoutRegion condition={dropdown !== null} clicked_outside={() => dropdown = null}>
+    <ClickoutRegion
+        clicked_outside={() => dropdown = null}
+        condition={dropdown !== null}>
         <div class="right">
             {#if user}
                 <Inside>
                     <ProfileButton
-                        on:click={() => toggle(Dropdown.Account)}
-                        bind:url={user.photoURL}/>
+                        on:click={ () => toggle(Dropdown.Account) }
+                        bind:url={ user }/>
                 </Inside>
             {:else}
-                <Button on:click={signin}>
+                <Button on:click={ signin }>
                     Start Learning
                 </Button>
             {/if}
             {#if user && dropdown === Dropdown.Account}
                 <Inside>
                     <div class="out-of-sidebar">
-                        <AccountPopout bind:user on:logout={logout}/>
+                        <AccountPopout
+                            bind:user
+                            on:logout={ logout }/>
                     </div>
                 </Inside>
             {/if}

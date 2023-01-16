@@ -1,16 +1,28 @@
 <script lang="ts">
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { PUBLIC_GRAPH_ENDPOINT } from "$env/static/public"
 import { onMount } from "svelte"
+import type { PageData } from "./$types"
 
 let container: HTMLDivElement
+export let data: PageData
+
 onMount(() => {
     const root = ReactDOM.createRoot(container)
     root.render(
         React.createElement(GraphiQL, {
             fetcher: GraphiQL.createFetcher({
                 url: PUBLIC_GRAPH_ENDPOINT,
+                fetch(input: URL | Request | string, init?: RequestInit) {
+                    return fetch(input, {
+                        ...init,
+                        headers: {
+                            ...init?.headers,
+                            ...(data?.token && {
+                                token: data.token,
+                            }),
+                        },
+                    })
+                },
             }),
             defaultEditorToolsVisibility: true,
         })
@@ -25,12 +37,12 @@ onMount(() => {
     <script
         crossorigin
         src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script
-        crossorigin
-        src="https://unpkg.com/graphiql/graphiql.min.js"></script>
     <link
         href="https://unpkg.com/graphiql/graphiql.min.css"
         rel="stylesheet" />
+    <script
+        crossorigin
+        src="https://unpkg.com/graphiql/graphiql.min.js"></script>
 </svelte:head>
 
 <div
