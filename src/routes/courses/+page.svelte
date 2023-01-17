@@ -9,11 +9,13 @@ export let data: PageData
     <title>Courses</title>
 </svelte:head>
 
-<main>
+<div class="main">
     <h1>Courses:</h1>
 
     {#each data.courses as course}
-        <div class="course">
+        <a
+            class="course"
+            href={"/courses/" + course.slug}>
             <h2>Course { course.id.slice(-2) }: { course.name }</h2>
             <h2>Units:</h2>
 
@@ -26,12 +28,12 @@ export let data: PageData
 
             <p>Created on { new Date(course.createdAt).toLocaleString() }</p>
             <!-- notice: no type warnings -->
-        </div>
+        </a>
     {/each}
-</main>
+</div>
 
 <style>
-  main {
+  .main {
     padding: 40px;
   }
   .course,
@@ -39,6 +41,7 @@ export let data: PageData
     padding: 20px;
     margin: 20px;
     max-width: 400px;
+    display: block;
   }
   .course {
     background-color: midnightblue;

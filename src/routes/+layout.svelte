@@ -1,8 +1,9 @@
 <script lang="ts">
-import type { LayoutData } from "./$types";
+import type { LayoutData } from "./$types"
 import AlertBar from "./AlertBar.svelte"
 import Header from "./Header.svelte"
 import PageLoaderBar from "./PageLoaderBar.svelte"
+import "../stylus/reset.css"
 
 export let data: LayoutData
 </script>
@@ -26,7 +27,6 @@ export let data: LayoutData
 
 <style lang="stylus">
 :global
-    @import 'normalise'
     @import 'variables'
 
     html
@@ -39,7 +39,7 @@ export let data: LayoutData
     h1, h2, h3, h4, h5, h6
         font-weight 700
 
-    a
+    p a
         text-decoration none
         color $brand
         &:hover

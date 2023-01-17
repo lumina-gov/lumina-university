@@ -10,10 +10,12 @@ export const load: PageLoad = async () => {
         id
         name
         createdAt
+        slug
         units {
           createdAt
           name
           id
+          slug
         }
       }
     }
