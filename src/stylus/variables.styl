@@ -1,7 +1,7 @@
 $dark = #2D3744
 $dark_app = #15181C
 $titanium = #F2F4FA
-$brand = #7446F6
+$brand = #12ac78
 $cream = #F2F2F0
 
 $red = #E25454
@@ -11,7 +11,7 @@ $yellow = #F2C94C
 $blue = #2570B6
 
 $laptop = 1200px
-$tablet = 950px
+$tablet = 900px
 $mobile = 600px
 
 shadow()
@@ -30,3 +30,11 @@ cardify(percent = 4%)
     shadow()
     background transparify(white, percent)
     border-radius 6px
+
+background-blur(amount = 4px)
+    backdrop-filter blur(amount)
+    -webkit-backdrop-filter blur(amount)
+
+outline-effect()
+    outline $brand 1px dashed
+    outline-offset 1px

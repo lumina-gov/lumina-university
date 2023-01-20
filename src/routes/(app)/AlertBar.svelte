@@ -2,11 +2,13 @@
     {#each $alerts as message}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
-            bind:this={elements[message.id]}
+            bind:this={ elements[message.id] }
             class={"action-bar " + MessageType[message.type]}
-            on:click={() => remove(message.id)}>
+            on:click={ () => remove(message.id) }>
             <div class="icon">
-                <svelte:component this={icons[message.type]} size="22px"/>
+                <svelte:component
+                    this={ icons[message.type] }
+                    size="22px"/>
             </div>
             <div class="text">
                 { message.text }

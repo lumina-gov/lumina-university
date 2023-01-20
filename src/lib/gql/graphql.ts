@@ -30,69 +30,154 @@ export type Scalars = {
   Uuid: any;
 };
 
+export type CitizenshipApplicationInput = {
+  country_of_birth: Scalars['String'];
+  country_of_citizenship: Array<Scalars['String']>;
+  country_of_residence: Scalars['String'];
+  date_of_birth: Scalars['DateTime'];
+  ethnic_groups: Array<Scalars['String']>;
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
+  occupations: Array<Scalars['String']>;
+  sex: Scalars['String'];
+  skills: Array<Scalars['String']>;
+};
+
+export enum CitizenshipStatus {
+  Approved = 'APPROVED',
+  Pending = 'PENDING',
+  Rejected = 'REJECTED'
+}
+
 export type Course = {
   __typename?: 'Course';
   createdAt: Scalars['DateTime'];
   id: Scalars['Uuid'];
   name: Scalars['String'];
+  slug: Scalars['String'];
   units: Array<Unit>;
+};
+
+export type CrackSeconds = {
+  __typename?: 'CrackSeconds';
+  guesses: Scalars['Float'];
+  seconds: Scalars['Float'];
+  string: Scalars['String'];
 };
 
 export type CreateCourseInput = {
   name: Scalars['String'];
 };
 
+export type CreateUserInput = {
+  calling_code: Scalars['String'];
+  country_code: Scalars['String'];
+  email: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
+  password: Scalars['String'];
+  phone_number: Scalars['String'];
+  referrer?: InputMaybe<Scalars['String']>;
+};
+
+export type LoginUserInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
-  createCourse: Course;
+  create_citizenship_application: Scalars['Uuid'];
+  create_course: Course;
+  create_user: Scalars['Uuid'];
+  /** Returns a JWT token for the user */
+  login: Scalars['String'];
   test: Scalars['String'];
 };
 
 
-export type MutationCreateCourseArgs = {
+export type MutationCreate_Citizenship_ApplicationArgs = {
+  citizenship_application: CitizenshipApplicationInput;
+};
+
+
+export type MutationCreate_CourseArgs = {
   course: CreateCourseInput;
+};
+
+
+export type MutationCreate_UserArgs = {
+  create_user_input: CreateUserInput;
+};
+
+
+export type MutationLoginArgs = {
+  login_user: LoginUserInput;
 };
 
 export type Query = {
   __typename?: 'Query';
+  course_by_slug?: Maybe<Course>;
   courses: Array<Course>;
-  me: User;
+  /**
+   * Returns the crack time of a password
+   * Used for password strength estimation
+   * On the frontend
+   */
+  crack_time: CrackSeconds;
+  me?: Maybe<User>;
+  user_count: Scalars['Int'];
 };
 
 
-export type QueryMeArgs = {
-  jwt: Scalars['String'];
+export type QueryCourse_By_SlugArgs = {
+  slug: Scalars['String'];
+};
+
+
+export type QueryCrack_TimeArgs = {
+  password: Scalars['String'];
 };
 
 export type Unit = {
   __typename?: 'Unit';
-  courseId: Scalars['Uuid'];
-  createdAt: Scalars['DateTime'];
+  course_id: Scalars['Uuid'];
+  created_at: Scalars['DateTime'];
   id: Scalars['Uuid'];
   name: Scalars['String'];
-  parentUnit?: Maybe<Scalars['Uuid']>;
+  parent_unit?: Maybe<Scalars['Uuid']>;
+  slug: Scalars['String'];
 };
 
 export type User = {
   __typename?: 'User';
-  bio?: Maybe<Scalars['String']>;
-  createdAt: Scalars['DateTime'];
+  citizenship_status: CitizenshipStatus;
   email: Scalars['String'];
+  first_name: Scalars['String'];
   id: Scalars['Uuid'];
+  last_name: Scalars['String'];
+  referral_count: Scalars['Int'];
+  roles: Array<Scalars['String']>;
 };
 
-export type GetCoursesQueryVariables = Exact<{ [key: string]: never; }>;
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: any, name: string, createdAt: any, units: Array<{ __typename?: 'Unit', createdAt: any, name: string, id: any }> }> };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: any, email: string, first_name: string, last_name: string } | null };
 
-export type MeQueryVariables = Exact<{
-  jwt: Scalars['String'];
+export type CoursesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: any, name: string, slug: string, units: Array<{ __typename?: 'Unit', id: any, name: string, slug: string, created_at: any, parent_unit?: any | null }> }> };
+
+export type Course_By_SlugQueryVariables = Exact<{
+  slug: Scalars['String'];
 }>;
 
 
-export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: any, email: string, bio?: string | null } };
+export type Course_By_SlugQuery = { __typename?: 'Query', course_by_slug?: { __typename?: 'Course', id: any, name: string, slug: string, units: Array<{ __typename?: 'Unit', id: any, name: string, slug: string, created_at: any, parent_unit?: any | null }> } | null };
 
 
-export const GetCoursesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCourses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"courses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"units"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetCoursesQuery, GetCoursesQueryVariables>;
-export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"jwt"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"jwt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"jwt"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const CoursesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"courses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"courses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"units"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"parent_unit"}}]}}]}}]}}]} as unknown as DocumentNode<CoursesQuery, CoursesQueryVariables>;
+export const Course_By_SlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"course_by_slug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"course_by_slug"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"units"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"parent_unit"}}]}}]}}]}}]} as unknown as DocumentNode<Course_By_SlugQuery, Course_By_SlugQueryVariables>;

@@ -1,10 +1,12 @@
 <script lang="ts">
-import LogoIcon from "./LogoIcon.svelte";
+import LogoIcon from "./LogoIcon.svelte"
 
-export let size = "1em";
+export let size = "1em"
 
 </script>
-<a href="/" class="logo">
+<a
+    class="logo"
+    href="/">
     <div class="icon">
         <LogoIcon {size}/>
     </div>

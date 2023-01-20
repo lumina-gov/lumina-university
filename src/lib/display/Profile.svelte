@@ -1,15 +1,13 @@
-<script lang="ts">
-export let size = "32px"
-export let url: string | null = null
+<script>
 
-$: profile_url = url ? url : "/assets/default-profile.svg"
+export let size = "32px"
 
 </script>
 
-<div class="profile" style="
-    --size: {size};
-    background-image: url({profile_url});
-">
+<div
+    style:--size={ size }
+    class="profile">
+
 </div>
 <style lang="stylus">
 @import 'variables'
@@ -17,15 +15,11 @@ $: profile_url = url ? url : "/assets/default-profile.svg"
 .profile
     width var(--size)
     height var(--size)
-    min-width var(--size)
-    min-height var(--size)
+    display inline-flex
     background transparify(white, 20%)
-    background-size cover
-    background-repeat no-repeat
-    background-position center
     border-radius 50px
-    display flex
-    justify-content center
-    align-items center
-    padding 4px
+    background-image url('/assets/default-profile.svg')
+    background-size cover
+    background-position center
+    background-repeat no-repeat
 </style>

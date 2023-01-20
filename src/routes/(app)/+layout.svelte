@@ -1,64 +1,77 @@
 <script lang="ts">
-import type { LayoutData } from "./$types";
-import AlertBar from "./AlertBar.svelte"
-import Header from "./Header.svelte"
-import PageLoaderBar from "./PageLoaderBar.svelte"
+import type { LayoutData } from "./$types"
+import Navigation from "./Navigation.svelte"
+import AppBar from "./AppBar.svelte"
+import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 
 export let data: LayoutData
+
+let nav_opened = false
+
+$: authenticated = data.user_store.user != null
+
 </script>
 
-<Header bind:user={ data.user_container.user } />
-<main>
-    <slot />
-</main>
-<PageLoaderBar />
-<AlertBar />
 <svelte:head>
-    <meta charset="utf-8" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0" />
     <link
-        defer
-        href="https://fonts.googleapis.com/css2?family=Noto Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet" />
+        href="/manifest.json"
+        rel="manifest">
+    <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-8MK9JSEJ2P');
+    </script>
 </svelte:head>
-
+<ClickoutRegion clicked_outside={() => nav_opened = false}>
+    <div
+        class="layout"
+        class:authenticated>
+        <AppBar
+            bind:user={ data.user_store.user }
+            bind:nav_opened/>
+        <Navigation
+            bind:user={ data.user_store.user }
+            bind:nav_opened/>
+        <div class="content">
+            <slot/>
+        </div>
+        {#if !data.user_store.user}
+            <!-- <Rater/>
+            <Footer/> -->
+        {/if}
+    </div>
+</ClickoutRegion>
 <style lang="stylus">
-:global
-    @import 'normalise'
-    @import 'variables'
+@import 'variables'
 
-    html
-        display flex
-        min-height 100%
-        flex 1
-        margin 0
-        padding 0
-
-    h1, h2, h3, h4, h5, h6
-        font-weight 700
-
-    a
-        text-decoration none
-        color $brand
-        &:hover
-            color lighten($brand, 10%)
-
-    body
-        background $dark_app
-        color white
-        flex 1
-        margin 0
-        padding 0
-        min-height 100%
-        font-family  'Noto Sans'
-        font-weight 500
-        display flex
-        flex-direction column
-
-main
+.content
+    flex 1
     display flex
     flex-direction column
-    flex 1
+    z-index 1
+    @media (max-width $tablet)
+        overflow-y auto
+        height 100%
+
+
+.layout
+    display flex
+    position relative
+    flex-direction column
+    min-height 100%
+    background rgba(0,0,0,0.2)
+    &.authenticated
+        @media (max-width $tablet)
+            height 100vh
+            display grid
+            overflow-y hidden
+            grid-template-rows 1fr 60px // content, AppBar
+
+
+
 </style>

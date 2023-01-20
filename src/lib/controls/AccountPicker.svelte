@@ -1,6 +1,6 @@
 <script lang="ts">
-import Icon from '$lib/display/Icon.svelte';
-import Dropdown from 'svelte-material-icons/ArrowDownDropCircle.svelte'
+import Icon from "$lib/display/Icon.svelte"
+import Dropdown from "svelte-material-icons/ArrowDownDropCircle.svelte"
 
 export let account_name = "Lumina"
 </script>
@@ -11,7 +11,9 @@ export let account_name = "Lumina"
     <div class="name">
         { account_name }
     </div>
-    <Icon icon={Dropdown} opacity="0.2"/>
+    <Icon
+        icon={Dropdown}
+        opacity="0.2"/>
 </div>
 <style lang="stylus">
 @import "variables"

@@ -9,7 +9,7 @@ import type { SessionOfferWithTutor } from "$lib/types/session_offer"
 
 export let data: PageData
 
-$: authenticated = data.user_container.user !== null
+$: authenticated = data.user_store.user !== null
 let sessions: unknown[] = []
 let session_offers = data.session_offers
 let booking_session: SessionOfferWithTutor | null = null

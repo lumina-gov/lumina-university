@@ -67,15 +67,23 @@ $: d = arc({
 
 </script>
 <div
+    style:width={ size }
+    style:height={ size }
     class="play-icon"
-    class:completed={completion==1}
-    style="width: {size}; height: {size};">
+    class:completed={ completion==1 }>
     <div class="play">
         <Play/>
     </div>
     {#if completion > 0}
-        <svg width={size} height={size} viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <path {d} fill="#7446F6"/>
+        <svg
+            fill="none"
+            height={size}
+            viewBox="0 0 48 48"
+            width={size}
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+                {d}
+                fill="#7446F6"/>
         </svg>
     {/if}
 </div>

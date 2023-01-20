@@ -32,12 +32,14 @@
 		"vite": "^4.0.1"
 	},
 	"dependencies": {
+		"@graphql-codegen/add": "^3.2.3",
 		"@notionhq/client": "^2.2.3",
-		"@supabase/auth-helpers-sveltekit": "^0.8.6",
+		"@resvg/resvg-js": "^2.2.0",
 		"@urql/core": "^3.1.1",
 		"atob": "^2.1.2",
 		"marked": "^4.0.19",
 		"postcss": "8.4.12",
+		"satori": "^0.1.1",
 		"schema-dts": "^1.1.0",
 		"stripe": "^11.3.0",
 		"stylus": "0.55.0",

@@ -7,19 +7,20 @@ let container: HTMLDivElement
 export let data: PageData
 
 onMount(() => {
-    const root = ReactDOM.createRoot(container)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let global = <any>window
+    const root = global.ReactDOM.createRoot(container)
     root.render(
-        React.createElement(GraphiQL, {
-            fetcher: GraphiQL.createFetcher({
+        global.React.createElement(global.GraphiQL, {
+            fetcher: global.GraphiQL.createFetcher({
                 url: PUBLIC_GRAPH_ENDPOINT,
+                // eslint-disable-next-line no-undef
                 fetch(input: URL | Request | string, init?: RequestInit) {
                     return fetch(input, {
                         ...init,
                         headers: {
                             ...init?.headers,
-                            ...(data?.token && {
-                                token: data.token,
-                            }),
+                            ...(data.user_store.auth_token ? { Authorization: data.user_store.auth_token } : {})
                         },
                     })
                 },
@@ -32,19 +33,20 @@ onMount(() => {
 
 <svelte:head>
     <script
-        crossorigin
+        crossorigin="anonymous"
         src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script
-        crossorigin
+        crossorigin="anonymous"
         src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <link
         href="https://unpkg.com/graphiql/graphiql.min.css"
         rel="stylesheet" />
     <script
-        crossorigin
+        crossorigin="anonymous"
         src="https://unpkg.com/graphiql/graphiql.min.js"></script>
 </svelte:head>
 
 <div
     bind:this={ container }
+    style:flex="1"
     style:height="100%"/>

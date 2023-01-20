@@ -11,9 +11,9 @@ export let data: PageData
         <h2>Billing</h2>
         <p>Managed through stripe</p>
         <Button
+            style="branded"
             href={data.customer_portal_url}
-            openInNewTab={true}
-            style="branded">
+            openInNewTab={true}>
             Manage Billing
         </Button>
     </div>

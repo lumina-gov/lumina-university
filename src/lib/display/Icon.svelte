@@ -16,14 +16,14 @@ export let opacity = 1
         size={size}/>
 </div>
 <style lang="stylus">
-    @import "variables"
+@import "variables"
 
-    .icon
-        display inline-flex
-        &.brand
-            color $brand
-        &.white
-            color white
-        &.red
-            color $red
-    </style>
+.icon
+    display inline-flex
+    &.brand
+        color $brand
+    &.white
+        color white
+    &.red
+        color $red
+</style>

@@ -8,7 +8,7 @@ export const load: PageLoad = async ({ parent, fetch, url }) => {
     const response = await fetch_as_json<{ url: string }>(fetch, "/api/customer-portal-url", {
         method: "POST",
         body: JSON.stringify({
-            user_access_token: data.auth_token,
+            user_access_token: data.user_store.auth_token,
             return_url: url.toString(),
         }),
         headers: {

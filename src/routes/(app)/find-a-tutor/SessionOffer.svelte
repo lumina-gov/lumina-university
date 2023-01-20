@@ -13,14 +13,17 @@ let dispatch = createEventDispatcher<{ session: SessionOfferWithTutor }>()
 export let session_offer: SessionOfferWithTutor
 
 </script>
-<Card padding="16px" gap="16px" align_items_center={false}>
+<Card
+    align_items_center={false}
+    gap="16px"
+    padding="16px">
     <div class="info">
         <Profile
             size="48px"
             url={session_offer.tutor.photo_url}
-            />
+        />
         <div class="person-subject">
-            <h3>{session_offer.tutor.name}</h3>
+            <h3>{ session_offer.tutor.name }</h3>
             <Tag>{ session_offer.subject }</Tag>
         </div>
         <div class="price">
@@ -36,9 +39,9 @@ export let session_offer: SessionOfferWithTutor
         { session_offer.description }
     </div>
     <Button
-        on:click={() => dispatch("session", session_offer)}
+        style="translucent"
         right_icon={Calendar}
-        style="translucent">
+        on:click={ () => dispatch("session", session_offer) }>
         Book Session
     </Button>
 </Card>

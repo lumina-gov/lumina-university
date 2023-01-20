@@ -3,7 +3,7 @@ export let text: string
 </script>
 
 <div class="small_heading">
-    {text}
+    { text }
 </div>
 
 <style lang="stylus">

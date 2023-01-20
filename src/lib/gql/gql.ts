@@ -13,8 +13,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n    query getCourses {\n      courses {\n        id\n        name\n        createdAt\n        units {\n          createdAt\n          name\n          id\n        }\n      }\n    }\n  ": types.GetCoursesDocument,
-    "\n\tquery me($jwt: String!) {\n\t  me(jwt: $jwt) {\n\t\tid\n\t\temail\n\t\tbio\n\t  }\n\t}\n\t": types.MeDocument,
+    "\n        query me {\n            me {\n                id\n                email\n                first_name\n                last_name\n            }\n        }": types.MeDocument,
+    "\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }": types.CoursesDocument,
+    "\n        query course_by_slug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }": types.Course_By_SlugDocument,
 };
 
 /**
@@ -34,11 +35,15 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query getCourses {\n      courses {\n        id\n        name\n        createdAt\n        units {\n          createdAt\n          name\n          id\n        }\n      }\n    }\n  "): (typeof documents)["\n    query getCourses {\n      courses {\n        id\n        name\n        createdAt\n        units {\n          createdAt\n          name\n          id\n        }\n      }\n    }\n  "];
+export function graphql(source: "\n        query me {\n            me {\n                id\n                email\n                first_name\n                last_name\n            }\n        }"): (typeof documents)["\n        query me {\n            me {\n                id\n                email\n                first_name\n                last_name\n            }\n        }"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n\tquery me($jwt: String!) {\n\t  me(jwt: $jwt) {\n\t\tid\n\t\temail\n\t\tbio\n\t  }\n\t}\n\t"): (typeof documents)["\n\tquery me($jwt: String!) {\n\t  me(jwt: $jwt) {\n\t\tid\n\t\temail\n\t\tbio\n\t  }\n\t}\n\t"];
+export function graphql(source: "\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"): (typeof documents)["\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n        query course_by_slug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"): (typeof documents)["\n        query course_by_slug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

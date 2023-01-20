@@ -22,22 +22,22 @@ async function book_session() {
 }
 </script>
 <Card
-    padding="16px"
-    gap="8px"
     align_items_center={false}
+    gap="8px"
     justify_content_center={false}
+    padding="16px"
     reset_bg={true}>
     <h2>Book a session</h2>
-    <p>Book a session with {session_offer.tutor.name}</p>
+    <p>Book a session with { session_offer.tutor.name }</p>
     <Input
-        type="number"
         name="Number of hours"
         placeholder="How many hours?"
-        bind:value={hours}/>
+        type="number"
+        bind:value={ hours }/>
     <Button
-        on:click={book_session}
         style="branded"
-        right_icon={Calendar}>
+        right_icon={Calendar}
+        on:click={ book_session }>
         Pay Now
     </Button>
 </Card>

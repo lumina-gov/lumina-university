@@ -31,36 +31,40 @@ onMount(() => {
     }
 })
 </script>
-<InputWrapper bind:name on:click={() => input_ref && input_ref.focus()}>
+<InputWrapper
+    bind:name
+    on:click={ () => input_ref && input_ref.focus() }>
     <div class="input-pseudo-wrapper">
         {#if left_icon}
-            <div class="icon"
+            <div
+                class="icon"
+                class:clickable={ !!left_icon_handler }
                 role="button"
-                class:clickable={!!left_icon_handler}
-                on:keypress={e => { if (e.key === "Enter") handle_icon_click(e, left_icon_handler) }}
-                on:click={e => handle_icon_click(e, left_icon_handler)}>
-                <svelte:component this={left_icon} />
+                on:keypress={ e => { if (e.key === "Enter") handle_icon_click(e, left_icon_handler) } }
+                on:click={ e => handle_icon_click(e, left_icon_handler) }>
+                <svelte:component this={ left_icon } />
             </div>
         {/if}
         <input
-            on:keyup
-            on:keydown
-            bind:this={input_ref}
-            on:input={event => (value = event.currentTarget.value)}
-            on:input
+            bind:this={ input_ref }
             name={autocomplete}
+            {autocomplete}
             {placeholder}
             {type}
-            {autocomplete}
             {value}
+            on:keyup
+            on:keydown
+            on:input={ event => (value = event.currentTarget.value) }
+            on:input
         />
         {#if right_icon}
-            <div class="icon"
+            <div
+                class="icon"
+                class:clickable={ !!right_icon_handler }
                 role="button"
-                class:clickable={!!right_icon_handler}
-                on:keypress={e => { if (e.key === "Enter") handle_icon_click(e, right_icon_handler) }}
-                on:click={e => handle_icon_click(e, right_icon_handler)}>
-                <svelte:component this={right_icon} />
+                on:keypress={ e => { if (e.key === "Enter") handle_icon_click(e, right_icon_handler) } }
+                on:click={ e => handle_icon_click(e, right_icon_handler) }>
+                <svelte:component this={ right_icon } />
             </div>
         {/if}
     </div>

@@ -21,16 +21,16 @@ function handle_keyup(e: KeyboardEvent) {
 </script>
 
 <svelte:element
-    this={tag}
-    href={href}
-    on:click={clicked}
-    role="button"
-    on:keyup={handle_keyup}
+    this={ tag }
     class="button"
-    tabindex="0"
     class:opacity
+    href={href}
+    role="button"
+    tabindex="0"
+    on:click={ clicked }
+    on:keyup={ handle_keyup }
 >
-    <svelte:component this={icon} />
+    <svelte:component this={ icon } />
 </svelte:element>
 
 <style lang="stylus">

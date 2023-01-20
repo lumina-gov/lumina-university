@@ -15,8 +15,8 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
             Gain practical experience, create real outcomes.
         </div>
         <Button
-            hug={true}
             href="/dashboard"
+            hug={true}
             right_icon={ChevronRight}>
             Start Learning
         </Button>
@@ -27,7 +27,9 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 </div>
 <svelte:head>
     <title>Light University - The next generation of education</title>
-    <meta name="description" content="The next generation of education - powered by the government of Lumina">
+    <meta
+        name="description"
+        content="The next generation of education - powered by the government of Lumina">
 </svelte:head>
 <style lang="stylus">
 @import "variables"

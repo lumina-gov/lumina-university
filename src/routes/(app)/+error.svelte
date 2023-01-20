@@ -2,4 +2,4 @@
 import { page } from "$app/stores"
 
 </script>
-<h1> Oops {$page.error?.message}</h1>
+<h1> Oops { $page.error?.message }</h1>

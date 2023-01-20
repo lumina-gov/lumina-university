@@ -7,6 +7,7 @@ import ProfileButton from "$lib/controls/ProfileButton.svelte"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 import Inside from "$lib/controls/Inside.svelte"
 import AccountPopout from "./AccountPopout.svelte"
+import type { MeQuery } from "$lib/gql/graphql"
 
 enum Dropdown {
     Account,
@@ -23,7 +24,7 @@ function toggle(toggling: Dropdown) {
     }
 }
 
-export let user: null
+export let user: null | MeQuery["me"] = null
 
 async function logout() {
     delete_cookie("token")
@@ -56,9 +57,7 @@ async function signin() {
         <div class="right">
             {#if user}
                 <Inside>
-                    <ProfileButton
-                        on:click={ () => toggle(Dropdown.Account) }
-                        bind:url={ user }/>
+                    <ProfileButton on:click={ () => toggle(Dropdown.Account) }/>
                 </Inside>
             {:else}
                 <Button on:click={ signin }>

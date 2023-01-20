@@ -5,7 +5,9 @@ const dispatch = createEventDispatcher<{ close: void }>()
 
 </script>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="scrim" on:click|self={() => dispatch("close")}>
+<div
+    class="scrim"
+    on:click|self={ () => dispatch("close") }>
     <slot/>
 </div>
 <style lang="stylus">

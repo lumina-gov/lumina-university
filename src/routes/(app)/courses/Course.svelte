@@ -1,0 +1,50 @@
+<script lang="ts">
+import Icon from "$lib/display/Icon.svelte"
+import { CoursesQuery } from "$lib/gql/graphql"
+import ImageOutline from "svelte-material-icons/ImageOutline.svelte"
+
+export let course: CoursesQuery["courses"][number]
+</script>
+<a
+    class="course"
+    href="/courses/{course.slug}">
+    <div class="image">
+        <Icon
+            icon={ImageOutline}
+            opacity={0.1}
+            size={64}/>
+    </div>
+    <div class="contents">
+        <h3>{ course.name }</h3>
+    </div>
+</a>
+<style lang="stylus">
+@import "variables"
+
+
+.course
+    display flex
+    flex-direction column
+    background transparify(white, 4%)
+    border-radius 6px
+    overflow hidden
+    color white
+    &:hover
+        background transparify(white, 8%)
+    .image
+        background transparify(white, 4%)
+        height 150px
+        display flex
+        align-items center
+        justify-content center
+
+    h3
+        font-size 16px
+        font-weight 600
+
+    .contents
+        padding 16px
+        gap 8px
+        display flex
+        flex-direction column
+</style>

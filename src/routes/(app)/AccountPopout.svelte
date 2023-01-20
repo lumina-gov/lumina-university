@@ -4,47 +4,52 @@ import Settings from "svelte-material-icons/Settings.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Profile from "$lib/display/Profile.svelte"
-import type { User } from "firebase/auth"
 import { createEventDispatcher } from "svelte"
+import type { MeQuery } from "$lib/gql/graphql"
 
 const dispatch = createEventDispatcher<{ logout: void }>()
 
-export let user: User
-$: name = `${user.displayName}`
+export let user: NonNullable<MeQuery["me"]>
+$: name = `${user?.first_name ?? ""} ${user?.last_name ?? ""}`
 $: email = user.email
 
 </script>
-<Card
-    reset_bg={true}>
+<Card reset_bg={true}>
     <div class="account">
-        <Profile url={user.photoURL} size=48px/>
+        <Profile size="48px"/>
         <div class="data">
             <span class="name">
-                {name}
+                { name }
             </span>
             <span class="email">
-                {email}
+                { email }
             </span>
         </div>
     </div>
     <div class="links">
-        <a class="link" href="/dashboard/account">
-            <Icon icon={Settings} size="20px"/>
+        <a
+            class="link"
+            href="/dashboard/account">
+            <Icon
+                icon={Settings}
+                size={20}/>
             <span>
                 Account Settings
             </span>
         </a>
         <div
             class="link red"
-            on:click={() => dispatch("logout")}
             role="button"
             tabindex="0"
-            on:keypress={event => {
+            on:click={ () => dispatch("logout") }
+            on:keypress={ event => {
                 if (event.key === "Enter") {
                     dispatch("logout")
                 }
-            }}>
-            <Icon icon={ExitToApp} size="20px"/>
+            } }>
+            <Icon
+                icon={ExitToApp}
+                size={20}/>
             <span>
                 Log Out
             </span>
