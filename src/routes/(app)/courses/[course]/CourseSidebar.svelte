@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { Unit } from "$lib/gql/graphql"
+import type { CoursesBySlugQuery } from "$lib/gql/graphql"
 import CourseSidebarItem from "./CourseSidebarItem.svelte"
 
 export let course_slug: string
-export let items: Unit[] = []
+export let items: CoursesBySlugQuery["course_by_slug"]["units"] = []
 </script>
 <div class="course-sidebar">
     {#each items as item}

@@ -7,6 +7,6 @@ export let data: PageData
 
 
 <CourseSidebar
-    course_slug{data.course_slug}
+    course_slug={data.slug}
     items={data.course.units}
 />
