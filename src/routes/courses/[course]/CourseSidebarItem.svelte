@@ -1,7 +1,8 @@
 <script lang="ts">
 import { page } from "$app/stores"
 import Icon from "$lib/display/Icon.svelte"
-import { UnitStatus, type Unit } from "$lib/types/unit"
+import { Unit } from "$lib/gql/graphql"
+import { UnitStatus } from "$lib/types/unit"
 import CheckCircle from "svelte-material-icons/CheckCircle.svelte"
 import ChevronDown from "svelte-material-icons/ChevronDown.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
@@ -14,7 +15,8 @@ export let padding_left = 8
 
 let toggled = true
 
-$: has_subunits = item.subunits && item.subunits.length > 0
+$: item.status = UnitStatus.NotStarted // TODO
+$: has_subunits = false// TODO: item.subunits && item.subunits.length > 0
 $: url = `/courses/${course_slug}/${item.id}`
 
 function toggle_children(e: Event) {

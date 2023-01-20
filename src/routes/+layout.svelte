@@ -1,18 +1,3 @@
-<svelte:head>
-    <link
-        href="/manifest.json"
-        rel="manifest">
-    <script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-8MK9JSEJ2P');
-    </script>
-</svelte:head>
 <script lang="ts">
 import AlertBar from "./AlertBar.svelte"
 import PageLoaderBar from "./PageLoaderBar.svelte"
@@ -105,7 +90,6 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
     100%
         background-position 0% 50%
 
-
 :global
     @import 'normalise'
 
@@ -118,6 +102,7 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
         border-top 1px solid transparify(white, 10%)
         width 100%
         margin 0
+
 
     html
         display flex
@@ -145,5 +130,10 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
         min-height 100%
         font-family 'Noto Sans', sans-serif
         max-width 100%
-
+        display flex
+        flex-direction column
+        z-index 1
+        @media (max-width $tablet)
+            overflow-y auto
+            height 100%
 </style>
