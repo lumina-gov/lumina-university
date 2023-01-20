@@ -10,12 +10,12 @@ import Settlement from "$lib/icons/Settlement.svelte"
 import Signin from "svelte-material-icons/ExitToApp.svelte"
 import Scrim from "$lib/controls/Scrim.svelte"
 import NotificationsPopout from "./NotificationsPopout.svelte"
-import AccountPopout from "./AccountPopout.svelte"
-import Inside from "$lib/controls/Inside.svelte"
 import { MeQuery } from "$lib/gql/graphql"
 import { afterNavigate } from "$app/navigation"
 import Icon from "$lib/display/Icon.svelte"
 import { page } from "$app/stores"
+import Inside from "$lib/controls/Inside.svelte"
+import AccountPopout from "./AccountPopout.svelte"
 
 enum Dropdown {
     Notifications,

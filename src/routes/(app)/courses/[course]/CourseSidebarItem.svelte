@@ -15,7 +15,7 @@ export let padding_left = 8
 
 let toggled = true
 
-$: item.status = UnitStatus.NotStarted // TODO
+$: status = UnitStatus.NotStarted // TODO
 $: has_subunits = false// TODO: item.subunits && item.subunits.length > 0
 $: url = `/courses/${course_slug}/${item.id}`
 
@@ -29,10 +29,10 @@ function toggle_children(e: Event) {
 </script>
 <a
     style:padding-left={ padding_left + "px" }
-    class="item {item.status}"
+    class="item {status}"
     class:active={ $page.url.pathname === url }
-    class:completed={ item.status === UnitStatus.Completed }
-    class:not_started={ item.status === UnitStatus.NotStarted }
+    class:completed={ status === UnitStatus.Completed }
+    class:not_started={ status === UnitStatus.NotStarted }
     href={url}>
     <div
         class="subunits-toggle"
@@ -48,28 +48,28 @@ function toggle_children(e: Event) {
     <div class="name">
         { item.name }
     </div>
-    {#if item.status === UnitStatus.InProgress}
+    {#if status === UnitStatus.InProgress}
         <Icon
             color="white"
             icon={Clock}
             opacity={0.2}
             size={18}/>
     {/if}
-    {#if item.status === UnitStatus.Completed}
+    {#if status === UnitStatus.Completed}
         <Icon
             color="brand"
             icon={CheckCircle}
             size={18}/>
     {/if}
 </a>
-{#if toggled && item.subunits && item.subunits.length > 0}
+<!-- {#if toggled && item.subunits && item.subunits.length > 0}
     {#each item.subunits as subunit}
         <svelte:self
             {course_slug}
             item={subunit}
             padding_left={padding_left + 16}/>
     {/each}
-{/if}
+{/if} -->
 <style lang="stylus">
 @import "variables"
 

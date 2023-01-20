@@ -1,7 +1,9 @@
 <script lang="ts">
 import type { LayoutData } from "./$types"
+// import Footer from "./Footer.svelte"
 import Navigation from "./Navigation.svelte"
 import AppBar from "./AppBar.svelte"
+// import Rater from "./Rater.svelte"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 
 export let data: LayoutData
@@ -40,10 +42,10 @@ $: authenticated = data.user_store.user != null
         <div class="content">
             <slot/>
         </div>
-        {#if !data.user_store.user}
-            <!-- <Rater/>
-            <Footer/> -->
-        {/if}
+        <!-- {#if !data.user_store.user}
+            <Rater/>
+            <Footer/>
+        {/if} -->
     </div>
 </ClickoutRegion>
 <style lang="stylus">
@@ -71,7 +73,5 @@ $: authenticated = data.user_store.user != null
             display grid
             overflow-y hidden
             grid-template-rows 1fr 60px // content, AppBar
-
-
 
 </style>
