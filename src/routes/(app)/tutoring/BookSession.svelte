@@ -22,9 +22,8 @@ async function book_session() {
 }
 </script>
 <Card
-    align_items_center={false}
+    align_items="flex-start"
     gap="8px"
-    justify_content_center={false}
     padding="16px"
     reset_bg={true}>
     <h2>Book a session</h2>

@@ -14,14 +14,11 @@ export let session_offer: SessionOfferWithTutor
 
 </script>
 <Card
-    align_items_center={false}
+    align_items="flex-start"
     gap="16px"
     padding="16px">
     <div class="info">
-        <Profile
-            size="48px"
-            url={session_offer.tutor.photo_url}
-        />
+        <Profile size="48px"/>
         <div class="person-subject">
             <h3>{ session_offer.tutor.name }</h3>
             <Tag>{ session_offer.subject }</Tag>
