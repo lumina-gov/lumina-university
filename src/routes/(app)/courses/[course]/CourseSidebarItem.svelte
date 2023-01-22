@@ -1,7 +1,7 @@
 <script lang="ts">
 import { page } from "$app/stores"
 import Icon from "$lib/display/Icon.svelte"
-import { Unit } from "$lib/gql/graphql"
+import { CoursesBySlugQuery } from "$lib/gql/graphql"
 import { UnitStatus } from "$lib/types/unit"
 import CheckCircle from "svelte-material-icons/CheckCircle.svelte"
 import ChevronDown from "svelte-material-icons/ChevronDown.svelte"
@@ -10,7 +10,7 @@ import Clock from "svelte-material-icons/Clock.svelte"
 import Text from "svelte-material-icons/Text.svelte"
 
 export let course_slug: string
-export let item: Unit
+export let item: NonNullable<CoursesBySlugQuery["course_by_slug"]>["units"][number]
 export let padding_left = 8
 
 let toggled = true

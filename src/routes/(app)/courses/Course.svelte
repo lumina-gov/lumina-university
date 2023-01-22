@@ -1,5 +1,6 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
+import Tag from "$lib/display/Tag.svelte"
 import { CoursesQuery } from "$lib/gql/graphql"
 import ImageOutline from "svelte-material-icons/ImageOutline.svelte"
 
@@ -16,6 +17,12 @@ export let course: CoursesQuery["courses"][number]
     </div>
     <div class="contents">
         <h3>{ course.name }</h3>
+        <div class="info">
+            <span>{ course.units.length } units</span>
+            <Tag>
+                Programming
+            </Tag>
+        </div>
     </div>
 </a>
 <style lang="stylus">
@@ -41,6 +48,13 @@ export let course: CoursesQuery["courses"][number]
     h3
         font-size 16px
         font-weight 600
+
+    .info
+        display flex
+        justify-content space-between
+        align-items center
+        span
+            opacity 0.5
 
     .contents
         padding 16px

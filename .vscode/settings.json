@@ -1,14 +1,11 @@
 {
-    "files.exclude": {
-        "**/.vscode": true,
-    },
     "eslint.validate": [
         "javascript",
         "svelte",
         "typescript",
     ],
     "[svelte]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.defaultFormatter": "svelte.svelte-vscode",
         // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "editor.codeActionsOnSave": {
