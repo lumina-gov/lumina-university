@@ -35,5 +35,5 @@ $: tag = is_clickable ? "a" : "div"
     &.horizontal
         flex-direction row
     &.padding
-        padding 20px
+        padding 16px
 </style>

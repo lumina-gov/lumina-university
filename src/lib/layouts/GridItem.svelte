@@ -19,42 +19,35 @@ export let flex_direction: FlexDirection | BreakpointColumns<FlexDirection> | un
 export let justify_content: JustifyContent | BreakpointColumns<JustifyContent> | undefined = undefined
 export let align_items: AlignItems | BreakpointColumns<AlignItems> | undefined = undefined
 export let text_align: "left" | "center" | "right" | undefined = undefined
+export let translucent = false
+export let border_radius = false
 
 export let columns: BreakpointColumns<string>
-
-$: styles = {
-    "--mobile-columns": columns.mobile,
-    "--tablet-columns": columns.tablet,
-    "--laptop-columns": columns.laptop,
-    "--mobile-align-items": typeof align_items == "object" && "mobile" in align_items ? align_items.mobile : undefined,
-    "--tablet-align-items": typeof align_items == "object"  && "tablet" in align_items ? align_items.tablet : undefined,
-    "--laptop-align-items": typeof align_items == "object"  && "laptop" in align_items ? align_items.laptop : undefined,
-    "--mobile-justify-content": typeof justify_content == "object"  && "mobile" in justify_content ? justify_content.mobile : undefined,
-    "--tablet-justify-content": typeof justify_content == "object"  && "tablet" in justify_content ? justify_content.tablet : undefined,
-    "--laptop-justify-content": typeof justify_content == "object"  && "laptop" in justify_content ? justify_content.laptop : undefined,
-    "--mobile-flex-direction": typeof flex_direction == "object"  && "mobile" in flex_direction ? flex_direction.mobile : undefined,
-    "--tablet-flex-direction": typeof flex_direction == "object"  && "tablet" in flex_direction ? flex_direction.tablet : undefined,
-    "--laptop-flex-direction": typeof flex_direction == "object"  && "laptop" in flex_direction ? flex_direction.laptop : undefined,
-    "align-items": typeof align_items == "string" ? align_items : undefined,
-    "justify-content": typeof justify_content == "string" ? justify_content : undefined,
-    "flex-direction": typeof flex_direction == "string" ? flex_direction : undefined,
-    "text-align": text_align,
-    "padding": padding,
-    "gap": gap ? gap + "px" : undefined,
-    "Position": position,
-}
-
-
-$: styles_string = Object.entries(styles)
-    .filter(([_key, value]) => typeof value !== "undefined")
-    .map(([key, value]) => key + ":" + value)
-    .join(";")
-
 </script>
 <svelte:element
     this={ tag }
-    style={styles_string}
-    class="grid-item">
+    style:--mobile-columns={ columns.mobile }
+    style:--tablet-columns={ columns.tablet }
+    style:--laptop-columns={ columns.laptop }
+    style:--mobile-align-items={ typeof align_items == "object" && "mobile" in align_items ? align_items.mobile : undefined }
+    style:--tablet-align-items={ typeof align_items == "object"  && "tablet" in align_items ? align_items.tablet : undefined }
+    style:--laptop-align-items={ typeof align_items == "object"  && "laptop" in align_items ? align_items.laptop : undefined }
+    style:--mobile-justify-content={ typeof justify_content == "object"  && "mobile" in justify_content ? justify_content.mobile : undefined }
+    style:--tablet-justify-content={ typeof justify_content == "object"  && "tablet" in justify_content ? justify_content.tablet : undefined }
+    style:--laptop-justify-content={ typeof justify_content == "object"  && "laptop" in justify_content ? justify_content.laptop : undefined }
+    style:--mobile-flex-direction={ typeof flex_direction == "object"  && "mobile" in flex_direction ? flex_direction.mobile : undefined }
+    style:--tablet-flex-direction={ typeof flex_direction == "object"  && "tablet" in flex_direction ? flex_direction.tablet : undefined }
+    style:--laptop-flex-direction={ typeof flex_direction == "object"  && "laptop" in flex_direction ? flex_direction.laptop : undefined }
+    style:align-items={ typeof align_items == "string" ? align_items : undefined }
+    style:justify-content={ typeof justify_content == "string" ? justify_content : undefined }
+    style:flex-direction={ typeof flex_direction == "string" ? flex_direction : undefined }
+    style:text-align={ text_align }
+    style:padding
+    style:gap={ gap ? gap + "px" : undefined }
+    style:position
+    class="grid-item"
+    class:border_radius
+    class:translucent>
     <slot/>
 </svelte:element>
 <style lang="stylus">
@@ -67,6 +60,11 @@ $: styles_string = Object.entries(styles)
     justify-content var(--laptop-justify-content)
     align-items var(--laptop-align-items)
     flex-direction var(--laptop-flex-direction)
+    overflow hidden
+    &.translucent
+        background-color transparify(white, 4%)
+    &.border_radius
+        border-radius 6px
     @media (max-width $tablet)
         grid-column var(--tablet-columns)
         justify-content var(--tablet-justify-content)
