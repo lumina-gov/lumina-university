@@ -16,6 +16,6 @@ export type SessionOfferWithTutor = SessionOffer & {
         id: string
         name: string
         email: string
-        photo_url: string
+        photo_url: string | null
     }
 }
