@@ -83,7 +83,6 @@ function toggle_children(e: Event) {
     display flex
     align-items center
     gap 8px
-    height 34px
     padding 8px
     font-size 14px
     font-weight 500

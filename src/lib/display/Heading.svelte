@@ -23,7 +23,9 @@ export let underline = false
             color={left_icon_color}
             icon={left_icon}/>
     {/if}
-    <slot/>
+    <div class="text">
+        <slot/>
+    </div>
     {#if right_icon}
         <Icon
             color={right_icon_color}
