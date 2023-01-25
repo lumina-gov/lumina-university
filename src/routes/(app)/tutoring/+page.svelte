@@ -6,6 +6,7 @@ import Info from "svelte-material-icons/Information.svelte"
 import CentreScrim from "$lib/controls/CentreScrim.svelte"
 import BookSession from "./BookSession.svelte"
 import type { SessionOfferWithTutor } from "$lib/types/session_offer"
+import TopicCard from "./TopicCard.svelte"
 
 export let data: PageData
 
@@ -15,6 +16,7 @@ let session_offers = data.session_offers
 let booking_session: SessionOfferWithTutor | null = null
 
 </script>
+
 {#if booking_session !== null}
     <CentreScrim on:close={ () => booking_session = null }>
         <div class="card-wrapper">
@@ -43,6 +45,11 @@ let booking_session: SessionOfferWithTutor | null = null
                 <a
                     class="button"
                     href="/signup">Sign up</a>
+                <div
+                    style:width={ 386 }
+                    style:height={ 104 }>
+                    <TopicCard/>
+                </div>
             </div>
         {/if}
     </div>
@@ -97,6 +104,7 @@ let booking_session: SessionOfferWithTutor | null = null
             href="/">Become a tutor</a>
     </div>
 </div>
+
 <style lang="stylus">
 @import "variables"
 
