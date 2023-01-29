@@ -25,6 +25,22 @@ $: authenticated = data.user_store.user !== null
 let sessions: unknown[] = []
 let session_offers = data.session_offers
 let booking_session: SessionOfferWithTutor | null = null
+let topics = [
+    "Programming",
+    "Mathematics",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "English",
+    "History",
+    "Geography",
+    "French",
+    "Spanish",
+    "German",
+    "Latin",
+    "Greek",
+    "Art",
+]
 </script>
 
 {#if booking_session !== null}
@@ -35,7 +51,8 @@ let booking_session: SessionOfferWithTutor | null = null
     </CentreScrim>
 {/if}
 
-<hr />
+<hr/>
+
 <Grid padding_vertical={60}>
     <GridItem
         columns={{
@@ -72,14 +89,17 @@ let booking_session: SessionOfferWithTutor | null = null
             </VerticalLayout>
         </GridItem>
     </Grid>
-    <Grid padding_vertical={60}>
+    <Grid
+        padding_vertical={60}
+        side_padding={false}>
         <GridItem
             columns={{
                 mobile: "span 4",
                 tablet: "span 8",
                 laptop: "span 16",
             }}>
-            <ResponsiveLayout min_item_size={250}>
+            <ResponsiveLayout min_item_size={300}>
+                <TopicCard />
                 <TopicCard />
                 <TopicCard />
                 <TopicCard />
@@ -97,7 +117,7 @@ let booking_session: SessionOfferWithTutor | null = null
                 laptop: "span 16",
             }}
             gap={16}>
-            <a href="/">Back to subjects</a>
+            <a href="/">Back to subjects</a> // TODO: Make this a link to the subject page
             <Heading
                 left_icon={CodeTags}
                 level={2}>Programming Tutors

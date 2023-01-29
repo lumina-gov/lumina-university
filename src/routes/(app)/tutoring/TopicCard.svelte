@@ -18,9 +18,14 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
                 Learn to code using the latest technology
             </div>
         </div>
-        <ChevronRight
-            color="#12ac78"
-            size={32}/>
+        <div
+            style:width={ "32px" }
+            style:height={ "32px" }>
+            <ChevronRight
+                color="#12ac78"
+                height={32}
+                width={32}/>
+        </div>
     </div>
 </div>
 
@@ -33,19 +38,26 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
     height 100%
     border-radius 10px
     overflow hidden
-    max-width 407px
+    cursor pointer
+    -webkit-touch-callout none
+    -webkit-user-select none
+    -khtml-user-select none
+    -moz-user-select none
+    -ms-user-select none
+    user-select none
 
 .left-segment
     background-color $brand
     display flex
     align-items center
     justify-content center
-    padding 8px
+    padding 16px
 
 .right-segment
     display flex
     padding 16px
     align-items center
+    justify-content space-between
     gap 16px
     flex-grow 1
     background-color transparify(white, 4%)
@@ -54,10 +66,11 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
         flex-direction column
         gap 16px
         .top-text
-            font-size 24px
-            font-weight 700
-        .bottom-text
-            font-size 16px
+            font-size 22px
             font-weight 600
+        .bottom-text
+            font-size 14px
+            font-weight 400
+            color transparify(white, 70%)
 
 </style>
