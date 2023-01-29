@@ -16,8 +16,8 @@ import TopicCard from "./TopicCard.svelte"
 import Magnify from "svelte-material-icons/Magnify.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
 import ResponsiveLayout from "$lib/layouts/ResponsiveLayout.svelte"
-import CodeTags from "svelte-material-icons/CodeTags.svelte";
-import ArrowDecision from "svelte-material-icons/ArrowDecision.svelte";
+import CodeTags from "svelte-material-icons/CodeTags.svelte"
+import ArrowDecision from "svelte-material-icons/ArrowDecision.svelte"
 
 export let data: PageData
 
