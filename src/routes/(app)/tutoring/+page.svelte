@@ -129,7 +129,9 @@ let topics = [
             </VerticalLayout>
         </GridItem>
     </Grid>
-    <Grid padding_vertical={60}>
+    <Grid
+        padding_vertical={60}
+        side_padding={false}>
         <GridItem
             columns={{
                 mobile: "span 4",
