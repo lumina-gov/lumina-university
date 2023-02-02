@@ -7,6 +7,7 @@ import Tag from "$lib/display/Tag.svelte"
 import type { SessionOfferWithTutor } from "$lib/types/session_offer"
 import { createEventDispatcher } from "svelte"
 import Calendar from "svelte-material-icons/Calendar.svelte"
+import Box from "$lib/cards/Box.svelte"
 
 let dispatch = createEventDispatcher<{ session: SessionOfferWithTutor }>()
 
@@ -16,12 +17,19 @@ export let session_offer: SessionOfferWithTutor
 <Card
     align_items="flex-start"
     gap="16px"
+    interactive
     padding="16px">
-    <div class="info">
-        <Profile size="48px"/>
-        <div class="person-subject">
-            <h3>{ session_offer.tutor.name }</h3>
-            <Tag>{ session_offer.subject }</Tag>
+    <Box
+        align_items="center"
+        direction="horizontal"
+        gap="16px"
+        justify_content="space-between">
+        <div class="info">
+            <Profile size="48px"/>
+            <div class="person-subject">
+                <h3>{ session_offer.tutor.name }</h3>
+                <Tag>{ session_offer.subject }</Tag>
+            </div>
         </div>
         <div class="price">
             <h3>
@@ -30,7 +38,7 @@ export let session_offer: SessionOfferWithTutor
             </h3>
             <div class="opacity">per hour</div>
         </div>
-    </div>
+    </Box>
     <SmallHeading text="Description"/>
     <div class="description">
         { session_offer.description }

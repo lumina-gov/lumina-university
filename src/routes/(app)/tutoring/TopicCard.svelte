@@ -10,6 +10,7 @@ $: disabled = href === undefined
 <Card
     align_items="normal"
     direction="horizontal"
+    {disabled}
     interactive>
     <div class="left-segment">
         <CodeTags
