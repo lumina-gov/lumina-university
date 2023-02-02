@@ -1,9 +1,16 @@
 <script lang="ts">
 import CodeTags from "svelte-material-icons/CodeTags.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
+import Card from "$lib/cards/Card.svelte"
+
+export let href: string | undefined = undefined
+$: disabled = href === undefined
 </script>
 
-<div class="card-wrapper">
+<Card
+    align_items="normal"
+    direction="horizontal"
+    interactive>
     <div class="left-segment">
         <CodeTags
             color="white"
@@ -27,24 +34,11 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
                 width={32}/>
         </div>
     </div>
-</div>
+</Card>
+
 
 <style lang="stylus">
 @import "variables"
-
-.card-wrapper
-    display flex
-    width 100%
-    height 100%
-    border-radius 10px
-    overflow hidden
-    cursor pointer
-    -webkit-touch-callout none
-    -webkit-user-select none
-    -khtml-user-select none
-    -moz-user-select none
-    -ms-user-select none
-    user-select none
 
 .left-segment
     background-color $brand
@@ -52,6 +46,7 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
     align-items center
     justify-content center
     padding 16px
+    border-radius: 6px 0 0 6px;
 
 .right-segment
     display flex
@@ -60,7 +55,6 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
     justify-content space-between
     gap 16px
     flex-grow 1
-    background-color transparify(white, 4%)
     .text-wrapper
         display flex
         flex-direction column
