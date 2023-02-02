@@ -74,7 +74,7 @@ let showSessionOffer = false
             align_items="flex-start"
             max_width={600}>
             <Heading left_icon={HumanMaleBoard}>Tutoring</Heading>
-            Attend the session
+            <Tag>TUTORING SERVICES</Tag>
             <Paragraph>Our customised tutoring is delivered by top professionals in the field, ensuring you receive cutting-edge training and support for success. Experience tailored instruction and take control of your education</Paragraph>
         </VerticalLayout>
     </GridItem>
