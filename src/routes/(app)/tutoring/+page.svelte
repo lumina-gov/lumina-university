@@ -27,6 +27,7 @@ import Numeric2 from "svelte-material-icons/Numeric2.svelte"
 import Numeric3 from "svelte-material-icons/Numeric3.svelte"
 import Numeric4 from "svelte-material-icons/Numeric4.svelte"
 import Numeric5 from "svelte-material-icons/Numeric5.svelte"
+import InstructionBox from "./InstructionBox.svelte"
 
 export let data: PageData
 
@@ -50,7 +51,36 @@ let topics = [
     "Greek",
     "Art",
 ]
+let boxes = [
+    {
+        heading: "Select a topic to learn",
+        paragraph: "Choose from a wide range of topics to learn from. We have a wide range of topics to choose from, so you can find the perfect topic for you.",
+    },
+    {
+        heading: "Find a tutor",
+        paragraph: "We have a wide range of tutors to choose from, so you can find the perfect tutor for you.",
+    },
+    {
+        heading: "Book a session",
+        paragraph: "Book a session with your tutor and get started on your learning journey.",
+    },
+    {
+        heading: "Learn",
+        paragraph: "Learn from your tutor and get the most out of your learning experience.",
+    },
+    {
+        heading: "Review",
+        paragraph: "Review your tutor and help others find the perfect tutor for them.",
+    },
+]
+let colors = [
+    "#00B473",
+    "#E25454",
+    "#FF8947"
+]
+
 let showSessionOffer = false
+$: console.log(showSessionOffer)
 </script>
 
 {#if booking_session !== null}
@@ -109,6 +139,11 @@ let showSessionOffer = false
                 laptop: "span 16",
             }}>
             <ResponsiveLayout min_item_size={300}>
+                {#each topics as topic, i}
+                    <TopicCard
+                        topic={topic}
+                        on:click={ () => showSessionOffer = true } />
+                {/each}
                 <TopicCard on:click={ () => showSessionOffer = true } />
                 <TopicCard on:click={ () => showSessionOffer = true } />
                 <TopicCard on:click={ () => showSessionOffer = true } />
@@ -129,7 +164,8 @@ let showSessionOffer = false
                     align_items="center"
                     direction="horizontal"
                     gap="16px"
-                    href="/tutoring">
+                    href="/tutoring"
+                    on:click={ () => { showSessionOffer = false } }>
                     <Icon
                         color="brand"
                         icon={ChevronLeft} 
@@ -213,112 +249,12 @@ let showSessionOffer = false
             tablet: "span 8",
             laptop: "span 16",
         }}
-        gap={16}>
-        <Box 
-            align_items="flex-start"
-            direction="horizontal"
-            gap="36px">
-            <div class="steps">
-                <Icon
-                    icon={Numeric1} 
-                    size={28} />
-            </div>
-            <Box
-                align_items="flex-start"
-                direction="vertical"
-                gap="16px">
-                <Heading level={2}>
-                    Select a topic to learn
-                </Heading>
-                <Paragraph>
-                    hjhajsdaks asdasdh aaj sjd ajshashdj aa hasdha jad ajshdahjashsdaad
-                </Paragraph>
-            </Box>
-        </Box>
-        <Box 
-            align_items="flex-start"
-            direction="horizontal"
-            gap="36px">
-            <div class="steps">
-                <Icon
-                    icon={Numeric2} 
-                    size={28} />
-            </div>
-            <Box
-                align_items="flex-start"
-                direction="vertical"
-                gap="16px">
-                <Heading level={2}>
-                    Select a tutor suitable for you
-                </Heading>
-                <Paragraph>
-                    hjhajsdaks asdasdh aaj sjd ajshashdj aa hasdha jad ajshdahjashsdaad
-                </Paragraph>
-            </Box>
-        </Box>
-        <Box 
-            align_items="flex-start"
-            direction="horizontal"
-            gap="36px">
-            <div class="steps">
-                <Icon
-                    icon={Numeric3} 
-                    size={28} />
-            </div>
-            <Box
-                align_items="flex-start"
-                direction="vertical"
-                gap="16px">
-                <Heading level={2}>
-                    Find a time that works for you
-                </Heading>
-                <Paragraph>
-                    hjhajsdaks asdasdh aaj sjd ajshashdj aa hasdha jad ajshdahjashsdaad
-                </Paragraph>
-            </Box>
-        </Box>
-        <Box 
-            align_items="flex-start"
-            direction="horizontal"
-            gap="36px">
-            <div class="steps">
-                <Icon
-                    icon={Numeric4} 
-                    size={28} />
-            </div>
-            <Box
-                align_items="flex-start"
-                direction="vertical"
-                gap="16px">
-                <Heading level={2}>
-                    Confirm the session
-                </Heading>
-                <Paragraph>
-                    hjhajsdaks asdasdh aaj sjd ajshashdj aa hasdha jad ajshdahjashsdaad
-                </Paragraph>
-            </Box>
-        </Box>
-        <Box 
-            align_items="flex-start"
-            direction="horizontal"
-            gap="36px">
-            <div class="steps">
-                <Icon
-                    icon={Numeric5} 
-                    size={28} />
-            </div>
-            <Box
-                align_items="flex-start"
-                direction="vertical"
-                gap="16px">
-                <Heading level={2}>
-                    Attend the session
-                </Heading>
-                <Paragraph>
-                    hjhajsdaks asdasdh aaj sjd ajshashdj aa hasdha jad ajshdahjashsdaad
-                </Paragraph>
-            </Box>
-        </Box>
+        gap={0}>
+        {#each boxes as box, i}
+            <InstructionBox
+                {box}
+                {i}/>
+        {/each}
     </GridItem>
 </Grid>
 <hr />
@@ -389,10 +325,7 @@ let showSessionOffer = false
     padding 12px
     border-radius 6px
 
-.steps
-    background-color $brand
-    padding 4px
-    border-radius 50%
+
 
 .strip
     width 8px

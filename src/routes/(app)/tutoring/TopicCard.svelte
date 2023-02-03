@@ -3,6 +3,7 @@ import CodeTags from "svelte-material-icons/CodeTags.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Card from "$lib/cards/Card.svelte"
 
+export let color: string
 export let href: string | undefined = undefined
 $: disabled = href === undefined
 </script>
@@ -14,7 +15,7 @@ $: disabled = href === undefined
     interactive>
     <div class="left-segment">
         <CodeTags
-            color="white"
+            color={color}
             size={32}/>
     </div>
     <div class="right-segment">
