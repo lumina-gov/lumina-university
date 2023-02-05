@@ -72,7 +72,6 @@ let boxes = [
 let colors = ["#00B473", "#E25454", "#FF8947"]
 
 let show_session_offer = false
-$: console.log(show_session_offer)
 </script>
 
 {#if booking_session !== null}
