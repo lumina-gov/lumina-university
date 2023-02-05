@@ -1,9 +1,8 @@
 <script lang="ts">
 import Box from "$lib/cards/Box.svelte"
 import Heading from "$lib/display/Heading.svelte"
-import Icon from "$lib/display/Icon.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
-import Numeric1 from "svelte-material-icons/Numeric1.svelte"
+
 export let box: {
     heading: string
     paragraph: string
@@ -58,6 +57,7 @@ export let i: number
     height 24px
     align-items center
     justify-content center
+
 .sidebar
     width 8px
     position absolute

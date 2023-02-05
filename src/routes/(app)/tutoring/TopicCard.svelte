@@ -5,24 +5,25 @@ import Card from "$lib/cards/Card.svelte"
 
 export let color: string
 export let href: string | undefined = undefined
+export let topic: string
 $: disabled = href === undefined
 </script>
 
 <Card
     align_items="normal"
     direction="horizontal"
-    {disabled}
-    interactive>
-    <div class="left-segment">
+    interactive
+    on:click>
+    <div
+        style:background-color={ color }
+        class="left-segment">
         <CodeTags
-            color={color}
-            size={32}/>
+            color={"white"}
+            size={32} />
     </div>
     <div class="right-segment">
         <div class="text-wrapper">
-            <div class="top-text">
-                Programming
-            </div>
+            <div class="top-text">{ topic }</div>
             <div class="bottom-text">
                 Learn to code using the latest technology
             </div>
@@ -33,11 +34,10 @@ $: disabled = href === undefined
             <ChevronRight
                 color="#12ac78"
                 height={32}
-                width={32}/>
+                width={32} />
         </div>
     </div>
 </Card>
-
 
 <style lang="stylus">
 @import "variables"

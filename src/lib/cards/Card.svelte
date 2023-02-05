@@ -12,8 +12,20 @@ export let gap: number | string = 0
 export let reset_bg = false
 export let opacity = false
 export let interactive = false
-export let align_items: "center" | "flex-start" | "flex-end" | "stretch" | "normal" = "center"
-export let justify_content: "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "space-evenly" | "normal" = "normal"
+export let align_items:
+    | "center"
+    | "flex-start"
+    | "flex-end"
+    | "stretch"
+    | "normal" = "center"
+export let justify_content:
+    | "center"
+    | "flex-start"
+    | "flex-end"
+    | "space-between"
+    | "space-around"
+    | "space-evenly"
+    | "normal" = "normal"
 export let disabled = false
 
 $: is_clickable = (href || interactive)
@@ -30,6 +42,7 @@ function handle_keyup(e: KeyboardEvent) {
     }
 }
 </script>
+
 <svelte:element
     this={ tag }
     style:max-width={ max_width }
@@ -48,10 +61,13 @@ function handle_keyup(e: KeyboardEvent) {
     {href}
     role="button"
     tabindex={is_clickable ? 0 : -1}
+    on:click
     on:click={ clicked }
-    on:keyup={ handle_keyup }>
-    <slot/>
+    on:keyup={ handle_keyup }
+>
+    <slot />
 </svelte:element>
+
 <style lang="stylus">
 @import 'variables'
 
