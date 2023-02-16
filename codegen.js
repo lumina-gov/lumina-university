@@ -18,8 +18,9 @@ const config = {
   },
 }
 
-writeFileSync("codegen.yml", yml.stringify(config))
+// AFTER EDITING THIS FILE, DELETE CODEGEN.YML TO REFRESH
+writeFileSync("codegen.yml", "# DON'T EDIT THIS, EDIT CODEGEN.JS!\n" + yml.stringify(config))
 console.log("Written to codegen.yml!")
 process.exit(0)
 
-// codegen.js/ts won't work (https://github.com/dotansimha/graphql-code-generator/issues/8488)
+// codegen.js/ts won't work on it's own (https://github.com/dotansimha/graphql-code-generator/issues/8488)
