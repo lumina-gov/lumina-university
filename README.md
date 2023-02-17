@@ -14,6 +14,7 @@ Clone the git repository to your local machine
 - `cd` into the repository directory
 - run `npm i` to install dependencies
 - run `npm run dev` to start the development server
+- if the GraphQL API has changed, run `npm run codegen`
 
 ## Where to find everything
 - `src` - contains the source code for the website

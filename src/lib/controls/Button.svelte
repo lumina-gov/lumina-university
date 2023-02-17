@@ -8,6 +8,7 @@ export let style: "translucent" | "transparent" | "branded" = "branded"
 export let hug = true
 export let disabled = false
 export let text: string | null = null
+export let target: string | null = null
 
 $: tag = href ? "a" : "div"
 
@@ -32,6 +33,7 @@ function handle_keyup(e: KeyboardEvent) {
     href={href}
     role="button"
     tabindex={disabled ? -1 : 0}
+    target={target}
     on:click={ clicked }
     on:keyup={ handle_keyup }
 >

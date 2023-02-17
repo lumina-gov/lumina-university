@@ -89,6 +89,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   create_citizenship_application: Scalars['Uuid'];
   create_course: Course;
+  create_light_university_checkout_session: Scalars['String'];
   create_user: Scalars['Uuid'];
   /** Returns a JWT token for the user */
   login: Scalars['String'];
@@ -103,6 +104,11 @@ export type MutationCreate_Citizenship_ApplicationArgs = {
 
 export type MutationCreate_CourseArgs = {
   course: CreateCourseInput;
+};
+
+
+export type MutationCreate_Light_University_Checkout_SessionArgs = {
+  success_url: Scalars['String'];
 };
 
 
@@ -126,6 +132,7 @@ export type Query = {
    */
   crack_time: CrackSeconds;
   me?: Maybe<User>;
+  unit_by_slug?: Maybe<Unit>;
   user_count: Scalars['Int'];
 };
 
@@ -139,19 +146,26 @@ export type QueryCrack_TimeArgs = {
   password: Scalars['String'];
 };
 
+
+export type QueryUnit_By_SlugArgs = {
+  slug: Scalars['String'];
+};
+
 export type Unit = {
   __typename?: 'Unit';
   course_id: Scalars['Uuid'];
   created_at: Scalars['DateTime'];
   id: Scalars['Uuid'];
   name: Scalars['String'];
+  notion_page_id?: Maybe<Scalars['String']>;
   parent_unit?: Maybe<Scalars['Uuid']>;
   slug: Scalars['String'];
 };
 
 export type User = {
   __typename?: 'User';
-  citizenship_status: CitizenshipStatus;
+  citizenship_status?: Maybe<CitizenshipStatus>;
+  customer_portal_url: Scalars['String'];
   email: Scalars['String'];
   first_name: Scalars['String'];
   id: Scalars['Uuid'];
@@ -160,10 +174,29 @@ export type User = {
   roles: Array<Scalars['String']>;
 };
 
+
+export type UserCustomer_Portal_UrlArgs = {
+  return_url?: InputMaybe<Scalars['String']>;
+};
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: any, email: string, first_name: string, last_name: string } | null };
+
+export type CustomerPortalUrlQueryVariables = Exact<{
+  return_url: Scalars['String'];
+}>;
+
+
+export type CustomerPortalUrlQuery = { __typename?: 'Query', me?: { __typename?: 'User', customer_portal_url: string } | null };
+
+export type CreateLightUniversityCheckoutSessionMutationVariables = Exact<{
+  return_url: Scalars['String'];
+}>;
+
+
+export type CreateLightUniversityCheckoutSessionMutation = { __typename?: 'Mutation', create_light_university_checkout_session: string };
 
 export type CoursesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -177,7 +210,17 @@ export type CoursesBySlugQueryVariables = Exact<{
 
 export type CoursesBySlugQuery = { __typename?: 'Query', course_by_slug?: { __typename?: 'Course', id: any, name: string, slug: string, units: Array<{ __typename?: 'Unit', id: any, name: string, slug: string, created_at: any, parent_unit?: any | null }> } | null };
 
+export type UnitBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type UnitBySlugQuery = { __typename?: 'Query', unit_by_slug?: { __typename?: 'Unit', id: any, name: string, slug: string, created_at: any, parent_unit?: any | null, notion_page_id?: string | null } | null };
+
 
 export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const CustomerPortalUrlDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CustomerPortalUrl"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer_portal_url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"return_url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}}}]}]}}]}}]} as unknown as DocumentNode<CustomerPortalUrlQuery, CustomerPortalUrlQueryVariables>;
+export const CreateLightUniversityCheckoutSessionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateLightUniversityCheckoutSession"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_light_university_checkout_session"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"success_url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}}}]}]}}]} as unknown as DocumentNode<CreateLightUniversityCheckoutSessionMutation, CreateLightUniversityCheckoutSessionMutationVariables>;
 export const CoursesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"courses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"courses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"units"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"parent_unit"}}]}}]}}]}}]} as unknown as DocumentNode<CoursesQuery, CoursesQueryVariables>;
 export const CoursesBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CoursesBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"course_by_slug"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"units"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"parent_unit"}}]}}]}}]}}]} as unknown as DocumentNode<CoursesBySlugQuery, CoursesBySlugQueryVariables>;
+export const UnitBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UnitBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unit_by_slug"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"parent_unit"}},{"kind":"Field","name":{"kind":"Name","value":"notion_page_id"}}]}}]}}]} as unknown as DocumentNode<UnitBySlugQuery, UnitBySlugQueryVariables>;

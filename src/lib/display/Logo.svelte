@@ -1,31 +1,37 @@
 <script lang="ts">
-import LogoIcon from "./LogoIcon.svelte"
-
-export let size = "1em"
-
+import Icon from "$lib/display/Icon.svelte"
+import LightUniversity from "$lib/icons/LightUniversity.svelte"
 </script>
 <a
     class="logo"
     href="/">
-    <div class="icon">
-        <LogoIcon {size}/>
+    <Icon
+        color="brand"
+        icon={LightUniversity}
+        size={48}/>
+    <div class="text">
+        <div class="light">
+            Light
+        </div>
+        <div class="university">
+            University
+        </div>
     </div>
 </a>
 <style lang="stylus">
-@import "variables"
+@import 'variables'
 
 .logo
-    display inline-flex
+    display flex
     align-items center
-    color white
-    text-decoration none
-    font-weight 600
-    letter-spacing 2px
-    font-size 16px
-    padding 8px
     gap 8px
-    .icon
-        display inline-flex
-        font-size 28px
-
+    .text
+        color white
+        font-weight 800
+        text-transform uppercase
+        .light
+            font-size 22px
+            letter-spacing 5px
+        .university
+            font-size 14px
 </style>

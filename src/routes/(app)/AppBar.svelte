@@ -1,6 +1,5 @@
 <script lang="ts">
 import AppbarButton from "$lib/controls/AppbarButton.svelte"
-import Logo from "$lib/icons/LightUniversity.svelte"
 import { onMount } from "svelte"
 import Menu from "svelte-material-icons/Menu.svelte"
 import Apps from "svelte-material-icons/Apps.svelte"
@@ -12,10 +11,10 @@ import Scrim from "$lib/controls/Scrim.svelte"
 import NotificationsPopout from "./NotificationsPopout.svelte"
 import { MeQuery } from "$lib/gql/graphql"
 import { afterNavigate } from "$app/navigation"
-import Icon from "$lib/display/Icon.svelte"
 import { page } from "$app/stores"
 import Inside from "$lib/controls/Inside.svelte"
 import AccountPopout from "./AccountPopout.svelte"
+import Logo from "$lib/display/Logo.svelte"
 
 enum Dropdown {
     Notifications,
@@ -64,18 +63,7 @@ afterNavigate(() => {
             <div
                 class="logo"
                 class:authenticated>
-                <Icon
-                    color="brand"
-                    icon={Logo}
-                    size={48}/>
-                <div class="text">
-                    <div class="light">
-                        Light
-                    </div>
-                    <div class="university">
-                        University
-                    </div>
-                </div>
+                <Logo/>
             </div>
         </div>
         <div class="flex-align-center">
@@ -115,20 +103,6 @@ afterNavigate(() => {
 {/if}
 <style lang="stylus">
 @import "variables"
-
-.logo
-    display flex
-    align-items center
-    gap 8px
-    .text
-        font-weight 800
-        text-transform uppercase
-        .light
-            font-size 22px
-            letter-spacing 5px
-        .university
-            font-size 14px
-
 
 .popout
     max-width 400px

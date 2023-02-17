@@ -14,8 +14,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n        query me {\n            me {\n                id\n                email\n                first_name\n                last_name\n            }\n        }": types.MeDocument,
+    "\n        query CustomerPortalUrl($return_url: String!) {\n            me {\n                customer_portal_url(return_url: $return_url)\n            }\n        }": types.CustomerPortalUrlDocument,
+    "\n        mutation CreateLightUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }": types.CreateLightUniversityCheckoutSessionDocument,
     "\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }": types.CoursesDocument,
     "\n        query CoursesBySlug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }": types.CoursesBySlugDocument,
+    "\n    query UnitBySlug($slug: String!) {\n        unit_by_slug(slug: $slug) {\n            id\n            name\n            slug\n            created_at\n            parent_unit\n            notion_page_id\n        }\n    }": types.UnitBySlugDocument,
 };
 
 /**
@@ -39,11 +42,23 @@ export function graphql(source: "\n        query me {\n            me {\n       
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n        query CustomerPortalUrl($return_url: String!) {\n            me {\n                customer_portal_url(return_url: $return_url)\n            }\n        }"): (typeof documents)["\n        query CustomerPortalUrl($return_url: String!) {\n            me {\n                customer_portal_url(return_url: $return_url)\n            }\n        }"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n        mutation CreateLightUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }"): (typeof documents)["\n        mutation CreateLightUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"): (typeof documents)["\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n        query CoursesBySlug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"): (typeof documents)["\n        query CoursesBySlug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query UnitBySlug($slug: String!) {\n        unit_by_slug(slug: $slug) {\n            id\n            name\n            slug\n            created_at\n            parent_unit\n            notion_page_id\n        }\n    }"): (typeof documents)["\n    query UnitBySlug($slug: String!) {\n        unit_by_slug(slug: $slug) {\n            id\n            name\n            slug\n            created_at\n            parent_unit\n            notion_page_id\n        }\n    }"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
