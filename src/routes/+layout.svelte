@@ -4,7 +4,7 @@ import PageLoaderBar from "./PageLoaderBar.svelte"
 import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
 
 </script>
-<div class="grid-wrapper">
+<!-- <div class="grid-wrapper">
     <div class="grid laptop">
         {#each new Array(16) as _}
             <div/>
@@ -20,11 +20,11 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
             <div/>
         {/each}
     </div>
-</div>
+</div> -->
 <PageLoaderBar/>
 <AlertBar/>
 <ServiceWorkerUI/>
-<div class="floating-gradient"/>
+<!-- <div class="floating-gradient"/> -->
 <slot/>
 <style lang="stylus">
 @import 'variables'
@@ -128,7 +128,7 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
         margin 0
         padding 0
         min-height 100%
-        font-family 'Noto Sans', sans-serif
+        font-family 'Inter', sans-serif
         max-width 100%
         display flex
         flex-direction column

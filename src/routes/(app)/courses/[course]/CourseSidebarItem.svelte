@@ -1,8 +1,7 @@
 <script lang="ts">
 import { page } from "$app/stores"
 import Icon from "$lib/display/Icon.svelte"
-import { CoursesBySlugQuery } from "$lib/gql/graphql"
-import { UnitStatus } from "$lib/types/unit"
+import { Unit, UnitStatus } from "$lib/types/unit"
 import CheckCircle from "svelte-material-icons/CheckCircle.svelte"
 import ChevronDown from "svelte-material-icons/ChevronDown.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
@@ -10,13 +9,13 @@ import Clock from "svelte-material-icons/Clock.svelte"
 import Text from "svelte-material-icons/Text.svelte"
 
 export let course_slug: string
-export let item: NonNullable<CoursesBySlugQuery["course_by_slug"]>["units"][number]
+export let item: Unit
 export let padding_left = 8
 
 let toggled = true
 
 $: status = UnitStatus.NotStarted // TODO
-$: has_subunits = false// TODO: item.subunits && item.subunits.length > 0
+$: has_subunits = item.subunits && item.subunits.length > 0
 $: url = `/courses/${course_slug}/${item.slug}`
 
 function toggle_children(e: Event) {
@@ -31,8 +30,6 @@ function toggle_children(e: Event) {
     style:padding-left={ padding_left + "px" }
     class="item {status}"
     class:active={ $page.url.pathname === url }
-    class:completed={ status === UnitStatus.Completed }
-    class:not_started={ status === UnitStatus.NotStarted }
     href={url}>
     <div
         class="subunits-toggle"
@@ -62,14 +59,14 @@ function toggle_children(e: Event) {
             size={18}/>
     {/if}
 </a>
-<!-- {#if toggled && item.subunits && item.subunits.length > 0}
+{#if toggled && item.subunits && item.subunits.length > 0}
     {#each item.subunits as subunit}
         <svelte:self
             {course_slug}
             item={subunit}
             padding_left={padding_left + 16}/>
     {/each}
-{/if} -->
+{/if}
 <style lang="stylus">
 @import "variables"
 
@@ -88,12 +85,12 @@ function toggle_children(e: Event) {
     font-weight 500
     color white
     text-decoration none
+    outline none
     transition color 0.2s
-    &:hover, &.active
+    &.active
         background transparify(white, 4%)
-    &.not_started
-        .name
-            opacity 0.5
+    &:hover
+        background transparify(white, 8%)
 
 
 .subunits-toggle
@@ -101,7 +98,7 @@ function toggle_children(e: Event) {
     display inline-flex
     opacity 0
     &.visible
-        opacity 1
+        opacity 0.5
         cursor pointer
     &:hover
         background transparify(white, 8%)

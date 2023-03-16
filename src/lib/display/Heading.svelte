@@ -8,7 +8,7 @@ export let left_icon: typeof SvelteComponent | null = null
 export let left_icon_color: Prop<Icon, "color"> = "brand"
 export let right_icon: typeof SvelteComponent | null = null
 export let right_icon_color: Prop<Icon, "color"> = "brand"
-export let level: 1 | 2 | 3 | 4 = 1
+export let level: 1 | 2 | 3 | 4 | 5 | 6 = 1
 export let id: string | null = null
 export let underline = false
 </script>

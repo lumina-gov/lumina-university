@@ -24,7 +24,7 @@ import Box from "$lib/cards/Box.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import InstructionBox from "./InstructionBox.svelte"
 import LaptopAccount from "svelte-material-icons/LaptopAccount.svelte"
-    import AccountPlus from "svelte-material-icons/AccountPlus.svelte";
+import AccountPlus from "svelte-material-icons/AccountPlus.svelte"
 
 export let data: PageData
 
@@ -40,7 +40,7 @@ let topics = [
     "Robotics",
     "VR/AR",
     "3D Printing",
-    "UX/UI Design"
+    "UX/UI Design",
 ]
 let boxes = [
     {
@@ -119,7 +119,7 @@ let show_session_offer = false
                     laptop: "span 16",
                 }}
                 gap={16}
-            > 
+            >
                 <div class="back-control">
                     <Box
                         align_items="center"
@@ -132,7 +132,9 @@ let show_session_offer = false
                             size={28} />
                         <span
                             style:color="white"
-                            style:font-weight="bold">Back to topics</span>
+                            style:font-weight="bold"
+                        >Back to topics</span
+                        >
                     </Box>
                 </div>
                 <Box
@@ -162,8 +164,7 @@ let show_session_offer = false
                     mobile: "span 4",
                     tablet: "span 8",
                     laptop: "span 16",
-                }}
-            >
+                }}>
                 <ResponsiveLayout min_item_size={250}>
                     {#if session_offers.length > 0}
                         <div class="session-offers">

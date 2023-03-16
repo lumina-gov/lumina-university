@@ -4,14 +4,19 @@ import Settings from "svelte-material-icons/Settings.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Profile from "$lib/display/Profile.svelte"
-import { createEventDispatcher } from "svelte"
 import type { MeQuery } from "$lib/gql/graphql"
-
-const dispatch = createEventDispatcher<{ logout: void }>()
+import { delete_cookie } from "$lib/utils/cookie"
+import { goto, invalidateAll } from "$app/navigation"
 
 export let user: NonNullable<MeQuery["me"]>
 $: name = `${user?.first_name ?? ""} ${user?.last_name ?? ""}`
 $: email = user.email
+
+async function logout() {
+    delete_cookie("token")
+    await goto("/")
+    await invalidateAll()
+}
 
 </script>
 <Card reset_bg={true}>
@@ -41,10 +46,10 @@ $: email = user.email
             class="link red"
             role="button"
             tabindex="0"
-            on:click={ () => dispatch("logout") }
+            on:click={ logout }
             on:keypress={ event => {
                 if (event.key === "Enter") {
-                    dispatch("logout")
+                    logout()
                 }
             } }>
             <Icon

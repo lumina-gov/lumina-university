@@ -11,6 +11,7 @@ import Box from "$lib/cards/Box.svelte"
 import BlocksArray from "$lib/components/blocks/BlocksArray.svelte"
 import Button from "$lib/controls/Button.svelte"
 import BookEdit from "svelte-material-icons/BookEdit.svelte"
+import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 
 export let data: PageData
 
@@ -53,7 +54,7 @@ export let data: PageData
         <hr>
         <CourseSidebar
             course_slug={data.slug}
-            items={data.course.units}
+            items={data.units_tree}
         />
     </GridItem>
     <GridItem
@@ -64,9 +65,10 @@ export let data: PageData
             tablet: "span 8",
             mobile: "span 4",
         }}
+        gap={24}
         padding="24px"
         translucent={true}>
-        <BlocksArray blocks={data.blocks}/>
+        <MarkdownRenderer markdown={data.markdown}/>
         <Button
             right_icon={BookEdit}
             text="Enroll"

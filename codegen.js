@@ -14,6 +14,12 @@ const config = {
   generates: {
     "src/lib/gql/": {
       preset: "client",
+      config: {
+        scalars: {
+          // Use "string" type for Uuids, instead of "any" type
+          Uuid: "string",
+        }
+      }
     },
   },
 }

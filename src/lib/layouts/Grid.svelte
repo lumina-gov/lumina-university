@@ -16,6 +16,7 @@ export let columns: {
 
 export let flex: string | undefined = undefined
 export let side_padding = true
+export let max_width: string | undefined = undefined
 
 </script>
 <div
@@ -26,6 +27,7 @@ export let side_padding = true
     style:padding-bottom={ padding_vertical ? `${padding_vertical}px` : undefined }
     style:grid-row-gap={ vertical_gap ? `${vertical_gap}px` : undefined }
     style:grid-column-gap={ horizontal_gap ? `${horizontal_gap}px` : undefined }
+    style:max-width={ max_width }
     style:flex
     class="grid"
     class:side_padding>

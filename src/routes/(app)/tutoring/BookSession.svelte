@@ -17,8 +17,6 @@ async function book_session() {
             hours
         })
     })
-
-    console.log(res)
 }
 </script>
 <Card

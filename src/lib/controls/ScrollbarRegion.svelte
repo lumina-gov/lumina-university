@@ -55,6 +55,7 @@ export let content_height: string | undefined = undefined
     box-sizing border-box
     -ms-overflow-style none
     scrollbar-width none
+    scroll-behavior smooth
 
     &::-webkit-scrollbar
         display none

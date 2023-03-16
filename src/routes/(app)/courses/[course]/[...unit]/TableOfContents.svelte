@@ -1,0 +1,84 @@
+<script lang="ts">
+import { browser } from "$app/environment"
+import { generate_ast } from "$lib/utils/markdown/ast"
+import type { Heading } from "mdast-util-from-markdown/lib"
+import { onDestroy, onMount } from "svelte"
+import TocSection from "./TocSection.svelte"
+
+export let markdown: string
+let active_id: null | string = null
+let scrollable_viewport: HTMLElement
+let content: HTMLElement
+
+$: ast = generate_ast(markdown)
+$: headings = ast.children.filter(block => block.type === "heading") as Heading[]
+
+
+// We want to observe the scroll position of the page and update the active
+// To do this, we need an array of all the headings on the page, and their
+// corresponding ids. We can then use the scroll position to determine which is nearest
+// to the top of the scrollable viewport, and set the active id to that heading's id
+function update_active_id() {
+    // get all the headings within the #content div
+    let headings = Array.from(content.querySelectorAll("h1, h2, h3, h4, h5, h6")) as HTMLElement[]
+
+    // get the scroll position of the nearest scrollable parent
+    let scroll_position = scrollable_viewport.scrollTop
+
+    if (headings.length === 0) {
+        active_id = null
+        return
+    }
+
+    // find the heading nearest to the top of the page
+    headings.sort((a, b) => {
+        let a_distance = Math.abs(a.offsetTop - scroll_position - 40)
+        let b_distance = Math.abs(b.offsetTop - scroll_position - 40)
+        return a_distance - b_distance
+    })
+
+    // set the active id to the id of the nearest heading
+    active_id = headings[0].id
+}
+
+onMount(() => {
+    if (browser) {
+        // get the scrollable viewport
+        content = document.querySelector("#content") as HTMLElement
+        scrollable_viewport = content
+        // find the nearest scrollable parent
+        while (scrollable_viewport && scrollable_viewport.scrollHeight <= scrollable_viewport.clientHeight) {
+            scrollable_viewport = scrollable_viewport.parentElement as HTMLElement
+        }
+
+        // update the active id when the page is scrolled
+        scrollable_viewport.addEventListener("scroll", update_active_id, { passive: true })
+        // update the active id when the page is loaded
+        update_active_id()
+    }
+})
+
+onDestroy(() => {
+    if (browser) {
+        window.removeEventListener("scroll", update_active_id)
+    }
+})
+
+</script>
+<div class="toc">
+    {#each headings as heading}
+        <TocSection
+            {active_id}
+            heading={heading}/>
+    {/each}
+</div>
+<style lang="stylus">
+@import "variables"
+
+.toc
+    display flex
+    flex-direction column
+    width 100%
+    padding-top 10px
+
+</style>

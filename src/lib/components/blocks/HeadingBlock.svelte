@@ -1,27 +1,17 @@
 <script lang="ts">
-import Heading from "$lib/display/Heading.svelte"
-import type { Heading1BlockObjectResponse, Heading2BlockObjectResponse, Heading3BlockObjectResponse, RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints"
-import RichTextArray from "./RichTextArray.svelte"
+import HeadingComponent from "$lib/display/Heading.svelte"
+import { get_plain_text } from "$lib/utils/markdown/plain_text"
+import type { Heading } from "mdast-util-from-markdown/lib"
+import PhrasingContent from "./PhrasingContentArray.svelte"
 
-export let block: Heading1BlockObjectResponse | Heading2BlockObjectResponse | Heading3BlockObjectResponse
+export let block: Heading
 
-$: level = parseInt(block.type.replace("heading_", "")) + 1 as 2 | 3 | 4
-
-$: rich_text_array = get_rich_text(block)
-
-function get_rich_text(block: Heading1BlockObjectResponse | Heading2BlockObjectResponse | Heading3BlockObjectResponse): RichTextItemResponse[] {
-    if ("heading_1" in block) {
-        return block.heading_1.rich_text
-    } else if ("heading_2" in block) {
-        return block.heading_2.rich_text
-    } else if ("heading_3" in block) {
-        return block.heading_3.rich_text
-    } else {
-        return []
-    }
-}
+$: plain_text = get_plain_text(block.children)
+$: id = plain_text.toLowerCase().replace(/ /g, "-")
 
 </script>
-<Heading {level}>
-    <RichTextArray {rich_text_array}/>
-</Heading>
+<HeadingComponent
+    {id}
+    level={block.depth}>
+    <PhrasingContent children={block.children}/>
+</HeadingComponent>

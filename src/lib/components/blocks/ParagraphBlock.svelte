@@ -1,13 +1,12 @@
 <script lang="ts">
-import type { BlockResponseWithChildren } from "$lib/api/notion_api"
-import type { ParagraphBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints"
-import RichTextArray from "./RichTextArray.svelte"
+import type { Paragraph } from "mdast-util-from-markdown/lib"
+import PhrasingContentArray from "./PhrasingContentArray.svelte"
 
-export let block: BlockResponseWithChildren<ParagraphBlockObjectResponse>
+export let block: Paragraph
 
 </script>
 <p>
-    <RichTextArray rich_text_array={block.paragraph.rich_text}/>
+    <PhrasingContentArray children={block.children}/>
 </p>
 <style lang="stylus">
 
