@@ -33,8 +33,8 @@ export const load: LayoutLoad = async ({ params, parent }) => {
 
     return {
         course: query.data.course_by_slug,
-        units_tree: units_query_to_unit_tree(query.data.course_by_slug.units),
-        slug: params.course
+        slug: params.course,
+        ...units_query_to_unit_tree(query.data.course_by_slug.units),
     }
 }
 
@@ -44,7 +44,7 @@ function sort_units(units: Unit[]) {
     })
 }
 
-function units_query_to_unit_tree(units: NonNullable<CoursesBySlugQuery["course_by_slug"]>["units"]): Unit[] {
+function units_query_to_unit_tree(units: NonNullable<CoursesBySlugQuery["course_by_slug"]>["units"]): { units_by_id: { [key: string]: Unit }, root_units: Unit[] } {
     // Create a map of units by id
     const units_by_id: { [key: string]: Unit } = {}
     // Create a list of root units
@@ -75,5 +75,8 @@ function units_query_to_unit_tree(units: NonNullable<CoursesBySlugQuery["course_
         sort_units(unit.subunits)
     })
 
-    return root_units
+    return {
+        root_units,
+        units_by_id
+    }
 }

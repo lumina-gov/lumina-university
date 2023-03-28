@@ -54,7 +54,7 @@ export let data: PageData
         <hr>
         <CourseSidebar
             course_slug={data.slug}
-            items={data.units_tree}
+            items={data.root_units}
         />
     </GridItem>
     <GridItem

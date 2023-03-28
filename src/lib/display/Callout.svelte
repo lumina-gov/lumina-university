@@ -29,9 +29,9 @@ export let type: keyof typeof icons
 
 .callout
     display flex
-    gap 24px
+    gap 20px
     width 100%
-    padding 24px
+    padding 20px
     border-radius 4px
     background transparify(white, 10%)
     &.note

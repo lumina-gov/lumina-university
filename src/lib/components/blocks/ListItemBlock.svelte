@@ -1,17 +1,22 @@
 <script lang="ts">
-import type { BlockResponseWithChildren } from "$lib/api/notion_api"
-import type { BulletedListItemBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints"
-import RichTextArray from "./RichTextArray.svelte"
+import Icon from "$lib/display/Icon.svelte"
+import type { ListItem } from "mdast-util-from-markdown/lib"
+import CheckboxBlank from "svelte-material-icons/CheckboxBlank.svelte"
+import CheckboxMarked from "svelte-material-icons/CheckboxMarked.svelte"
+import BlocksArray from "./BlocksArray.svelte"
 
-export let block: BlockResponseWithChildren<BulletedListItemBlockObjectResponse>
-
+export let block: ListItem
+console.log(block)
 </script>
 <li>
-    <RichTextArray rich_text_array={block.bulleted_list_item.rich_text}/>
+    {#if typeof block.checked === "boolean"}
+        <Icon icon={block.checked ? CheckboxMarked : CheckboxBlank}/>
+    {/if}
+    <BlocksArray blocks={block.children}/>
 </li>
 <style lang="stylus">
 li
     margin 0
-    opacity 0.8
-    margin-left 24px
+    margin-left 22px
+
 </style>

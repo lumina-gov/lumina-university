@@ -3,17 +3,18 @@ import type { SvelteComponent } from "svelte"
 import Unsupported from "./Unsupported.svelte"
 import ParagraphBlock from "./ParagraphBlock.svelte"
 import HeadingBlock from "./HeadingBlock.svelte"
-// import CalloutBlock from "./CalloutBlock.svelte"
-// import ListItemBlock from "./ListItemBlock.svelte"
 import type { Block } from "$lib/types/block"
 import ContainerDirective from "./ContainerDirective.svelte"
+import { PartialRecord } from "$lib/utils/typed_props"
+import ListBlock from "./ListBlock.svelte"
 
 export let block: Block
 
-let block_types: { [key: string]: typeof SvelteComponent } = {
+let block_types: PartialRecord<Block["type"], typeof SvelteComponent> = {
     "heading": HeadingBlock,
     "paragraph": ParagraphBlock,
     "containerDirective": ContainerDirective,
+    "list": ListBlock,
 // "bulleted_list_item": ListItemBlock,
 }
 

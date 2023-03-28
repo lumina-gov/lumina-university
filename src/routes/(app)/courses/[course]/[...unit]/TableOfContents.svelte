@@ -1,6 +1,7 @@
 <script lang="ts">
 import { browser } from "$app/environment"
 import { generate_ast } from "$lib/utils/markdown/ast"
+import { get_plain_text } from "$lib/utils/markdown/plain_text"
 import type { Heading } from "mdast-util-from-markdown/lib"
 import { onDestroy, onMount } from "svelte"
 import TocSection from "./TocSection.svelte"
@@ -42,14 +43,17 @@ function update_active_id() {
 }
 
 onMount(() => {
+    active_id = headings[0] ? get_plain_text(headings[0].children).toLowerCase().replace(/ /g, "-") : null
     if (browser) {
         // get the scrollable viewport
         content = document.querySelector("#content") as HTMLElement
-        scrollable_viewport = content
+        scrollable_viewport = content.parentElement as HTMLElement
         // find the nearest scrollable parent
         while (scrollable_viewport && scrollable_viewport.scrollHeight <= scrollable_viewport.clientHeight) {
             scrollable_viewport = scrollable_viewport.parentElement as HTMLElement
         }
+
+        if (!scrollable_viewport) return
 
         // update the active id when the page is scrolled
         scrollable_viewport.addEventListener("scroll", update_active_id, { passive: true })
@@ -60,7 +64,8 @@ onMount(() => {
 
 onDestroy(() => {
     if (browser) {
-        window.removeEventListener("scroll", update_active_id)
+        if (!scrollable_viewport) return
+        scrollable_viewport.removeEventListener("scroll", update_active_id)
     }
 })
 

@@ -1,23 +1,39 @@
 <script lang="ts">
 import CourseSidebar from "../CourseSidebar.svelte"
 import type { PageData } from "./$types"
-import Grid from "$lib/layouts/Grid.svelte"
-import GridItem from "$lib/layouts/GridItem.svelte"
-import Book from "svelte-material-icons/Book.svelte"
-import Heading from "$lib/display/Heading.svelte"
-import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import Subheading from "$lib/display/Subheading.svelte"
-import Box from "$lib/cards/Box.svelte"
-import BlocksArray from "$lib/components/blocks/BlocksArray.svelte"
 import Button from "$lib/controls/Button.svelte"
-import BookEdit from "svelte-material-icons/BookEdit.svelte"
 import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 import TableOfContents from "./TableOfContents.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
 import CourseBreadcrumbs from "./CourseBreadcrumbs.svelte"
 import Pencil from "svelte-material-icons/Pencil.svelte"
+import type { Unit } from "$lib/types/unit"
+import UnitPaginator from "./UnitPaginator.svelte"
 
 export let data: PageData
+
+$: previous_unit = get_unit_relative(data.units_by_id[data.unit.id], "previous")
+$: next_unit = get_unit_relative(data.units_by_id[data.unit.id], "next")
+
+function flatten_unit(unit: Unit): Unit[] {
+    let flattened: Unit[] = []
+    flattened.push(unit)
+
+    for (let subunit of unit.subunits) {
+        flattened.push(...flatten_unit(subunit))
+    }
+
+    return flattened
+}
+
+function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
+    let units_flattened = data.root_units.flatMap(unit => flatten_unit(unit))
+    let index = units_flattened.findIndex(u => u.id === unit.id)
+    let relative_index = direction === "previous" ? index - 1 : index + 1
+
+    return units_flattened[relative_index] || null
+}
 
 </script>
 <hr>
@@ -27,7 +43,7 @@ export let data: PageData
         <hr>
         <CourseSidebar
             course_slug={data.slug}
-            items={data.units_tree}
+            items={data.root_units}
         />
     </div>
     <ScrollbarRegion>
@@ -37,12 +53,24 @@ export let data: PageData
                     id="content"
                     class="content">
                     <MarkdownRenderer markdown={data.markdown}/>
-                    <Button
-                        style="transparent"
-                        href="https://github.com/luminagov/lumina-education/edit/main/src/lib/courses/{data.slug}.md"
-                        left_icon={Pencil}>
-                        Edit this page on GitHub
-                    </Button>
+                    <div class="section row">
+                        <UnitPaginator
+                            course={data.course}
+                            direction="previous"
+                            unit={previous_unit}/>
+                        <UnitPaginator
+                            course={data.course}
+                            direction="next"
+                            unit={next_unit}/>
+                    </div>
+                    <div class="section">
+                        <Button
+                            style="transparent"
+                            href="https://github.com/lumina-gov/light-university/edit/main/src/lib/courses/{data.course.slug}/{data.unit.slug}.md"
+                            left_icon={Pencil}>
+                            Edit this page on GitHub
+                        </Button>
+                    </div>
                 </div>
             </div>
             <div class="toc">
@@ -58,6 +86,13 @@ export let data: PageData
 </div>
 <style lang="stylus">
 @import "variables"
+
+.section
+    display flex
+    flex-direction column
+    gap 16px
+    &.row
+        flex-direction row
 
 .layout
     display flex
@@ -88,11 +123,14 @@ main
 .content
     max-width 700px
     margin 0 auto
+    display flex
+    flex-direction column
+    gap 16px
 
 .toc
     width 100%
     position sticky
-    height calc(100vh - 60px)
+    height calc(100vh - 61px)
     top 0
     max-width 300px
     @media (max-width 1400px)
