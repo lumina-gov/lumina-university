@@ -19,8 +19,7 @@ export let data: PageData
             mobile: "span 4",
             tablet: "span 8",
             laptop: "span 16",
-        }}
-    >
+        }}>
         <VerticalLayout
             max_width={650}
             padding={16}
@@ -32,7 +31,7 @@ export let data: PageData
             <div>
                 <Button
                     style="translucent"
-                    href={data.customer_portal_url}
+                    href="https://lumina.earth/account"
                     hug={true}
                     left_icon={AccountCircle}>
                     Manage Account
@@ -48,8 +47,7 @@ export let data: PageData
             mobile: "span 4",
             tablet: "span 8",
             laptop: "span 16",
-        }}
-    >
+        }}>
         <VerticalLayout
             horizontal_padding={16}
             max_width={650}
@@ -64,22 +62,19 @@ export let data: PageData
                 <Button
                     style="translucent"
                     href={data.customer_portal_url}
-                    left_icon={AccountCircle}>
-                    Manage Account
+                    left_icon={CreditCard}>
+                    Billing Portal
                 </Button>
                 <Button
                     style="branded"
-                    href={data.customer_portal_url}
+                    href={data.checkout_session_url}
                     right_icon={RocketLaunch}>
                     Start Subscription
                 </Button>
             </div>
         </VerticalLayout>
     </GridItem>
-
-
 </Grid>
-
 
 <style lang="stylus">
 @import "variables"
