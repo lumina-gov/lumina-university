@@ -21,6 +21,7 @@ import new_nav from "$lib/data/new_nav"
 import Circle from "svelte-material-icons/Circle.svelte"
 import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
 import Icon from "$lib/display/Icon.svelte"
+import { page } from "$app/stores"
 
 export let user: MeQuery["me"] | null
 export let nav_opened: boolean
@@ -91,24 +92,28 @@ afterNavigate(() => {
                         </ResponsiveLayout>
                     </div>
                 {:else}
-                    <ResponsiveLayout
-                        max_width={600}
-                        min_item_size={250}
-                        padding={16}
-                    >
-                        <Button
-                            gamified={true}
-                            hug={false}
-                            left_icon={AccountPlus}
-                            text="Create Account"/>
-                        <Button
-                            style="translucent"
-                            gamified={true}
-                            hug={false}
-                            left_icon={ExitToApp}>
-                            Sign In
-                        </Button>
-                    </ResponsiveLayout>
+                    <div class="button-wrapper">
+                        <ResponsiveLayout
+                            max_width={600}
+                            min_item_size={250}
+                            padding={16}
+                        >
+                            <Button
+                                gamified={true}
+                                href={$page.data.user_store.login_url}
+                                hug={false}
+                                left_icon={AccountPlus}
+                                text="Create Account"/>
+                            <Button
+                                style="translucent"
+                                gamified={true}
+                                href={$page.data.user_store.login_url}
+                                hug={false}
+                                left_icon={ExitToApp}>
+                                Sign In
+                            </Button>
+                        </ResponsiveLayout>
+                    </div>
                 {/if}
                 <div class="breaker">
                     <ResponsiveLayout
@@ -262,6 +267,10 @@ afterNavigate(() => {
         max-width 170px
         line-height 1.2
         text-align center
-        
+.button-wrapper
+    display flex
+    align-items center
+    justify-content center
+
 
 </style>
