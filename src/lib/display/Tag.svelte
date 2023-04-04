@@ -2,12 +2,15 @@
 export let color: "red" | "brand" | "blue" | "white" | "yellow" | "green" = "brand"
 export let opacity = false
 export let text = ""
+export let small = false
 </script>
 
 <span
     class="tag {color}"
     class:opacity>
-    <div class="text">
+    <div
+        class="text"
+        class:small>
         {#if $$slots.default}
             <slot />
         {:else}
@@ -29,7 +32,8 @@ export let text = ""
     .text
         padding 3px 4px
         line-height 100%
-
+    .small
+        font-size 12px
     &.opacity
         opacity 0.5
 

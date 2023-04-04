@@ -1,72 +1,56 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
 import site_data from "$lib/data/site_data"
 import Discord from "svelte-material-icons/Discord.svelte"
 import Facebook from "svelte-material-icons/Facebook.svelte"
 import Twitter from "svelte-material-icons/Twitter.svelte"
 import Youtube from "svelte-material-icons/Youtube.svelte"
 import { afterNavigate } from "$app/navigation"
-import type ServiceCard from "$lib/components/ServiceCard.svelte"
 import type { Props } from "$lib/utils/typed_props"
 import Information from "svelte-material-icons/Information.svelte"
-import { information } from "$lib/data/nav"
 import Inside from "$lib/controls/Inside.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
 import { MeQuery } from "$lib/gql/graphql"
-import DashboardBlock from "$lib/display/DashboardBlock.svelte"
+import DashboardBlock from "./NavLink.svelte"
 import ResponsiveLayout from "$lib/layouts/ResponsiveLayout.svelte"
 import Home from "svelte-material-icons/Home.svelte"
-import HumanGreeting from "svelte-material-icons/HumanGreeting.svelte"
 import CreditCard from "svelte-material-icons/CreditCard.svelte"
-import IconButton from "$lib/controls/IconButton.svelte"
 import Button from "$lib/controls/Button.svelte"
 import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import AccountPlus from "svelte-material-icons/AccountPlus.svelte"
+import new_nav from "$lib/data/new_nav"
+import Circle from "svelte-material-icons/Circle.svelte"
+import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
+import Icon from "$lib/display/Icon.svelte"
+import { page } from "$app/stores"
 
 export let user: MeQuery["me"] | null
 export let nav_opened: boolean
 
-type MenuLink = {
-    icon: typeof SvelteComponent
-    name: string
-    href: string
-    sublinks?: Props<ServiceCard>[]
-}
-
-// let auth_settings: MenuLink[] = [
-//     {
-//         icon: Information,
-//         name: "Information",
-//         href: "/#information",
-//         sublinks: information
-//     }
-// ]
-let auth_settings = [
+let auth_settings: Array<Props<DashboardBlock>> = [
     {
         icon: Home,
         name: "Dashboard",
-        href: "/#dashboard",
+        href: "/",
         subtext: "Keep track of your enrolments, and progress here.",
-        color: "#00B473"
+        color: "#00B473",
     },
     {
         icon: Information,
         name: "Account Settings",
-        href: "/#information",
+        href: "/account",
         subtext: "Update your account settings and user information.",
         color: "red"
     },
     {
         icon: Discord,
         name: "Join Our Discord",
-        href: "/#information",
         subtext: "Stay in touch with the community through our official discord.",
         color: "#7446F6"
     },
     {
         icon: CreditCard,
         name: "Billing",
-        href: "/#information",
+        href: "/account",
         subtext: "Manage billing and payment methods attached to your account.",
         color: "#00B473"
     }
@@ -92,105 +76,79 @@ afterNavigate(() => {
                 {#if authenticated}
                     <div class="auth-wrapper">
                         <div class="greeting">
-                            <HumanGreeting/>
+                            <Icon
+                                icon={HumanGreetingVariant}
+                                opacity={0.5}
+                                size={32}/>
                             Hi { user?.first_name }!
                         </div>
                         <ResponsiveLayout
-                            horizontal_padding={150}
+                            gap={0}
+                            max_width={600}
                             min_item_size={250}>
                             {#each auth_settings as card}
-                                <DashboardBlock
-                                    color={card.color}
-                                    header={card.name}
-                                    icon={card.icon}
-                                    subtext={card.subtext}/>
+                                <DashboardBlock {...card}/>
                             {/each}
                         </ResponsiveLayout>
                     </div>
                 {:else}
+                    <div class="button-wrapper">
+                        <ResponsiveLayout
+                            max_width={600}
+                            min_item_size={250}
+                            padding={16}
+                        >
+                            <Button
+                                gamified={true}
+                                href={$page.data.user_store.login_url}
+                                hug={false}
+                                left_icon={AccountPlus}
+                                text="Create Account"/>
+                            <Button
+                                style="translucent"
+                                gamified={true}
+                                href={$page.data.user_store.login_url}
+                                hug={false}
+                                left_icon={ExitToApp}>
+                                Sign In
+                            </Button>
+                        </ResponsiveLayout>
+                    </div>
+                {/if}
+                <div class="breaker">
                     <ResponsiveLayout
-                        horizontal_padding={150}
-                        min_item_size={250}
+                        gap={0}
+                        min_item_size={200}
                         padding={16}
                     >
-                        <Button
-                            gamified={true}
-                            hug={false}
-                            left_icon={AccountPlus}
-                            text="Create Account"/>
-                        <Button
-                            style="translucent"
-                            gamified={true}
-                            hug={false}
-                            left_icon={ExitToApp}>
-                            Sign In
-                        </Button>
+                        {#each new_nav as card}
+                            <DashboardBlock {...card}/>
+                        {/each}
                     </ResponsiveLayout>
-                {/if}
-                <br/>
-                    
-                <!-- {#each links as link}
-                    <div class="menu-section">
-                        <a
-                            class="menu-link"
-                            href={link.href}>
-                            <div class="link-icon">
-                                <svelte:component this={ link.icon }/>
-                            </div>
-                            <div class="link-name">
-                                { link.name }
-                            </div>
-                        </a>
-                        {#if link.sublinks}
-                            <div class="menu-sublinks">
-                                {#each link.sublinks as sublink}
-                                    <a
-                                        class="menu-sublink"
-                                        class:disabled={ !sublink.href }
-                                        href={sublink.href}>
-                                        <div class="menu-sublink-icon {sublink.tag.color}">
-                                            <svelte:component this={ sublink.icon }/>
-                                        </div>
-                                        <div class="info">
-                                            <div class="menu-sublink-name">
-                                                { sublink.title }
-                                            </div>
-                                            <div class="description">
-                                                { sublink.description }
-                                            </div>
-                                        </div>
-                                    </a>
-                                {/each}
-                            </div>
-                        {/if}
-                    </div>
-                {/each} -->
-                <div class="menu-section">
-                    <a
-                        class="menu-link"
-                        class:disabled={ authenticated }
-                        href={site_data.socials.discord}>
-                        <div class="link-icon">
-                            <Discord/>
-                        </div>
-                        <div class="link-name">
-                            Join Community Discord
-                        </div>
-                    </a>
                 </div>
-                <div class="socials">
-                    <a
-                        class="social-media-icon"
-                        href={site_data.socials.twitter}><Twitter/></a>
-                    <a
-                        class="social-media-icon"
-                        href={site_data.socials.discord}><Discord/></a>
-                    <a
-                        class="social-media-icon"
-                        href={site_data.socials.facebook}><Facebook/></a>
-                    <a
-                        class="social-media-icon"
-                        href={site_data.socials.youtube}><Youtube/></a>
+                <div class="footer">
+                    <div class="footer-links">
+                        <a href="/about">Home</a>
+                        <Icon
+                            icon={Circle}
+                            opacity={0.5}
+                            size={6}/>
+                        <a href="/about">About Us</a>
+                    </div>
+                    <div class="socials">
+                        <a
+                            class="social-media-icon"
+                            href={site_data.socials.facebook}><Facebook/></a>
+                        <a
+                            class="social-media-icon"
+                            href={site_data.socials.twitter}><Twitter/></a>
+                        <a
+                            class="social-media-icon"
+                            href={site_data.socials.youtube}><Youtube/></a>
+                    </div>
+                    <div class="impressum">
+                        A service from the Government of Lumina
+                    </div>
                 </div>
             </nav>
         </ScrollbarRegion>
@@ -250,96 +208,19 @@ afterNavigate(() => {
     align-items center
     justify-content center
     gap 8px
-    padding 16px
     .social-media-icon
+        background transparify(white, 4%)
         display inline-flex
         font-size 24px
-        color white
+        color transparify(white, 50%)
         opacity 0.8
         padding 8px
         border-radius 4px
         &:hover
             opacity 1
-            background transparify(white, 4%)
+            background transparify(white, 8%)
+            color white
 
-
-.menu-links
-    padding 16px
-    gap 16px
-    border-bottom 1px solid transparify(white, 8%)
-.menu-sublinks
-    display grid
-    grid-template-columns repeat(auto-fit, minmax(250px, 1fr))
-    padding 8px
-    .menu-sublink
-        display flex
-        align-items flex-start
-        gap 12px
-        color white
-        padding 12px
-        opacity 0.5
-        border-radius 4px
-        cursor default
-        &:not(.disabled)
-            opacity 1
-            cursor pointer
-            &:hover
-                background transparify(white, 4%)
-        .menu-sublink-icon
-            padding 6px
-            display inline-flex
-            font-size 18px
-            border-radius 40px
-            &.brand
-                background transparify($brand, 8%)
-                color $brand
-            &.red
-                background transparify($red, 8%)
-                color $red
-            &.green
-                background transparify($green, 8%)
-                color $green
-            &.blue
-                background transparify($blue, 8%)
-                color $blue
-            &.yellow
-                background transparify($yellow, 8%)
-                color $yellow
-            &.white
-                background transparify(white, 8%)
-                color white
-        .info
-            gap 8px
-            display flex
-            flex-direction column
-        .menu-sublink-name
-            font-size 15px
-            font-weight 600
-        .description
-            font-size 12px
-            font-weight 500
-            opacity 0.5
-.menu-section
-    border-bottom 1px solid transparify(white, 8%)
-    display flex
-    flex-direction column
-    &:last-child
-        border-bottom 0
-.menu-link
-    display flex
-    align-items center
-    cursor pointer
-    color white
-    gap 16px
-    padding 16px
-    &:hover
-        background transparify(white, 4%)
-    font-size 18px
-    font-weight 600
-    .link-icon
-        color $brand
-        display inline-flex
-        font-size 24px
 .greeting
     display flex
     align-items center
@@ -356,4 +237,40 @@ afterNavigate(() => {
     justify-content center
     padding 8px
     padding 16px
+    border-bottom 1px solid transparify(white, 8%)
+.breaker
+    border-bottom 1px solid transparify(white, 8%)
+.footer
+    display flex
+    align-items center
+    justify-content center
+    flex-direction column
+    gap 8px
+    padding 16px
+    .footer-links
+        display flex
+        align-items center
+        gap 6px
+        a
+            color white
+            font-size 12px
+            font-weight 500
+            padding  6px 10px
+            border-radius 4px
+            &:hover
+                background transparify(white, 8%)
+    .impressum
+        display flex
+        font-size 12px
+        font-weight 500
+        opacity 0.5
+        max-width 170px
+        line-height 1.2
+        text-align center
+.button-wrapper
+    display flex
+    align-items center
+    justify-content center
+
+
 </style>
