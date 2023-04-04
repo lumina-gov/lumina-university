@@ -1,9 +1,7 @@
 <script lang="ts">
 import { goto, invalidateAll } from "$app/navigation"
 import { page } from "$app/stores"
-import Heading from "$lib/display/Heading.svelte"
-import Hero from "$lib/layouts/Hero.svelte"
-import Inner from "$lib/layouts/Inner.svelte"
+import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import { MessageType } from "$lib/types/message"
 import { set_cookie } from "$lib/utils/cookie"
 import { onMount } from "svelte"
@@ -20,6 +18,4 @@ onMount(async () => {
     return await goto("/")
 })
 </script>
-<Hero>
-    <Heading level={1}>Signing you in</Heading>
-</Hero>
+<OverlayLoading/>
