@@ -1,5 +1,5 @@
 export function set_cookie (name: string, value: string | null) {
-    document.cookie = `${name}=${value ? encodeURIComponent(value) : ""};path=/;Domain=${window.location.hostname};${value ? "" : "Max-Age=0"}`
+    document.cookie = `${name}=${value ? encodeURIComponent(value) : ""};path=/;Domain=${window.location.hostname};Max-Age=${value ? 86400 * 100 : 0}`
 }
 
 export function delete_cookie(name: string) {

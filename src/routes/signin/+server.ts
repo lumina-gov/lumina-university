@@ -12,7 +12,9 @@ export const GET = (async ({ url, cookies }) => {
         })
     }
 
-    cookies.set("token", token)
+    cookies.set("token", token, {
+        maxAge: 86400 * 200
+    })
 
     throw redirect(307, "/")
 
