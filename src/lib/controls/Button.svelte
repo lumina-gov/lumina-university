@@ -9,6 +9,7 @@ export let hug = true
 export let disabled = false
 export let text: string | null = null
 export let target: string | null = null
+export let gamified = false
 
 $: tag = href ? "a" : "div"
 
@@ -29,6 +30,7 @@ function handle_keyup(e: KeyboardEvent) {
     this={ tag }
     class="button {style}"
     class:disabled
+    class:gamified
     class:hug
     href={href}
     role="button"
@@ -73,6 +75,7 @@ function handle_keyup(e: KeyboardEvent) {
     font-weight 600
     .text
         padding 0px 12px
+
     &.hug
         width auto
     .icon
@@ -87,12 +90,24 @@ function handle_keyup(e: KeyboardEvent) {
                 background: lighten($brand, 12%)
             &:active
                 background $brand
+            &.gamified
+                border-bottom 4px solid mix($brand, $dark_app, 60%)
+                outline 0
+                &:active
+                    border-bottom 1px solid mix($brand, $dark_app, 60%)
+                    border-top 3px transparent solid
         &.translucent
             background transparify(white, 8%)
             &:hover, &:focus
                 background: transparify(white, 14%)
             &:active
                 background: transparify(white, 8%)
+            &.gamified
+                border-bottom 4px solid transparify(white, 15%)
+                outline 0
+                &:active
+                    border-bottom 1px solid transparify(white, 15%)
+                    border-top 3px transparent solid
         &.transparent
             color transparify(white, 60%)
             background transparify(white, 0%)

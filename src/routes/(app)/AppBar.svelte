@@ -1,7 +1,6 @@
 <script lang="ts">
 import AppbarButton from "$lib/controls/AppbarButton.svelte"
 import { onMount } from "svelte"
-import Menu from "svelte-material-icons/Menu.svelte"
 import Apps from "svelte-material-icons/Apps.svelte"
 import NotificationOutline from "svelte-material-icons/BellOutline.svelte"
 import ProfileButton from "$lib/controls/ProfileButton.svelte"
@@ -57,7 +56,7 @@ afterNavigate(() => {
                 <AppbarButton
                     style="transparent"
                     authenticated_app_bar={authenticated}
-                    left_icon={Menu}
+                    left_icon={Apps}
                     on:click={ () => nav_opened = !nav_opened }/>
             </Inside>
             <div

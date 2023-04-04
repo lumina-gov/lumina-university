@@ -13,6 +13,15 @@ import { information } from "$lib/data/nav"
 import Inside from "$lib/controls/Inside.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
 import { MeQuery } from "$lib/gql/graphql"
+import DashboardBlock from "$lib/display/DashboardBlock.svelte"
+import ResponsiveLayout from "$lib/layouts/ResponsiveLayout.svelte"
+import Home from "svelte-material-icons/Home.svelte"
+import HumanGreeting from "svelte-material-icons/HumanGreeting.svelte"
+import CreditCard from "svelte-material-icons/CreditCard.svelte"
+import IconButton from "$lib/controls/IconButton.svelte"
+import Button from "$lib/controls/Button.svelte"
+import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
+import AccountPlus from "svelte-material-icons/AccountPlus.svelte"
 
 export let user: MeQuery["me"] | null
 export let nav_opened: boolean
@@ -24,12 +33,42 @@ type MenuLink = {
     sublinks?: Props<ServiceCard>[]
 }
 
-let links: MenuLink[] = [
+// let auth_settings: MenuLink[] = [
+//     {
+//         icon: Information,
+//         name: "Information",
+//         href: "/#information",
+//         sublinks: information
+//     }
+// ]
+let auth_settings = [
+    {
+        icon: Home,
+        name: "Dashboard",
+        href: "/#dashboard",
+        subtext: "Keep track of your enrolments, and progress here.",
+        color: "#00B473"
+    },
     {
         icon: Information,
-        name: "Information",
+        name: "Account Settings",
         href: "/#information",
-        sublinks: information
+        subtext: "Update your account settings and user information.",
+        color: "red"
+    },
+    {
+        icon: Discord,
+        name: "Join Our Discord",
+        href: "/#information",
+        subtext: "Stay in touch with the community through our official discord.",
+        color: "#7446F6"
+    },
+    {
+        icon: CreditCard,
+        name: "Billing",
+        href: "/#information",
+        subtext: "Manage billing and payment methods attached to your account.",
+        color: "#00B473"
     }
 ]
 
@@ -50,7 +89,47 @@ afterNavigate(() => {
         on:focus|capture={ () => nav_opened = true }>
         <ScrollbarRegion>
             <nav>
-                {#each links as link}
+                {#if authenticated}
+                    <div class="auth-wrapper">
+                        <div class="greeting">
+                            <HumanGreeting/>
+                            Hi { user?.first_name }!
+                        </div>
+                        <ResponsiveLayout
+                            horizontal_padding={150}
+                            min_item_size={250}>
+                            {#each auth_settings as card}
+                                <DashboardBlock
+                                    color={card.color}
+                                    header={card.name}
+                                    icon={card.icon}
+                                    subtext={card.subtext}/>
+                            {/each}
+                        </ResponsiveLayout>
+                    </div>
+                {:else}
+                    <ResponsiveLayout
+                        horizontal_padding={150}
+                        min_item_size={250}
+                        padding={16}
+                    >
+                        <Button
+                            gamified={true}
+                            hug={false}
+                            left_icon={AccountPlus}
+                            text="Create Account"/>
+                        <Button
+                            style="translucent"
+                            gamified={true}
+                            hug={false}
+                            left_icon={ExitToApp}>
+                            Sign In
+                        </Button>
+                    </ResponsiveLayout>
+                {/if}
+                <br/>
+                    
+                <!-- {#each links as link}
                     <div class="menu-section">
                         <a
                             class="menu-link"
@@ -85,7 +164,7 @@ afterNavigate(() => {
                             </div>
                         {/if}
                     </div>
-                {/each}
+                {/each} -->
                 <div class="menu-section">
                     <a
                         class="menu-link"
@@ -135,7 +214,7 @@ afterNavigate(() => {
         transition top 0.3s ease-in-out
         top 100%
         nav
-            max-width 1200px
+            max-width 900px
             margin 0 auto
             width 100%
             border-radius 16px
@@ -261,5 +340,20 @@ afterNavigate(() => {
         color $brand
         display inline-flex
         font-size 24px
+.greeting
+    display flex
+    align-items center
+    justify-content center
+    gap 12px
+    padding 16px
+    font-size 24px
+    font-weight 800
 
+.auth-wrapper
+    display flex
+    flex-direction column
+    align-items center
+    justify-content center
+    padding 8px
+    padding 16px
 </style>
