@@ -66,13 +66,17 @@ function handle_keyup(e: KeyboardEvent) {
     padding 10px 10px
     color white
     display inline-flex
+    user-select none
     align-items: center
     white-space nowrap
     justify-content: center
     border-radius 4px
     width 100%
     cursor pointer
+    transition top 0.05s ease-in, box-shadow 0.05s ease-in
     font-weight 600
+    position relative
+    top 0
     .text
         padding 0px 12px
 
@@ -85,29 +89,31 @@ function handle_keyup(e: KeyboardEvent) {
         &:focus-visible
             outline-effect()
         &.branded
-            background: $brand
+            background $brand
             &:hover, &:focus
-                background: lighten($brand, 12%)
+                background lighten($brand, 12%)
             &:active
                 background $brand
             &.gamified
-                border-bottom 4px solid mix($brand, $dark_app, 60%)
+                background $brand
+                box-shadow 0 4px 0 transparify($brand, 50%)
                 outline 0
                 &:active
-                    border-bottom 1px solid mix($brand, $dark_app, 60%)
-                    border-top 3px transparent solid
+                    top 3px
+                    box-shadow 0 1px 0 transparify($brand, 50%)
         &.translucent
             background transparify(white, 8%)
             &:hover, &:focus
-                background: transparify(white, 14%)
+                background: transparify(white, 12%)
             &:active
                 background: transparify(white, 8%)
             &.gamified
-                border-bottom 4px solid transparify(white, 15%)
+                background transparify(white, 15%)
+                box-shadow 0 4px 0 transparify(white, 8%)
                 outline 0
                 &:active
-                    border-bottom 1px solid transparify(white, 15%)
-                    border-top 3px transparent solid
+                    top 3px
+                    box-shadow 0 1px 0 transparify(white, 8%)
         &.transparent
             color transparify(white, 60%)
             background transparify(white, 0%)
