@@ -1,30 +1,79 @@
 <script lang="ts">
 import Button from "$lib/controls/Button.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
+import type { PageData } from "./$types"
+import RocketLaunch from "svelte-material-icons/RocketLaunch.svelte"
+import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
+import Icon from "$lib/display/Icon.svelte"
+import Hero from "$lib/layouts/Hero.svelte"
+import ProgressBar from "$lib/display/ProgressBar.svelte"
+import DashboardCourse from "./DashboardCourse.svelte"
+export let data: PageData
+
+$: user = data.user_store.user
+$: authenticated = data.user_store.user != null
 </script>
-<div class="hero">
-    <div class="inner padding">
-        <div class="span">
-            Tired of bull***t universities?
+{#if authenticated}
+    <Hero divider={true}>
+        <div class="auth-hero">
+            <div class="greeting">
+                <Icon
+                    icon={HumanGreetingVariant}
+                    opacity={0.5}
+                    size={48}/>
+                Hi { user?.first_name }!
+            </div>
+            <Button
+                gamified={true}
+                href="/account"
+                hug={true}
+                right_icon={RocketLaunch}
+                text="Start Subscription"/>
         </div>
-        <h1>The next generation of education</h1>
-        <div class="para">
-            An education system that wasn't designed in the 1800s
+    </Hero>
+    <br/>
+    <Hero
+        align="center"
+        divider={true}>
+        <div class="subheader">
+            Where you left off
         </div>
-        <div class="para">
-            Gain practical experience, create real outcomes.
+        <DashboardCourse/>
+    </Hero>
+    <Hero
+        align="center"
+        divider={true}>
+        <div class="subheader">
+            Your courses
         </div>
-        <Button
-            href="/dashboard"
-            hug={true}
-            right_icon={ChevronRight}>
-            Start Learning
-        </Button>
-        <div class="span">
-            Ready for the real world?
+        <DashboardCourse/>
+    </Hero>
+{:else}
+    <div class="unauth-hero">
+        <div class="inner padding">
+            <div class="span">
+                Tired of bull***t universities?
+            </div>
+            <h1>The next generation of education</h1>
+            <div class="para">
+                An education system that wasn't designed in the 1800s
+            </div>
+            <div class="para">
+                Gain practical experience, create real outcomes.
+            </div>
+            <Button
+                href="/dashboard"
+                hug={true}
+                right_icon={ChevronRight}>
+                Start Learning
+            </Button>
+            <div class="span">
+                Ready for the real world?
+            </div>
         </div>
     </div>
-</div>
+
+{/if}
 <svelte:head>
     <title>Light University - The next generation of education</title>
     <meta
@@ -33,8 +82,24 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 </svelte:head>
 <style lang="stylus">
 @import "variables"
+.auth-hero
+    display flex
+    flex-direction row
+    justify-content space-between
+    align-items center
+    width 100%
+    .greeting
+        display flex
+        gap 16px
+        font-size 36px
+        font-weight 800
+        align-items center
+.subheader
+    font-size 22px
+    font-weight 800
+    text-align center
 
-.hero
+.unauth-hero
     display flex
     flex-direction column
     align-items center
