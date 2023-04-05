@@ -32,9 +32,19 @@ $: authenticated = data.user_store.user != null
         </div>
     </Hero>
     <br/>
-    <Hero align="center">
+    <Hero
+        align="center"
+        divider={true}>
         <div class="subheader">
             Where you left off
+        </div>
+        <DashboardCourse/>
+    </Hero>
+    <Hero
+        align="center"
+        divider={true}>
+        <div class="subheader">
+            Your courses
         </div>
         <DashboardCourse/>
     </Hero>

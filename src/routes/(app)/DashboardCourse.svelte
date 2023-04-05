@@ -50,7 +50,13 @@ export let enlarge = true
         </div>
     </div>
 {:else}
-    asdf
+    <div>
+        <div class="image">
+            <img
+                alt="placeholder"
+                src="src/routes/(app)/Courseplaceholder.png"/>
+        </div>
+    </div>
 {/if}
 
 
