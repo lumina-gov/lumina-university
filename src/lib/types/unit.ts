@@ -1,12 +1,18 @@
 
+export type UnitData = {
+    name: string
+    subunits?: string[]
+}
+
 export type Unit = {
-    id: string
     name: string
     slug: string
-    created_at: string
-    parent_unit?: string | null
+    status: UnitStatus
     subunits: Unit[]
-    order: number
+}
+
+export type UnitMap = {
+    [key: string]: Unit
 }
 
 export enum UnitStatus {

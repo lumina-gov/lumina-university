@@ -1,82 +1,75 @@
-import { graphql } from "$lib/gql"
-import { CoursesBySlugQuery } from "$lib/gql/graphql"
-import { Unit } from "$lib/types/unit"
+import { courses } from "$lib/courses/content"
+import { Unit, UnitData, UnitMap, UnitStatus } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
 
-export const load: LayoutLoad = async ({ params, parent }) => {
-    const data = await parent()
-
-    const query = await data.graph.gquery(graphql(`
-        query CoursesBySlug($slug: String!) {
-            course_by_slug(slug: $slug) {
-                id
-                name
-                slug
-                units {
-                    id
-                    name
-                    slug
-                    created_at
-                    parent_unit
-                    order
-                }
-            }
-        }`), { slug: params.course })
-
-    if(!query.data?.course_by_slug) {
+export const load: LayoutLoad = async ({ params }) => {
+    const course_import = courses[`./${params.course}/course.ts`]
+    if (!course_import) {
         throw error(404, {
             message: "Course not found",
             code: "COURSE_NOT_FOUND"
         })
     }
 
+    const course = (await course_import()).course
+
     return {
-        course: query.data.course_by_slug,
-        slug: params.course,
-        ...units_query_to_unit_tree(query.data.course_by_slug.units),
+        course: {
+            ...course,
+            slug: params.course,
+        },
+        ...units_query_to_unit_tree(course.units_map, course.root_units),
     }
 }
 
-function sort_units(units: Unit[]) {
-    units.sort((a, b) => {
-        return a.order - b.order
-    })
+type UnitDataMap = {
+    [key: string]: UnitData
 }
 
-function units_query_to_unit_tree(units: NonNullable<CoursesBySlugQuery["course_by_slug"]>["units"]): { units_by_id: { [key: string]: Unit }, root_units: Unit[] } {
+function units_query_to_unit_tree(units: UnitDataMap, root_units: string[]): { units_by_id: UnitMap, root_units: Unit[] } {
     // Create a map of units by id
     const units_by_id: { [key: string]: Unit } = {}
     // Create a list of root units
-    const root_units: Unit[] = []
 
     // Add units to map, and empty subunits array
-    units.map(unit => {
-        units_by_id[unit.id] = {
+    Object.entries(units).map(([slug, unit]) => {
+        units_by_id[slug] = {
             ...unit,
-            subunits: []
+            slug,
+            subunits: [],
+            status: UnitStatus.NotStarted
         }
     })
 
     // Add subunits to units
-    Object.values(units_by_id).map(unit => {
-        if(unit.parent_unit) {
-            units_by_id[unit.parent_unit].subunits.push(unit)
-        } else {
-            root_units.push(unit)
+    Object.entries(units).map(([slug, unit]) => {
+        if (unit.subunits) {
+            unit.subunits.map(subunit_slug => {
+                const subunit = units_by_id[subunit_slug]
+                if (!subunit) {
+                    throw error(500, {
+                        message: "Subunit not found",
+                        code: "SUBUNIT_NOT_FOUND"
+                    })
+                }
+
+                units_by_id[slug].subunits.push(subunit)
+            })
         }
     })
 
-    // Sort root units
-    sort_units(root_units)
-
-    // Sort subunits
-    Object.values(units_by_id).map(unit => {
-        sort_units(unit.subunits)
-    })
-
     return {
-        root_units,
+        root_units: root_units.map(slug => {
+            const unit = units_by_id[slug]
+            if (!unit) {
+                throw error(500, {
+                    message: "Root unit not found",
+                    code: "ROOT_UNIT_NOT_FOUND"
+                })
+            }
+            return unit
+        }),
         units_by_id
     }
 }

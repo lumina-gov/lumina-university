@@ -13,8 +13,8 @@ import UnitPaginator from "./UnitPaginator.svelte"
 
 export let data: PageData
 
-$: previous_unit = get_unit_relative(data.units_by_id[data.unit.id], "previous")
-$: next_unit = get_unit_relative(data.units_by_id[data.unit.id], "next")
+$: previous_unit = get_unit_relative(data.units_by_id[data.unit.slug], "previous")
+$: next_unit = get_unit_relative(data.units_by_id[data.unit.slug], "next")
 
 function flatten_unit(unit: Unit): Unit[] {
     let flattened: Unit[] = []
@@ -29,7 +29,7 @@ function flatten_unit(unit: Unit): Unit[] {
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
     let units_flattened = data.root_units.flatMap(unit => flatten_unit(unit))
-    let index = units_flattened.findIndex(u => u.id === unit.id)
+    let index = units_flattened.findIndex(u => u.slug === unit.slug)
     let relative_index = direction === "previous" ? index - 1 : index + 1
 
     return units_flattened[relative_index] || null
@@ -42,7 +42,7 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
         <CourseBreadcrumbs course={data.course}/>
         <hr>
         <CourseSidebar
-            course_slug={data.slug}
+            course_slug={data.course.slug}
             items={data.root_units}
         />
     </div>

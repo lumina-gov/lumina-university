@@ -8,7 +8,6 @@ import Heading from "$lib/display/Heading.svelte"
 import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import Subheading from "$lib/display/Subheading.svelte"
 import Box from "$lib/cards/Box.svelte"
-import BlocksArray from "$lib/components/blocks/BlocksArray.svelte"
 import Button from "$lib/controls/Button.svelte"
 import BookEdit from "svelte-material-icons/BookEdit.svelte"
 import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
@@ -53,7 +52,7 @@ export let data: PageData
         </Box>
         <hr>
         <CourseSidebar
-            course_slug={data.slug}
+            course_slug={data.course.slug}
             items={data.root_units}
         />
     </GridItem>

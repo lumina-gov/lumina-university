@@ -1,23 +1,12 @@
 import { content } from "$lib/courses/content"
-import { graphql } from "$lib/gql"
 import { error } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
 
 export const load = (async ({ params, parent }) => {
     const data = await parent()
+    const unit = data.units_by_id[params.unit]
 
-    const query = await data.graph.gquery(graphql(`
-    query UnitBySlug($slug: String!) {
-        unit_by_slug(slug: $slug) {
-            id
-            name
-            slug
-            created_at
-            parent_unit
-        }
-    }`), { slug: params.unit })
-
-    if(!query.data?.unit_by_slug) {
+    if (!unit) {
         throw error(404, {
             message: "Unit not found",
             code: "UNIT_NOT_FOUND"
@@ -29,10 +18,15 @@ export const load = (async ({ params, parent }) => {
     let markdown = ""
     if (file) {
         markdown = await file()
+    } else {
+        throw error(404, {
+            message: "Unit content not found",
+            code: "UNIT_CONTENT_NOT_FOUND"
+        })
     }
 
     return {
-        unit: query.data.unit_by_slug,
+        unit,
         markdown
     }
 }) satisfies PageLoad
