@@ -10,6 +10,7 @@ export let enlarge = true
 
 {#if enlarge}
     <div class="wrapper">
+            
         <div class="image">
             <img
                 alt="placeholder"
@@ -66,18 +67,27 @@ export let enlarge = true
     display flex
     background transparify(white, 4%)
     padding 24px
-    gap 24px
     border-radius 8px
+    gap 24px
+    @media screen and (max-width: $tablet)
+        flex-direction column
+        gap 16px
+        padding 16px
+        align-items center
+        max-width 450px
     .image
-        min-width 390px
-        min-height 236px
+        display flex
+        max-width 390px
+        width 100%
         border-radius 8px
         background transparify(white, 8%)
     .right-wrapper
         display flex
+        flex 1
         flex-direction column
         justify-content space-between
         padding 8px 0px
+        gap 45px
         .button-text
             display flex
             flex-direction column
