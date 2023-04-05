@@ -34,7 +34,7 @@ async function logout() {
     <div class="links">
         <a
             class="link"
-            href="/dashboard/account">
+            href="/account">
             <Icon
                 icon={Settings}
                 size={20}/>

@@ -6,7 +6,6 @@ import Twitter from "svelte-material-icons/Twitter.svelte"
 import Youtube from "svelte-material-icons/Youtube.svelte"
 import { afterNavigate } from "$app/navigation"
 import type { Props } from "$lib/utils/typed_props"
-import Information from "svelte-material-icons/Information.svelte"
 import Inside from "$lib/controls/Inside.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
 import { MeQuery } from "$lib/gql/graphql"
@@ -17,11 +16,12 @@ import CreditCard from "svelte-material-icons/CreditCard.svelte"
 import Button from "$lib/controls/Button.svelte"
 import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import AccountPlus from "svelte-material-icons/AccountPlus.svelte"
-import new_nav from "$lib/data/new_nav"
+import nav from "$lib/data/nav"
 import Circle from "svelte-material-icons/Circle.svelte"
 import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import { page } from "$app/stores"
+import Settings from "svelte-material-icons/Settings.svelte"
 
 export let user: MeQuery["me"] | null
 export let nav_opened: boolean
@@ -35,24 +35,25 @@ let auth_settings: Array<Props<DashboardBlock>> = [
         color: "#00B473",
     },
     {
-        icon: Information,
+        icon: Settings,
         name: "Account Settings",
         href: "/account",
         subtext: "Update your account settings and user information.",
-        color: "red"
+        color: "#E25454"
     },
     {
         icon: Discord,
         name: "Join Our Discord",
         subtext: "Stay in touch with the community through our official discord.",
-        color: "#7446F6"
+        color: "#7446F6",
+        href: "https://discord.gg/r4vNcUKktT"
     },
     {
         icon: CreditCard,
         name: "Billing",
         href: "/account",
         subtext: "Manage billing and payment methods attached to your account.",
-        color: "#00B473"
+        color: "#22AAFF"
     }
 ]
 
@@ -121,7 +122,7 @@ afterNavigate(() => {
                         min_item_size={200}
                         padding={16}
                     >
-                        {#each new_nav as card}
+                        {#each nav as card}
                             <DashboardBlock {...card}/>
                         {/each}
                     </ResponsiveLayout>

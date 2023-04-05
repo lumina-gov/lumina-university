@@ -15,15 +15,11 @@ export let size = "48px"
     font-size var(--size)
     display inline-flex
     color $brand
-    animation spin 1s infinite ease-in-out
+    animation: rotate 1.5s linear infinite;
 
-@keyframes spin
-    from
-        transform: rotate(180deg)
-    50%
-        transform: rotate(90deg)
+@keyframes rotate
     to
-        transform: rotate(0deg)
+        transform rotate(360deg)
 
 
 </style>
