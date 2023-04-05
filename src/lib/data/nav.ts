@@ -10,14 +10,14 @@ export default [
     {
         icon: BookOpenPageVariantfrom,
         name: "Courses",
-        href: "/#dashboard",
+        href: "/courses",
         color: "#7446F6",
         subtext: "Expertly curated courses using first principle thinking"
     },
     {
         icon: Chat,
         name: "Tutoring",
-        href: "/#dashboard",
+        href: "/tutoring",
         color: "#FF8947",
         subtext: "Accelerate your learning with tutoring"
     },
