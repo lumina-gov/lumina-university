@@ -49,7 +49,7 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[]): { u
                 const subunit = units_by_id[subunit_slug]
                 if (!subunit) {
                     throw error(500, {
-                        message: "Subunit not found",
+                        message: `Subunit not found ${subunit_slug}`,
                         code: "SUBUNIT_NOT_FOUND"
                     })
                 }
@@ -64,7 +64,7 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[]): { u
             const unit = units_by_id[slug]
             if (!unit) {
                 throw error(500, {
-                    message: "Root unit not found",
+                    message: `Root unit not found, ${slug}`,
                     code: "ROOT_UNIT_NOT_FOUND"
                 })
             }
