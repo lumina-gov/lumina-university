@@ -3,11 +3,12 @@ import type { SvelteComponent } from "svelte"
 
 export let icon: typeof SvelteComponent
 export let size: number | undefined = undefined
-export let color: "brand" | "white" | "red" | undefined = undefined
+export let color: "brand" | "white" | "red" | "yellow" | "orange" | "purple" | string | undefined = undefined
 export let opacity = 1
 </script>
 <div
     style:opacity
+    style:color
     class="icon {color}"
     on:click
     on:keypress>
@@ -26,4 +27,11 @@ export let opacity = 1
         color white
     &.red
         color $red
+    &.yellow
+        color $yellow
+    &.orange
+        color $orange
+    &.purple
+        color $purple
+
 </style>

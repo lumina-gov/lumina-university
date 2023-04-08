@@ -6,7 +6,8 @@ let dispatch = createEventDispatcher()
 export let href: string | null = null
 export let icon: typeof SvelteComponent | null = null
 export let opacity = true
-
+export let gamified = false
+export let style: "translucent" | "transparent" | "branded" = "branded"
 $: tag = href ? "a" : "div"
 
 function clicked(e: Event) {
@@ -22,7 +23,8 @@ function handle_keyup(e: KeyboardEvent) {
 
 <svelte:element
     this={ tag }
-    class="button"
+    class="button {style}"
+    class:gamified
     class:opacity
     href={href}
     role="button"
@@ -58,6 +60,40 @@ function handle_keyup(e: KeyboardEvent) {
     &:focus-visible
         outline $brand 2px dashed
         outline-offset 2px
+    &.branded
+        background $brand
+        &:hover, &:focus
+            background lighten($brand, 12%)
+        &:active
+            background $brand
+        &.gamified
+            background $brand
+            box-shadow 0 4px 0 transparify($brand, 50%)
+            outline 0
+            &:active
+                top 3px
+                box-shadow 0 1px 0 transparify($brand, 50%)
+    &.translucent
+        background transparify(white, 8%)
+        &:hover, &:focus
+            background: transparify(white, 12%)
+        &:active
+            background: transparify(white, 8%)
+        &.gamified
+            background transparify(white, 15%)
+            box-shadow 0 4px 0 transparify(white, 8%)
+            outline 0
+            &:active
+                top 3px
+                box-shadow 0 1px 0 transparify(white, 8%)
+    &.transparent
+        color transparify(white, 60%)
+        background transparify(white, 0%)
+        &:hover, &:focus
+            background: transparify(white, 12%)
+            color white
+        &:active
+            background: transparify(white, 6%)
 
 
 </style>
