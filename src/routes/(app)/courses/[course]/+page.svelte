@@ -7,6 +7,7 @@ import BookEdit from "svelte-material-icons/BookEdit.svelte"
 import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 import OutlineSidebar from "./OutlineSidebar.svelte"
 import ExtrasSidebar from "./ExtrasSidebar.svelte"
+import ContentMap from "./ContentMap.svelte"
 
 export let data: PageData
 
@@ -15,6 +16,7 @@ export let data: PageData
 
 <Grid padding_vertical={60}>
     <GridItem
+        align_self="start"
         border_radius={true}
         columns={{
             laptop: "span 6",
@@ -22,9 +24,11 @@ export let data: PageData
             mobile: "span 4",
         }}
         gap={16}
+        position="sticky"
+        top_distance={78}
         translucent={false}>
         <OutlineSidebar course_name={data.course.name}/>
-        <ExtrasSidebar/>
+        <ExtrasSidebar show={false}/>
     </GridItem>
     <GridItem
         align_items="flex-start"
@@ -37,7 +41,10 @@ export let data: PageData
         gap={24}
         padding="24px"
         translucent={true}>
-        <MarkdownRenderer markdown={data.markdown}/>
+        <ContentMap
+            course_slug={data.course.slug}
+            units={data.root_units}/>
+        <!-- <MarkdownRenderer markdown={data.markdown}/> -->
         <Button
             right_icon={BookEdit}
             text="Enroll"

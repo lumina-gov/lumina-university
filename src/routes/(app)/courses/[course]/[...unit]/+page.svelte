@@ -11,7 +11,7 @@ import Pencil from "svelte-material-icons/Pencil.svelte"
 import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
 import { onMount } from "svelte"
-import OverviewBlock from "./OverviewBlock.svelte"
+import OverviewBlock from "../OverviewBlock.svelte"
 
 export let data: PageData
 
@@ -48,10 +48,6 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 //it does this by detecting if the bottom of the wrapper is within the full view port of the screen
 </script>
 <hr>
-<OverviewBlock
-    href=""
-    status="in-progress"
-    title="myass"/>
 <div class="layout">
     <div class="sidebar">
         <CourseBreadcrumbs course={data.course}/>

@@ -6,6 +6,9 @@ import OpenInNew from "svelte-material-icons/OpenInNew.svelte"
 import HeadCheck from "svelte-material-icons/HeadCheck.svelte"
 import Database from "svelte-material-icons/Database.svelte"
 import Sitemap from "svelte-material-icons/Sitemap.svelte"
+
+export let show: boolean
+
 let prerequisites = [
     {
         icon: ArrowDecision,
@@ -37,43 +40,44 @@ let up_next = [
     },
 ]
 </script>
-
-<div class="wrapper">
-    <div>PREREQUISITES</div>
-    <div class="bars">
-        {#each prerequisites as prerequisite}
-            <div class="prereq">
-                <Icon
-                    color={prerequisite.color}
-                    icon={prerequisite.icon}
-                    size={18}/>
-                <div class="text">{ prerequisite.name }</div>
-                <Icon
-                    color="white"
-                    icon={OpenInNew}
-                    opacity={0.5}
-                    size={18}/>
-            </div>
-        {/each}
+{#if show}
+    <div class="wrapper">
+        <div>PREREQUISITES</div>
+        <div class="bars">
+            {#each prerequisites as prerequisite}
+                <div class="prereq">
+                    <Icon
+                        color={prerequisite.color}
+                        icon={prerequisite.icon}
+                        size={18}/>
+                    <div class="text">{ prerequisite.name }</div>
+                    <Icon
+                        color="white"
+                        icon={OpenInNew}
+                        opacity={0.5}
+                        size={18}/>
+                </div>
+            {/each}
+        </div>
+        <div>NEXT UP</div>
+        <div class="bars">
+            {#each up_next as next}
+                <div class="prereq">
+                    <Icon
+                        color={next.color}
+                        icon={next.icon}
+                        size={18}/>
+                    <div class="text">{ next.name }</div>
+                    <Icon
+                        color="white"
+                        icon={OpenInNew}
+                        opacity={0.5}
+                        size={18}/>
+                </div>
+            {/each}
+        </div>
     </div>
-    <div>NEXT UP</div>
-    <div class="bars">
-        {#each up_next as next}
-            <div class="prereq">
-                <Icon
-                    color={next.color}
-                    icon={next.icon}
-                    size={18}/>
-                <div class="text">{ next.name }</div>
-                <Icon
-                    color="white"
-                    icon={OpenInNew}
-                    opacity={0.5}
-                    size={18}/>
-            </div>
-        {/each}
-    </div>
-</div>
+{/if}
 
 <style lang="stylus">
 @import "variables"

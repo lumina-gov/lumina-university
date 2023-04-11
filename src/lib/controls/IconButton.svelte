@@ -12,6 +12,7 @@ $: tag = href ? "a" : "div"
 
 function clicked(e: Event) {
     dispatch("click", e)
+
 }
 
 function handle_keyup(e: KeyboardEvent) {
@@ -49,6 +50,9 @@ function handle_keyup(e: KeyboardEvent) {
     cursor pointer
     font-weight 600
     font-size 24px
+    position relative
+    transition top 0.05s ease-in, box-shadow 0.05s ease-in
+    top 0
     &.opacity
         color transparify(white, 40%)
     &:hover
@@ -64,15 +68,15 @@ function handle_keyup(e: KeyboardEvent) {
         background $brand
         &:hover, &:focus
             background lighten($brand, 12%)
-        &:active
-            background $brand
         &.gamified
+            border-radius 8px
+            outline 4px solid transparify(black, 20%)
+            outline-offset -4px
             background $brand
-            box-shadow 0 4px 0 transparify($brand, 50%)
-            outline 0
+            box-shadow 0 8px 0 transparify($brand, 50%)
             &:active
-                top 3px
-                box-shadow 0 1px 0 transparify($brand, 50%)
+                top 6px
+                box-shadow 0 2px 0 transparify($brand, 50%)
     &.translucent
         background transparify(white, 8%)
         &:hover, &:focus
@@ -81,11 +85,12 @@ function handle_keyup(e: KeyboardEvent) {
             background: transparify(white, 8%)
         &.gamified
             background transparify(white, 15%)
-            box-shadow 0 4px 0 transparify(white, 8%)
-            outline 0
+            box-shadow 0 8px 0 transparify(white, 8%)
+            outline 4px solid transparify(black, 20%)
+            outline-offset -4px
             &:active
-                top 3px
-                box-shadow 0 1px 0 transparify(white, 8%)
+                top 6px
+                box-shadow 0 2px 0 transparify(white, 8%)
     &.transparent
         color transparify(white, 60%)
         background transparify(white, 0%)

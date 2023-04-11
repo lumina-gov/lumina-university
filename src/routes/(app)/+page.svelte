@@ -6,7 +6,6 @@ import RocketLaunch from "svelte-material-icons/RocketLaunch.svelte"
 import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
-import ProgressBar from "$lib/display/ProgressBar.svelte"
 import DashboardCourse from "./DashboardCourse.svelte"
 export let data: PageData
 

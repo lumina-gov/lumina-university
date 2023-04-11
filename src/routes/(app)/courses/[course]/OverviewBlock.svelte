@@ -15,10 +15,16 @@ export let href: string
         style={(status !== "not-started") ? "branded" : "translucent"}
         gamified={status !== "completed"}
         {href}
-        icon={status === "completed" ? Check : Play} />
+        icon={status === "completed" ? Check : Play}
+        opacity={false} />
     <div class="text">
-        <Icon icon={Text}/>
-        { title }
+        {#if status !== "not-started"}
+            <Icon
+                color="brand"
+                icon={Text}
+                size={24}/>
+        {/if}
+        <div>{ title }</div>
     </div>
 </div>
 
@@ -31,6 +37,8 @@ export let href: string
     gap 24px
     align-items center
     justify-content center
+    z-index 10
+    
     &.not-started
         opacity 0.5
     &.in-progress
@@ -39,10 +47,12 @@ export let href: string
         opacity 0.5
 
 .text
+    margin-top 8px
     display flex
     gap 8px
     font-size 16px
     font-weight 700
+    align-items center
     
 </style>
 

@@ -96,7 +96,7 @@ function handle_keyup(e: KeyboardEvent) {
                 background $brand
             &.gamified
                 background $brand
-                box-shadow 0 4px 0 transparify($brand, 50%)
+                box-shadow 0 8px 0 transparify($brand, 50%)
                 outline 0
                 &:active
                     top 3px
@@ -109,7 +109,7 @@ function handle_keyup(e: KeyboardEvent) {
                 background: transparify(white, 8%)
             &.gamified
                 background transparify(white, 15%)
-                box-shadow 0 4px 0 transparify(white, 8%)
+                box-shadow 0 8px 0 transparify(white, 8%)
                 outline 0
                 &:active
                     top 3px
