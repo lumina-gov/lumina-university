@@ -25,7 +25,9 @@ let stats = [
 </script>
 
 <div class="wrapper">
-    <div class="all-courses">
+    <a
+        class="all-courses"
+        href="/courses">
         <Icon
             color="white"
             icon={ChevronDoubleLeft}
@@ -36,7 +38,7 @@ let stats = [
             icon={BookOpenPageVariant}
             size={18}/>
         <div class="text">ALL COURSES</div>
-    </div>
+    </a>
     <div class="course-details">
         <div class="name">
             <Icon
@@ -61,6 +63,9 @@ let stats = [
 
 <style lang="stylus">
 @import "variables"
+
+a
+    color white
 
 .wrapper
     display flex

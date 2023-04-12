@@ -1,7 +1,5 @@
 # Iterative Logic
 
-Parent item: https://www.notion.so/Algorithms-and-Logic-47f27522cfcd4decbc1aef8a9b2979fc
-
 Iterative logic is a fundamental concept in programming that involves repeating a set of instructions multiple times. In this unit, we will explore the basics of iterative logic, including the different types of loops and how they are used in programming.
 
 ## What Will You Learn

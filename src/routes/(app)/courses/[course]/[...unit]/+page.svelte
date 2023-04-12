@@ -11,7 +11,7 @@ import Pencil from "svelte-material-icons/Pencil.svelte"
 import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
 import { onMount } from "svelte"
-import OverviewBlock from "../OverviewBlock.svelte"
+import { flatten_unit } from "$lib/utils/unit"
 
 export let data: PageData
 
@@ -22,16 +22,7 @@ $: next_unit = get_unit_relative(data.units_by_id[data.unit.slug], "next")
 
 // async function page_view
 
-function flatten_unit(unit: Unit): Unit[] {
-    let flattened: Unit[] = []
-    flattened.push(unit)
 
-    for (let subunit of unit.subunits) {
-        flattened.push(...flatten_unit(subunit))
-    }
-
-    return flattened
-}
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
     let units_flattened = data.root_units.flatMap(unit => flatten_unit(unit))

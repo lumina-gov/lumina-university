@@ -1,7 +1,5 @@
 # Agile Programming
 
-Parent item: https://www.notion.so/Clean-Code-84517a024d7f493788507ff5cfb92f81
-
 ## What will you learn
 
 - What is agile programming

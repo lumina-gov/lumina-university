@@ -1,8 +1,5 @@
 # Abstraction, Modularity & Integration
 
-Notes: Blackbox metholodgy
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
-
 Programming can be complex, and managing complexity is a key challenge for any programmer. In this unit, you will learn how to manage complexity by using abstraction, modularity, and integration.
 
 ## What Will You Learn

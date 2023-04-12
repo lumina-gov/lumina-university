@@ -1,7 +1,5 @@
 # Conditional Logic
 
-Parent item: https://www.notion.so/Algorithms-and-Logic-47f27522cfcd4decbc1aef8a9b2979fc
-
 Conditional logic is a fundamental concept in programming that enables us to write programs that make decisions based on certain conditions. In this unit, we will explore the basics of conditional logic, including if and else blocks, switch statements, and match statements.
 
 ## What Will You Learn

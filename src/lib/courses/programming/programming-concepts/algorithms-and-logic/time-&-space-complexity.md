@@ -1,7 +1,5 @@
 # Time & Space Complexity
 
-Parent item: https://www.notion.so/Algorithms-and-Logic-47f27522cfcd4decbc1aef8a9b2979fc
-
 ## Introduction
 
 When designing algorithms, it is important to consider both their time and space complexity. Time complexity refers to the amount of time an algorithm takes to complete its task, while space complexity refers to the amount of memory an algorithm requires to complete its task.

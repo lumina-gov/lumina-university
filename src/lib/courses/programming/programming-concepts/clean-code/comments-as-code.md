@@ -1,8 +1,5 @@
 # Comments As Code
 
-Notes: - Code is there to explain the comments to the computer, not for humans
-Parent item: https://www.notion.so/Clean-Code-84517a024d7f493788507ff5cfb92f81
-
 ## What will you learn?
 
 In this unit, you will learn about the importance of comments as code, how to write effective comments, and best practices for incorporating comments into your code.

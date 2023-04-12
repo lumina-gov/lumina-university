@@ -1,8 +1,5 @@
 # Sequential Logic
 
-Notes: Mention blocks
-Parent item: https://www.notion.so/Algorithms-and-Logic-47f27522cfcd4decbc1aef8a9b2979fc
-
 Sequential logic is a fundamental concept in programming that refers to the order in which statements are executed. In this unit, we will explore the basics of sequential logic, including blocks, statements, and expressions.
 
 ## What Will You Learn

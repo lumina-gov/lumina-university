@@ -1,7 +1,5 @@
 # Premature optimisation
 
-Parent item: https://www.notion.so/Clean-Code-84517a024d7f493788507ff5cfb92f81
-
 ## What Will You Learn
 
 - The dangers of premature optimization

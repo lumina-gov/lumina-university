@@ -8,6 +8,7 @@ export let icon: typeof SvelteComponent | null = null
 export let opacity = true
 export let gamified = false
 export let style: "translucent" | "transparent" | "branded" = "branded"
+export let element: HTMLElement
 $: tag = href ? "a" : "div"
 
 function clicked(e: Event) {
@@ -24,6 +25,7 @@ function handle_keyup(e: KeyboardEvent) {
 
 <svelte:element
     this={ tag }
+    bind:this={ element }
     class="button {style}"
     class:gamified
     class:opacity

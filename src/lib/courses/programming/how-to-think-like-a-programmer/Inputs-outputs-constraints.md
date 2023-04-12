@@ -1,7 +1,5 @@
 # Inputs, Outputs & Constraints
 
-Notes: blackbox methodology
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
 
 As a programmer, you will often need to work with inputs, outputs, and constraints when solving problems. In this unit, you will learn what inputs, outputs, and constraints are, how to define them, and how to work with them effectively.
 

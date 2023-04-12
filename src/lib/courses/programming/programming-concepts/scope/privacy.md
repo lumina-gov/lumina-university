@@ -1,8 +1,5 @@
 # Privacy
 
-Notes: public and private features of fields, classes, namespaces and modules
-Parent item: https://www.notion.so/Scope-571bf839bc764c0abfdc9733b437014a
-
 ## What will you learn?
 
 In this unit, you will learn about the concept of privacy in programming and how it is implemented in different programming languages.

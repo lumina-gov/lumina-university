@@ -1,8 +1,5 @@
 # Thinking in terms of data
 
-Notes: Information processing & mutation
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
-
 Data is at the core of programming. As a programmer, you will work with data in various forms, such as numbers, text, images, and more. In this unit, you will learn how to think in data and how to represent the world as data.
 
 ## What Will You Learn

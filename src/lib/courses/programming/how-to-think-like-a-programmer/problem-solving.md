@@ -1,9 +1,5 @@
 # Problem Solving
 
-Notes: - Debugging, troubleshooting - aka problem solving
-- Elimination of potential vectors and issues - how to narrow down problems
-- Breaking down complex problems into smaller subproblems
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
 
 # Problem Solving
 

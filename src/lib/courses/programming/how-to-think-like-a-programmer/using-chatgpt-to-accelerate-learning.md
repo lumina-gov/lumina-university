@@ -1,7 +1,5 @@
 # Using ChatGPT to accelerate learning
 
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
-
 ChatGPT is a powerful tool that can help accelerate your learning in programming and many other fields. As an AI-powered language model, ChatGPT can provide you with instant feedback, suggestions, and explanations to help you learn more efficiently. In this unit, you will learn how to use ChatGPT effectively to accelerate your learning.
 
 ## What Will You Learn

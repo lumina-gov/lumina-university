@@ -1,9 +1,5 @@
 # Coding Standards and Conventions
 
-Notes: • Consistency
-• Descriptive and meaningful names
-Parent item: https://www.notion.so/Clean-Code-84517a024d7f493788507ff5cfb92f81
-
 ## What will you learn?
 
 In this unit, you will learn about the importance of coding standards and conventions in writing clean code. You will understand the benefits of following these standards, learn some common conventions, and explore some tools that can help you maintain code quality.

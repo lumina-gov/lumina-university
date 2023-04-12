@@ -1,9 +1,5 @@
 # Functions & Methods
 
-Notes: • Parameters, Output, Parameters are a special type of variables that are inputs into a function
-• Clean vs Side effects
-• A function is a block of code
-Parent item: https://www.notion.so/Algorithms-and-Logic-47f27522cfcd4decbc1aef8a9b2979fc
 
 ## What will you learn
 
