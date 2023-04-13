@@ -10,7 +10,7 @@ In this unit, you will learn about closures and nested functions. You will under
 
 A closure is a function that retains access to variables from its enclosing lexical scope, even when the function is executed outside that scope. This means that a closure can access variables defined in the parent function, even after the parent function has returned.
 
-Here's an example of a closure:
+Here's an example of a closure in `JavaScript`:
 
 ```
 function outerFunction() {

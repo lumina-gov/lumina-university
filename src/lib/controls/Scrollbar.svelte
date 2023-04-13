@@ -156,7 +156,6 @@ function setupThumb(thumb: HTMLDivElement) {
     }
     if (thumb === HThumb) {
         HTeardownThumb?.()
-        HThumb.addEventListener("mousedown" , () => console.log("foo"))
         HThumb.addEventListener("mousedown", onThumbDown, { passive: true, capture: true })
         HThumb.addEventListener("touchstart", onThumbDown, { passive: true })
 

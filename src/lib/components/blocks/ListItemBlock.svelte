@@ -6,7 +6,6 @@ import CheckboxMarked from "svelte-material-icons/CheckboxMarked.svelte"
 import BlocksArray from "./BlocksArray.svelte"
 
 export let block: ListItem
-console.log(block)
 </script>
 <li>
     {#if typeof block.checked === "boolean"}
