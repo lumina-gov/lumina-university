@@ -86,9 +86,10 @@ function handle_keyup(e: KeyboardEvent) {
         &:active
             background: transparify(white, 8%)
         &.gamified
+            border-radius 8px
             background transparify(white, 15%)
             box-shadow 0 8px 0 transparify(white, 8%)
-            outline 4px solid transparify(black, 20%)
+            outline 4px solid transparify(white, 10%)
             outline-offset -4px
             &:active
                 top 6px

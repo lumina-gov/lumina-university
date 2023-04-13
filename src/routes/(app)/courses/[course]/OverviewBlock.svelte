@@ -45,14 +45,14 @@ export let href: string
         opacity 1
     &.completed
         opacity 0.5
+    .text
+        margin-top 100px
+        display flex
+        gap 8px
+        font-size 16px
+        font-weight 700
+        align-items center
 
-.text
-    margin-top 8px
-    display flex
-    gap 8px
-    font-size 16px
-    font-weight 700
-    align-items center
     
 </style>
 

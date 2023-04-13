@@ -11,7 +11,8 @@ import Pencil from "svelte-material-icons/Pencil.svelte"
 import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
 import { onMount } from "svelte"
-import { flatten_unit } from "$lib/utils/unit"
+import { flatten_unit, flatten_units } from "$lib/utils/unit"
+import CourseProgressBar from "./CourseProgressBar.svelte"
 
 export let data: PageData
 
@@ -39,15 +40,24 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 //it does this by detecting if the bottom of the wrapper is within the full view port of the screen
 </script>
 <hr>
+<div class="crumb-bar">
+    <CourseBreadcrumbs course={data.course}
+    />
+    <CourseProgressBar
+        course_slug={data.course.slug}
+        {data}
+        units={data.root_units.flatMap(unit => flatten_unit(unit))}/>
+</div>
+<hr>
 <div class="layout">
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <CourseBreadcrumbs course={data.course}/>
         <hr>
         <CourseSidebar
             course_slug={data.course.slug}
             items={data.root_units}
         />
-    </div>
+    </div> -->
     <ScrollbarRegion>
         <main>
             <div class="content-container">
@@ -91,6 +101,9 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 <style lang="stylus">
 @import "variables"
 
+.crumb-bar
+    display flex
+    padding 0px 150px
 .section
     display flex
     flex-direction column
@@ -125,7 +138,7 @@ main
     padding 40px
 
 .content
-    max-width 700px
+    max-width 650px
     margin 0 auto
     display flex
     flex-direction column
