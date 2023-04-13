@@ -10,22 +10,19 @@ import CourseBreadcrumbs from "./CourseBreadcrumbs.svelte"
 import Pencil from "svelte-material-icons/Pencil.svelte"
 import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
+import { onMount } from "svelte"
+import { flatten_unit } from "$lib/utils/unit"
 
 export let data: PageData
 
 $: previous_unit = get_unit_relative(data.units_by_id[data.unit.slug], "previous")
 $: next_unit = get_unit_relative(data.units_by_id[data.unit.slug], "next")
 
-function flatten_unit(unit: Unit): Unit[] {
-    let flattened: Unit[] = []
-    flattened.push(unit)
+// onMount(page_view)
 
-    for (let subunit of unit.subunits) {
-        flattened.push(...flatten_unit(subunit))
-    }
+// async function page_view
 
-    return flattened
-}
+
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
     let units_flattened = data.root_units.flatMap(unit => flatten_unit(unit))
@@ -34,7 +31,12 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 
     return units_flattened[relative_index] || null
 }
+// on mount trigger the page view function
 
+// there should be an component that contains elements/blocks
+//component has offset top and height 
+// create a resize listener and scroll listener that triggers a function that evvaluates completion of each component
+//it does this by detecting if the bottom of the wrapper is within the full view port of the screen
 </script>
 <hr>
 <div class="layout">
@@ -84,6 +86,8 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
         </main>
     </ScrollbarRegion>
 </div>
+
+
 <style lang="stylus">
 @import "variables"
 
@@ -139,6 +143,4 @@ main
 .inner-toc
     padding-top 40px
     width 100%
-
-
 </style>

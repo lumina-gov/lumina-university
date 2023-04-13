@@ -1,7 +1,5 @@
 # Closures and Nested Functions
 
-Parent item: https://www.notion.so/Scope-571bf839bc764c0abfdc9733b437014a
-
 ## What will you learn?
 
 In this unit, you will learn about closures and nested functions. You will understand the scope of variables within these functions and how they can be used effectively in programming.

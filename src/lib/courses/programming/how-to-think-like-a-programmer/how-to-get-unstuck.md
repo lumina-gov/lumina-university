@@ -1,7 +1,5 @@
 # How to get unstuck
 
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
-
 As a programmer, getting stuck is a natural part of the process. It's easy to get frustrated and overwhelmed when you encounter a problem that you can't solve. In this unit, you will learn how to get unstuck and solve problems more efficiently.
 
 ## What Will You Learn

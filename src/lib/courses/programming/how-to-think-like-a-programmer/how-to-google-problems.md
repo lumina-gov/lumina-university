@@ -1,7 +1,5 @@
 # How to google problems
 
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
-
 As a programmer, you will encounter many problems that you don't know how to solve. Fortunately, there is a wealth of information available online that can help you find a solution. In this unit, you will learn how to use Google effectively to solve programming problems.
 
 ## What Will You Learn

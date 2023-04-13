@@ -1,7 +1,5 @@
 # Dealing with Failure
 
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
-
 Programming can be challenging, and failure is an inevitable part of the learning process. In this unit, you will learn how to deal with failure and use it as an opportunity to learn and improve your skills.
 
 ## What Will You Learn

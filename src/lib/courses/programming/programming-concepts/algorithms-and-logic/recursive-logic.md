@@ -1,7 +1,5 @@
 # Recursive Logic
 
-Parent item: https://www.notion.so/Algorithms-and-Logic-47f27522cfcd4decbc1aef8a9b2979fc
-
 ## What will you learn?
 
 In this unit, you will learn about recursive logic, including:

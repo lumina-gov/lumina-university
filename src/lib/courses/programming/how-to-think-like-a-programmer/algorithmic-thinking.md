@@ -1,10 +1,5 @@
 # Algorithmic Thinking
 
-Notes: Code is a story for computers analogy
-- Systems, processes, pipelines computational thinking
-- Writing step by step instructions for problem solving, pseudocode / recipe analogy
-Parent item: https://www.notion.so/How-to-Think-Like-a-Programmer-d802e754e66c4f1793aab6327bf7fbbf
-
 Programming is all about solving problems, and one of the most important skills for solving problems is algorithmic thinking. In this unit, you will learn what algorithmic thinking is, how to apply it to problem-solving, and how to write algorithms that solve problems.
 
 ## What Will You Learn

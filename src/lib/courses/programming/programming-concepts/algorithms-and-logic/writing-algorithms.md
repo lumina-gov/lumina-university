@@ -1,7 +1,5 @@
 # Writing Algorithms
 
-Parent item: https://www.notion.so/Algorithms-and-Logic-47f27522cfcd4decbc1aef8a9b2979fc
-
 ## Writing Clear and Effective Algorithms
 
 When writing algorithms, it's important to keep them clear and easy to understand. Here are some tips for writing clear and effective algorithms:

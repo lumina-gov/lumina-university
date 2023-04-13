@@ -1,7 +1,5 @@
 # Test-driven development
 
-Parent item: https://www.notion.so/Clean-Code-84517a024d7f493788507ff5cfb92f81
-
 ## What you will learn
 
 In this unit, you will learn about Test-Driven Development (TDD), which is a programming technique that emphasizes writing tests before writing code. By following the TDD approach, you will learn how to write code that is testable, maintainable, and easily understood by other developers.

@@ -1,7 +1,5 @@
 # Best Practices
 
-Parent item: https://www.notion.so/Scope-571bf839bc764c0abfdc9733b437014a
-
 ## What will you learn?
 
 - Best practices for working with variable scope in programming languages.

@@ -19,8 +19,10 @@ export let flex_direction: FlexDirection | BreakpointColumns<FlexDirection> | un
 export let justify_content: JustifyContent | BreakpointColumns<JustifyContent> | undefined = undefined
 export let align_items: AlignItems | BreakpointColumns<AlignItems> | undefined = undefined
 export let text_align: "left" | "center" | "right" | undefined = undefined
+export let align_self: "auto" | "start" | "end" | "center" | "baseline" | "stretch" | undefined = undefined
 export let translucent = false
 export let border_radius = false
+export let top_distance = 0
 
 export let columns: BreakpointColumns<string>
 </script>
@@ -45,6 +47,8 @@ export let columns: BreakpointColumns<string>
     style:padding
     style:gap={ gap ? gap + "px" : undefined }
     style:position
+    style:align-self={ align_self }
+    style:top={ `${top_distance}px` }
     class="grid-item"
     class:border_radius
     class:translucent>

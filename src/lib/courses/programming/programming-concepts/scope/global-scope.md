@@ -1,7 +1,5 @@
 # Global Scope
 
-Parent item: https://www.notion.so/Scope-571bf839bc764c0abfdc9733b437014a
-
 In programming, scope refers to the visibility and accessibility of variables in your code. Global scope refers to variables that are accessible from anywhere in your code.
 
 ## What Will You Learn

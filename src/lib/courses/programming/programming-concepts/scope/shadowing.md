@@ -1,7 +1,4 @@
 # Shadowing
-
-Parent item: https://www.notion.so/Scope-571bf839bc764c0abfdc9733b437014a
-
 ## What will you learn?
 
 In this unit, you will learn about shadowing, which is a concept in programming that occurs when a variable declared within a certain scope has the same name as a variable in an outer scope. You will learn how shadowing works, why it can be useful, and best practices for using it effectively.

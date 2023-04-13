@@ -1,7 +1,5 @@
 # Local / Block Scope
 
-Parent item: https://www.notion.so/Scope-571bf839bc764c0abfdc9733b437014a
-
 # Local/Block Scope
 
 In programming, scope refers to the visibility and accessibility of variables in your code. Local/block scope refers to variables that are only accessible within a specific function or code block.

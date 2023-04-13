@@ -1,13 +1,5 @@
 # Identifying Code Smells
 
-Notes: • Long methods
-• Duplicated Code
-• Un-descriptive code
-• Too much nesting of logic, extraction of logic, and inversion
-• Overly complex
-- Bad formatting
-Parent item: https://www.notion.so/Clean-Code-84517a024d7f493788507ff5cfb92f81
-
 ## What will you learn
 
 - What code smells are

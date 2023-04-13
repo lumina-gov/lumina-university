@@ -1,7 +1,5 @@
 # Programming Paradigms
 
-Parent item: https://www.notion.so/Clean-Code-84517a024d7f493788507ff5cfb92f81
-
 In computer science, programming paradigms refer to fundamental styles and approaches to programming. These paradigms are a way to classify programming languages based on their features and syntax. Each paradigm represents a distinct set of principles for structuring and organising code. There are several paradigms, including:
 
 ## Imperative Programming
