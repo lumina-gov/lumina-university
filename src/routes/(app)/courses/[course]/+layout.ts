@@ -38,7 +38,7 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[]): { u
             ...unit,
             slug,
             subunits: [],
-            status: UnitStatus.Completed
+            status: UnitStatus.NotStarted
         }
     })
 

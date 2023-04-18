@@ -7,7 +7,7 @@ import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import BookmarkCheck from "svelte-material-icons/BookmarkCheck.svelte"
 import ClockTimeFour from "svelte-material-icons/ClockTimeFour.svelte"
 export let course_name: string
-
+export let unit_count: number
 let stats = [
     {
         icon: AccountGroup,
@@ -15,7 +15,7 @@ let stats = [
     },
     {
         icon: BookmarkCheck,
-        text: "32 Units"
+        text: `${unit_count} Units`
     },
     {
         icon: ClockTimeFour,

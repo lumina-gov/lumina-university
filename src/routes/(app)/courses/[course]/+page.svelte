@@ -9,7 +9,7 @@ import OutlineSidebar from "./OutlineSidebar.svelte"
 import ExtrasSidebar from "./ExtrasSidebar.svelte"
 
 import CourseTree from "./CourseTree.svelte"
-import { flatten_units } from "$lib/utils/unit"
+import { flatten_unit, flatten_units } from "$lib/utils/unit"
 
 export let data: PageData
 
@@ -29,7 +29,9 @@ export let data: PageData
         position="sticky"
         top_distance={78}
         translucent={false}>
-        <OutlineSidebar course_name={data.course.name}/>
+        <OutlineSidebar
+            course_name={data.course.name}
+            unit_count={data.root_units.flatMap(unit => flatten_unit(unit)).length}/>
         <ExtrasSidebar show={false}/>
     </GridItem>
     <GridItem

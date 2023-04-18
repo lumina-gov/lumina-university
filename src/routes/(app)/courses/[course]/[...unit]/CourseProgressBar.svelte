@@ -44,7 +44,7 @@ $: console.log(data.unit.slug)
                 class:completed={ unit.status === UnitStatus.Completed }
                 href={`/courses/${course_slug}/${unit.slug}`}
             >
-                {#if unit.slug === data.unit.slug}
+                <!-- {#if unit.slug === data.unit.slug}
                     <div class="current u">
                         <Icon
                             color="white"
@@ -59,7 +59,7 @@ $: console.log(data.unit.slug)
                             opacity={0.4}
                             size={14}/>
                     </div>
-                {/if}
+                {/if} -->
             </a>
         {/each}
     </div>
@@ -80,7 +80,6 @@ $: console.log(data.unit.slug)
     align-items center
     width 100%
     gap 8px
-    position relative
 .bar
     display flex
     flex 1
@@ -90,8 +89,10 @@ $: console.log(data.unit.slug)
     width 100%
     overflow hidden
 
+
     .seg
         display flex
+        position relative
         flex 1
         &.completed
             background-color $brand
@@ -100,11 +101,12 @@ $: console.log(data.unit.slug)
             &.active
                 background-color mix(white, $brand, 30%)
 
-.current
-    position absolute
-    &.u
-        top 5px
-    &.b 
-        bottom 2px
+// .current
+//     position absolute
+//     &.u
+//         top -16px
+//         left 0px
+//     &.b 
+//         bottom -16px
 
 </style>
