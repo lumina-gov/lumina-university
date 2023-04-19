@@ -45,7 +45,7 @@ $: authenticated = data.user_store.user != null
         <div class="subheader">
             Your courses
         </div>
-        <DashboardCourse/>
+        <DashboardCourse enlarge={false}/>
     </Hero>
 {:else}
     <div class="unauth-hero">
