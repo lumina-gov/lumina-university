@@ -49,16 +49,6 @@ export enum CitizenshipStatus {
   Rejected = 'REJECTED'
 }
 
-export type Course = {
-  __typename?: 'Course';
-  created_at: Scalars['DateTime'];
-  id: Scalars['Uuid'];
-  is_enrolled: Scalars['Boolean'];
-  name: Scalars['String'];
-  slug: Scalars['String'];
-  units: Array<Unit>;
-};
-
 export type CrackSeconds = {
   __typename?: 'CrackSeconds';
   guesses: Scalars['Float'];
@@ -87,9 +77,9 @@ export type Mutation = {
   create_citizenship_application: Scalars['Uuid'];
   create_light_university_checkout_session: Scalars['String'];
   create_user: Scalars['Uuid'];
-  enroll_user_to_course: Scalars['Boolean'];
   /** Returns a JWT token for the user */
   login: Scalars['String'];
+  set_unit_progress: UnitProgress;
   test: Scalars['String'];
 };
 
@@ -109,33 +99,37 @@ export type MutationCreate_UserArgs = {
 };
 
 
-export type MutationEnroll_User_To_CourseArgs = {
-  course_slug: Scalars['String'];
-};
-
-
 export type MutationLoginArgs = {
   login_user: LoginUserInput;
 };
 
+
+export type MutationSet_Unit_ProgressArgs = {
+  course_slug: Scalars['String'];
+  status: UnitStatus;
+  unit_slug: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  course_by_slug?: Maybe<Course>;
-  courses: Array<Course>;
+  all_course_progress: Array<Array<UnitProgress>>;
+  course_progress: Array<UnitProgress>;
   /**
    * Returns the crack time of a password
    * Used for password strength estimation
    * On the frontend
    */
   crack_time: CrackSeconds;
+  last_updated_unit?: Maybe<UnitProgress>;
   me?: Maybe<User>;
-  unit_by_slug?: Maybe<Unit>;
+  ping: Scalars['String'];
   user_count: Scalars['Int'];
+  user_count_by_interval: Array<Scalars['Int']>;
 };
 
 
-export type QueryCourse_By_SlugArgs = {
-  slug: Scalars['String'];
+export type QueryCourse_ProgressArgs = {
+  course_slug: Scalars['String'];
 };
 
 
@@ -144,20 +138,26 @@ export type QueryCrack_TimeArgs = {
 };
 
 
-export type QueryUnit_By_SlugArgs = {
-  slug: Scalars['String'];
+export type QueryUser_Count_By_IntervalArgs = {
+  count: Scalars['Int'];
+  interval: Scalars['Int'];
 };
 
-export type Unit = {
-  __typename?: 'Unit';
-  course_id: Scalars['Uuid'];
-  created_at: Scalars['DateTime'];
+export type UnitProgress = {
+  __typename?: 'UnitProgress';
+  course_slug: Scalars['String'];
   id: Scalars['Uuid'];
-  name: Scalars['String'];
-  order: Scalars['Float'];
-  parent_unit?: Maybe<Scalars['Uuid']>;
-  slug: Scalars['String'];
+  status: UnitStatus;
+  unit_slug: Scalars['String'];
+  updated_at: Scalars['DateTime'];
+  user_id: Scalars['Uuid'];
 };
+
+export enum UnitStatus {
+  Completed = 'COMPLETED',
+  InProgress = 'IN_PROGRESS',
+  NotStarted = 'NOT_STARTED'
+}
 
 export type User = {
   __typename?: 'User';
@@ -195,29 +195,16 @@ export type CreateLightUniversityCheckoutSessionMutationVariables = Exact<{
 
 export type CreateLightUniversityCheckoutSessionMutation = { __typename?: 'Mutation', create_light_university_checkout_session: string };
 
-export type CoursesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: string, name: string, slug: string, units: Array<{ __typename?: 'Unit', id: string, name: string, slug: string, created_at: any, parent_unit?: string | null }> }> };
-
-export type CoursesBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
+export type SetUnitProgressMutationVariables = Exact<{
+  course_slug: Scalars['String'];
+  unit_slug: Scalars['String'];
 }>;
 
 
-export type CoursesBySlugQuery = { __typename?: 'Query', course_by_slug?: { __typename?: 'Course', id: string, name: string, slug: string, units: Array<{ __typename?: 'Unit', id: string, name: string, slug: string, created_at: any, parent_unit?: string | null, order: number }> } | null };
-
-export type UnitBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
-}>;
-
-
-export type UnitBySlugQuery = { __typename?: 'Query', unit_by_slug?: { __typename?: 'Unit', id: string, name: string, slug: string, created_at: any, parent_unit?: string | null } | null };
+export type SetUnitProgressMutation = { __typename?: 'Mutation', set_unit_progress: { __typename?: 'UnitProgress', id: string, status: UnitStatus, user_id: string, unit_slug: string, course_slug: string, updated_at: any } };
 
 
 export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
 export const CustomerPortalUrlDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CustomerPortalUrl"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer_portal_url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"return_url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}}}]}]}}]}}]} as unknown as DocumentNode<CustomerPortalUrlQuery, CustomerPortalUrlQueryVariables>;
 export const CreateLightUniversityCheckoutSessionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateLightUniversityCheckoutSession"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_light_university_checkout_session"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"success_url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}}}]}]}}]} as unknown as DocumentNode<CreateLightUniversityCheckoutSessionMutation, CreateLightUniversityCheckoutSessionMutationVariables>;
-export const CoursesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"courses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"courses"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"units"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"parent_unit"}}]}}]}}]}}]} as unknown as DocumentNode<CoursesQuery, CoursesQueryVariables>;
-export const CoursesBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CoursesBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"course_by_slug"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"units"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"parent_unit"}},{"kind":"Field","name":{"kind":"Name","value":"order"}}]}}]}}]}}]} as unknown as DocumentNode<CoursesBySlugQuery, CoursesBySlugQueryVariables>;
-export const UnitBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UnitBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unit_by_slug"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"parent_unit"}}]}}]}}]} as unknown as DocumentNode<UnitBySlugQuery, UnitBySlugQueryVariables>;
+export const SetUnitProgressDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetUnitProgress"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"course_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"unit_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"set_unit_progress"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"course_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"course_slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"unit_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"unit_slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"status"},"value":{"kind":"EnumValue","value":"IN_PROGRESS"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_slug"}},{"kind":"Field","name":{"kind":"Name","value":"course_slug"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]} as unknown as DocumentNode<SetUnitProgressMutation, SetUnitProgressMutationVariables>;

@@ -3,7 +3,7 @@ import { Unit, UnitData, UnitMap, UnitStatus } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
 
-export const load: LayoutLoad = async ({ params }) => {
+export const load: LayoutLoad = async ({ params, parent }) => {
     const course_import = courses[`./${params.course}/course.ts`]
     if (!course_import) {
         throw error(404, {
@@ -11,9 +11,9 @@ export const load: LayoutLoad = async ({ params }) => {
             code: "COURSE_NOT_FOUND"
         })
     }
-
     const course = (await course_import()).course
 
+    const req = await data.graphql({},{})
     return {
         course: {
             ...course,
