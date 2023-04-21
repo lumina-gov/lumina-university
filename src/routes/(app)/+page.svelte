@@ -23,7 +23,6 @@ $: authenticated = data.user_store.user != null
                 Hi { user?.first_name }!
             </div>
             <Button
-                gamified={true}
                 href="/account"
                 hug={true}
                 right_icon={RocketLaunch}

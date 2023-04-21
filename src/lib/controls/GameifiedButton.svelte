@@ -30,7 +30,7 @@ function handle_keyup(e: KeyboardEvent) {
 >
     <Icon
         icon={icon}
-        opacity={style === "highlighted" ? 1 : 0.2} />
+        opacity={style === "highlighted" ? 1 : 0.5} />
 </div>
     
 <style lang="stylus">
