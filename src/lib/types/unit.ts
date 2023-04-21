@@ -1,3 +1,4 @@
+import { UnitStatus } from "$lib/gql/graphql"
 
 export type UnitData = {
     name: string
@@ -12,9 +13,3 @@ export type Unit = {
 }
 
 export type UnitMap = Record<string, Unit>
-
-export enum UnitStatus {
-    Completed,
-    NotStarted,
-    InProgress,
-}

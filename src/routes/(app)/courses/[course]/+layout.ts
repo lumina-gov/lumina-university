@@ -1,10 +1,13 @@
 import { courses } from "$lib/courses/content"
-import { Unit, UnitData, UnitMap, UnitStatus } from "$lib/types/unit"
+import { Unit, UnitData, UnitMap } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
+import { graphql } from "$lib/gql"
+import { UnitStatus } from "$lib/gql/graphql"
 
 export const load: LayoutLoad = async ({ params, parent }) => {
     const course_import = courses[`./${params.course}/course.ts`]
+    const data = await parent()
     if (!course_import) {
         throw error(404, {
             message: "Course not found",
@@ -13,12 +16,37 @@ export const load: LayoutLoad = async ({ params, parent }) => {
     }
     const course = (await course_import()).course
 
+    const req = await data.graph.gquery(graphql(`
+        query GetCourseProgress($course_slug: String!) {
+            course_progress(course_slug: $course_slug) {
+                id
+                status
+                user_id
+                unit_slug
+                course_slug
+                updated_at
+            }
+        }
+    `), {course_slug: params.course})
+
+    if (req.error ) {
+        throw error(500, {
+            message: req.error.message,
+            code: "COURSE_PROGRESS_ERROR"
+        })
+    }
+
+    const units_progress_map: { [key: string]: UnitStatus } = {}
+    req.data?.course_progress.map(progress => {
+        units_progress_map[progress.unit_slug] = progress.status
+    })
+
     return {
         course: {
             ...course,
             slug: params.course,
         },
-        ...units_query_to_unit_tree(course.units_map, course.root_units),
+        ...units_query_to_unit_tree(course.units_map, course.root_units, units_progress_map),
     }
 }
 
@@ -26,7 +54,7 @@ type UnitDataMap = {
     [key: string]: UnitData
 }
 
-function units_query_to_unit_tree(units: UnitDataMap, root_units: string[]): { units_by_id: UnitMap, root_units: Unit[] } {
+function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: {[key: string]: UnitStatus} ): { units_by_id: UnitMap, root_units: Unit[] } {
     // Create a map of units by id
     const units_by_id: { [key: string]: Unit } = {}
     // Create a list of root units
@@ -37,7 +65,7 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[]): { u
             ...unit,
             slug,
             subunits: [],
-            status: UnitStatus.NotStarted
+            status: units_progress_map[slug]
         }
     })
 
