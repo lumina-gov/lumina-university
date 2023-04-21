@@ -9,7 +9,6 @@ export let hug = true
 export let disabled = false
 export let text: string | null = null
 export let target: string | null = null
-export let gamified = false
 
 $: tag = href ? "a" : "div"
 
@@ -30,7 +29,6 @@ function handle_keyup(e: KeyboardEvent) {
     this={ tag }
     class="button {style}"
     class:disabled
-    class:gamified
     class:hug
     href={href}
     role="button"
@@ -73,13 +71,12 @@ function handle_keyup(e: KeyboardEvent) {
     border-radius 4px
     width 100%
     cursor pointer
-    transition top 0.05s ease-in, box-shadow 0.05s ease-in
+    transition top 0.05s ease-in, box-shadow 0.05s ease-in, background 0.05s ease-in
     font-weight 600
     position relative
     top 0
     .text
         padding 0px 12px
-
     &.hug
         width auto
     .icon
@@ -90,30 +87,26 @@ function handle_keyup(e: KeyboardEvent) {
             outline-effect()
         &.branded
             background $brand
+            box-shadow 0 6px 0 transparify($brand, 50%)
+            outline 0
             &:hover, &:focus
-                background lighten($brand, 12%)
+                background lighten($brand, 8%)
+                box-shadow 0 6px lighten(transparify($brand, 50%), 12%)
             &:active
-                background $brand
-            &.gamified
-                background $brand
-                box-shadow 0 8px 0 transparify($brand, 50%)
-                outline 0
-                &:active
-                    top 3px
-                    box-shadow 0 1px 0 transparify($brand, 50%)
+                top 6px
+                box-shadow 0 1px 0 transparify($brand, 50%)
         &.translucent
-            background transparify(white, 8%)
+            background transparify(white, 15%)
+            box-shadow 0 6px 0 transparify(white, 8%)
+            outline 0
             &:hover, &:focus
-                background: transparify(white, 12%)
+                background transparify(white, 18%)
+                box-shadow 0 6px transparify(white, 12%)
             &:active
+                top 5px
+                box-shadow 0 1px 0 transparify(white, 8%)
                 background: transparify(white, 8%)
-            &.gamified
-                background transparify(white, 15%)
-                box-shadow 0 8px 0 transparify(white, 8%)
-                outline 0
-                &:active
-                    top 3px
-                    box-shadow 0 1px 0 transparify(white, 8%)
+
         &.transparent
             color transparify(white, 60%)
             background transparify(white, 0%)

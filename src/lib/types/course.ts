@@ -10,3 +10,7 @@ export type Course = {
         }
     }
 }
+
+export type CourseExtendedData = Course & {
+    course_slug: string
+}

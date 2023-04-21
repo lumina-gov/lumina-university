@@ -56,6 +56,7 @@ $: authenticated = data.user_store.user != null
     display flex
     flex-direction column
     z-index 1
+    grid-row 2
     @media (max-width $tablet)
         overflow-y auto
         height 100%
@@ -72,6 +73,7 @@ $: authenticated = data.user_store.user != null
             height 100vh
             display grid
             overflow-y hidden
-            grid-template-rows 1fr 60px // content, AppBar
+            grid-template-rows min-content 1fr 60px
+
 
 </style>

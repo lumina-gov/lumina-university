@@ -5,5 +5,5 @@ export const content = import.meta.glob("./**/*.md", { as: "raw" }) as {
 }
 
 export const courses = import.meta.glob("./*/course.ts") as {
-    [key: string]: undefined | (() => Promise<{ course: Course }>)
+    [key: string]: (() => Promise<{ course: Course }>)
 }

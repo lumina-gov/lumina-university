@@ -1,14 +1,14 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import { CoursesQuery } from "$lib/gql/graphql"
+import { CourseExtendedData } from "$lib/types/course"
 import ImageOutline from "svelte-material-icons/ImageOutline.svelte"
 
-export let course: CoursesQuery["courses"][number]
+export let course: CourseExtendedData
 </script>
 <a
     class="course"
-    href="/courses/{course.slug}">
+    href="/courses/{course.course_slug}">
     <div class="image">
         <Icon
             icon={ImageOutline}
@@ -18,7 +18,7 @@ export let course: CoursesQuery["courses"][number]
     <div class="contents">
         <h3>{ course.name }</h3>
         <div class="info">
-            <span>{ course.units.length } units</span>
+            <span>{ Object.keys(course.units_map).length } units</span>
             <Tag>
                 Programming
             </Tag>

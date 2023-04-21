@@ -1,34 +1,15 @@
-import { graphql } from "$lib/gql"
-import { error } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
+import { courses } from "$lib/courses/content"
 
-export const load: PageLoad = async ({ parent }) => {
-    const data = await parent()
-
-    const query = await data.graph.gquery(graphql(`
-        query courses {
-            courses {
-                id
-                name
-                slug
-                units {
-                    id
-                    name
-                    slug
-                    created_at
-                    parent_unit
-                }
-            }
-        }`), {})
-
-    if(!query.data?.courses) {
-        throw error(500, {
-            message: "Failed to load courses",
-            code: "LOAD_COURSES_FAILED"
-        })
-    }
+export const load: PageLoad = async () => {
+    const course_items = await Promise.all(
+        Object.entries(courses).map(async ([file, course_import]) => ({
+            ...(await course_import()).course,
+            course_slug: file.replace("./", "").replace("/course.ts", ""),
+        }))
+    )
 
     return {
-        courses: query.data?.courses
+        courses: course_items,
     }
 }

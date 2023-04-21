@@ -31,17 +31,21 @@ export let data: PageData
     </GridItem>
 </Grid>
 <hr/>
-<Grid padding_vertical={60}>
-    <GridItem
-        columns={{
-            mobile: "span 4",
-            tablet: "span 8",
-            laptop: "span 16",
-        }}>
-        <ResponsiveLayout min_item_size={250}>
-            {#each data.courses as course}
-                <Course {course}/>
-            {/each}
-        </ResponsiveLayout>
-    </GridItem>
+<Grid
+    columns={{
+        laptop: 12,
+        tablet: 8,
+        mobile: 4,
+    }}
+    padding_vertical={60}>
+    {#each data.courses as course}
+        <GridItem
+            columns={{
+                mobile: "span 4",
+                tablet: "span 4",
+                laptop: "span 4",
+            }}>
+            <Course {course}/>
+        </GridItem>
+    {/each}
 </Grid>

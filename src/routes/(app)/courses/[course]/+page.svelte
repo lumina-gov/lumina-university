@@ -2,16 +2,15 @@
 import type { PageData } from "./$types"
 import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
-import Button from "$lib/controls/Button.svelte"
-import BookEdit from "svelte-material-icons/BookEdit.svelte"
-import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 import OutlineSidebar from "./OutlineSidebar.svelte"
 import ExtrasSidebar from "./ExtrasSidebar.svelte"
 
 import CourseTree from "./CourseTree.svelte"
-import { flatten_unit, flatten_units } from "$lib/utils/unit"
+import { flatten_units } from "$lib/utils/unit"
 
 export let data: PageData
+
+$: units = flatten_units(data.root_units)
 
 </script>
 <hr>
@@ -31,7 +30,7 @@ export let data: PageData
         translucent={false}>
         <OutlineSidebar
             course_name={data.course.name}
-            unit_count={data.root_units.flatMap(unit => flatten_unit(unit)).length}/>
+            unit_count={units.length}/>
         <ExtrasSidebar show={false}/>
     </GridItem>
     <GridItem
@@ -43,12 +42,11 @@ export let data: PageData
             mobile: "span 4",
         }}
         gap={24}
-        padding="24px 108px"
+        padding="16px"
         translucent={false}>
         <CourseTree
             course_slug={data.course.slug}
             root_units={data.root_units}
-            units={flatten_units(data.root_units)}/>
-        <!-- <MarkdownRenderer markdown={data.markdown}/> -->
+            units={units}/>
     </GridItem>
 </Grid>

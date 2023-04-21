@@ -64,15 +64,15 @@ afterNavigate(() => {
 })
 
 </script>
-<Inside>
-    <div
-        class="nav-wrapper"
-        class:authenticated
-        class:nav_opened
-        aria-hidden={!nav_opened}
-        inert={!nav_opened ? true : undefined}
-        on:focus|capture={ () => nav_opened = true }>
-        <ScrollbarRegion>
+<div
+    class="nav-wrapper"
+    class:authenticated
+    class:nav_opened
+    aria-hidden={!nav_opened}
+    inert={!nav_opened ? true : undefined}
+    on:focus|capture={ () => nav_opened = true }>
+    <ScrollbarRegion>
+        <Inside>
             <nav>
                 {#if authenticated}
                     <div class="auth-wrapper">
@@ -152,9 +152,9 @@ afterNavigate(() => {
                     </div>
                 </div>
             </nav>
-        </ScrollbarRegion>
-    </div>
-</Inside>
+        </Inside>
+    </ScrollbarRegion>
+</div>
 
 <style lang="stylus">
 @import "variables"
