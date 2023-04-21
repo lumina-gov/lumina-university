@@ -1,6 +1,6 @@
 <script lang="ts">
 import IconButton from "$lib/controls/IconButton.svelte"
-import { Unit, UnitStatus } from "$lib/types/unit"
+import { Unit } from "$lib/types/unit"
 import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import UnitBlock from "../UnitBlock.svelte"
@@ -9,6 +9,8 @@ import { flatten_unit } from "$lib/utils/unit"
 import Icon from "$lib/display/Icon.svelte"
 import ChevronDown from "svelte-material-icons/ChevronDown.svelte"
 import ChevronUp from "svelte-material-icons/ChevronUp.svelte"
+import { UnitStatus } from "$lib/gql/graphql"
+
 export let units: Unit[]
 export let data: PageData
 export let course_slug: string
@@ -24,9 +26,8 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 }
 
 
-$: previous_unit = get_unit_relative(data.units_by_id[data.unit.slug], "previous")
-$: next_unit = get_unit_relative(data.units_by_id[data.unit.slug], "next")
-$: console.log(data.unit.slug)
+$: previous_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "previous")
+$: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
 </script>
 
 <div class="wrapper">
@@ -40,8 +41,10 @@ $: console.log(data.unit.slug)
     <div class="bar">
         {#each units as unit}
             <a
-                class="seg {unit.status === UnitStatus.Completed ? "completed" : ""} {unit.slug === data.unit.slug ? "active" : ""}"
+                class="seg"
                 class:completed={ unit.status === UnitStatus.Completed }
+                class:in-progress={ unit.status === UnitStatus.InProgress }
+                class:not-started={ unit.status === UnitStatus.NotStarted }
                 href={`/courses/${course_slug}/${unit.slug}`}
             >
                 <!-- {#if unit.slug === data.unit.slug}
@@ -88,18 +91,20 @@ $: console.log(data.unit.slug)
     border-radius 100px
     width 100%
     overflow hidden
-
-
-    .seg
-        display flex
-        position relative
-        flex 1
-        &.completed
-            background-color $brand
-            &:hover
-                background-color mix(white, $brand, 30%)
-            &.active
-                background-color mix(white, $brand, 30%)
+.seg
+    display flex
+    position relative
+    flex 1
+    &.completed
+        background-color $brand
+    &.in-progress
+        background-color $blue
+    &.not-started
+        background-color transparify(white, 20%)
+    &:hover
+        background-color transparify(white, 50%)
+    &:active
+        background-color transparify(white, 80%)
 
 // .current
 //     position absolute

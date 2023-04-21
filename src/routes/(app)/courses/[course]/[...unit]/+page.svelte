@@ -1,5 +1,4 @@
 <script lang="ts">
-import CourseSidebar from "../CourseSidebar.svelte"
 import type { PageData } from "./$types"
 import Subheading from "$lib/display/Subheading.svelte"
 import Button from "$lib/controls/Button.svelte"
@@ -10,34 +9,57 @@ import CourseBreadcrumbs from "./CourseBreadcrumbs.svelte"
 import Pencil from "svelte-material-icons/Pencil.svelte"
 import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
-import { onMount } from "svelte"
 import { flatten_unit, flatten_units } from "$lib/utils/unit"
 import CourseProgressBar from "./CourseProgressBar.svelte"
 import { graphql } from "$lib/gql"
-import { error } from "@sveltejs/kit"
+import { page } from "$app/stores"
+import { MessageType } from "$lib/types/message"
+import { UnitStatus } from "$lib/gql/graphql"
+import { afterNavigate, beforeNavigate } from "$app/navigation"
 
 export let data: PageData
+let end_of_content: HTMLElement
 
-$: previous_unit = get_unit_relative(data.units_by_id[data.unit.slug], "previous")
-$: next_unit = get_unit_relative(data.units_by_id[data.unit.slug], "next")
+$: previous_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "previous")
+$: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
 
-// onMount(page_view)
 
-// async function page_view
 
-onMount(async() => {
+function check_completed(entries: IntersectionObserverEntry[], observer: IntersectionObserver): void {
+    if (entries[0].isIntersecting) {
+        observer.disconnect()
+        update_unit_progress(UnitStatus.Completed)
+    }
+}
+
+async function update_unit_progress(status: UnitStatus): Promise<void> {
+    if (data.unit.status === status) return
     let res = await data.graph.gmutation(graphql(`
-        mutation SetUnitProgress($course_slug: String!, $unit_slug: String!) {
-            set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: IN_PROGRESS) {
+        mutation SetUnitProgress($course_slug: String!, $unit_slug: String!, $status: UnitStatus!) {
+            set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: $status) {
                 id
-                status
-                user_id
-                unit_slug
-                course_slug
-                updated_at
             }
         }
-    `), {course_slug: data.course.slug, unit_slug: data.unit.slug})
+    `), {course_slug: data.course.slug, unit_slug: data.unit.slug, status})
+    if (res.error) {
+        return $page.data.alerts.create_alert(MessageType.Error, res.error.message)
+    }
+    data.units_by_slug[data.unit.slug].status = status
+}
+beforeNavigate(async() => {
+    let a = document.getElementById("mainwrappertothetop")
+    if (a) a.scrollIntoView({block: "start"})
+})
+afterNavigate(async() => {
+    let a = document.getElementById("mainwrappertothetop")
+    if (a) a.scrollIntoView({block: "start"})
+
+
+    let observer = new IntersectionObserver(check_completed, {threshold: 1.0})
+    observer.observe(end_of_content)
+
+    if (data.unit.status === UnitStatus.Completed) return
+    await update_unit_progress(UnitStatus.InProgress)
 })
 
 
@@ -48,12 +70,8 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 
     return units_flattened[relative_index] || null
 }
-// on mount trigger the page view function
 
-// there should be an component that contains elements/blocks
-//component has offset top and height 
-// create a resize listener and scroll listener that triggers a function that evvaluates completion of each component
-//it does this by detecting if the bottom of the wrapper is within the full view port of the screen
+
 </script>
 <hr>
 <div class="crumb-bar">
@@ -66,21 +84,14 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 </div>
 <hr>
 <div class="layout">
-    <!-- <div class="sidebar">
-        <CourseBreadcrumbs course={data.course}/>
-        <hr>
-        <CourseSidebar
-            course_slug={data.course.slug}
-            items={data.root_units}
-        />
-    </div> -->
     <ScrollbarRegion>
-        <main>
+        <main id="mainwrappertothetop">
             <div class="content-container">
                 <div
                     id="content"
                     class="content">
                     <MarkdownRenderer markdown={data.markdown}/>
+                    <div bind:this={ end_of_content }/>
                     <div class="section row">
                         <UnitPaginator
                             course={data.course}

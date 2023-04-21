@@ -2,10 +2,12 @@
 import IconButton from "$lib/controls/IconButton.svelte"
 import Play from "svelte-material-icons/Play.svelte"
 import Check from "svelte-material-icons/Check.svelte"
-import { Unit, UnitStatus } from "$lib/types/unit"
+import { Unit } from "$lib/types/unit"
 import { onMount } from "svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Text from "svelte-material-icons/Text.svelte"
+import { UnitStatus } from "$lib/gql/graphql"
+import GameifiedButton from "$lib/controls/GameifiedButton.svelte"
 
 
 export let level: number
@@ -15,18 +17,7 @@ export let el_map: Record<string, HTMLElement>
 
 let element: HTMLElement
 
-let form: string
-switch (unit.status) {
-    case UnitStatus.NotStarted:
-        form = "not-started"
-        break
-    case UnitStatus.InProgress:
-        form = "in-progress"
-        break
-    case UnitStatus.Completed:
-        form = "completed"
-        break
-}
+
 
 onMount(() => {
     console.log(element)
@@ -38,25 +29,25 @@ onMount(() => {
 <a
     style:padding-left={ level * 40 + "px" }
     class="unit"
+    class:completed={ unit.status === UnitStatus.Completed }
+    class:in-progress={ unit.status === UnitStatus.InProgress }
+    class:not-started={ unit.status === UnitStatus.NotStarted }
     href="/courses/{course_slug}/{unit.slug}">
-    <div class={form === "completed" ? "icon-button" : ""}>
-        <IconButton
-            style={(unit.status !== UnitStatus.NotStarted) ? "branded" : "translucent"}
-            gamified={unit.status !== UnitStatus.Completed}
-            icon={unit.status === UnitStatus.Completed ? Check : Play}
-            opacity={unit.status === UnitStatus.NotStarted}
-            bind:element/>
-    </div>
-    <div class="text {form}">
-        {#if unit.status !== UnitStatus.NotStarted}
-            <Icon
-                color="brand"
-                icon={Text}
-                size={24}/>
-        {/if}
-        <div class={form}>
-            { unit.name }
-        </div>
+    <GameifiedButton
+        style={unit.status === UnitStatus.Completed 
+            ? "pressed"
+            : unit.status === UnitStatus.InProgress
+            ? "highlighted"
+            : "translucent"}
+        icon={unit.status === UnitStatus.Completed ? Check : Play}
+        bind:element/>
+    <Icon
+        color={unit.status === UnitStatus.InProgress ? "brand" : "white"}
+        icon={Text}
+        opacity={unit.status === UnitStatus.InProgress ? 1 : 0.5}
+        size={24}/>
+    <div class="text">
+        { unit.name }
     </div>
 </a>
 
@@ -73,12 +64,11 @@ onMount(() => {
 
 .unit
     display flex
-    gap 24px
+    gap 18px
     align-items center
     outline 0
     color white
 .text
-    margin-top 8px
     display flex
     gap 8px
     font-size 16px

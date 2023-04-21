@@ -54,18 +54,18 @@ type UnitDataMap = {
     [key: string]: UnitData
 }
 
-function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: {[key: string]: UnitStatus} ): { units_by_id: UnitMap, root_units: Unit[] } {
+function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: {[key: string]: UnitStatus} ): { units_by_slug: UnitMap, root_units: Unit[] } {
     // Create a map of units by id
-    const units_by_id: { [key: string]: Unit } = {}
+    const units_by_slug: { [key: string]: Unit } = {}
     // Create a list of root units
 
     // Add units to map, and empty subunits array
     Object.entries(units).map(([slug, unit]) => {
-        units_by_id[slug] = {
+        units_by_slug[slug] = {
             ...unit,
             slug,
             subunits: [],
-            status: units_progress_map[slug]
+            status: units_progress_map[slug] || UnitStatus.NotStarted
         }
     })
 
@@ -73,7 +73,7 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], unit
     Object.entries(units).map(([slug, unit]) => {
         if (unit.subunits) {
             unit.subunits.map(subunit_slug => {
-                const subunit = units_by_id[subunit_slug]
+                const subunit = units_by_slug[subunit_slug]
                 if (!subunit) {
                     throw error(500, {
                         message: `Subunit "${subunit_slug}" not found`,
@@ -81,14 +81,14 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], unit
                     })
                 }
 
-                units_by_id[slug].subunits.push(subunit)
+                units_by_slug[slug].subunits.push(subunit)
             })
         }
     })
 
     return {
         root_units: root_units.map(slug => {
-            const unit = units_by_id[slug]
+            const unit = units_by_slug[slug]
             if (!unit) {
                 throw error(500, {
                     message: `Root unit "${slug}" not found`,
@@ -97,6 +97,6 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], unit
             }
             return unit
         }),
-        units_by_id
+        units_by_slug
     }
 }

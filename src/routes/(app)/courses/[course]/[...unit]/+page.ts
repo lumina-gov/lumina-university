@@ -4,7 +4,7 @@ import type { PageLoad } from "./$types"
 
 export const load = (async ({ params, parent }) => {
     const data = await parent()
-    const unit = data.units_by_id[params.unit]
+    const unit = data.units_by_slug[params.unit]
 
     if (!unit) {
         throw error(404, {

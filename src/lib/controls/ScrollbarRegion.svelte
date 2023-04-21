@@ -6,6 +6,7 @@ let contents: Element
 export let scale: number | undefined = undefined
 export let content_width: string | undefined = undefined
 export let content_height: string | undefined = undefined
+
 </script>
 
 <div class="wrapper">
