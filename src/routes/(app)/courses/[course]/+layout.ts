@@ -13,7 +13,6 @@ export const load: LayoutLoad = async ({ params, parent }) => {
     }
     const course = (await course_import()).course
 
-    const req = await data.graphql({},{})
     return {
         course: {
             ...course,
