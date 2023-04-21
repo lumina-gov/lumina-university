@@ -13,6 +13,8 @@ import UnitPaginator from "./UnitPaginator.svelte"
 import { onMount } from "svelte"
 import { flatten_unit, flatten_units } from "$lib/utils/unit"
 import CourseProgressBar from "./CourseProgressBar.svelte"
+import { graphql } from "$lib/gql"
+import { error } from "@sveltejs/kit"
 
 export let data: PageData
 
@@ -23,6 +25,20 @@ $: next_unit = get_unit_relative(data.units_by_id[data.unit.slug], "next")
 
 // async function page_view
 
+onMount(async() => {
+    let res = await data.graph.gmutation(graphql(`
+        mutation SetUnitProgress($course_slug: String!, $unit_slug: String!) {
+            set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: IN_PROGRESS) {
+                id
+                status
+                user_id
+                unit_slug
+                course_slug
+                updated_at
+            }
+        }
+    `), {course_slug: data.course.slug, unit_slug: data.unit.slug})
+})
 
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {

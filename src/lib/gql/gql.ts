@@ -16,9 +16,7 @@ const documents = {
     "\n        query me {\n            me {\n                id\n                email\n                first_name\n                last_name\n            }\n        }": types.MeDocument,
     "\n        query CustomerPortalUrl($return_url: String!) {\n            me {\n                customer_portal_url(return_url: $return_url)\n            }\n        }": types.CustomerPortalUrlDocument,
     "\n        mutation CreateLightUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }": types.CreateLightUniversityCheckoutSessionDocument,
-    "\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }": types.CoursesDocument,
-    "\n        query CoursesBySlug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                    order\n                }\n            }\n        }": types.CoursesBySlugDocument,
-    "\n    query UnitBySlug($slug: String!) {\n        unit_by_slug(slug: $slug) {\n            id\n            name\n            slug\n            created_at\n            parent_unit\n        }\n    }": types.UnitBySlugDocument,
+    "\n        mutation SetUnitProgress($course_slug: String!, $unit_slug: String!) {\n            set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: IN_PROGRESS) {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    ": types.SetUnitProgressDocument,
 };
 
 /**
@@ -50,15 +48,7 @@ export function graphql(source: "\n        mutation CreateLightUniversityCheckou
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"): (typeof documents)["\n        query courses {\n            courses {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                }\n            }\n        }"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n        query CoursesBySlug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                    order\n                }\n            }\n        }"): (typeof documents)["\n        query CoursesBySlug($slug: String!) {\n            course_by_slug(slug: $slug) {\n                id\n                name\n                slug\n                units {\n                    id\n                    name\n                    slug\n                    created_at\n                    parent_unit\n                    order\n                }\n            }\n        }"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    query UnitBySlug($slug: String!) {\n        unit_by_slug(slug: $slug) {\n            id\n            name\n            slug\n            created_at\n            parent_unit\n        }\n    }"): (typeof documents)["\n    query UnitBySlug($slug: String!) {\n        unit_by_slug(slug: $slug) {\n            id\n            name\n            slug\n            created_at\n            parent_unit\n        }\n    }"];
+export function graphql(source: "\n        mutation SetUnitProgress($course_slug: String!, $unit_slug: String!) {\n            set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: IN_PROGRESS) {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    "): (typeof documents)["\n        mutation SetUnitProgress($course_slug: String!, $unit_slug: String!) {\n            set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: IN_PROGRESS) {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    "];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
