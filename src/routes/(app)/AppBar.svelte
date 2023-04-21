@@ -14,6 +14,9 @@ import { page } from "$app/stores"
 import Inside from "$lib/controls/Inside.svelte"
 import AccountPopout from "./AccountPopout.svelte"
 import Logo from "$lib/display/Logo.svelte"
+import Icon from "$lib/display/Icon.svelte"
+import CreditCardOutline from "svelte-material-icons/CreditCardOutline.svelte"
+import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 
 enum Dropdown {
     Notifications,
@@ -47,6 +50,19 @@ afterNavigate(() => {
 })
 
 </script>
+<a
+    class="start-subscription"
+    href="/account">
+    <Icon
+        color="brand"
+        icon={CreditCardOutline}
+        size={20}/>
+    Start Subscription
+    <Icon
+        color="brand"
+        icon={ChevronRight}
+        size={20}/>
+</a>
 <header
     class:authenticated
     class:scrolled>
@@ -99,6 +115,35 @@ afterNavigate(() => {
 <style lang="stylus">
 @import "variables"
 
+.start-subscription
+    height 40px
+    width 100%
+    margin 0 auto
+    max-width $laptop
+
+    display flex
+    grid-row 1
+    align-items center
+    color white
+    gap 12px
+    outline 0
+    text-transform uppercase
+    font-weight 700
+    opacity 0.7
+    transition opacity 0.1s ease-in-out
+    &::before, &::after
+        content ""
+        display block
+        height 4px
+        flex 1
+        border-radius 10px
+    &::after
+        background linear-gradient(90deg, $brand 0%, transparent 100%)
+    &::before
+        background linear-gradient(90deg, transparent 0%, $brand 100%)
+    &:hover
+        opacity 1
+
 .popout
     max-width 400px
     width 100%
@@ -108,8 +153,8 @@ top_header()
     z-index 8
     background transparent
     box-shadow none
-    grid-row 2
     position sticky
+    grid-row 3
     top 0
     transition box-shadow 0.1s ease-in-out, background 0.1s ease-in-out
 
@@ -122,6 +167,7 @@ scroll_header()
 header
     display flex
     justify-content center
+    flex-direction column
 
     @media (min-width $tablet)
         top_header()
@@ -134,7 +180,7 @@ header
             &.scrolled
                 scroll_header()
         &.authenticated
-            grid-row 2
+            grid-row 3
             background mix($dark_app, white, 90%)
             z-index 80
             box-shadow 0 -2px 8px rgba(0,0,0,0.2)
