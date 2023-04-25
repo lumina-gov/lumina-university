@@ -38,7 +38,7 @@ $: user = data.user_store.user
         <div class="subheader">
             Where you left off
         </div>
-        <DashboardCourse recent_course={recent_course}/>
+        <DashboardCourse recent_course={data.recent_course}/>
     </Hero>
     <Hero
         align="center"
@@ -48,7 +48,7 @@ $: user = data.user_store.user
         </div>
         <DashboardCourse
             enlarge={false}
-            recent_course={recent_course}/>
+            recent_course={data.recent_course}/>
     </Hero>
 {:else}
     <div class="unauth-hero">
