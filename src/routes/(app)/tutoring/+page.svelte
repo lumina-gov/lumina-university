@@ -23,13 +23,9 @@ import Icon from "$lib/display/Icon.svelte"
 import Box from "$lib/cards/Box.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import InstructionBox from "./InstructionBox.svelte"
-import LaptopAccount from "svelte-material-icons/LaptopAccount.svelte"
-import AccountPlus from "svelte-material-icons/AccountPlus.svelte"
 
 export let data: PageData
 
-$: authenticated = data.user_store.user !== null
-let sessions: unknown[] = []
 let session_offers = data.session_offers
 let booking_session: SessionOfferWithTutor | null = null
 let topics = [

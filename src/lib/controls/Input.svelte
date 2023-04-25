@@ -1,9 +1,6 @@
 <script lang="ts">
 import { onMount, SvelteComponent } from "svelte"
 import InputWrapper from "../display/InputWrapper.svelte"
-import { createEventDispatcher } from "svelte"
-
-let dispatch = createEventDispatcher<{input: string}>()
 
 export let name: string
 export let placeholder = ""

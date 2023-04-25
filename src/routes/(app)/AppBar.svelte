@@ -8,7 +8,7 @@ import Settlement from "$lib/icons/Settlement.svelte"
 import Signin from "svelte-material-icons/ExitToApp.svelte"
 import Scrim from "$lib/controls/Scrim.svelte"
 import NotificationsPopout from "./NotificationsPopout.svelte"
-import { MeQuery } from "$lib/gql/graphql"
+import { MeQuery, SubscriptionStatus } from "$lib/gql/graphql"
 import { afterNavigate } from "$app/navigation"
 import { page } from "$app/stores"
 import Inside from "$lib/controls/Inside.svelte"
@@ -51,6 +51,7 @@ afterNavigate(() => {
 
 </script>
 <a
+    style:display={ user?.stripe_subscription_info.status === SubscriptionStatus.None ? "flex" : "none" }
     class="start-subscription"
     href="/account">
     <Icon

@@ -1,3 +1,4 @@
+import { env } from "$env/dynamic/private"
 import type { LayoutServerLoad } from "./$types"
 
 export const load: LayoutServerLoad = async ({ url, cookies }) => {
@@ -5,6 +6,7 @@ export const load: LayoutServerLoad = async ({ url, cookies }) => {
 
     return {
         auth_token: cookies.get("token") || null,
-        login_url: `https://lumina.earth/signin?redirect=${redirect_url}`,
+        login_url: `${env.LUMINA_DOMAIN}/signin?redirect=${redirect_url}`,
+        lumina_domain: env.LUMINA_DOMAIN,
     }
 }

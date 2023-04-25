@@ -5,5 +5,9 @@ import type { Thing, WithContext } from "schema-dts"
 export let schema: Thing | WithContext<Thing>
 </script>
 <svelte:head>
-    {@html serializeSchema(schema)}
+    <svelte:element
+        this={ "script" }
+        type="application/ld+json">
+        { serializeSchema(schema) }
+    </svelte:element>
 </svelte:head>

@@ -6,14 +6,13 @@ import Circle from "svelte-material-icons/Circle.svelte"
 import Button from "$lib/controls/Button.svelte"
 import PlayOutline from "svelte-material-icons/PlayOutline.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
-import GridItem from "$lib/layouts/GridItem.svelte"
 import Plus from "svelte-material-icons/Plus.svelte"
 export let enlarge = true
 </script>
 
 {#if enlarge}
     <div class="wrapper">
-            
+
         <div class="image">
             <img
                 alt="placeholder"
@@ -58,7 +57,7 @@ export let enlarge = true
         columns={{
             "mobile": 1,
             "tablet": 1,
-            "laptop": 3,}} 
+            "laptop": 3,}}
         side_padding={false}
     >
         <a
@@ -163,7 +162,7 @@ export let enlarge = true
         gap 16px
         padding 16px
         align-items center
-        
+
     .image
         display flex
         width 100%

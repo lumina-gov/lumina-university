@@ -1,25 +1,27 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
+import ButtonSound from "$lib/sounds/ButtonSound.wav"
 import { type SvelteComponent, createEventDispatcher } from "svelte"
-    
+
 let dispatch = createEventDispatcher()
-    
-export let icon: typeof SvelteComponent 
+
+export let icon: typeof SvelteComponent
 export let style: "pressed" | "translucent" | "highlighted"
 export let element: HTMLElement
-    
+
 function clicked(e: Event) {
+    let audio = new Audio(ButtonSound)
+    audio.play()
     dispatch("click", e)
-    
 }
-    
+
 function handle_keyup(e: KeyboardEvent) {
     if (e.key === "Enter") {
         clicked(e)
     }
 }
 </script>
-    
+
 <div
     bind:this={ element }
     class="button {style}"
@@ -32,7 +34,7 @@ function handle_keyup(e: KeyboardEvent) {
         icon={icon}
         opacity={style === "highlighted" ? 1 : 0.5} />
 </div>
-    
+
 <style lang="stylus">
 @import 'variables'
 
@@ -64,6 +66,6 @@ function handle_keyup(e: KeyboardEvent) {
         &:active
             box-shadow 0 2px transparify($brand, 50%)
             top 6px
-        
+
 
     </style>

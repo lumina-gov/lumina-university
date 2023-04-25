@@ -3,12 +3,6 @@ import Icon from "$lib/display/Icon.svelte"
 import BookOpenVariant from "svelte-material-icons/BookOpenVariant.svelte"
 import CodeTags from "svelte-material-icons/CodeTags.svelte"
 import SlashForward from "svelte-material-icons/SlashForward.svelte"
-import CourseProgressBar from "./CourseProgressBar.svelte"
-import { Unit } from "$lib/types/unit"
-
-import { flatten_unit } from "$lib/utils/unit"
-
-
 
 export let course: {
     name: string

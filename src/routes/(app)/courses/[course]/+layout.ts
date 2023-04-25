@@ -3,7 +3,7 @@ import { Unit, UnitData, UnitMap } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
 import { graphql } from "$lib/gql"
-import { UnitStatus } from "$lib/gql/graphql"
+import { GetCourseProgressQuery, UnitStatus } from "$lib/gql/graphql"
 
 export const load: LayoutLoad = async ({ params, parent }) => {
     const course_import = courses[`./${params.course}/course.ts`]
@@ -16,28 +16,41 @@ export const load: LayoutLoad = async ({ params, parent }) => {
     }
     const course = (await course_import()).course
 
-    const req = await data.graph.gquery(graphql(`
-        query GetCourseProgress($course_slug: String!) {
-            course_progress(course_slug: $course_slug) {
-                id
-                status
-                user_id
-                unit_slug
-                course_slug
-                updated_at
-            }
-        }
-    `), {course_slug: params.course})
+    let course_progresses: GetCourseProgressQuery["course_progress"] = []
 
-    if (req.error ) {
-        throw error(500, {
-            message: req.error.message,
-            code: "COURSE_PROGRESS_ERROR"
-        })
+    if (data.user_store.user) {
+        const req = await data.graph.gquery(graphql(`
+            query GetCourseProgress($course_slug: String!) {
+                course_progress(course_slug: $course_slug) {
+                    id
+                    status
+                    user_id
+                    unit_slug
+                    course_slug
+                    updated_at
+                }
+            }
+        `), {course_slug: params.course})
+
+        if (req.error) {
+            throw error(500, {
+                message: req.error.message,
+                code: "COURSE_PROGRESS_ERROR"
+            })
+        }
+
+        if (!req.data) {
+            throw error(500, {
+                message: "No data returned from course progress query",
+                code: "COURSE_PROGRESS_ERROR"
+            })
+        }
+
+        course_progresses = req.data.course_progress
     }
 
     const units_progress_map: { [key: string]: UnitStatus } = {}
-    req.data?.course_progress.map(progress => {
+    course_progresses.map(progress => {
         units_progress_map[progress.unit_slug] = progress.status
     })
 
@@ -65,7 +78,8 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], unit
             ...unit,
             slug,
             subunits: [],
-            status: units_progress_map[slug] || UnitStatus.NotStarted
+            status: units_progress_map[slug] || UnitStatus.NotStarted,
+            free: unit.free || false,
         }
     })
 

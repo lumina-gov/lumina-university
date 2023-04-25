@@ -7,10 +7,19 @@ import ExtrasSidebar from "./ExtrasSidebar.svelte"
 
 import CourseTree from "./CourseTree.svelte"
 import { flatten_units } from "$lib/utils/unit"
+import { UnitStatus } from "$lib/gql/graphql"
 
 export let data: PageData
 
 $: units = flatten_units(data.root_units)
+
+$: {
+    let first_unit = units.find(unit => unit.status !== UnitStatus.Completed)
+
+    if(first_unit) {
+        first_unit.status = UnitStatus.InProgress
+    }
+}
 
 </script>
 <hr>

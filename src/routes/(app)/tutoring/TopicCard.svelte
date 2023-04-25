@@ -4,9 +4,7 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Card from "$lib/cards/Card.svelte"
 
 export let color: string
-export let href: string | undefined = undefined
 export let topic: string
-$: disabled = href === undefined
 </script>
 
 <Card

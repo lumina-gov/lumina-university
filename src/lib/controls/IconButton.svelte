@@ -1,19 +1,25 @@
 <script lang="ts">
+import Icon from "$lib/display/Icon.svelte"
+import { Prop } from "$lib/utils/typed_props"
 import { type SvelteComponent, createEventDispatcher } from "svelte"
-
+import ButtonSound from "$lib/sounds/ButtonSound.wav"
 let dispatch = createEventDispatcher()
 
 export let href: string | null = null
-export let icon: typeof SvelteComponent | null = null
-export let opacity = true
+export let icon: typeof SvelteComponent
+export let opacity = 1
 export let gamified = false
 export let style: "translucent" | "transparent" | "branded" = "branded"
-export let element: HTMLElement
+export let color: Prop<Icon, "color"> = undefined
+export let use_sound = true
 $: tag = href ? "a" : "div"
 
 function clicked(e: Event) {
+    if (use_sound) {
+        let sound = new Audio(ButtonSound)
+        sound.play()
+    }
     dispatch("click", e)
-
 }
 
 function handle_keyup(e: KeyboardEvent) {
@@ -25,17 +31,18 @@ function handle_keyup(e: KeyboardEvent) {
 
 <svelte:element
     this={ tag }
-    bind:this={ element }
     class="button {style}"
     class:gamified
-    class:opacity
     href={href}
     role="button"
     tabindex="0"
     on:click={ clicked }
     on:keyup={ handle_keyup }
 >
-    <svelte:component this={ icon } />
+    <Icon
+        color={color}
+        icon={icon}
+        opacity={opacity}/>
 </svelte:element>
 
 <style lang="stylus">

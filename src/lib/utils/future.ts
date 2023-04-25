@@ -1,4 +1,4 @@
-export default async (promise: Promise<any>, subscriber: (value: boolean) => any)=> {
+export default async <T>(promise: Promise<T>, subscriber: (value: boolean) => T) => {
     subscriber(true)
     try {
         await promise

@@ -3,19 +3,19 @@ import IconButton from "$lib/controls/IconButton.svelte"
 import { Unit } from "$lib/types/unit"
 import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
-import UnitBlock from "../UnitBlock.svelte"
 import type { PageData } from "./$types"
 import { flatten_unit } from "$lib/utils/unit"
-import Icon from "$lib/display/Icon.svelte"
-import ChevronDown from "svelte-material-icons/ChevronDown.svelte"
-import ChevronUp from "svelte-material-icons/ChevronUp.svelte"
 import { UnitStatus } from "$lib/gql/graphql"
+import { createEventDispatcher } from "svelte"
+import CheckboxMarkedCircle from "svelte-material-icons/CheckboxMarkedCircle.svelte"
+import { Prop } from "$lib/utils/typed_props"
 
 export let units: Unit[]
 export let data: PageData
+export let unit: Unit
 export let course_slug: string
 
-let element: HTMLElement
+let dispatch = createEventDispatcher<{ set_unit_progress: UnitStatus }>()
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
     let units_flattened = data.root_units.flatMap(unit => flatten_unit(unit))
@@ -23,6 +23,12 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
     let relative_index = direction === "previous" ? index - 1 : index + 1
 
     return units_flattened[relative_index] || null
+}
+
+const progress_color: Record<UnitStatus, Prop<IconButton, "color">> = {
+    [UnitStatus.NotStarted]: "white",
+    [UnitStatus.InProgress]: "blue",
+    [UnitStatus.Completed]: "brand"
 }
 
 
@@ -33,15 +39,16 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
 <div class="wrapper">
     <IconButton
         style="transparent"
-        element={element}
         href={previous_unit ? `/courses/${course_slug}/${previous_unit.slug}` : undefined}
         icon={ChevronLeft}
-        opacity={true}
+        opacity={0.5}
+        use_sound={true}
     />
     <div class="bar">
         {#each units as unit}
             <a
                 class="seg"
+                class:active={ unit.slug === data.unit.slug }
                 class:completed={ unit.status === UnitStatus.Completed }
                 class:in-progress={ unit.status === UnitStatus.InProgress }
                 class:not-started={ unit.status === UnitStatus.NotStarted }
@@ -68,11 +75,20 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
     </div>
     <IconButton
         style="transparent"
-        element={element}
         href={next_unit ? `/courses/${course_slug}/${next_unit.slug}` : undefined}
         icon={ChevronRight}
-        opacity={true}
+        opacity={0.5}
+        use_sound={true}
     />
+    <IconButton
+        style="transparent"
+        color={progress_color[unit.status]}
+        icon={CheckboxMarkedCircle}
+        opacity={unit.status === UnitStatus.NotStarted ? 0.5 : 1}
+        use_sound={true}
+        on:click={ () => dispatch("set_unit_progress", unit.status === UnitStatus.Completed ? UnitStatus.NotStarted : UnitStatus.Completed) }
+    />
+
 </div>
 
 <style lang="stylus">
@@ -95,6 +111,8 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
     display flex
     position relative
     flex 1
+    &.active
+        background-color mix($brand, white, 50%)
     &.completed
         background-color $brand
     &.in-progress
@@ -111,7 +129,7 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
 //     &.u
 //         top -16px
 //         left 0px
-//     &.b 
+//     &.b
 //         bottom -16px
 
 </style>

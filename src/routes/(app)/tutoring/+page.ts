@@ -1,7 +1,7 @@
 import type { SessionOfferWithTutor } from "$lib/types/session_offer"
 import type { PageLoad } from "./$types"
 
-export const load: PageLoad = async ({ fetch }) => {
+export const load: PageLoad = async () => {
     return {
         session_offers: [
             {

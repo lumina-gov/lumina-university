@@ -7,12 +7,12 @@ import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.sve
 import Icon from "$lib/display/Icon.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
 import DashboardCourse from "./DashboardCourse.svelte"
+import { SubscriptionStatus } from "$lib/gql/graphql"
 export let data: PageData
 
 $: user = data.user_store.user
-$: authenticated = data.user_store.user != null
 </script>
-{#if authenticated}
+{#if user}
     <Hero divider={true}>
         <div class="auth-hero">
             <div class="greeting">
@@ -20,13 +20,15 @@ $: authenticated = data.user_store.user != null
                     icon={HumanGreetingVariant}
                     opacity={0.5}
                     size={48}/>
-                Hi { user?.first_name }!
+                Hi { user.first_name }!
             </div>
-            <Button
-                href="/account"
-                hug={true}
-                right_icon={RocketLaunch}
-                text="Start Subscription"/>
+            {#if user.stripe_subscription_info.status === SubscriptionStatus.None}
+                <Button
+                    href="/account"
+                    hug={true}
+                    right_icon={RocketLaunch}
+                    text="Start Subscription"/>
+            {/if}
         </div>
     </Hero>
     <br/>

@@ -5,10 +5,9 @@ export function get_paths_for_units(
     container_el: HTMLElement,
     elements: Record<string, HTMLElement>,
 ): string[] {
-    console.log(elements)
     const paths: string[] = []
     units.map((unit, i) => {
-        const next_sibling = units[i + 1] 
+        const next_sibling = units[i + 1]
         if (!next_sibling) return
         const current_el = elements[unit.slug]
         const next_sibling_el = elements[next_sibling.slug]

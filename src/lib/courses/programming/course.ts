@@ -178,13 +178,16 @@ export const course: Course = {
     units_map: {
         "introduction": {
             name: "Introduction",
-            subunits: ["introduction/test-unit"]
+            subunits: ["introduction/test-unit"],
+            free: true,
         },
         "introduction/test-unit": {
             name: "Test Unit",
+            free: true,
         },
         "how-to-think-like-a-programmer": {
             name: "How to Think Like a Programmer",
+            free: true,
             subunits: [
                 "how-to-think-like-a-programmer/problem-solving",
                 "how-to-think-like-a-programmer/inputs-outputs-constraints",
@@ -199,9 +202,11 @@ export const course: Course = {
         },
         "how-to-think-like-a-programmer/problem-solving": {
             name: "Problem Solving",
+            free: true,
         },
         "how-to-think-like-a-programmer/inputs-outputs-constraints": {
             name: "Inputs, Outputs, and Constraints",
+            free: true,
         },
         "how-to-think-like-a-programmer/thinking-in-terms-of-data": {
             name: "Thinking in Terms of Data",

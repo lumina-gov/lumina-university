@@ -3,20 +3,19 @@ import Card from "$lib/cards/Card.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Input from "$lib/controls/Input.svelte"
 import type { SessionOfferWithTutor } from "$lib/types/session_offer"
-import { fetch_as_json } from "$lib/utils/response"
 import Calendar from "svelte-material-icons/Calendar.svelte"
 
 export let session_offer: SessionOfferWithTutor
 let hours = 1
 
 async function book_session() {
-    const res = await fetch_as_json<SessionOfferWithTutor>(fetch, "/api/session", {
-        method: "POST",
-        body: JSON.stringify({
-            session_offer_id: session_offer.id,
-            hours
-        })
-    })
+// const res = await fetch_as_json<SessionOfferWithTutor>(fetch, "/api/session", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //         session_offer_id: session_offer.id,
+    //         hours
+    //     })
+    // })
 }
 </script>
 <Card

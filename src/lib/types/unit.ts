@@ -2,7 +2,8 @@ import { UnitStatus } from "$lib/gql/graphql"
 
 export type UnitData = {
     name: string
-    subunits?: string[]
+    subunits?: string[],
+    free?: boolean
 }
 
 export type Unit = {
@@ -10,6 +11,7 @@ export type Unit = {
     slug: string
     status: UnitStatus
     subunits: Unit[]
+    free: boolean
 }
 
 export type UnitMap = Record<string, Unit>

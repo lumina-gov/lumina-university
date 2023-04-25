@@ -1,6 +1,8 @@
 import { content } from "$lib/courses/content"
-import { error } from "@sveltejs/kit"
+import { error, redirect } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
+import { SubscriptionStatus } from "$lib/gql/graphql"
+import { MessageType } from "$lib/types/message"
 
 export const load = (async ({ params, parent }) => {
     const data = await parent()
@@ -23,6 +25,14 @@ export const load = (async ({ params, parent }) => {
             message: "Unit content not found",
             code: "UNIT_CONTENT_NOT_FOUND"
         })
+    }
+
+    const user = data.user_store.user
+    const subscription_status = user?.stripe_subscription_info.status ?? SubscriptionStatus.None
+
+    if (!unit.free && subscription_status === SubscriptionStatus.None) {
+        data.alerts.create_alert(MessageType.Warning, "You must be subscribed to view this unit")
+        throw redirect(307, "/account")
     }
 
     return {

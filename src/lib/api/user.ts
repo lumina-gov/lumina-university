@@ -17,7 +17,11 @@ export async function get_me(graph: GraphClient, alerts: AlertsStore): Promise<M
                 id
                 email
                 first_name
-                last_name
+                last_name,
+                stripe_subscription_info {
+                    status
+                    expiry_date
+                }
             }
         }`), {})
 

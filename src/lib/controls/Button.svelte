@@ -1,5 +1,6 @@
 <script lang="ts">
 import { createEventDispatcher, SvelteComponent } from "svelte"
+import ButtonSound from "$lib/sounds/ButtonSound.wav"
 
 export let href: string | null = null
 export let left_icon: typeof SvelteComponent | null = null
@@ -9,6 +10,7 @@ export let hug = true
 export let disabled = false
 export let text: string | null = null
 export let target: string | null = null
+export let use_sound = true
 
 $: tag = href ? "a" : "div"
 
@@ -16,6 +18,10 @@ let dispatch = createEventDispatcher()
 
 function clicked(e: Event) {
     !disabled && dispatch("click", e)
+    if(use_sound) {
+        let sound = new Audio(ButtonSound)
+        sound.play()
+    }
 }
 
 function handle_keyup(e: KeyboardEvent) {

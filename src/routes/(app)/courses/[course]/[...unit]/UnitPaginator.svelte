@@ -5,10 +5,18 @@ import type { Unit } from "$lib/types/unit"
 import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Text from "svelte-material-icons/Text.svelte"
+import ButtonSound from "$lib/sounds/ButtonSound.wav"
+
 
 export let direction: "next" | "previous"
 export let unit: Unit | null
 export let course: { slug: string }
+
+function pressed() {
+    if(!unit) return
+    let audio = new Audio(ButtonSound)
+    audio.play()
+}
 
 </script>
 <svelte:element
@@ -16,7 +24,9 @@ export let course: { slug: string }
     class="paginator"
     class:active={ unit !== null }
     class:next={ direction === "next" }
-    href={unit ? `/courses/${course.slug}/${unit.slug}` : undefined}>
+    href={unit ? `/courses/${course.slug}/${unit.slug}` : undefined}
+    on:click={ pressed }
+    on:keyup={ e => e.key === "Enter" && pressed() }>
     {#if unit}
         <Icon
             color="brand"
@@ -48,13 +58,18 @@ export let course: { slug: string }
     gap 16px
     color white
     padding 16px
-    border 1px solid transparify(white, 10%)
     &.next
         flex-direction row-reverse
     &.active
-        border none
-        background transparify(white, 6%)
+        transition top 0.1s ease-in-out, box-shadow 0.1s ease-in-out
+        box-shadow 0 8px 0 transparify(white, 6%)
+        background transparify(white, 12%)
+        top 0
+        position relative
         cursor pointer
+        &:active
+            top 8px
+            box-shadow 0 0 0 transparify(white, 6%)
 
     .data
         display flex

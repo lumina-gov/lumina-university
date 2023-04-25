@@ -6,7 +6,7 @@ import { browser } from "$app/environment"
 import { set_cookie } from "$lib/utils/cookie"
 import { user_store_init } from "$lib/stores/user_store"
 
-export const load: LayoutLoad = async ({ data: { auth_token, login_url }}) => {
+export const load: LayoutLoad = async ({ data: { auth_token, login_url, lumina_domain }}) => {
     const user_store = user_store_init(auth_token, login_url)
     const graph = init_urql(user_store)
     const alerts = alerts_init([])
@@ -24,5 +24,6 @@ export const load: LayoutLoad = async ({ data: { auth_token, login_url }}) => {
         user_store,
         alerts,
         graph,
+        lumina_domain,
     }
 }

@@ -35,6 +35,11 @@ $: tag = is_clickable ? "a" : "div"
     class:padding
     class:vertical={ direction === "vertical" }
     {href}
+    on:keyup={ e => {
+        if (e.key === "Enter") {
+            click_handler && click_handler(e)
+        }
+    } }
     on:click
 >
     <slot />

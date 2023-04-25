@@ -7,6 +7,7 @@ export type Course = {
         [key: string]: {
             name: string
             subunits?: string[]
+            free?: boolean
         }
     }
 }

@@ -9,51 +9,59 @@ import CourseBreadcrumbs from "./CourseBreadcrumbs.svelte"
 import Pencil from "svelte-material-icons/Pencil.svelte"
 import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
-import { flatten_unit, flatten_units } from "$lib/utils/unit"
+import { flatten_units } from "$lib/utils/unit"
 import CourseProgressBar from "./CourseProgressBar.svelte"
 import { graphql } from "$lib/gql"
 import { page } from "$app/stores"
 import { MessageType } from "$lib/types/message"
 import { UnitStatus } from "$lib/gql/graphql"
 import { afterNavigate, beforeNavigate } from "$app/navigation"
+import UnitCompletionSound from "$lib/sounds/UnitCompletion.wav"
 
 export let data: PageData
+
+$: unit = data.unit
+
 let end_of_content: HTMLElement
+let content: HTMLElement
+let content_container: HTMLElement
 
-$: previous_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "previous")
-$: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
-
-
+$: flattened_units = flatten_units(data.root_units)
+$: previous_unit = get_unit_relative(unit, "previous")
+$: next_unit = get_unit_relative(unit, "next")
 
 function check_completed(entries: IntersectionObserverEntry[], observer: IntersectionObserver): void {
     if (entries[0].isIntersecting) {
         observer.disconnect()
+        if(unit.status === UnitStatus.Completed) return
+        let sound = new Audio(UnitCompletionSound)
+        sound.volume = 0.3
+        sound.play()
         update_unit_progress(UnitStatus.Completed)
     }
 }
 
 async function update_unit_progress(status: UnitStatus): Promise<void> {
-    if (data.unit.status === status) return
+    if (unit.status === status) return
     let res = await data.graph.gmutation(graphql(`
         mutation SetUnitProgress($course_slug: String!, $unit_slug: String!, $status: UnitStatus!) {
             set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: $status) {
                 id
             }
         }
-    `), {course_slug: data.course.slug, unit_slug: data.unit.slug, status})
+    `), {course_slug: data.course.slug, unit_slug: unit.slug, status})
     if (res.error) {
         return $page.data.alerts.create_alert(MessageType.Error, res.error.message)
     }
-    data.units_by_slug[data.unit.slug].status = status
+    unit.status = status
+    unit = unit
 }
+
 beforeNavigate(async() => {
-    let a = document.getElementById("mainwrappertothetop")
-    if (a) a.scrollIntoView({block: "start"})
+    content_container.scrollIntoView({block: "start"})
 })
 afterNavigate(async() => {
-    let a = document.getElementById("mainwrappertothetop")
-    if (a) a.scrollIntoView({block: "start"})
-
+    content_container.scrollIntoView({block: "start"})
 
     let observer = new IntersectionObserver(check_completed, {threshold: 1.0})
     observer.observe(end_of_content)
@@ -64,11 +72,10 @@ afterNavigate(async() => {
 
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
-    let units_flattened = data.root_units.flatMap(unit => flatten_unit(unit))
-    let index = units_flattened.findIndex(u => u.slug === unit.slug)
+    let index = flattened_units.findIndex(u => u.slug === unit.slug)
     let relative_index = direction === "previous" ? index - 1 : index + 1
 
-    return units_flattened[relative_index] || null
+    return flattened_units[relative_index] || null
 }
 
 
@@ -80,15 +87,19 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
     <CourseProgressBar
         course_slug={data.course.slug}
         {data}
-        units={data.root_units.flatMap(unit => flatten_unit(unit))}/>
+        units={flattened_units}
+        bind:unit={ data.unit }
+        on:set_unit_progress={ e => update_unit_progress(e.detail) }/>
 </div>
 <hr>
 <div class="layout">
     <ScrollbarRegion>
-        <main id="mainwrappertothetop">
-            <div class="content-container">
+        <main>
+            <div
+                bind:this={ content_container }
+                class="content-container">
                 <div
-                    id="content"
+                    bind:this={ content }
                     class="content">
                     <MarkdownRenderer markdown={data.markdown}/>
                     <div bind:this={ end_of_content }/>
@@ -116,7 +127,9 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                 <ScrollbarRegion>
                     <div class="inner-toc">
                         <Subheading>On this page</Subheading>
-                        <TableOfContents markdown={data.markdown}/>
+                        <TableOfContents
+                            markdown={data.markdown}
+                            bind:content/>
                     </div>
                 </ScrollbarRegion>
             </div>

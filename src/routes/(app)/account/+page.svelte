@@ -31,7 +31,7 @@ export let data: PageData
             <div>
                 <Button
                     style="translucent"
-                    href="https://lumina.earth/account"
+                    href="{data.lumina_domain}/account"
                     hug={true}
                     left_icon={AccountCircle}>
                     Manage Account
