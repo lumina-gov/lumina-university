@@ -1,4 +1,4 @@
-import { UnitProgressResult, courses, get_full_course } from "$lib/courses/content"
+import { courses, get_full_course } from "$lib/courses/content"
 import { error } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
 import { graphql } from "$lib/gql"
