@@ -57,17 +57,14 @@ async function update_unit_progress(status: UnitStatus): Promise<void> {
     unit = unit
 }
 
-beforeNavigate(async() => {
-    content_container.scrollIntoView({block: "start"})
-})
-afterNavigate(async() => {
-    content_container.scrollIntoView({block: "start"})
+afterNavigate(() => {
+    content_container.scrollIntoView({block: "start", behavior: "instant"})
 
     let observer = new IntersectionObserver(check_completed, {threshold: 1.0})
     observer.observe(end_of_content)
 
     if (data.unit.status === UnitStatus.Completed) return
-    await update_unit_progress(UnitStatus.InProgress)
+    update_unit_progress(UnitStatus.InProgress)
 })
 
 
@@ -82,8 +79,7 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 </script>
 <hr>
 <div class="crumb-bar">
-    <CourseBreadcrumbs course={data.course}
-    />
+    <CourseBreadcrumbs course={data.course}/>
     <CourseProgressBar
         course_slug={data.course.slug}
         {data}
@@ -160,11 +156,6 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
     flex-basis 0
     position relative
     overflow-y hidden
-
-.sidebar
-    width 100%
-    max-width 380px
-    border-right 1px solid transparify(white, 10%)
 
 main
     flex 1

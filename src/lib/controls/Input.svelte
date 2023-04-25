@@ -37,6 +37,7 @@ onMount(() => {
                 class="icon"
                 class:clickable={ !!left_icon_handler }
                 role="button"
+                tabindex="0"
                 on:keypress={ e => { if (e.key === "Enter") handle_icon_click(e, left_icon_handler) } }
                 on:click={ e => handle_icon_click(e, left_icon_handler) }>
                 <svelte:component this={ left_icon } />
@@ -49,6 +50,7 @@ onMount(() => {
             {placeholder}
             {type}
             {value}
+            tabindex="0"
             on:keyup
             on:keydown
             on:input={ event => (value = event.currentTarget.value) }
@@ -59,6 +61,7 @@ onMount(() => {
                 class="icon"
                 class:clickable={ !!right_icon_handler }
                 role="button"
+                tabindex="0"
                 on:keypress={ e => { if (e.key === "Enter") handle_icon_click(e, right_icon_handler) } }
                 on:click={ e => handle_icon_click(e, right_icon_handler) }>
                 <svelte:component this={ right_icon } />

@@ -77,12 +77,4 @@ onMount(() => {
     font-weight 700
     align-items center
     opacity 0.5
-    &.in-progress
-        opacity 1
-
-.icon-button
-    opacity 0.5
-    box-shadow 0 4px transparify($brand, 40%)
-    border-radius 8px
-    overflow hidden
 </style>

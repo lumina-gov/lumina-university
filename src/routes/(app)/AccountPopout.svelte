@@ -1,6 +1,6 @@
 <script lang="ts">
 import Card from "$lib/cards/Card.svelte"
-import Settings from "svelte-material-icons/Settings.svelte"
+import Settings from "svelte-material-icons/Cog.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Profile from "$lib/display/Profile.svelte"

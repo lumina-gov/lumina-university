@@ -21,7 +21,7 @@ import Circle from "svelte-material-icons/Circle.svelte"
 import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import { page } from "$app/stores"
-import Settings from "svelte-material-icons/Settings.svelte"
+import Settings from "svelte-material-icons/Cog.svelte"
 
 export let user: MeQuery["me"] | null
 export let nav_opened: boolean
@@ -100,14 +100,12 @@ afterNavigate(() => {
                             padding={16}
                         >
                             <Button
-                                gamified={true}
                                 href={$page.data.user_store.login_url}
                                 hug={false}
                                 left_icon={AccountPlus}
                                 text="Create Account"/>
                             <Button
                                 style="translucent"
-                                gamified={true}
                                 href={$page.data.user_store.login_url}
                                 hug={false}
                                 left_icon={ExitToApp}>

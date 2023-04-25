@@ -6,7 +6,7 @@ import { UnitStatus } from "$lib/gql/graphql"
 
 export const load = (async ({ parent }) => {
     const data = await parent()
-    
+
     const last_updated_unit_req = await data.graph.gquery(graphql(`
         query LastUpdatedUnit {
             last_updated_unit {
