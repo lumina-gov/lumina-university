@@ -7,8 +7,7 @@ import Button from "$lib/controls/Button.svelte"
 import PlayOutline from "svelte-material-icons/PlayOutline.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
 import Plus from "svelte-material-icons/Plus.svelte"
-import { CourseWithProgress } from "$lib/types/course"
-import { Unit } from "$lib/types/unit"
+import type { CourseWithProgress } from "$lib/types/course"
 import { UnitStatus } from "$lib/gql/graphql"
 import { flatten_units } from "$lib/utils/unit"
 
@@ -20,14 +19,6 @@ export let recent_unit: string
 $: units = flatten_units(course.root_units)
 $: current_unit_index = units.findIndex(unit => unit.unit_slug === recent_unit) + 1
 $: number_completed = units.filter(unit => unit.status === UnitStatus.Completed).length
-// {
-//     slug: string | undefined,
-//     number_completed: number,
-//     course_length: number,
-//     last_unit: string | undefined,
-//     description: string,
-//     current_index: number
-// }
 
 $: percentage_completed = (number_completed/units.length)*100
 

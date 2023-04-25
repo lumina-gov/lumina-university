@@ -1,12 +1,12 @@
-import { createClient, type TypedDocumentNode, type Client } from "@urql/core"
+import { createClient, type TypedDocumentNode, type Client, type AnyVariables, fetchExchange } from "@urql/core"
 import { PUBLIC_GRAPH_ENDPOINT } from "$env/static/public"
-import type { AnyVariables } from "@urql/core/dist/types/types"
 import type { UserStore } from "./user_store"
 
 export type GraphClient = ReturnType<typeof init_urql>
 
 export const init_urql = (user_store: UserStore) => Object.assign(createClient({
     url: PUBLIC_GRAPH_ENDPOINT,
+    exchanges: [fetchExchange],
     fetch: (url, options = {}) => {
         if (user_store.auth_token) {
             options.headers = {

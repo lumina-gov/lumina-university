@@ -15,7 +15,7 @@ import { graphql } from "$lib/gql"
 import { page } from "$app/stores"
 import { MessageType } from "$lib/types/message"
 import { UnitStatus } from "$lib/gql/graphql"
-import { afterNavigate, beforeNavigate } from "$app/navigation"
+import { afterNavigate } from "$app/navigation"
 import UnitCompletionSound from "$lib/sounds/UnitCompletion.wav"
 
 export let data: PageData
