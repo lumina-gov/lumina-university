@@ -8,6 +8,7 @@ import Icon from "$lib/display/Icon.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
 import DashboardCourse from "./DashboardCourse.svelte"
 import { SubscriptionStatus } from "$lib/gql/graphql"
+import DashboardTopics from "./DashboardTopics.svelte";
 
 export let data: PageData
 
@@ -45,18 +46,18 @@ $: user = data.user_store.user
                 course={data.recent_data.course}
                 recent_unit={data.recent_data.unit}/>
         </Hero>
+        <Hero
+            align="center"
+            divider={true}>
+            <div class="subheader">
+                Your courses
+            </div>
+            <!-- <DashboardCourse
+                course={data.recent_data.course}
+                enlarge={false}
+                recent_unit={data.recent_data.unit}/> -->
+        </Hero>
     {/if}
-    <Hero
-        align="center"
-        divider={true}>
-        <div class="subheader">
-            Your courses
-        </div>
-        <!-- <DashboardCourse
-            course={data.recent_data.course}
-            enlarge={false}
-            recent_unit={data.recent_data.unit}/> -->
-    </Hero>
 {:else}
     <div class="unauth-hero">
         <div class="inner padding">
@@ -79,9 +80,12 @@ $: user = data.user_store.user
             <div class="span">
                 Ready for the real world?
             </div>
+            <DashboardTopics/>
+            <div class="view-courses">
+                <Button style="translucent" text="View Courses" right_icon={ChevronRight} href="/courses"/>
+            </div>
         </div>
     </div>
-
 {/if}
 <svelte:head>
     <title>Light University - The next generation of education</title>
@@ -133,4 +137,9 @@ $: user = data.user_store.user
             font-weight 700
         .para
             opacity 0.8
+.view-courses
+    width 100%
+    display flex
+    justify-content center
+    padding 20px
 </style>
