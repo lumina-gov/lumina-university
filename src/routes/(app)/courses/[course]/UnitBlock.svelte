@@ -23,7 +23,7 @@ export let el_map: Record<string, HTMLElement>
 let element: HTMLElement
 
 onMount(() => {
-    el_map[unit.slug] = element
+    el_map[unit.unit_slug] = element
     el_map = el_map
 })
 </script>
@@ -34,7 +34,7 @@ onMount(() => {
     class:completed={ unit.status === UnitStatus.Completed }
     class:in-progress={ unit.status === UnitStatus.InProgress }
     class:not-started={ unit.status === UnitStatus.NotStarted }
-    href="/courses/{course_slug}/{unit.slug}">
+    href="/courses/{course_slug}/{unit.unit_slug}">
     <GameifiedButton
         style={unit.status === UnitStatus.Completed
             ? "pressed"

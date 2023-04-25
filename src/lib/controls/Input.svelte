@@ -48,9 +48,9 @@ onMount(() => {
             name={autocomplete}
             {autocomplete}
             {placeholder}
+            tabindex="0"
             {type}
             {value}
-            tabindex="0"
             on:keyup
             on:keydown
             on:input={ event => (value = event.currentTarget.value) }

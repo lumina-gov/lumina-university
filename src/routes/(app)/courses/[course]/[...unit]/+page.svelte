@@ -49,7 +49,7 @@ async function update_unit_progress(status: UnitStatus): Promise<void> {
                 id
             }
         }
-    `), {course_slug: data.course.slug, unit_slug: unit.slug, status})
+    `), {course_slug: data.course.slug, unit_slug: unit.unit_slug, status})
     if (res.error) {
         return $page.data.alerts.create_alert(MessageType.Error, res.error.message)
     }
@@ -69,7 +69,7 @@ afterNavigate(() => {
 
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
-    let index = flattened_units.findIndex(u => u.slug === unit.slug)
+    let index = flattened_units.findIndex(u => u.unit_slug === unit.unit_slug)
     let relative_index = direction === "previous" ? index - 1 : index + 1
 
     return flattened_units[relative_index] || null
@@ -112,7 +112,7 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                     <div class="section">
                         <Button
                             style="transparent"
-                            href="https://github.com/lumina-gov/light-university/edit/main/src/lib/courses/{data.course.slug}/{data.unit.slug}.md"
+                            href="https://github.com/lumina-gov/light-university/edit/main/src/lib/courses/{data.course.slug}/{data.unit.unit_slug}.md"
                             left_icon={Pencil}>
                             Edit this page on GitHub
                         </Button>

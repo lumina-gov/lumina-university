@@ -17,7 +17,7 @@ let toggled = true
 
 $: status = UnitStatus.NotStarted // TODO
 $: has_subunits = item.subunits && item.subunits.length > 0
-$: url = `/courses/${course_slug}/${item.slug}`
+$: url = `/courses/${course_slug}/${item.unit_slug}`
 
 function toggle_children(e: Event) {
     if (has_subunits) {

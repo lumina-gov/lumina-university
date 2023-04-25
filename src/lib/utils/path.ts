@@ -9,8 +9,8 @@ export function get_paths_for_units(
     units.map((unit, i) => {
         const next_sibling = units[i + 1]
         if (!next_sibling) return
-        const current_el = elements[unit.slug]
-        const next_sibling_el = elements[next_sibling.slug]
+        const current_el = elements[unit.unit_slug]
+        const next_sibling_el = elements[next_sibling.unit_slug]
         if(!current_el || !next_sibling_el) return
         const current_rect = current_el.getBoundingClientRect()
         const next_sibling_rect = next_sibling_el.getBoundingClientRect()

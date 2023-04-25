@@ -8,7 +8,7 @@ export type UnitData = {
 
 export type Unit = {
     name: string
-    slug: string
+    unit_slug: string
     status: UnitStatus
     subunits: Unit[]
     free: boolean

@@ -7,28 +7,36 @@ import Button from "$lib/controls/Button.svelte"
 import PlayOutline from "svelte-material-icons/PlayOutline.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
 import Plus from "svelte-material-icons/Plus.svelte"
+import { CourseWithProgress } from "$lib/types/course"
+import { Unit } from "$lib/types/unit"
+import { UnitStatus } from "$lib/gql/graphql"
+import { flatten_units } from "$lib/utils/unit"
 
 
 export let enlarge = true
+export let course: CourseWithProgress
+export let recent_unit: string
 
+$: units = flatten_units(course.root_units)
+$: current_unit_index = units.findIndex(unit => unit.unit_slug === recent_unit) + 1
+$: number_completed = units.filter(unit => unit.status === UnitStatus.Completed).length
+// {
+//     slug: string | undefined,
+//     number_completed: number,
+//     course_length: number,
+//     last_unit: string | undefined,
+//     description: string,
+//     current_index: number
+// }
 
-
-export let recent_course: {
-    slug: string | undefined,
-    number_completed: number,
-    course_length: number,
-    last_unit: string | undefined,
-    description: string,
-    current_index: number
-}
-let percentage_completed = (recent_course.number_completed/recent_course.course_length)*100
+$: percentage_completed = (number_completed/units.length)*100
 
 function formatString(str: string | undefined): string {
     if (!str) return ""
     const formattedStr = str.replace(/-/g, " ").replace(/\//g, " / ")
     return formattedStr.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
 }
-let unit_name = formatString(recent_course.last_unit)
+let unit_name = formatString(recent_unit)
 </script>
 
 {#if enlarge}
@@ -43,7 +51,7 @@ let unit_name = formatString(recent_course.last_unit)
             <div class="button-text">
                 <div class="text">
                     <div class="top-text">
-                        <div class="faded">Unit { recent_course.current_index } of { recent_course.course_length }</div>
+                        <div class="faded">Unit { current_unit_index } of { units.length }</div>
                         <Icon
                             icon={Circle}
                             opacity={0.5}
@@ -55,18 +63,16 @@ let unit_name = formatString(recent_course.last_unit)
                             color="brand"
                             icon={CodeTags}
                             size={32}/>
-                        {#if recent_course.slug} 
-                            { recent_course.slug }
-                        {/if}
+                        { course.name }
                     </div>
                     <div class="subtext">
-                        { recent_course.description }
+                        { course.description }
                     </div>
                 </div>
                 <div>
                     <Button
                         style="translucent"
-                        href={`/courses/${recent_course.slug}/${recent_course.last_unit}`}
+                        href={`/courses/${course.course_slug}/${recent_unit}`}
                         hug={true}
                         left_icon={PlayOutline}
                         text="Continue Course"/>

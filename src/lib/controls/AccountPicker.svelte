@@ -13,7 +13,7 @@ export let account_name = "Lumina"
     </div>
     <Icon
         icon={Dropdown}
-        opacity="0.2"/>
+        opacity={0.2}/>
 </div>
 <style lang="stylus">
 @import "variables"

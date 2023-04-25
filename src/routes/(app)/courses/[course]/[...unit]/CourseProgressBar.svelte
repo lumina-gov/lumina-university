@@ -19,7 +19,7 @@ let dispatch = createEventDispatcher<{ set_unit_progress: UnitStatus }>()
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
     let units_flattened = data.root_units.flatMap(unit => flatten_unit(unit))
-    let index = units_flattened.findIndex(u => u.slug === unit.slug)
+    let index = units_flattened.findIndex(u => u.unit_slug === unit.unit_slug)
     let relative_index = direction === "previous" ? index - 1 : index + 1
 
     return units_flattened[relative_index] || null
@@ -32,14 +32,14 @@ const progress_color: Record<UnitStatus, Prop<IconButton, "color">> = {
 }
 
 
-$: previous_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "previous")
-$: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
+$: previous_unit = get_unit_relative(data.units_by_slug[data.unit.unit_slug], "previous")
+$: next_unit = get_unit_relative(data.units_by_slug[data.unit.unit_slug], "next")
 </script>
 
 <div class="wrapper">
     <IconButton
         style="transparent"
-        href={previous_unit ? `/courses/${course_slug}/${previous_unit.slug}` : undefined}
+        href={previous_unit ? `/courses/${course_slug}/${previous_unit.unit_slug}` : undefined}
         icon={ChevronLeft}
         opacity={0.5}
         use_sound={true}
@@ -48,13 +48,13 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
         {#each units as unit}
             <a
                 class="seg"
-                class:active={ unit.slug === data.unit.slug }
+                class:active={ unit.unit_slug === data.unit.unit_slug }
                 class:completed={ unit.status === UnitStatus.Completed }
                 class:in-progress={ unit.status === UnitStatus.InProgress }
                 class:not-started={ unit.status === UnitStatus.NotStarted }
-                href={`/courses/${course_slug}/${unit.slug}`}
+                href={`/courses/${course_slug}/${unit.unit_slug}`}
             >
-                <!-- {#if unit.slug === data.unit.slug}
+                <!-- {#if unit.unit_slug === data.unit.unit_slug}
                     <div class="current u">
                         <Icon
                             color="white"
@@ -75,7 +75,7 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.slug], "next")
     </div>
     <IconButton
         style="transparent"
-        href={next_unit ? `/courses/${course_slug}/${next_unit.slug}` : undefined}
+        href={next_unit ? `/courses/${course_slug}/${next_unit.unit_slug}` : undefined}
         icon={ChevronRight}
         opacity={0.5}
         use_sound={true}

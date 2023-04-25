@@ -24,7 +24,7 @@ function pressed() {
     class="paginator"
     class:active={ unit !== null }
     class:next={ direction === "next" }
-    href={unit ? `/courses/${course.slug}/${unit.slug}` : undefined}
+    href={unit ? `/courses/${course.slug}/${unit.unit_slug}` : undefined}
     on:click={ pressed }
     on:keyup={ e => e.key === "Enter" && pressed() }>
     {#if unit}

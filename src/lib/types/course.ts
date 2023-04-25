@@ -19,7 +19,7 @@ export type CourseExtendedData = Course & {
 }
 
 export type CourseWithProgress = {
-    slug: string,
+    course_slug: string,
     name: string,
     description: string,
     root_units: Unit[],

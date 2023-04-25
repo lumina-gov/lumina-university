@@ -25,7 +25,6 @@ onDestroy(() => {
 
 
 $: paths = get_paths_for_units(units, wrapper, el_map)
-
 </script>
 
 <div

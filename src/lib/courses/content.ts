@@ -1,4 +1,4 @@
-import { GetCourseProgressQuery, UnitStatus } from "$lib/gql/graphql"
+import { UnitStatus } from "$lib/gql/graphql"
 import { Course, CourseWithProgress } from "$lib/types/course"
 import { Unit, UnitData } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
@@ -23,7 +23,7 @@ export async function get_full_course(course_slug: string, units_progress_map: R
     const course = (await course_import()).course
     const {units_by_slug, root_units} = units_query_to_unit_tree(course.units_map, course.root_units, units_progress_map)
     return {
-        slug: course_slug,
+        course_slug: course_slug,
         name: course.name,
         description: course.description,
         root_units: root_units,
@@ -50,11 +50,11 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], unit
     // Create a list of root units
 
     // Add units to map, and empty subunits array
-    Object.entries(units).map(([slug, unit]) => {
-        units_by_slug[slug] = {
+    Object.entries(units).map(([unit_slug, unit]) => {
+        units_by_slug[unit_slug] = {
             ...unit,
-            slug,
-            status: units_progress_map[slug] ?? UnitStatus.NotStarted,
+            unit_slug,
+            status: units_progress_map[unit_slug] ?? UnitStatus.NotStarted,
             subunits: [],
             free: unit.free ?? false
         }

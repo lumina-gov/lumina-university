@@ -18,7 +18,7 @@ export let type: keyof typeof icons
     <div class="icon">
         <Icon
             icon={icons[type]}
-            size="24"/>
+            size={24}/>
     </div>
     <div class="content">
         <slot/>
