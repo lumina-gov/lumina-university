@@ -68,6 +68,8 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
     font-size 18px
     color white
     font-weight 500
+    &:focus
+        outline none
     &.divider
         border-left 1px solid rgba(255, 255, 255, 0.2)
 </style>
