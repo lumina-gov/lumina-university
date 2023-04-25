@@ -9,10 +9,10 @@ import Hero from "$lib/layouts/Hero.svelte"
 import DashboardCourse from "./DashboardCourse.svelte"
 import { SubscriptionStatus } from "$lib/gql/graphql"
 export let data: PageData
-
 $: user = data.user_store.user
+// data.recent course is null if user is null however the type does not reflect this
 </script>
-{#if user}
+{#if data.recent_course && user}
     <Hero divider={true}>
         <div class="auth-hero">
             <div class="greeting">
@@ -38,7 +38,7 @@ $: user = data.user_store.user
         <div class="subheader">
             Where you left off
         </div>
-        <DashboardCourse recent_course={data.recent_course}/>
+        <DashboardCourse recent_course={recent_course}/>
     </Hero>
     <Hero
         align="center"
@@ -48,7 +48,7 @@ $: user = data.user_store.user
         </div>
         <DashboardCourse
             enlarge={false}
-            recent_course={data.recent_course}/>
+            recent_course={recent_course}/>
     </Hero>
 {:else}
     <div class="unauth-hero">
@@ -64,7 +64,7 @@ $: user = data.user_store.user
                 Gain practical experience, create real outcomes.
             </div>
             <Button
-                href="/dashboard"
+                href="/courses"
                 hug={true}
                 right_icon={ChevronRight}>
                 Start Learning

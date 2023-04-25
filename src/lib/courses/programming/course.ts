@@ -3,6 +3,7 @@ import { Course } from "$lib/types/course"
 export const course: Course = {
     name: "Programming",
     root_units: ["introduction", "how-to-think-like-a-programmer", "programming-concepts", "frontend-vs-backend", "setting-up-your-dev-env", "syntax-&-programming-languages"],
+    description: "Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
     units_map: {
         "introduction": {
             name: "Introduction",
