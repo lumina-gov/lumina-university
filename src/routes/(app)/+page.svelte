@@ -36,7 +36,7 @@ $: authenticated = data.user_store.user != null
         <div class="subheader">
             Where you left off
         </div>
-        <DashboardCourse/>
+        <DashboardCourse recent_course={data.recent_course}/>
     </Hero>
     <Hero
         align="center"
@@ -44,7 +44,9 @@ $: authenticated = data.user_store.user != null
         <div class="subheader">
             Your courses
         </div>
-        <DashboardCourse enlarge={false}/>
+        <DashboardCourse
+            enlarge={false}
+            recent_course={data.recent_course}/>
     </Hero>
 {:else}
     <div class="unauth-hero">
