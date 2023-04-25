@@ -4,10 +4,19 @@ import { graphql } from "$lib/gql"
 import { error } from "@sveltejs/kit"
 import { UnitStatus } from "$lib/gql/graphql"
 import { flatten_units } from "$lib/utils/unit"
-
+// if user is unauthed, return null
+// if user is authed, 
+//     request the recently completed unit
+//     if the recently completed unit is null, return null
+//     otherwise request the course progress for the course of the recently completed unit
+//     if the course data is null throw an error
 export const load = (async ({ parent }) => {
     const data = await parent()
-    
+    if (data.user_store.user === null) {
+        return {recent_course: null}
+    }
+
+
     const last_updated_unit_req = await data.graph.gquery(graphql(`
         query LastUpdatedUnit {
             last_updated_unit {
@@ -29,8 +38,10 @@ export const load = (async ({ parent }) => {
     }
 
     const course = last_updated_unit_req?.data?.last_updated_unit?.course_slug
+    if (!course) {
+        return {recent_course: null}
+    }
     const unit_slug = last_updated_unit_req?.data?.last_updated_unit?.unit_slug
-
     const last_updated_course_progress = await data.graph.gquery(graphql(`
         query GetCourseProgress($course_slug: String!) {
             course_progress(course_slug: $course_slug) {
