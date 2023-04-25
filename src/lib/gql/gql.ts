@@ -14,6 +14,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n        query me {\n            me {\n                id\n                email\n                first_name\n                last_name,\n                stripe_subscription_info {\n                    status\n                    expiry_date\n                }\n            }\n        }": types.MeDocument,
+    "\n        query LastUpdatedUnit {\n            last_updated_unit {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    ": types.LastUpdatedUnitDocument,
+    "\n        query GetCourseProgress($course_slug: String!) {\n            course_progress(course_slug: $course_slug) {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    ": types.GetCourseProgressDocument,
     "\n        query CustomerPortalUrl($return_url: String!) {\n            me {\n                customer_portal_url(return_url: $return_url)\n            }\n        }": types.CustomerPortalUrlDocument,
     "\n        mutation CreateLightUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }": types.CreateLightUniversityCheckoutSessionDocument,
     "\n            query GetCourseProgress($course_slug: String!) {\n                course_progress(course_slug: $course_slug) {\n                    id\n                    status\n                    user_id\n                    unit_slug\n                    course_slug\n                    updated_at\n                }\n            }\n        ": types.GetCourseProgressDocument,
@@ -38,6 +40,14 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n        query me {\n            me {\n                id\n                email\n                first_name\n                last_name,\n                stripe_subscription_info {\n                    status\n                    expiry_date\n                }\n            }\n        }"): (typeof documents)["\n        query me {\n            me {\n                id\n                email\n                first_name\n                last_name,\n                stripe_subscription_info {\n                    status\n                    expiry_date\n                }\n            }\n        }"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n        query LastUpdatedUnit {\n            last_updated_unit {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    "): (typeof documents)["\n        query LastUpdatedUnit {\n            last_updated_unit {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n        query GetCourseProgress($course_slug: String!) {\n            course_progress(course_slug: $course_slug) {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    "): (typeof documents)["\n        query GetCourseProgress($course_slug: String!) {\n            course_progress(course_slug: $course_slug) {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

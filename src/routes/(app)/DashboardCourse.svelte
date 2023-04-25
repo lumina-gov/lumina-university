@@ -7,7 +7,26 @@ import Button from "$lib/controls/Button.svelte"
 import PlayOutline from "svelte-material-icons/PlayOutline.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
 import Plus from "svelte-material-icons/Plus.svelte"
+
+
 export let enlarge = true
+
+
+let current_index = 0
+export let recent_course: {
+    slug: string | undefined,
+    number_completed: number,
+    course_length: number,
+    last_unit: string | undefined,
+}
+let percentage_completed = (recent_course.number_completed/recent_course.course_length)*100
+
+function formatString(str: string | undefined): string {
+    if (!str) return ""
+    const formattedStr = str.replace(/-/g, " ").replace(/\//g, " / ")
+    return formattedStr.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
+}
+let unit_name = formatString(recent_course.last_unit)
 </script>
 
 {#if enlarge}
@@ -22,19 +41,21 @@ export let enlarge = true
             <div class="button-text">
                 <div class="text">
                     <div class="top-text">
-                        <div class="faded">Unit 7 of 32</div>
+                        <div class="faded">Unit { current_index } of { recent_course.course_length }</div>
                         <Icon
                             icon={Circle}
                             opacity={0.5}
                             size={8}/>
-                        How To Think Like A Programmer
+                        { unit_name }
                     </div>
                     <div class="title-text">
                         <Icon
                             color="brand"
                             icon={CodeTags}
                             size={32}/>
-                        Software Engineering
+                        {#if recent_course.slug} 
+                            { recent_course.slug }
+                        {/if}
                     </div>
                     <div class="subtext">
                         Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.
@@ -43,13 +64,13 @@ export let enlarge = true
                 <div>
                     <Button
                         style="translucent"
-                        gamified={true}
+                        href={`/courses/${recent_course.slug}/${recent_course.last_unit}`}
                         hug={true}
                         left_icon={PlayOutline}
                         text="Continue Course"/>
                 </div>
             </div>
-            <ProgressBar width={25}/>
+            <ProgressBar width={percentage_completed}/>
         </div>
     </div>
 {:else}
@@ -141,7 +162,7 @@ export let enlarge = true
     display flex
     gap 10px
     align-items center
-
+    text-transform capitalize
     font-size 24px
     font-weight 800
 .subtext
