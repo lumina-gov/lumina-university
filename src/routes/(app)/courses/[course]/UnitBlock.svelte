@@ -1,7 +1,7 @@
 <script lang="ts">
 import Play from "svelte-material-icons/Play.svelte"
 import Check from "svelte-material-icons/Check.svelte"
-import { Unit } from "$lib/types/unit"
+import type { Unit } from "$lib/types/unit"
 import { onMount } from "svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Text from "svelte-material-icons/Text.svelte"

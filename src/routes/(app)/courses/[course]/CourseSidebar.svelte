@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Unit } from "$lib/types/unit"
+import type { Unit } from "$lib/types/unit"
 import CourseSidebarItem from "./CourseSidebarItem.svelte"
 
 export let course_slug: string

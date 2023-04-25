@@ -1,4 +1,4 @@
-import { Course } from "$lib/types/course"
+import type { Course } from "$lib/types/course"
 
 export const course: Course = {
     name: "Programming",

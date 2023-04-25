@@ -1,6 +1,6 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
-import { Prop } from "$lib/utils/typed_props"
+import type { Prop } from "$lib/utils/typed_props"
 import { type SvelteComponent, createEventDispatcher } from "svelte"
 import ButtonSound from "$lib/sounds/ButtonSound.wav"
 let dispatch = createEventDispatcher()
@@ -8,7 +8,6 @@ let dispatch = createEventDispatcher()
 export let href: string | null = null
 export let icon: typeof SvelteComponent
 export let opacity = 1
-export let gamified = false
 export let style: "translucent" | "transparent" | "branded" = "branded"
 export let color: Prop<Icon, "color"> = undefined
 export let use_sound = true
@@ -32,7 +31,6 @@ function handle_keyup(e: KeyboardEvent) {
 <svelte:element
     this={ tag }
     class="button {style}"
-    class:gamified
     href={href}
     role="button"
     tabindex="0"
@@ -60,8 +58,6 @@ function handle_keyup(e: KeyboardEvent) {
     font-weight 600
     font-size 24px
     position relative
-    transition top 0.05s ease-in, box-shadow 0.05s ease-in
-    top 0
     &.opacity
         color transparify(white, 40%)
     &:hover
@@ -77,30 +73,12 @@ function handle_keyup(e: KeyboardEvent) {
         background $brand
         &:hover, &:focus
             background lighten($brand, 12%)
-        &.gamified
-            border-radius 8px
-            outline 4px solid transparify(black, 20%)
-            outline-offset -4px
-            background $brand
-            box-shadow 0 8px 0 transparify($brand, 50%)
-            &:active
-                top 6px
-                box-shadow 0 2px 0 transparify($brand, 50%)
     &.translucent
         background transparify(white, 8%)
         &:hover, &:focus
             background: transparify(white, 12%)
         &:active
             background: transparify(white, 8%)
-        &.gamified
-            border-radius 8px
-            background transparify(white, 15%)
-            box-shadow 0 8px 0 transparify(white, 8%)
-            outline 4px solid transparify(white, 10%)
-            outline-offset -4px
-            &:active
-                top 6px
-                box-shadow 0 2px 0 transparify(white, 8%)
     &.transparent
         color transparify(white, 60%)
         background transparify(white, 0%)

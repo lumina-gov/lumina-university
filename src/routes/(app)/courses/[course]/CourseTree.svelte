@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Unit } from "$lib/types/unit"
+import type { Unit } from "$lib/types/unit"
 import { get_paths_for_units } from "$lib/utils/path"
 import { onDestroy, onMount } from "svelte"
 import UnitBlock from "./UnitBlock.svelte"

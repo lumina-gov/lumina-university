@@ -1,7 +1,7 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import { CourseExtendedData } from "$lib/types/course"
+import type { CourseExtendedData } from "$lib/types/course"
 import ImageOutline from "svelte-material-icons/ImageOutline.svelte"
 
 export let course: CourseExtendedData

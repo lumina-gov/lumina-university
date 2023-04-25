@@ -2,7 +2,7 @@ import type { PageLoad } from "./$types"
 import { get_full_course } from "$lib/courses/content"
 import { graphql } from "$lib/gql"
 import { error } from "@sveltejs/kit"
-import { UnitStatus } from "$lib/gql/graphql"
+import type { UnitStatus } from "$lib/gql/graphql"
 
 export const load = (async ({ parent }) => {
     const data = await parent()

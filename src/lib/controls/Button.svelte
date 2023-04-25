@@ -1,5 +1,6 @@
 <script lang="ts">
-import { createEventDispatcher, SvelteComponent } from "svelte"
+import type { SvelteComponent } from "svelte"
+import { createEventDispatcher } from "svelte"
 import ButtonSound from "$lib/sounds/ButtonSound.wav"
 
 export let href: string | null = null

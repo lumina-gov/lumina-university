@@ -1,9 +1,7 @@
 <script lang="ts">
 import type { LayoutData } from "./$types"
-// import Footer from "./Footer.svelte"
 import Navigation from "./Navigation.svelte"
 import AppBar from "./AppBar.svelte"
-// import Rater from "./Rater.svelte"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 
 export let data: LayoutData

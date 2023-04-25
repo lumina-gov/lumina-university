@@ -1,4 +1,4 @@
-import { Unit } from "$lib/types/unit"
+import type { Unit } from "$lib/types/unit"
 
 export function flatten_unit(unit: Unit): Unit[] {
     const flattened: Unit[] = []

@@ -9,6 +9,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 		"codegen": "graphql-codegen"
 	},
 	"devDependencies": {
@@ -29,7 +30,8 @@
 		"svelte2tsx": "^0.6.11",
 		"tslib": "^2.5.0",
 		"typescript": "^5.0.4",
-		"vite": "^4.3.1"
+		"vite": "^4.3.1",
+		"@types/marked": "^4.0.8"
 	},
 	"dependencies": {
 		"@graphql-codegen/add": "^4.0.1",

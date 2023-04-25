@@ -1,6 +1,6 @@
 import { UnitStatus } from "$lib/gql/graphql"
-import { Course, CourseWithProgress } from "$lib/types/course"
-import { Unit, UnitData } from "$lib/types/unit"
+import type { Course, CourseWithProgress } from "$lib/types/course"
+import type { Unit, UnitData } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
 
 export const content = import.meta.glob("./**/*.md", { as: "raw" }) as {

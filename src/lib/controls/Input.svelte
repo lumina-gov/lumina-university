@@ -1,5 +1,6 @@
 <script lang="ts">
-import { onMount, SvelteComponent } from "svelte"
+import type { SvelteComponent } from "svelte"
+import { onMount } from "svelte"
 import InputWrapper from "../display/InputWrapper.svelte"
 
 export let name: string

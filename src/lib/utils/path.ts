@@ -1,4 +1,4 @@
-import { Unit } from "$lib/types/unit"
+import type { Unit } from "$lib/types/unit"
 
 export function get_paths_for_units(
     units: Unit[],

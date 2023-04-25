@@ -1,6 +1,6 @@
 <script lang="ts">
 import IconButton from "$lib/controls/IconButton.svelte"
-import { Unit } from "$lib/types/unit"
+import type { Unit } from "$lib/types/unit"
 import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import type { PageData } from "./$types"
@@ -8,7 +8,7 @@ import { flatten_unit } from "$lib/utils/unit"
 import { UnitStatus } from "$lib/gql/graphql"
 import { createEventDispatcher } from "svelte"
 import CheckboxMarkedCircle from "svelte-material-icons/CheckboxMarkedCircle.svelte"
-import { Prop } from "$lib/utils/typed_props"
+import type { Prop } from "$lib/utils/typed_props"
 
 export let units: Unit[]
 export let data: PageData
