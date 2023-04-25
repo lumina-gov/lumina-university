@@ -11,15 +11,11 @@ export const courses = import.meta.glob("./*/course.ts") as {
     [key: string]: (() => Promise<{ course: Course }>)
 }
 
-export type UnitProgressResult = {
-    unit_slug: string,
-    status: UnitStatus
-}
 type UnitDataMap = {
     [key: string]: UnitData
 }
 
-export async function get_full_course(course_slug: string, units_progress_map: Record<string, UnitProgressResult>): Promise<CourseWithProgress> {
+export async function get_full_course(course_slug: string, units_progress_map: Record<string, UnitStatus>): Promise<CourseWithProgress> {
     const course_import = courses[`./${course_slug}/course.ts`]
     if (!course_import) {
         throw new Error("Course not found")
@@ -34,7 +30,7 @@ export async function get_full_course(course_slug: string, units_progress_map: R
     }
 }
 
-function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: Record<string, UnitProgressResult> ): { units_by_slug: Record<string, Unit>, root_units: Unit[] } {
+function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: Record<string, UnitStatus> ): { units_by_slug: Record<string, Unit>, root_units: Unit[] } {
     // Create a map of units by id
     const units_by_slug: Record<string, Unit> = {}
     // Create a list of root units
@@ -44,8 +40,9 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], unit
         units_by_slug[slug] = {
             ...unit,
             slug,
-            status: units_progress_map[slug] ? units_progress_map[slug].status : UnitStatus.NotStarted,
+            status: units_progress_map[slug] ?? UnitStatus.NotStarted,
             subunits: [],
+            free: unit.free ?? false
         }
     })
 
