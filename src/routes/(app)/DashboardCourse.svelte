@@ -12,12 +12,14 @@ import Plus from "svelte-material-icons/Plus.svelte"
 export let enlarge = true
 
 
-let current_index = 0
+
 export let recent_course: {
     slug: string | undefined,
     number_completed: number,
     course_length: number,
     last_unit: string | undefined,
+    description: string,
+    current_index: number
 }
 let percentage_completed = (recent_course.number_completed/recent_course.course_length)*100
 
@@ -41,7 +43,7 @@ let unit_name = formatString(recent_course.last_unit)
             <div class="button-text">
                 <div class="text">
                     <div class="top-text">
-                        <div class="faded">Unit { current_index } of { recent_course.course_length }</div>
+                        <div class="faded">Unit { recent_course.current_index } of { recent_course.course_length }</div>
                         <Icon
                             icon={Circle}
                             opacity={0.5}
@@ -58,7 +60,7 @@ let unit_name = formatString(recent_course.last_unit)
                         {/if}
                     </div>
                     <div class="subtext">
-                        Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.
+                        { recent_course.description }
                     </div>
                 </div>
                 <div>

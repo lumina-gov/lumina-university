@@ -25,9 +25,23 @@ export async function get_full_course(course_slug: string, units_progress_map: R
     return {
         slug: course_slug,
         name: course.name,
+        description: course.description,
         root_units: root_units,
         units_by_slug: units_by_slug
     }
+}
+
+
+export async function get_course_description(course_slug: string | undefined): Promise<string> {
+    if (!course_slug) {
+        return ""
+    }
+    const course_import = courses[`./${course_slug}/course.ts`]
+    if (!course_import) {
+        throw new Error("Course not found")
+    }
+    const course = (await course_import()).course
+    return course.description
 }
 
 function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: Record<string, UnitStatus> ): { units_by_slug: Record<string, Unit>, root_units: Unit[] } {

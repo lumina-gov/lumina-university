@@ -1,8 +1,9 @@
 import type { PageLoad } from "./$types"
-import { courses } from "$lib/courses/content"
+import { get_full_course } from "$lib/courses/content"
 import { graphql } from "$lib/gql"
 import { error } from "@sveltejs/kit"
 import { UnitStatus } from "$lib/gql/graphql"
+import { flatten_units } from "$lib/utils/unit"
 
 export const load = (async ({ parent }) => {
     const data = await parent()
@@ -49,21 +50,33 @@ export const load = (async ({ parent }) => {
             code: "COURSE_PROGRESS_ERROR"
         })
     }
-    const units_progress_map: { unit: string, status: UnitStatus }[] = []
+    const units_progress_map: { [key: string]: UnitStatus } = {}
     last_updated_course_progress.data?.course_progress.map(progress => {
-        units_progress_map.push({unit: progress.unit_slug, status: progress.status})
+        units_progress_map[progress.unit_slug] = progress.status
     })
-    const course_length = units_progress_map.length
-    const completed = units_progress_map.filter(unit => unit.status === "COMPLETED").length
-    const index_object = units_progress_map.find(unit => unit.unit === unit_slug)
-    const current_index = units_progress_map.indexOf(index_object!)
-
+    if (!course) {
+        throw error(500, {
+            message: "Course not found",
+            code: "COURSE_NOT_FOUND"
+        })
+    }
+    const full_course = await get_full_course(course, units_progress_map)
+    const flattened_units = flatten_units((await full_course).root_units)
+    const index_object = flattened_units.find(unit => unit.slug === unit_slug)
+    if (index_object === undefined) {
+        throw error(500, {
+            message: "Unit not found",
+            code: "UNIT_NOT_FOUND"
+        })
+    }
     return {
         recent_course: {
             slug: course,
-            number_completed: completed,
-            course_length: course_length,
+            number_completed: (Object.values(units_progress_map).filter(unit => unit === "COMPLETED").length),
+            course_length: Object.entries(units_progress_map).length,
             last_unit: unit_slug,
+            current_index: flattened_units.indexOf(index_object) + 1,
+            description: full_course.description
         }
     }
 }) satisfies PageLoad
