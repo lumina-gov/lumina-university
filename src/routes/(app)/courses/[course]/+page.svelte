@@ -39,8 +39,9 @@ $: {
         translucent={false}>
         <OutlineSidebar
             course_name={data.course.name}
-            unit_count={units.length}/>
-        <ExtrasSidebar show={false}/>
+            unit_count={units.length}
+            course_icon={data.course.icon}/>
+        <ExtrasSidebar course_prerequisites={data.course.prerequisites}/>
     </GridItem>
     <GridItem
         align_items="flex-start"

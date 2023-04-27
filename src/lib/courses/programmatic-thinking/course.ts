@@ -1,62 +1,62 @@
-import type { Course } from "$lib/types/course"
+import type { Course } from "$lib/types/course";
+import CodeTags from "svelte-material-icons/CodeTags.svelte";
 
 export const course: Course = {
-    name: "Programming",
-    root_units: ["introduction", "how-to-think-like-a-programmer", "programming-concepts", "frontend-vs-backend", "setting-up-your-dev-env", "syntax-&-programming-languages"],
+    name: "Programmatic Thinking",
+    root_units: ["introduction", "thinking-like-a-programmer", "programming-concepts", "syntax-&-programming-languages"],
     description: "Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
     prerequisites: [],
+    image: "src/routes/(app)/Courseplaceholder.png",
+    icon: CodeTags,
     units_map: {
         "introduction": {
             name: "Introduction",
-            subunits: ["introduction/test-unit"],
+            subunits: [],
             free: true,
         },
-        "introduction/test-unit": {
-            name: "Test Unit",
-            free: true,
-        },
-        "how-to-think-like-a-programmer": {
+        "thinking-like-a-programmer": {
             name: "How to Think Like a Programmer",
             free: true,
             subunits: [
-                "how-to-think-like-a-programmer/problem-solving",
-                "how-to-think-like-a-programmer/inputs-outputs-constraints",
-                "how-to-think-like-a-programmer/thinking-in-terms-of-data",
-                "how-to-think-like-a-programmer/algorithmic-thinking",
-                "how-to-think-like-a-programmer/abstraction-modularity-&-integration",
-                "how-to-think-like-a-programmer/dealing-with-failure",
-                "how-to-think-like-a-programmer/how-to-get-unstuck",
-                "how-to-think-like-a-programmer/how-to-google-problems",
-                "how-to-think-like-a-programmer/using-chatgpt-to-accelerate-learning"
+                "thinking-like-a-programmer/problem-solving",
+                "thinking-like-a-programmer/inputs-outputs-constraints",
+                "thinking-like-a-programmer/thinking-in-terms-of-data",
+                "thinking-like-a-programmer/algorithmic-thinking",
+                "thinking-like-a-programmer/abstraction-modularity-&-integration",
+                "thinking-like-a-programmer/dealing-with-failure",
+                "thinking-like-a-programmer/how-to-get-unstuck",
+                "thinking-like-a-programmer/how-to-google-problems",
+                "thinking-like-a-programmer/using-chatgpt-to-accelerate-learning"
             ]
         },
-        "how-to-think-like-a-programmer/problem-solving": {
+        "thinking-like-a-programmer/problem-solving": {
             name: "Problem Solving",
             free: true,
         },
-        "how-to-think-like-a-programmer/inputs-outputs-constraints": {
+        "thinking-like-a-programmer/inputs-outputs-constraints": {
             name: "Inputs, Outputs, and Constraints",
             free: true,
         },
-        "how-to-think-like-a-programmer/thinking-in-terms-of-data": {
+        "thinking-like-a-programmer/thinking-in-terms-of-data": {
             name: "Thinking in Terms of Data",
+            free: true
         },
-        "how-to-think-like-a-programmer/algorithmic-thinking": {
+        "thinking-like-a-programmer/algorithmic-thinking": {
             name: "Algorithmic Thinking",
         },
-        "how-to-think-like-a-programmer/abstraction-modularity-&-integration": {
+        "thinking-like-a-programmer/abstraction-modularity-&-integration": {
             name: "Abstraction, Modularity, and Integration",
         },
-        "how-to-think-like-a-programmer/dealing-with-failure": {
+        "thinking-like-a-programmer/dealing-with-failure": {
             name: "Dealing with Failure",
         },
-        "how-to-think-like-a-programmer/how-to-get-unstuck": {
+        "thinking-like-a-programmer/how-to-get-unstuck": {
             name: "How to Get Unstuck",
         },
-        "how-to-think-like-a-programmer/how-to-google-problems": {
+        "thinking-like-a-programmer/how-to-google-problems": {
             name: "How to Google Problems",
         },
-        "how-to-think-like-a-programmer/using-chatgpt-to-accelerate-learning": {
+        "thinking-like-a-programmer/using-chatgpt-to-accelerate-learning": {
             name: "Using ChatGPT to Accelerate Learning",
         },
         "programming-concepts": {
@@ -235,13 +235,6 @@ export const course: Course = {
         "programming-concepts/heap-vs-stack": {
             name: "Heap Vs Stack",
         },
-
-        "frontend-vs-backend": {
-            name: "Frontend vs Backend",
-        },
-        "setting-up-your-dev-env": {
-            name: "Setting up your DevEnvironment",
-        },
         "syntax-&-programming-languages": {
             name: "Syntax & Programming Languages",
             subunits: [
@@ -264,30 +257,5 @@ export const course: Course = {
         "syntax-&-languages/how-programming-languages-work/compiled-languages": {
             name: "Compiled Languages"
         },
-        // "web-development": {
-        //     name: "Web Development",
-        //     subunits: [
-        //         "html1",
-        //         "css",
-        //     ]
-        // },
-        // "web-development/html1": {
-        //     name: "HTML",
-        //     subunits: [
-        //         "web-development/html1/creating-and-strucutring-html1-pages",
-        //         "web-development/html1/semantic-html1-&-accessibility",
-        //         "web-development/html1/types-of-html1-tags-&-elements",
-        //     ]
-        // },
-        // "web-development/css": {
-        //     name: "CSS",
-        // }
     }
 }
-
-
-
-
-
-
-

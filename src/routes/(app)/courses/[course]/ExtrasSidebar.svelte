@@ -6,21 +6,37 @@ import OpenInNew from "svelte-material-icons/OpenInNew.svelte"
 import HeadCheck from "svelte-material-icons/HeadCheck.svelte"
 import Database from "svelte-material-icons/Database.svelte"
 import Sitemap from "svelte-material-icons/Sitemap.svelte"
+import { get_course_icon } from "$lib/courses/content";
+import type { SvelteComponent } from "svelte";
 
-export let show: boolean
+export let course_prerequisites: string[]
 
-let prerequisites = [
-    {
-        icon: ArrowDecision,
-        color: "orange",
-        name: "Logic"
-    },
-    {
-        icon: Brain,
-        color: "yellow",
-        name: "Abstract Reasoning"
-    },
-]
+let prerequisites: { icon: typeof SvelteComponent, color: string, name: string }[] = []
+
+function random_color(): string {
+    let colors = ["red", "yellow", "orange", "purple", "green", "blue"]
+    return colors[Math.floor(Math.random() * colors.length)]
+}
+
+course_prerequisites.map(async (prerequisite) => {
+    prerequisites.push({
+        icon: await get_course_icon(prerequisite),
+        color: random_color(),
+        name: prerequisite
+    })
+})
+// let prerequisites = [
+//     {
+//         icon: ArrowDecision,
+//         color: "orange",
+//         name: "Logic"
+//     },
+//     {
+//         icon: Brain,
+//         color: "yellow",
+//         name: "Abstract Reasoning"
+//     },
+// ]
 
 let up_next = [
     {
@@ -40,7 +56,7 @@ let up_next = [
     },
 ]
 </script>
-{#if show}
+{#if course_prerequisites.length > 0}
     <div class="wrapper">
         <div>PREREQUISITES</div>
         <div class="bars">

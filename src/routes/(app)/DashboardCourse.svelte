@@ -52,7 +52,7 @@ let unit_name = formatString(recent_unit)
                     <div class="title-text">
                         <Icon
                             color="brand"
-                            icon={CodeTags}
+                            icon={course.icon}
                             size={32}/>
                         { course.name }
                     </div>
@@ -87,7 +87,7 @@ let unit_name = formatString(recent_unit)
                 class="image"
                 alt="placeholder"
                 src="src/routes/(app)/Courseplaceholder.png"/>
-            <div class="description">
+            <div class="description small">
                 <div class="top-text">
                     <div class="faded">Unit 7 of 32</div>
                     <Icon
@@ -198,6 +198,8 @@ let unit_name = formatString(recent_unit)
         font-size 18px
         font-weight 00
         color white
+    &.small
+        gap 16px
 
 .add-course
     color white

@@ -9,11 +9,13 @@ export let course: CourseExtendedData
 <a
     class="course"
     href="/courses/{course.course_slug}">
-    <div class="image">
-        <Icon
-            icon={ImageOutline}
-            opacity={0.1}
-            size={64}/>
+    <div class="image" style:background-image="url('{course.image}')">
+        {#if !course.image}
+            <Icon
+                icon={ImageOutline}
+                opacity={0.1}
+                size={64}/>
+        {/if}
     </div>
     <div class="contents">
         <h3>{ course.name }</h3>
@@ -40,25 +42,28 @@ export let course: CourseExtendedData
         background transparify(white, 8%)
     .image
         background transparify(white, 4%)
-        height 150px
+        height 200px
         display flex
         align-items center
         justify-content center
+        overflow hidden
+        background-size cover
+        background-position center
 
-    h3
-        font-size 16px
-        font-weight 600
+h3
+    font-size 16px
+    font-weight 600
 
-    .info
-        display flex
-        justify-content space-between
-        align-items center
-        span
-            opacity 0.5
+.info
+    display flex
+    justify-content space-between
+    align-items center
+    span
+        opacity 0.5
 
-    .contents
-        padding 16px
-        gap 8px
-        display flex
-        flex-direction column
+.contents
+    padding 16px
+    gap 8px
+    display flex
+    flex-direction column
 </style>

@@ -8,7 +8,7 @@ export let opacity = 1
 </script>
 <div
     style:opacity
-    class="icon {color}"
+    class="icon {color ?? ""}"
     on:click
     on:keypress>
     <svelte:component

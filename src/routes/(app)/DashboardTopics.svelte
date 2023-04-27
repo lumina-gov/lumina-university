@@ -5,7 +5,7 @@ import CogOutline from "svelte-material-icons/CogOutline.svelte";
 import CurrencyUsd from "svelte-material-icons/CurrencyUsd.svelte";
 import TagOutline from "svelte-material-icons/TagOutline.svelte";
 import Icon from "$lib/display/Icon.svelte";
-import { SvelteComponent } from "svelte";
+import type { SvelteComponent } from "svelte";
 
 let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white" | "red" | "yellow" | "orange" | "purple" | "blue" | undefined }[] =[
     {

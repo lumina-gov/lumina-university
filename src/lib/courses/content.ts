@@ -2,6 +2,7 @@ import { UnitStatus } from "$lib/gql/graphql"
 import type { Course, CourseWithProgress } from "$lib/types/course"
 import type { Unit, UnitData } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
+import type { SvelteComponent } from "svelte"
 
 export const content = import.meta.glob("./**/*.md", { as: "raw" }) as {
     [key: string]: undefined | (() => Promise<string>)
@@ -26,22 +27,30 @@ export async function get_full_course(course_slug: string, units_progress_map: R
         course_slug: course_slug,
         name: course.name,
         description: course.description,
+        icon: course.icon,
         root_units: root_units,
         units_by_slug: units_by_slug
     }
 }
 
-
-export async function get_course_description(course_slug: string | undefined): Promise<string> {
-    if (!course_slug) {
-        return ""
-    }
+export async function get_course_icon(course_slug: string): Promise<typeof SvelteComponent> {
     const course_import = courses[`./${course_slug}/course.ts`]
     if (!course_import) {
         throw new Error("Course not found")
     }
     const course = (await course_import()).course
-    return course.description
+    return course.icon
+}
+// this function needs to search through all courses and return the courses that have the given course slug as a prerequisite
+export async function get_up_next(course_slug: string): Promise<string[]> {
+    const up_next: string[] = []
+    for (const [key, course_import] of Object.entries(courses)) {
+        const course = (await course_import()).course
+        if (course.prerequisites.includes(course_slug)) {
+            up_next.push(key.split("/")[1])
+        }
+    }
+    return up_next
 }
 
 function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: Record<string, UnitStatus> ): { units_by_slug: Record<string, Unit>, root_units: Unit[] } {

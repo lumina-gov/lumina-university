@@ -52,10 +52,10 @@ $: user = data.user_store.user
             <div class="subheader">
                 Your courses
             </div>
-            <!-- <DashboardCourse
+            <DashboardCourse
                 course={data.recent_data.course}
                 enlarge={false}
-                recent_unit={data.recent_data.unit}/> -->
+                recent_unit={data.recent_data.unit}/>
         </Hero>
     {/if}
 {:else}
