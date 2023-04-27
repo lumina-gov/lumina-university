@@ -1,10 +1,13 @@
 import type { Course } from "$lib/types/course"
-
+import CodeTags from "svelte-material-icons/CodeTags.svelte";
 export const course: Course = {
     name: "Programming",
     root_units: ["introduction", "how-to-think-like-a-programmer", "programming-concepts", "frontend-vs-backend", "setting-up-your-dev-env", "syntax-&-programming-languages"],
     description: "Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
-    prerequisites: [],
+    prerequisites: [{name: "Programmatic Thinking", slug :"programmatic-thinking"}],
+    next_up: [{name: "Programmatic Thinking", slug :"programmatic-thinking"}],
+    image: "",
+    icon: CodeTags,
     units_map: {
         "introduction": {
             name: "Introduction",

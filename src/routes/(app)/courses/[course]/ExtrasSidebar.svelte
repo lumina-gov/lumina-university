@@ -6,79 +6,55 @@ import OpenInNew from "svelte-material-icons/OpenInNew.svelte"
 import HeadCheck from "svelte-material-icons/HeadCheck.svelte"
 import Database from "svelte-material-icons/Database.svelte"
 import Sitemap from "svelte-material-icons/Sitemap.svelte"
-import { get_course_icon } from "$lib/courses/content";
+import { get_course_icon, get_up_next } from "$lib/courses/content";
 import type { SvelteComponent } from "svelte";
+import type { Course } from "$lib/types/course";
 
-export let course_prerequisites: string[]
 
-let prerequisites: { icon: typeof SvelteComponent, color: string, name: string }[] = []
 
-function random_color(): string {
-    let colors = ["red", "yellow", "orange", "purple", "green", "blue"]
-    return colors[Math.floor(Math.random() * colors.length)]
-}
+export let course: Course
 
-course_prerequisites.map(async (prerequisite) => {
-    prerequisites.push({
-        icon: await get_course_icon(prerequisite),
-        color: random_color(),
-        name: prerequisite
-    })
-})
-// let prerequisites = [
-//     {
-//         icon: ArrowDecision,
-//         color: "orange",
-//         name: "Logic"
-//     },
-//     {
-//         icon: Brain,
-//         color: "yellow",
-//         name: "Abstract Reasoning"
-//     },
-// ]
+$: prerequisites = course.prerequisites.map(async prereq => ({
+    ...prereq,
+    icon: await get_course_icon(prereq.slug)
+}))
 
-let up_next = [
-    {
-        icon: HeadCheck,
-        color: "red",
-        name: "Solution Engineering"
-    },
-    {
-        icon: Database,
-        color: "purple",
-        name: "Backend Development"
-    },
-    {
-        icon: Sitemap,
-        color: "green",
-        name: "Frontend Development"
-    },
-]
+$: up_next = course.next_up.map(async next => ({
+    ...next,
+    icon: await get_course_icon(next.slug)
+}))
+
 </script>
-{#if course_prerequisites.length > 0}
+{#if course.prerequisites.length > 0}
     <div class="wrapper">
         <div>PREREQUISITES</div>
         <div class="bars">
-            {#each prerequisites as prerequisite}
-                <div class="prereq">
-                    <Icon
-                        color={prerequisite.color}
-                        icon={prerequisite.icon}
-                        size={18}/>
-                    <div class="text">{ prerequisite.name }</div>
-                    <Icon
-                        color="white"
-                        icon={OpenInNew}
-                        opacity={0.5}
-                        size={18}/>
-                </div>
+            {#each prerequisites as prerequisite_promise}
+                {#await prerequisite_promise}
+                    <div class="skeleton">
+
+                    </div>
+                {:then prerequisite}
+                    <a class="prereq" href={prerequisite.slug}>
+                        <Icon
+                            color={prerequisite.color}
+                            icon={prerequisite.icon}
+                            size={18}/>
+                        <div class="text">{ prerequisite.name }</div>
+                        <Icon
+                            color="white"
+                            icon={OpenInNew}
+                            opacity={0.5}
+                            size={18}/>
+                    </a>
+                {/await}
+                
             {/each}
         </div>
         <div>NEXT UP</div>
         <div class="bars">
             {#each up_next as next}
-                <div class="prereq">
+                <a class="prereq" href={next.slug}>
                     <Icon
                         color={next.color}
                         icon={next.icon}
@@ -89,7 +65,7 @@ let up_next = [
                         icon={OpenInNew}
                         opacity={0.5}
                         size={18}/>
-                </div>
+                </a>
             {/each}
         </div>
     </div>
@@ -113,6 +89,7 @@ let up_next = [
         gap 8px
         flex-direction column
     .prereq
+        color white
         font-size 16px
         font-weight 700
         gap 8px
@@ -121,7 +98,12 @@ let up_next = [
         padding 16px
         border-radius 4px
         background transparify(white, 4%)
+        text-transform capitalize
         .text
             display flex
             flex 1
+    .skeleton
+        height 50px
+        border-radius 4px
+        background transparify(white, 4%)
 </style>

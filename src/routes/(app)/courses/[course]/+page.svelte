@@ -41,7 +41,7 @@ $: {
             course_name={data.course.name}
             unit_count={units.length}
             course_icon={data.course.icon}/>
-        <ExtrasSidebar course_prerequisites={data.course.prerequisites}/>
+        <ExtrasSidebar course={data.course} />
     </GridItem>
     <GridItem
         align_items="flex-start"

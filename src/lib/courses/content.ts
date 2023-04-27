@@ -43,14 +43,16 @@ export async function get_course_icon(course_slug: string): Promise<typeof Svelt
 }
 // this function needs to search through all courses and return the courses that have the given course slug as a prerequisite
 export async function get_up_next(course_slug: string): Promise<string[]> {
-    const up_next: string[] = []
-    for (const [key, course_import] of Object.entries(courses)) {
-        const course = (await course_import()).course
-        if (course.prerequisites.includes(course_slug)) {
-            up_next.push(key.split("/")[1])
+    const up_next: string[] = [];
+
+    for (const slug in courses) {
+        const course = await courses[slug]();
+        if (course.course.prerequisites.some((prerequisite) => prerequisite.slug === course_slug)) {
+            up_next.push(course.course.name);
         }
     }
-    return up_next
+
+    return up_next;
 }
 
 function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: Record<string, UnitStatus> ): { units_by_slug: Record<string, Unit>, root_units: Unit[] } {
