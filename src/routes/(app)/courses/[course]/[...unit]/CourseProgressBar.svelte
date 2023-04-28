@@ -52,24 +52,8 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.unit_slug], "next"
                 class:completed={ unit.status === UnitStatus.Completed }
                 class:in-progress={ unit.status === UnitStatus.InProgress }
                 class:not-started={ unit.status === UnitStatus.NotStarted }
-                href={`/courses/${course_slug}/${unit.unit_slug}`}
-            >
-                <!-- {#if unit.unit_slug === data.unit.unit_slug}
-                    <div class="current u">
-                        <Icon
-                            color="white"
-                            icon={ChevronDown}
-                            opacity={0.4}
-                            size={14}/>
-                    </div>
-                    <div class="current b">
-                        <Icon
-                            color="white"
-                            icon={ChevronUp}
-                            opacity={0.4}
-                            size={14}/>
-                    </div>
-                {/if} -->
+                href={`/courses/${course_slug}/${unit.unit_slug}`}>
+                &nbsp;
             </a>
         {/each}
     </div>
@@ -111,14 +95,15 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.unit_slug], "next"
     display flex
     position relative
     flex 1
-    &.active
-        background-color mix($brand, white, 50%)
     &.completed
         background-color $brand
     &.in-progress
         background-color $blue
     &.not-started
         background-color transparify(white, 20%)
+    &.active
+        background-color $yellow
+
     &:hover
         background-color transparify(white, 50%)
     &:active

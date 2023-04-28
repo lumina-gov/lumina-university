@@ -15,7 +15,7 @@ An enumeration is a data type used to define a set of named values. Each value i
 
 In most programming languages, enumerations are defined using the `enum` keyword. For example, the following code defines an enumeration for the days of the week:
 
-```
+```rust
 enum Weekday {
   Monday,
   Tuesday,

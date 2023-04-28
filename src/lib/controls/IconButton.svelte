@@ -58,6 +58,7 @@ function handle_keyup(e: KeyboardEvent) {
     font-weight 600
     font-size 24px
     position relative
+    outline 0
     &.opacity
         color transparify(white, 40%)
     &:hover

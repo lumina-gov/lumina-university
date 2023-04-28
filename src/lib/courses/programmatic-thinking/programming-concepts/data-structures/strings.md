@@ -19,6 +19,12 @@ A character is a single symbol, such as a letter, number, or special character. 
 
 Strings can be manipulated in many ways in programming. Some common string manipulation methods include:
 
-- **Concatenation**: Concatenation is the process of combining two or more strings into a single string. This can be done using the + operator in many programming languages.
+- **Concatenation**: Concatenation is the process of combining or joining two or more strings into a single string.
 - **Substring**: A substring is a portion of a string. Substrings can be extracted from a string using various string manipulation methods.
-- **Replacing**: Replacing is the process of replacing a portion of a string with another string. This can be done using various string manipulation methods.
+- **Replacing**: Replacing is the process of replacing a portion of a string with another string.
+- **Splitting**: Splitting is the process of splitting a string into multiple substrings.
+- **Trimming**: Trimming is the process of removing whitespace from the beginning and end of a string.
+- **Case Conversion**: Case conversion is the process of converting a string from one case to another.
+- **Searching**: Searching is the process of searching for a substring within a string.
+- **Encoding**: Encoding is the process of converting a string into a different encoding.
+- **Decoding**: Decoding is the process of converting a string from one encoding to another.

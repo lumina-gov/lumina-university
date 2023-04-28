@@ -1,5 +1,3 @@
-# Closures and Nested Functions
-
 ## What will you learn?
 
 In this unit, you will learn about closures and nested functions. You will understand the scope of variables within these functions and how they can be used effectively in programming.
@@ -10,7 +8,7 @@ A closure is a function that retains access to variables from its enclosing lexi
 
 Here's an example of a closure in `JavaScript`:
 
-```
+```javascript
 function outerFunction() {
   let outerVariable = 10
 
@@ -29,6 +27,8 @@ In the example above, `innerFunction` is a closure, because it retains access to
 
 Closures are useful because they can be used to create private variables and functions. Since variables defined inside a function are not accessible from outside the function, we can use closures to create a private scope for those variables.
 
+:::warning
 Not all languages support closures, or if they do, careful management needs to ensure that the variables defined in the `outerFunction` have not been deleted or dropped from memory when the `innerFunction` is called.
+:::
 
 Certain languages, such as Rust use different syntax to define closures from functions, since functions in Rust can not access the parent scope. This is done to ensure memory safety and ensures the issues described above are detected by the code compiler.

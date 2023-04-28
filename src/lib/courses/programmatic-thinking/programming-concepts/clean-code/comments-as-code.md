@@ -1,5 +1,3 @@
-# Comments As Code
-
 ## What will you learn?
 
 In this unit, you will learn about the importance of comments as code, how to write effective comments, and best practices for incorporating comments into your code.

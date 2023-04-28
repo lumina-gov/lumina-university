@@ -1,5 +1,3 @@
-# Test-driven development
-
 ## What you will learn
 
 In this unit, you will learn about Test-Driven Development (TDD), which is a programming technique that emphasizes writing tests before writing code. By following the TDD approach, you will learn how to write code that is testable, maintainable, and easily understood by other developers.
@@ -34,6 +32,6 @@ Here are some best practices to follow when using TDD:
 - Fail sooner: When writing a test, stop writing the test as soon as it will fail. Don’t add more code into the test until you have ensured that earlier behaviours of the test are passing. Once it is passing, you can continue writing your test.
 - Test errors: Don’t write tests that just handle the expected inputs, write tests to ensure that the code actually fails when it is supposed to fail. This additionally helps keep your errors more readable which can help you find issues from bugs earlier.
 
-Warning
-
+:::warning
 Your users are your final layer of bug detection. If you don’t find a bug, then they will, so be sure to avoid that with adequate testing.
+:::

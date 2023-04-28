@@ -13,19 +13,13 @@ A tuple is a data structure used to group together multiple values of different 
 
 ## Defining and Using Tuples
 
-In most programming languages, tuples are defined using parentheses, with each value separated by a comma. For example, the following code defines a tuple containing a string and an integer:
+In most programming languages, tuples are defined using parentheses `()`, with each value separated by a comma. For example, the following code defines a tuple containing a string and an integer:
 
-```
-python
-
-```
-
-```
+```python
 my_tuple = ("Hello, World!", 42)
-
 ```
 
-Once a tuple is defined, its values can be accessed using indexing. In most programming languages, tuple indexing starts at 0, just like list or array indexing.
+Once a tuple is defined, its values can be accessed using indexing. In most programming languages, tuple indexing starts at `0`, just like list or array indexing.
 
 ## Comparing Tuples to Sets and Arrays
 

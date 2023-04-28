@@ -1,5 +1,3 @@
-# Abstraction, Modularity & Integration
-
 Programming can be complex, and managing complexity is a key challenge for any programmer. In this unit, you will learn how to manage complexity by using abstraction, modularity, and integration.
 
 ## What Will You Learn

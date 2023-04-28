@@ -1,9 +1,14 @@
-import type { Course } from "$lib/types/course";
-import CodeTags from "svelte-material-icons/CodeTags.svelte";
+import type { Course } from "$lib/types/course"
+import CodeTags from "svelte-material-icons/CodeTags.svelte"
 
 export const course: Course = {
     name: "Programmatic Thinking",
-    root_units: ["introduction", "thinking-like-a-programmer", "programming-concepts", "syntax-&-programming-languages"],
+    root_units: [
+        "introduction",
+        "thinking-like-a-programmer",
+        "programming-concepts",
+        "syntax-and-programming-languages"
+    ],
     description: "Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
     prerequisites: [],
     image: "src/routes/(app)/Courseplaceholder.png",
@@ -15,14 +20,14 @@ export const course: Course = {
             free: true,
         },
         "thinking-like-a-programmer": {
-            name: "How to Think Like a Programmer",
+            name: "Thinking Like a Programmer",
             free: true,
             subunits: [
                 "thinking-like-a-programmer/problem-solving",
                 "thinking-like-a-programmer/inputs-outputs-constraints",
                 "thinking-like-a-programmer/thinking-in-terms-of-data",
                 "thinking-like-a-programmer/algorithmic-thinking",
-                "thinking-like-a-programmer/abstraction-modularity-&-integration",
+                "thinking-like-a-programmer/abstraction-modularity-and-integration",
                 "thinking-like-a-programmer/dealing-with-failure",
                 "thinking-like-a-programmer/how-to-get-unstuck",
                 "thinking-like-a-programmer/how-to-google-problems",
@@ -44,7 +49,7 @@ export const course: Course = {
         "thinking-like-a-programmer/algorithmic-thinking": {
             name: "Algorithmic Thinking",
         },
-        "thinking-like-a-programmer/abstraction-modularity-&-integration": {
+        "thinking-like-a-programmer/abstraction-modularity-and-integration": {
             name: "Abstraction, Modularity, and Integration",
         },
         "thinking-like-a-programmer/dealing-with-failure": {
@@ -63,7 +68,7 @@ export const course: Course = {
             name: "Programming Concepts",
             subunits: [
                 "programming-concepts/data-structures",
-                "programming-concepts/syntax",
+                "programming-concepts/variables",
                 "programming-concepts/algorithms-and-logic",
                 "programming-concepts/scope",
                 "programming-concepts/clean-code",
@@ -73,7 +78,7 @@ export const course: Course = {
         "programming-concepts/data-structures": {
             name: "Data Structures",
             subunits: [
-                "programming-concepts/data-structures/bits-&-booleans",
+                "programming-concepts/data-structures/bits-and-booleans",
                 "programming-concepts/data-structures/numbers",
                 "programming-concepts/data-structures/references",
                 "programming-concepts/data-structures/collections-arrays",
@@ -82,12 +87,12 @@ export const course: Course = {
                 "programming-concepts/data-structures/enumerations",
                 "programming-concepts/data-structures/sets",
                 "programming-concepts/data-structures/tuples",
-                "programming-concepts/data-structures/maps-&-dictionaries",
-                "programming-concepts/data-structures/structs-&-classes",
-                "programming-concepts/data-structures/trees-&-graphs"
+                "programming-concepts/data-structures/maps-and-dictionaries",
+                "programming-concepts/data-structures/structs-and-classes",
+                "programming-concepts/data-structures/trees-and-graphs"
             ]
         },
-        "programming-concepts/data-structures/bits-&-booleans": {
+        "programming-concepts/data-structures/bits-and-booleans": {
             name: "Bits and Booleans"
         },
         "programming-concepts/data-structures/numbers": {
@@ -114,17 +119,14 @@ export const course: Course = {
         "programming-concepts/data-structures/tuples": {
             name: "Tuples"
         },
-        "programming-concepts/data-structures/maps-&-dictionaries": {
+        "programming-concepts/data-structures/maps-and-dictionaries": {
             name: "Maps & Dictionaries"
         },
-        "programming-concepts/data-structures/structs-&-classes": {
+        "programming-concepts/data-structures/structs-and-classes": {
             name: "Structs & Classes"
         },
-        "programming-concepts/data-structures/trees-&-graphs": {
+        "programming-concepts/data-structures/trees-and-graphs": {
             name: "Trees & Graphs"
-        },
-        "programming-concepts/syntax": {
-            name: "Syntax"
         },
         "programming-concepts/variables": {
             name: "Variables"
@@ -135,9 +137,9 @@ export const course: Course = {
                 "programming-concepts/algorithms-and-logic/sequential-logic",
                 "programming-concepts/algorithms-and-logic/conditional-logic",
                 "programming-concepts/algorithms-and-logic/iterative-logic",
-                "programming-concepts/algorithms-and-logic/functions-&-methods",
+                "programming-concepts/algorithms-and-logic/functions-and-methods",
                 "programming-concepts/algorithms-and-logic/recursive-logic",
-                "programming-concepts/algorithms-and-logic/time-&-space-complexity",
+                "programming-concepts/algorithms-and-logic/time-and-space-complexity",
                 "programming-concepts/algorithms-and-logic/writing-algorithms"
             ]
         },
@@ -150,13 +152,13 @@ export const course: Course = {
         "programming-concepts/algorithms-and-logic/iterative-logic": {
             name: "Iterative Logic"
         },
-        "programming-concepts/algorithms-and-logic/functions-&-methods": {
+        "programming-concepts/algorithms-and-logic/functions-and-methods": {
             name: "Functions & Methods"
         },
         "programming-concepts/algorithms-and-logic/recursive-logic": {
             name: "Recursive Logic"
         },
-        "programming-concepts/algorithms-and-logic/time-&-space-complexity": {
+        "programming-concepts/algorithms-and-logic/time-and-space-complexity": {
             name: "Time & Space Complexity",
         },
         "programming-concepts/algorithms-and-logic/writing-algorithms": {
@@ -165,13 +167,13 @@ export const course: Course = {
         "programming-concepts/scope": {
             name: "Scope",
             subunits: [
+                "programming-concepts/scope/best-practices",
                 "programming-concepts/scope/global-scope",
                 "programming-concepts/scope/local-block-scope",
                 "programming-concepts/scope/closures-and-nested-functions",
-                "programming-concepts/scope/namespaces-&-modules",
+                "programming-concepts/scope/namespaces-and-modules",
                 "programming-concepts/scope/privacy",
-                "programming-concepts/scope/best-practices",
-                "programming-concepts/scope/shadowing"
+                "programming-concepts/scope/shadowing",
             ]
         },
         "programming-concepts/scope/global-scope": {
@@ -183,7 +185,7 @@ export const course: Course = {
         "programming-concepts/scope/closures-and-nested-functions": {
             name: "Closures and Nested Functions",
         },
-        "programming-concepts/scope/namespaces-&-modules": {
+        "programming-concepts/scope/namespaces-and-modules": {
             name: "Namespaces & Modules",
         },
         "programming-concepts/scope/privacy": {
@@ -235,26 +237,26 @@ export const course: Course = {
         "programming-concepts/heap-vs-stack": {
             name: "Heap Vs Stack",
         },
-        "syntax-&-programming-languages": {
-            name: "Syntax & Programming Languages",
+        "syntax-and-programming-languages": {
+            name: "Syntax and Programming Languages",
             subunits: [
-                "syntax-&-languages/how-programming-languages-work",
+                "syntax-and-languages/how-programming-languages-work",
             ]
         },
 
-        "syntax-&-languages/how-programming-languages-work": {
+        "syntax-and-languages/how-programming-languages-work": {
             name: "How Programming Languages Work",
             subunits: [
-                "syntax-&-languages/how-programming-languages-work/interpreted-languages",
-                "syntax-&-languages/how-programming-languages-work/compiled-languages"
+                "syntax-and-languages/how-programming-languages-work/interpreted-languages",
+                "syntax-and-languages/how-programming-languages-work/compiled-languages"
             ]
         },
 
-        "syntax-&-languages/how-programming-languages-work/interpreted-languages": {
+        "syntax-and-languages/how-programming-languages-work/interpreted-languages": {
             name: "Interpreted Languages"
         },
 
-        "syntax-&-languages/how-programming-languages-work/compiled-languages": {
+        "syntax-and-languages/how-programming-languages-work/compiled-languages": {
             name: "Compiled Languages"
         },
     }

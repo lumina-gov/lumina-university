@@ -1,5 +1,3 @@
-# Best Practices
-
 ## What will you learn?
 
 - Best practices for working with variable scope in programming languages.

@@ -7,6 +7,9 @@ import type { Block } from "$lib/types/block"
 import ContainerDirective from "./ContainerDirective.svelte"
 import type { PartialRecord } from "$lib/utils/typed_props"
 import ListBlock from "./ListBlock.svelte"
+import BlockQuoteBlock from "./BlockQuoteBlock.svelte"
+import CodeBlock from "./CodeBlock.svelte"
+import TableBlock from "./TableBlock.svelte"
 
 export let block: Block
 
@@ -15,7 +18,9 @@ let block_types: PartialRecord<Block["type"], typeof SvelteComponent> = {
     "paragraph": ParagraphBlock,
     "containerDirective": ContainerDirective,
     "list": ListBlock,
-// "bulleted_list_item": ListItemBlock,
+    "blockquote": BlockQuoteBlock,
+    "code": CodeBlock,
+    "table": TableBlock,
 }
 
 function get_block_type(block: Block) {

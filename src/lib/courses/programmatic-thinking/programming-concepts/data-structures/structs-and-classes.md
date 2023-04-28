@@ -54,7 +54,9 @@ We will go into this deeper in later units.
 
 ## Comparing Structs & Classes
 
-Say that we want a user object, which has a method attached to it for logging the users age. We can do this in rust by doing the following
+Say that we want a user object, which has a method attached to it for logging the users age. Each language might have a different way of representing this.
+
+> A user represented in Rust using a struct
 
 ```rust
 struct User {
@@ -75,14 +77,14 @@ impl User {
     }
 }
 
-// create an instance of the user struct
+// create an instance of the user struct with the new static method
 let user = User::new("Albert".to_string(), 22);
 
 // print the user's age
 user.print_age() // I am 22 years old
 ```
 
-A user represented in Typescript
+> A user represented in Typescript using a class
 
 ```typescript
 class User {
@@ -99,7 +101,7 @@ class User {
     }
 }
 
-// create an instance of the user class
+// create an instance of the user class with the new keyword
 let user = new User("Albert", 22);
 
 // print the users age

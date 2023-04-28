@@ -1,6 +1,6 @@
-# Maps & Dictionaries
+In programming, maps and dictionaries are data structures used to store key-value pairs.
 
-In programming, maps and dictionaries are data structures used to store key-value pairs. Maps and dictionaries are a fundamental data type in many programming languages and are used extensively in many applications. In this unit, we will explore what maps and dictionaries are, the different types of maps, when and why to use each type, and some example use cases.
+Maps and dictionaries are a fundamental data type in many programming languages and are used extensively in many applications. In this unit, we will explore what maps and dictionaries are, the different types of maps, when and why to use each type, and some example use cases.
 
 ## What Will You Learn
 
@@ -12,7 +12,7 @@ In programming, maps and dictionaries are data structures used to store key-valu
 
 ## Maps & Dictionaries
 
-Maps and dictionaries are data structures used to store key-value pairs. They allow you to access values by their corresponding keys, rather than by their position in a sequence. This makes them extremely useful for storing and accessing data that doesn't have a natural order, such as user data or configuration settings.
+Maps and dictionaries are data structures used to store **key-value pairs**. They allow you to access values by their corresponding keys, rather than by their position in a sequence. This makes them extremely useful for storing and accessing data that doesn't have a natural order, such as user data or configuration settings.
 
 In most programming languages, maps and dictionaries are interchangeable terms, and their implementations are often similar or identical.
 

@@ -1,5 +1,3 @@
-# Thinking in terms of data
-
 Data is at the core of programming. As a programmer, you will work with data in various forms, such as numbers, text, images, and more. In this unit, you will learn how to think in data and how to represent the world as data.
 
 ## What Will You Learn

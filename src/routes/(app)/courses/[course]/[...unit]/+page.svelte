@@ -17,6 +17,8 @@ import { MessageType } from "$lib/types/message"
 import { UnitStatus } from "$lib/gql/graphql"
 import { afterNavigate } from "$app/navigation"
 import UnitCompletionSound from "$lib/sounds/UnitCompletion.wav"
+import Heading from "$lib/display/Heading.svelte"
+import Text from "svelte-material-icons/Text.svelte"
 
 export let data: PageData
 
@@ -97,6 +99,8 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                 <div
                     bind:this={ content }
                     class="content">
+                    <Heading left_icon={Text}>{ data.unit.name }</Heading>
+                    <hr>
                     <MarkdownRenderer markdown={data.markdown}/>
                     <div bind:this={ end_of_content }/>
                     <div class="section row">
@@ -139,7 +143,10 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 
 .crumb-bar
     display flex
-    padding 0px 150px
+    max-width $laptop
+    margin auto
+    padding 0 16px
+    width 100%
 .section
     display flex
     flex-direction column

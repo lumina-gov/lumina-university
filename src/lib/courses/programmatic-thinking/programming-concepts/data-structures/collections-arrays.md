@@ -24,7 +24,7 @@ There are several different types of arrays used in programming:
 
 ## Arrays in Memory
 
-As fixed arrays are generally a collection of values of the same type (which we will call `T`), and fixed length, the size of an array is the `sizeof(T) * length` 
+As fixed arrays are generally a collection of values of the same type (which we will call `T`), and fixed length, the size of an array is the `sizeof(T) * length`
 
 If the type `T` is a 64 bit unsigned integer (`u64`) then each number will occupy 8 bytes of memory. If the array length is `4`, then the array size will be `8 bytes * 4 = 32 bytes`
 
@@ -32,7 +32,8 @@ If the type `T` is a 64 bit unsigned integer (`u64`) then each number will occup
 
 The first item in an array starts at `0` and the last item in the array starts at `length - 1`
 
-~error Common Pitfalls {
+:::error
+**Common pitfalls**
 
 A very common problem even programmers face is the off-by-one problem.
 
@@ -40,7 +41,7 @@ This can be demonstrated by asking someone, if you have a fence with 10 posts, w
 
 Most people would answer 10 meters, but the answer is actually 9 meters.
 
-}
+:::
 
 ### Growable Arrays
 

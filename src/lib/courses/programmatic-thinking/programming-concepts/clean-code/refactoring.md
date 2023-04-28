@@ -1,5 +1,3 @@
-# Refactoring
-
 ## What will you learn
 
 In this unit, you will learn about refactoring, the process of restructuring code to improve its readability, maintainability, and efficiency. You'll learn about the principles of good code design and how to apply them to improve existing code.

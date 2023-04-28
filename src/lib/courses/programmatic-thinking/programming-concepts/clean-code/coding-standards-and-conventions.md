@@ -1,5 +1,3 @@
-# Coding Standards and Conventions
-
 ## What will you learn?
 
 In this unit, you will learn about the importance of coding standards and conventions in writing clean code. You will understand the benefits of following these standards, learn some common conventions, and explore some tools that can help you maintain code quality.

@@ -1,6 +1,4 @@
-# Recursive Logic
-
-## What will you learn?
+## What will you learn
 
 In this unit, you will learn about recursive logic, including:
 
@@ -29,11 +27,12 @@ Recursion is useful in solving problems that can be broken down into smaller sub
 - Recursion makes code more readable and easier to maintain
 - Recursion can solve problems that are difficult to solve iteratively
 
-Note Warning
+:::warning
 
 Recursion can cause stack overflow errors if the depth of the recursion is too large.
 
-We will explain the call stack in more detail later
+We will explain the "call stack" in more detail later
+:::
 
 ## Examples of Recursive Algorithms
 

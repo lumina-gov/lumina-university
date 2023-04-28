@@ -2,7 +2,7 @@ import type { Course } from "$lib/types/course"
 
 export const course: Course = {
     name: "Programming",
-    root_units: ["introduction", "how-to-think-like-a-programmer", "programming-concepts", "frontend-vs-backend", "setting-up-your-dev-env", "syntax-&-programming-languages"],
+    root_units: ["introduction", "how-to-think-like-a-programmer", "programming-concepts", "frontend-vs-backend", "setting-up-your-dev-env", "syntax-and-programming-languages"],
     description: "Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
     prerequisites: [],
     units_map: {
@@ -23,7 +23,7 @@ export const course: Course = {
                 "how-to-think-like-a-programmer/inputs-outputs-constraints",
                 "how-to-think-like-a-programmer/thinking-in-terms-of-data",
                 "how-to-think-like-a-programmer/algorithmic-thinking",
-                "how-to-think-like-a-programmer/abstraction-modularity-&-integration",
+                "how-to-think-like-a-programmer/abstraction-modularity-and-integration",
                 "how-to-think-like-a-programmer/dealing-with-failure",
                 "how-to-think-like-a-programmer/how-to-get-unstuck",
                 "how-to-think-like-a-programmer/how-to-google-problems",
@@ -44,7 +44,7 @@ export const course: Course = {
         "how-to-think-like-a-programmer/algorithmic-thinking": {
             name: "Algorithmic Thinking",
         },
-        "how-to-think-like-a-programmer/abstraction-modularity-&-integration": {
+        "how-to-think-like-a-programmer/abstraction-modularity-and-integration": {
             name: "Abstraction, Modularity, and Integration",
         },
         "how-to-think-like-a-programmer/dealing-with-failure": {
@@ -73,7 +73,7 @@ export const course: Course = {
         "programming-concepts/data-structures": {
             name: "Data Structures",
             subunits: [
-                "programming-concepts/data-structures/bits-&-booleans",
+                "programming-concepts/data-structures/bits-and-booleans",
                 "programming-concepts/data-structures/numbers",
                 "programming-concepts/data-structures/references",
                 "programming-concepts/data-structures/collections-arrays",
@@ -82,12 +82,12 @@ export const course: Course = {
                 "programming-concepts/data-structures/enumerations",
                 "programming-concepts/data-structures/sets",
                 "programming-concepts/data-structures/tuples",
-                "programming-concepts/data-structures/maps-&-dictionaries",
-                "programming-concepts/data-structures/structs-&-classes",
-                "programming-concepts/data-structures/trees-&-graphs"
+                "programming-concepts/data-structures/maps-and-dictionaries",
+                "programming-concepts/data-structures/structs-and-classes",
+                "programming-concepts/data-structures/trees-and-graphs"
             ]
         },
-        "programming-concepts/data-structures/bits-&-booleans": {
+        "programming-concepts/data-structures/bits-and-booleans": {
             name: "Bits and Booleans"
         },
         "programming-concepts/data-structures/numbers": {
@@ -114,13 +114,13 @@ export const course: Course = {
         "programming-concepts/data-structures/tuples": {
             name: "Tuples"
         },
-        "programming-concepts/data-structures/maps-&-dictionaries": {
+        "programming-concepts/data-structures/maps-and-dictionaries": {
             name: "Maps & Dictionaries"
         },
-        "programming-concepts/data-structures/structs-&-classes": {
+        "programming-concepts/data-structures/structs-and-classes": {
             name: "Structs & Classes"
         },
-        "programming-concepts/data-structures/trees-&-graphs": {
+        "programming-concepts/data-structures/trees-and-graphs": {
             name: "Trees & Graphs"
         },
         "programming-concepts/syntax": {
@@ -135,9 +135,9 @@ export const course: Course = {
                 "programming-concepts/algorithms-and-logic/sequential-logic",
                 "programming-concepts/algorithms-and-logic/conditional-logic",
                 "programming-concepts/algorithms-and-logic/iterative-logic",
-                "programming-concepts/algorithms-and-logic/functions-&-methods",
+                "programming-concepts/algorithms-and-logic/functions-and-methods",
                 "programming-concepts/algorithms-and-logic/recursive-logic",
-                "programming-concepts/algorithms-and-logic/time-&-space-complexity",
+                "programming-concepts/algorithms-and-logic/time-and-space-complexity",
                 "programming-concepts/algorithms-and-logic/writing-algorithms"
             ]
         },
@@ -150,13 +150,13 @@ export const course: Course = {
         "programming-concepts/algorithms-and-logic/iterative-logic": {
             name: "Iterative Logic"
         },
-        "programming-concepts/algorithms-and-logic/functions-&-methods": {
+        "programming-concepts/algorithms-and-logic/functions-and-methods": {
             name: "Functions & Methods"
         },
         "programming-concepts/algorithms-and-logic/recursive-logic": {
             name: "Recursive Logic"
         },
-        "programming-concepts/algorithms-and-logic/time-&-space-complexity": {
+        "programming-concepts/algorithms-and-logic/time-and-space-complexity": {
             name: "Time & Space Complexity",
         },
         "programming-concepts/algorithms-and-logic/writing-algorithms": {
@@ -168,7 +168,7 @@ export const course: Course = {
                 "programming-concepts/scope/global-scope",
                 "programming-concepts/scope/local-block-scope",
                 "programming-concepts/scope/closures-and-nested-functions",
-                "programming-concepts/scope/namespaces-&-modules",
+                "programming-concepts/scope/namespaces-and-modules",
                 "programming-concepts/scope/privacy",
                 "programming-concepts/scope/best-practices",
                 "programming-concepts/scope/shadowing"
@@ -183,7 +183,7 @@ export const course: Course = {
         "programming-concepts/scope/closures-and-nested-functions": {
             name: "Closures and Nested Functions",
         },
-        "programming-concepts/scope/namespaces-&-modules": {
+        "programming-concepts/scope/namespaces-and-modules": {
             name: "Namespaces & Modules",
         },
         "programming-concepts/scope/privacy": {
@@ -242,7 +242,7 @@ export const course: Course = {
         "setting-up-your-dev-env": {
             name: "Setting up your DevEnvironment",
         },
-        "syntax-&-programming-languages": {
+        "syntax-and-programming-languages": {
             name: "Syntax & Programming Languages",
             subunits: [
                 "syntax-&-languages/how-programming-languages-work",

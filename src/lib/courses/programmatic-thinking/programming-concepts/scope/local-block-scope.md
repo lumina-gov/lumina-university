@@ -1,7 +1,3 @@
-# Local / Block Scope
-
-# Local/Block Scope
-
 In programming, scope refers to the visibility and accessibility of variables in your code. Local/block scope refers to variables that are only accessible within a specific function or code block.
 
 ## What Will You Learn
@@ -31,24 +27,17 @@ However, local variables also have some disadvantages:
 - **Limited accessibility**: Local variables can only be accessed from within the function or block where they are declared, which can make it harder to share data between different parts of your code.
 - **Memory management**: Local variables are usually stored on the stack, which means that they are often automatically created and destroyed as you enter and exit functions or code blocks. This can sometimes lead to issues with memory management, especially if you have a lot of recursive functions or deep code blocks.
 
-Note
-
+:::note
 It’s useful to note that variables are generally always only accessible after they have been defined, in other words, you can’t use a variable before it has been declared and initialised.
-
+:::
 ## Declaring and Using Local Variables
 
 You can declare a local variable in your code by simply assigning a value to a variable within a function or code block. Here is an example of declaring and using a local variable in pseudocode:
 
 ```
-lua
-
-```
-
-```
-function main():
+function main()
     local_variable = 10
-    print(local_variable)
-
+    print(local_variable) // prints 10 to the console
 ```
 
 In this example, we declare a local variable called `local_variable` and assign it the value of `10`. We then print the value of `local_variable` to the console.

@@ -1,5 +1,3 @@
-# How to google problems
-
 As a programmer, you will encounter many problems that you don't know how to solve. Fortunately, there is a wealth of information available online that can help you find a solution. In this unit, you will learn how to use Google effectively to solve programming problems.
 
 ## What Will You Learn

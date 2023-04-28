@@ -9,9 +9,9 @@
 
 In computer programming, memory allocation refers to the process of reserving a portion of the computer's memory for use by a program. There are two main types of memory allocation: heap and stack. Understanding the difference between the two is crucial in writing efficient and safe code.
 
-Note
-
+:::note
 Many higher level languages like JavaScript, Java and Python which usually manage memory for you by means of automatic garbage collection will handle and automate lots of these concerns for you, but they are still useful to understand as a developer.
+:::
 
 ## Stack Memory Allocation
 
@@ -52,7 +52,7 @@ Different programming languages handle memory allocation differently. Some langu
 
 Rust is a systems programming language that provides safe memory management through its ownership and borrowing system. Rust ensures that memory is properly allocated and deallocated by enforcing strict ownership rules. These rules allow Rust to prevent common memory errors such as null pointer dereferencing and memory leaks.
 
-Memory safety issues account for around 80% of bugs, in a survey conducted by Microsoft.
+**Memory safety issues account for around 80% of bugs**, in a survey conducted by Microsoft.
 
 ## Functions and Stack
 

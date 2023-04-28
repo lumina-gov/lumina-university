@@ -24,8 +24,9 @@ $: active = active_id === id
 .toc-section
     color transparify(white, 80%)
     border-radius 4px 0 0 4px
-    padding 10px
+    padding 6px 10px
     font-size 14px
+    line-height 1.8em
     font-weight 700
     display flex
     width 100%

@@ -1,6 +1,3 @@
-# Inputs, Outputs & Constraints
-
-
 As a programmer, you will often need to work with inputs, outputs, and constraints when solving problems. In this unit, you will learn what inputs, outputs, and constraints are, how to define them, and how to work with them effectively.
 
 ## What Will You Learn

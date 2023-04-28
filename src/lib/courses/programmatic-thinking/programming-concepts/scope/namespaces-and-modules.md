@@ -1,5 +1,3 @@
-# Namespaces & Modules
-
 ## What will you learn
 
 - The concept of namespaces
@@ -13,17 +11,11 @@ A namespace is a container that holds a set of identifiers (such as variable, fu
 
 Namespaces are typically used in larger projects, where multiple developers are working on different parts of the codebase. By using namespaces, each developer can work on their own set of identifiers without worrying about accidentally using the same name as another developer.
 
-In many programming languages, namespaces are implemented using a combination of a prefix and a delimiter (such as a dot). For example, in Python, modules are used as namespaces, and the dot notation is used to access identifiers within a module:
+In many programming languages, namespaces are imported into a codebase using a combination of a identifiers and a delimiter (such as a `.` or `::`). For example, in Python, modules are used as namespaces, and the dot notation is used to access identifiers within a module:
 
-```
-lua
-
-```
-
-```
+```python
 import math
 print(math.pi)
-
 ```
 
 Here, `math` is a module that contains the constant `pi`. By using the dot notation, we can access the `pi` identifier within the `math` module without worrying about naming conflicts with other modules.
@@ -36,27 +28,15 @@ Modules can help organize code into logical units, making it easier to manage an
 
 In many programming languages, modules are implemented using a file-based system. For example, in Python, each module is defined in a separate file with a `.py` extension. To use a module in a program, we simply import it:
 
-```
-python
-
-```
-
-```
+```python
 import my_module
-
 ```
 
 Once a module is imported, we can access the identifiers defined in the module using the dot notation:
 
-```
-java
-
-```
-
-```
+```python
 import my_module
 result = my_module.my_function()
-
 ```
 
 Here, `my_module` is a module that defines a function `my_function`. By importing the module and using the dot notation, we can call the `my_function` function within our program.

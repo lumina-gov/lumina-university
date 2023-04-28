@@ -9,8 +9,6 @@ export let course: {
     slug: string
 }
 
-
-
 </script>
 <div class="breadcrumbs">
     <a
@@ -62,4 +60,5 @@ export let course: {
         font-weight 600
         color white
         font-size 14px
+        white-space nowrap
 </style>

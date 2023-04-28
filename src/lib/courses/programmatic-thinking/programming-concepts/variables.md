@@ -36,6 +36,6 @@ let message: string = "Hello, world!"; // message is a variable of type string w
 let isComplete: boolean = false; // isComplete is a variable of type boolean with an initial value of false
 ```
 
-## Data vs Variables
+## Data/Value versus Variables
 
 It's important to understand the difference between data and variables. Data is the information that is stored in a variable, while the variable is the named storage location that holds the data. When you manipulate a variable, you are actually manipulating the data that it stores.

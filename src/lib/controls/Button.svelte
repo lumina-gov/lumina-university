@@ -76,6 +76,7 @@ function handle_keyup(e: KeyboardEvent) {
     white-space nowrap
     justify-content: center
     border-radius 4px
+    outline 0
     width 100%
     cursor pointer
     transition top 0.05s ease-in, box-shadow 0.05s ease-in, background 0.05s ease-in

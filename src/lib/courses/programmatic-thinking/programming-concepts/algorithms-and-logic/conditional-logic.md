@@ -1,5 +1,3 @@
-# Conditional Logic
-
 Conditional logic is a fundamental concept in programming that enables us to write programs that make decisions based on certain conditions. In this unit, we will explore the basics of conditional logic, including if and else blocks, switch statements, and match statements.
 
 ## What Will You Learn
@@ -38,10 +36,11 @@ x < 5 || y > 10 // true if x is less than 5 OR y is greater than 10
 !(x == 5) // true if x does not equal 5
 ```
 
-Note
+:::note
 
 The specific syntax of boolean operators may vary from language to language, so make sure to check the specific syntax in the language you are working with
 
+:::
 ## If and Else Blocks
 
 An if statement is a conditional statement that executes a block of code if a certain condition is true. An else block can be used to execute a different block of code if the condition is false. If and else blocks are the most basic form of conditional logic in programming.
@@ -70,7 +69,7 @@ Some programming languages, such as Java and C++, have switch statements, which 
 
 Here is an example of a switch statement in Java:
 
-```
+```java
 switch (day) {
     case 1:
         System.out.println("Monday");
@@ -87,7 +86,7 @@ switch (day) {
 
 And here is the equivalent match statement in Rust:
 
-```
+```rust
 match day {
     1 => println!("Monday"),
     2 => println!("Tuesday"),
@@ -95,5 +94,7 @@ match day {
     _ => println!("Invalid day"),
 }
 ```
+
+> Rust match statements are more powerful than switch statements because they can match on more than just the value of a variable, but we won't get into that here.
 
 This is often more cleaner than writing a series of `if else` blocks

@@ -38,7 +38,7 @@ export let underline = false
 .heading
     font-weight 700
     display flex
-    gap 0.4em
+    gap 0.5em
     align-items center
     margin 0
     position relative

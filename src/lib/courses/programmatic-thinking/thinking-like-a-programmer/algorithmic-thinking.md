@@ -1,5 +1,3 @@
-# Algorithmic Thinking
-
 Programming is all about solving problems, and one of the most important skills for solving problems is algorithmic thinking. In this unit, you will learn what algorithmic thinking is, how to apply it to problem-solving, and how to write algorithms that solve problems.
 
 ## What Will You Learn
@@ -13,7 +11,7 @@ Programming is all about solving problems, and one of the most important skills 
 
 Algorithmic thinking is the process of breaking down a problem into smaller, more manageable parts, and designing a step-by-step plan to solve it. This process involves identifying the inputs, the outputs, and the steps needed to transform the inputs into the desired outputs.
 
-Note
+:::note
 
 Algorithms are a story for computers
 
@@ -22,6 +20,7 @@ To understand algorithmic thinking, let's use an analogy. Imagine that you are w
 Just like a story, code is a sequence of events that happen in a specific order. Each event builds upon the previous one, and together they tell a story that the computer can understand and execute.
 
 Stories can branch out into different scenarios and realities based on the circumstances of previous events.
+:::
 
 ## Computational Thinking
 

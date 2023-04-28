@@ -1,5 +1,3 @@
-# How to get unstuck
-
 As a programmer, getting stuck is a natural part of the process. It's easy to get frustrated and overwhelmed when you encounter a problem that you can't solve. In this unit, you will learn how to get unstuck and solve problems more efficiently.
 
 ## What Will You Learn

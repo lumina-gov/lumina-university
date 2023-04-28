@@ -12,6 +12,12 @@ In programming, a character is a single symbol, such as a letter, number, or spe
 
 A character is a single symbol used to represent text. Characters can be letters, numbers, or special characters. Characters are a fundamental data type in many programming languages and are used extensively in many applications.
 
+:::warning
+
+It’s easy to become overwhelmed by all the different types of character encodings, but generally languages will abstract this away for you, meaning you rarely have to think too much about how characters are represented
+
+:::
+
 ## Character Encoding Systems
 
 Character encoding is the process of assigning a unique numerical value to each character in a character set. There are several different character encoding systems in use today, including:
@@ -53,9 +59,3 @@ UTF-8 is a widely-used character encoding system that can represent all possible
 Emojis are graphical symbols used to represent emotions, objects, and other concepts. Emojis are represented in UTF-8 just like any other character in the Unicode standard. However, because emojis are more complex than most other characters, they require multiple code units to represent.
 
 For example, the "grinning face with smiling eyes" emoji (😊) is represented in UTF-8 by the code units `0xF0`, `0x9F`, `0x98`, and `0x8A`. Together, they represent a single character, the "grinning face with smiling eyes" emoji.
-
-~warning {
-
-It’s easy to become overwhelmed by all the different types of character encodings, but generally languages will abstract this away for you, meaning you rarely have to think too much about how characters are represented
-
-}

@@ -121,6 +121,8 @@ async function setBottomHeights () {
             background #b44
         &.Success
             background #4a6
+        &.Info
+            background $blue
         .icon
             padding-right 8px
             display inline-flex

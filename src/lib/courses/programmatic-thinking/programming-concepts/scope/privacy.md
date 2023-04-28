@@ -1,5 +1,3 @@
-# Privacy
-
 ## What will you learn?
 
 In this unit, you will learn about the concept of privacy in programming and how it is implemented in different programming languages.
@@ -19,11 +17,6 @@ Privacy is often implemented in programming languages through the use of access 
 Here is an example of how access modifiers can be used in pseudocode:
 
 ```
-cpp
-
-```
-
-```
 class Person
     public String name
     private int age
@@ -37,7 +30,6 @@ class Person
 
     protected void setAddress(String newAddress)
         address = newAddress
-
 ```
 
 In this example, the `Person` class has three variables (`name`, `age`, and `address`) and three functions (`setName()`, `setAge()`, and `setAddress()`), each with a different access modifier.

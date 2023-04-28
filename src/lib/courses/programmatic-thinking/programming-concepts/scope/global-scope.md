@@ -1,5 +1,3 @@
-# Global Scope
-
 In programming, scope refers to the visibility and accessibility of variables in your code. Global scope refers to variables that are accessible from anywhere in your code.
 
 ## What Will You Learn
@@ -21,6 +19,10 @@ function main()
 ```
 
 In this example, `global_variable` is accessible from within the `main` function because it is a global variable.
+
+:::error
+Global variables are generally considered bad practice because they can cause namespace pollution and concurrency issues. Instead of using global variables, consider passing variables as parameters or using a singleton.
+:::
 
 ## Advantages and Disadvantages of Global Variables
 

@@ -1,4 +1,3 @@
-# Programming Paradigms
 
 In computer science, programming paradigms refer to fundamental styles and approaches to programming. These paradigms are a way to classify programming languages based on their features and syntax. Each paradigm represents a distinct set of principles for structuring and organising code. There are several paradigms, including:
 

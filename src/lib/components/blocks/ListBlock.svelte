@@ -12,3 +12,9 @@ $: tag = block.ordered ? "ol" : "ul"
         <ListItemBlock block={child}/>
     {/each}
 </svelte:element>
+<style lang="stylus">
+@import "variables"
+
+ol, ul
+    margin-left 1.5em
+</style>

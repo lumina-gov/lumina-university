@@ -1,5 +1,3 @@
-# Dealing with Failure
-
 Programming can be challenging, and failure is an inevitable part of the learning process. In this unit, you will learn how to deal with failure and use it as an opportunity to learn and improve your skills.
 
 ## What Will You Learn

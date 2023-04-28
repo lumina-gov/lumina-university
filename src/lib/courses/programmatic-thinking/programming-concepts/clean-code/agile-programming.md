@@ -1,5 +1,3 @@
-# Agile Programming
-
 ## What will you learn
 
 - What is agile programming

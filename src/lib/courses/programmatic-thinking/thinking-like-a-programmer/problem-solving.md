@@ -1,8 +1,3 @@
-# Problem Solving
-
-
-# Problem Solving
-
 Programming is all about problem-solving. To become a successful programmer, you need to learn how to approach problems systematically and develop solutions that are both efficient and effective. In this unit, you will learn some techniques for solving problems using programming.
 
 ## What Will You Learn
@@ -24,7 +19,7 @@ The problem-solving process is a structured approach to solving problems. Here a
 6. **Test your solution**: After you've written your code, test it with a variety of inputs. Make sure it works correctly in all cases.
 7. **Debug your solution**: If your code doesn't work correctly, use debugging techniques to identify and fix the problem.
 
-error pitfall {
+:::error
 
 Most beginners think they don't understand what code to write, but the real problem is that they don't understand the problem they're trying to solve.
 
@@ -38,6 +33,7 @@ Most beginners think they don't understand what code to write, but the real prob
     6. This is because more often than not, your solution lies in the problem itself.
     7. “If you can’t explain something in simple terms, you don’t understand it well enough.” — Richard Feynman
 
+:::
 ### Rubber Duck Debugging
 
 Rubber duck debugging is a technique where you explain your code to a rubber duck as if it were a person. By talking through the code step-by-step, you may be able to spot errors or see the code in a new way. The rubber duck doesn't actually help you, but the act of explaining the code out loud can often help you find the solution to a problem.
@@ -46,22 +42,21 @@ Rubber duck debugging is a technique where you explain your code to a rubber duc
 
 Comments are code. What do I mean?
 
-Well, why do we use comments? We all know that comments explain code to other programmers.
+Well, why do we use comments? *We all know that comments explain code to other programmers*.
 
-This explains why we never write them, because half the time, you don't want to explain the code until you're sure it will work, which may never happen and the other half is because it's their own damn fault if they can't understand my code
+This explains **why we never write them**, because half the time, you don't want to explain the code until you're sure it will work, which may never happen and the other half is because it's their own damn fault if they can't understand my code
 
-**Wrong**
+**WRONG!**
 
-Code is there to explain the comments to the computer - **this is important**
-
-Your comments write your algorithm.
-
-How do you know when your algorithm is done?
-
-You look at every line step by step, and confirm:
-
-> Oh I could do that, I could do that, Oop better look that one up, hmm, I could break that up into smaller chunks
-> 
+> Code is there to explain the comments to the computer - **this is important**
+>
+> Your comments write your algorithm.
+>
+> How do you know when your algorithm is done?
+>
+> You look at every line step by step, and confirm:
+>
+> Oh I could do that, I could do that, Oop better look that one up, hmm... I could break that up into smaller chunks
 
 And **only when you're done** should you start thinking about writing code
 
@@ -79,10 +74,10 @@ To approach problems systematically, you need to break them down into smaller, m
 Pseudocode is a way of expressing the steps of a solution in plain language, without worrying about the specific programming language syntax. Here's an example
 
 ```
-1. Get the user's name
-2. Get the user's age
-3. If the user is under 18, print "You are too young to vote"
-4. If the user is 18 or older, print "You are old enough to vote"
+Get the user's name
+Get the user's age
+If the user is under 18, print "You are too young to vote"
+If the user is 18 or older, print "You are old enough to vote"
 ```
 
 Pseudocode helps you to flesh out the logic of your solution before you start writing code. Once you have the steps written out, it's much easier to translate them into code.
@@ -96,6 +91,6 @@ Testing and debugging are important parts of the problem-solving process. Here a
 - **Debug systematically**: Don't just randomly change code and hope the problem goes away. Instead, use a systematic approach to identify and fix the problem. Here are some steps:
     1. **Reproduce the problem**: Try to reproduce the problem using the same inputs or similar ones.
     2. **Isolate the problem**: Narrow down the problem by identifying the root cause of the issue in code.
-    3. **Fix the problem**: Once you've identified the root cause of the problem, fix it by changing the code.
-    4. **Retest the solution**: After you've made changes to the code, test it again to make sure the problem is fixed.
-    5. **Document the fix**: If you found a bug, document the fix so that other programmers who work on the code in the future will understand what you did.l
+    3. **Write a test**: Write a test that fails because of the problem. This test will prevent the problem from happening again in the future.
+    4. **Fix the problem**: Once you've identified the root cause of the problem, fix it by changing the code.
+    5. **Run the test**: Run the test to make sure the problem has been fixed. If the test fails, repeat the process until it passes.

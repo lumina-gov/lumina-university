@@ -11,9 +11,9 @@ In programming, a reference or pointer is a way to refer to a specific location 
 
 A reference is a way to refer to a specific location in memory. When you create a variable in a program, the computer sets aside a specific location in memory to store that variable's value. A reference allows you to access that location in memory and manipulate the data stored there.
 
-Note
-
-A reference is essentially just a number that points to a specific address in a computer’s memory.
+:::note
+A reference is essentially just an integer/number that points to a specific address in a computer’s memory.
+:::
 
 ## Difference Between References and Values
 

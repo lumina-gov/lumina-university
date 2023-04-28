@@ -9,8 +9,9 @@ export let block: Paragraph
     <PhrasingContentArray children={block.children}/>
 </p>
 <style lang="stylus">
+@import "variables"
 
 p
     margin 0
-    opacity 0.8
+    color transparify(white, 80%)
 </style>

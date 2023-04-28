@@ -20,13 +20,15 @@ In the same way as counting in decimal, when you reach the number 9, adding one 
 
 Because binary only has 2 possibilities, it means that you carry over from 1, by moving it left, and if there is already a 1 there, you carry it over again.
 
-Note
+:::note
 
 For example, in decimal:
 09 + 01 = 10
 
 And in binary:
 01 + 01 = 10 (3 in decimal)
+
+:::
 
 Here is an example of counting from 0 to 15 in binary (a total of 16 possibilities):
 
@@ -49,13 +51,14 @@ Here is an example of counting from 0 to 15 in binary (a total of 16 possibiliti
 | 14 | 1110 | E |
 | 15 | 1111 | F |
 
-A byte, contains 8 bits, so allows for a total of 256 possibilities or 2^8 possibilities. 
+
+:::note
+A byte, contains 8 bits, so allows for a total of 256 possibilities or 2^8 possibilities.
 
 Hexadecimal (base 16) is also a very commonly used way of representing numbers for computers, because 16 is divisible by two, all the way down.
 
-Note
-
 The word hexadecimal comes from the words: hex meaning six and decimal meaning ten
+:::
 
 ## Different Number Types
 
@@ -76,8 +79,11 @@ Floats are often used when you need numbers that contain a decimal point, but su
 
 It's important to note that a number and text that contains a number are two different things. In programming, text that contains a number is represented as a string, not a number. Attempting to perform mathematical operations on a string will often result in an error in many languages, or result in unexpected behaviour
 
-~error Pitfall: When dealing with user inputs from any text-based inputs, be sure to convert the string (or text) into an actual number
+:::error
+When dealing with user inputs from any text-based inputs, be sure to convert the string (or text) into an actual number.
 
+There is a difference between the text "1" and the number/integer 1.
+:::
 ## Colors in Hexadecimal
 
 Colors in computers are represented using RGB, often in the hexadecimal format. RGB stands for Red, Green, Blue, which can be combined to create all the colors using [additive color](https://en.wikipedia.org/wiki/Additive_color).
@@ -88,13 +94,13 @@ If you’ve ever used graphics design software, you will almost certainly have c
 
 16 bit colors are represented by using 3 hexadecimal digits (0 to 9 to A to F), the first digit represents the color red, the second represents the color green and the third represents the color blue, like so `#RGB` The colors are often prefixed with a hash `#` symbol.
 
-The colors white, grey and black, would be `#FFF`, `#000`, `#888` respectively, and the colors red, green and blue would be `#F00`, `#0F0`, `#00F` respectively.
+The colors white, grey and black, would be `#FFF`, `#888`, `#000` respectively, and the colors red, green and blue would be `#F00`, `#0F0`, `#00F` respectively.
 
 24-bit color is represented in a similar way, except using 2 hexadecimal digits instead of 1, for example, red would be `#FF0000` and green would be `#00FF00`.
 
-![An example of how colors, or absence of can be combined to create all the colors.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ef40ff3b-a22a-41f0-99fb-5b000f9b5b8d/Untitled.png)
-
-An example of how colors, or absence of can be combined to create all the colors.
+> ![An example of how colors, or absence of can be combined to create all the colors.](https://upload.wikimedia.org/wikipedia/commons/2/28/RGB_illumination.jpg)
+>
+> An example of how colors, or absence of can be combined to create all the colors.
 
 ## When to Use Numbers
 

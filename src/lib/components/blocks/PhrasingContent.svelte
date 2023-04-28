@@ -23,7 +23,7 @@ export let block: PhrasingContent
         <PhrasingContentArray children={block.children}/>
     </del>
 {:else if block.type === "inlineCode"}
-    <code>
+    <code class="inline">
         { block.value }
     </code>
 {:else if block.type === "link"}
@@ -40,4 +40,12 @@ export let block: PhrasingContent
 <style lang="stylus">
 @import "variables"
 
+code
+    font-family "Source Code Pro", monospace
+    &.inline
+        display inline
+        background transparify(white, 10%)
+        padding 1px 6px
+        margin 0 4px
+        border-radius 4px
 </style>

@@ -1,6 +1,3 @@
-# Functions & Methods
-
-
 ## What will you learn
 
 - The difference between parameters and arguments
@@ -40,10 +37,10 @@ A function is a block of code that performs a specific task. Functions have:
 
 ```jsx
 // A function in JavaScript
-function functionName(parameter1, parameter2, ...) {
-  // function body
-	let output = "hello"
-  return output; // the return statement
+function functionName(parameter1, parameter2) {
+    // function body
+    let output = "hello"
+    return output; // the return statement
 }
 ```
 

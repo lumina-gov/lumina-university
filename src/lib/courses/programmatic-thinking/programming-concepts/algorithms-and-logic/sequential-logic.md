@@ -1,5 +1,3 @@
-# Sequential Logic
-
 Sequential logic is a fundamental concept in programming that refers to the order in which statements are executed. In this unit, we will explore the basics of sequential logic, including blocks, statements, and expressions.
 
 ## What Will You Learn
@@ -11,7 +9,9 @@ Sequential logic is a fundamental concept in programming that refers to the orde
 
 ## Blocks
 
-A block is a group of statements that are executed together. In many programming languages, blocks are defined by curly braces `{}` or indentation. Blocks are used to group statements together and define the scope of variables and other program elements.
+A block is a group of **statements** that are executed together. In many programming languages, blocks are defined by curly braces `{}` or indentation. Blocks are used to group statements together and define the scope of variables and other program elements.
+
+Some languages such as Python use indentation to define blocks
 
 ## Statements
 
@@ -21,14 +21,15 @@ A statement is a generally single instruction or step that performs a specific t
 
 An expression is a combination of values, variables, and operators that can be evaluated to produce a single value. Examples of expressions include mathematical calculations, string concatenation, boolean comparisons, or running and evaluating a function.
 
-For example, here's an pseudocode expression that calculates the square of a number:
+For example, here's an pseudocode example of code that includes two statements:
+- One which assigns the value `5` to the variable `x`
+- One which assigns the result of the expression `x multiplied by x` to the variable `result` - with the `result` variable storing the evaluated value of `25`
 
 ```
 let x be 5
 let result be x multipled by x
 ```
 
-In this example, the expression `x * x` evaluates to the value `25`, which is then assigned to the variable `result`.
 
 ## Using Sequential Logic
 

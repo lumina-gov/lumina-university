@@ -4,7 +4,7 @@ In this unit, we will explore the different types of scope, including global and
 
 We will also discuss best practices for working with scope, as well as common anti-patterns that should be avoided.
 
-What you will learn:
+## What you will learn
 
 - Understand the basics of scope and its importance in programming
 - Learn about the differences between global and local/block scope

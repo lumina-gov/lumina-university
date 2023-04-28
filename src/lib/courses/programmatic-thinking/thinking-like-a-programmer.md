@@ -29,21 +29,17 @@ Here are some techniques to help you approach problems systematically:
 
 ## Programming is not about languages
 
-The language you choose typically doesn't typically matter much (*although I prefer to use Rust and Typescript*)
+- The language you choose typically doesn't typically matter much (*although I prefer to use Rust and Typescript*)
+- Some will just make you feel stupider at the beginning, for example: Java `public static void main (String[] args)`
+- Or C++ when dealing with memory allocation, pointers and etc.
+- Some will just make you feel better earlier by abstracting away other things. `name = 'Albert'`
+- Some languages are better suited for certain types of purposes, but overall the language you choose typically doesn't matter much.
+- The hard part is that languages go in and out of fashion as paradigm shifts and trends happe
+- And the first one you learn will always be the hardest → so we’re here to help accelerate that process.
 
-Some will just make you feel stupider at the beginning, for example: Java `public static void main (String[] args)`
+:::warning
 
-Or C++ when dealing with memory allocation, pointers and etc.
-
-Some will just make you feel better earlier by abstracting away other things. `name = 'Albert'`
-
-Some languages are better suited for certain types of purposes, but overall the language you choose typically doesn't matter much.
-
-The hard part is that languages go in and out of fashion as paradigm shifts and trends happe
-
-And the first one you learn will always be the hardest → so we’re here to help accelerate that process.
-
-:::warning Computers are stupid
+**Computers are stupid**
 
 > The hard part about writing a computer program, isn't about trying to be as smart as the computer, it's about learning how to be as mind-numbingly stupid as a computer. - Andy Harris
 

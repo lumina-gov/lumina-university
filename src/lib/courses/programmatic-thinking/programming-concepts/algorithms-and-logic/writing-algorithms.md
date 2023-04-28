@@ -1,5 +1,3 @@
-# Writing Algorithms
-
 ## Writing Clear and Effective Algorithms
 
 When writing algorithms, it's important to keep them clear and easy to understand. Here are some tips for writing clear and effective algorithms:
@@ -15,4 +13,4 @@ When writing algorithms, it's important to keep them clear and easy to understan
 
 Write an pseudo-code algorithm that checks if a given string is a palindrome (reads the same backward as forward)
 
-An example of a palindrome is the word racecar, when this word is read backward, it still spells racecar. Another example is “*rotator”*
+An example of a palindrome is the word `racecar`, when this word is read backward, it still spells racecar. Another example is `rotator`

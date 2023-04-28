@@ -1,5 +1,3 @@
-# Premature optimisation
-
 ## What Will You Learn
 
 - The dangers of premature optimization
@@ -9,6 +7,8 @@
 ## Premature Optimization
 
 Premature optimization is the act of trying to optimize your code before it's necessary. This can result in code that's more complicated than it needs to be and can make it harder to maintain and debug. It's essential to avoid premature optimization because it can lead to a waste of time and resources, and often it won't even make a noticeable difference in the performance of your program.
+
+> "Premature optimization is the root of all evil." - Donald Knuth
 
 ## The Cost of Optimization
 
@@ -31,6 +31,6 @@ There are several tools you can use to improve the performance of your code. Her
 - **Caching**: Caching is a technique where you store the result of a computation so that you don't have to perform the computation again. This can greatly improve performance, especially for computationally expensive operations.
 - **Parallelism**: Parallelism is the technique of dividing a problem into smaller subproblems that can be solved simultaneously. This can be achieved using threads, processes, or other parallel computing techniques.
 
-warning
-
+:::warning
 It’s better to have working, but slow code, than fast but broken code.
+:::
