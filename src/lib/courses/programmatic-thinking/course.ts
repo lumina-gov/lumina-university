@@ -10,7 +10,8 @@ export const course: Course = {
         "syntax-and-programming-languages"
     ],
     description: "Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
-    prerequisites: [],
+    prerequisites: [{name: "Programming", slug: "programming"}],
+    next_up: [{name: "Programming", slug: "programming"}],
     image: "src/routes/(app)/Courseplaceholder.png",
     icon: CodeTags,
     units_map: {

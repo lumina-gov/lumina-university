@@ -5,7 +5,8 @@ import type { Unit } from "./unit"
 export type Course = {
     name: string
     root_units: string[]
-    prerequisites: string[]
+    prerequisites: {name: string, slug: string}[]
+    next_up: {name: string, slug: string}[]
     description: string
     image: string
     icon: typeof SvelteComponent
