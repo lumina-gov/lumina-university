@@ -1,12 +1,12 @@
 <script>
-import LightUniversity from "$lib/icons/LightUniversity.svelte"
+import LuminaUniversity from "$lib/icons/LuminaUniversity.svelte"
 export let size = "48px"
 
 </script>
 <div
     style:--size={ size }
     class="icon">
-    <LightUniversity/>
+    <LuminaUniversity/>
 </div>
 <style lang="stylus">
 @import 'variables'

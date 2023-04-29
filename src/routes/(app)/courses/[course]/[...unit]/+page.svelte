@@ -28,7 +28,7 @@ let end_of_content: HTMLElement
 let content: HTMLElement
 let content_container: HTMLElement
 
-$: flattened_units = flatten_units(data.root_units)
+$: flattened_units = flatten_units(data.course.root_units)
 $: previous_unit = get_unit_relative(unit, "previous")
 $: next_unit = get_unit_relative(unit, "next")
 
@@ -51,7 +51,7 @@ async function update_unit_progress(status: UnitStatus): Promise<void> {
                 id
             }
         }
-    `), {course_slug: data.course.slug, unit_slug: unit.unit_slug, status})
+    `), {course_slug: data.course.course_slug, unit_slug: unit.unit_slug, status})
     if (res.error) {
         return $page.data.alerts.create_alert(MessageType.Error, res.error.message)
     }
@@ -83,8 +83,8 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 <div class="crumb-bar">
     <CourseBreadcrumbs course={data.course}/>
     <CourseProgressBar
-        course_slug={data.course.slug}
-        {data}
+        course={data.course}
+        current_unit={data.unit}
         units={flattened_units}
         bind:unit={ data.unit }
         on:set_unit_progress={ e => update_unit_progress(e.detail) }/>
@@ -116,7 +116,7 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                     <div class="section">
                         <Button
                             style="transparent"
-                            href="https://github.com/lumina-gov/light-university/edit/main/src/lib/courses/{data.course.slug}/{data.unit.unit_slug}.md"
+                            href="https://github.com/lumina-gov/lumina-university/edit/main/src/lib/courses/{data.course.course_slug}/{data.unit.unit_slug}.md"
                             left_icon={Pencil}>
                             Edit this page on GitHub
                         </Button>

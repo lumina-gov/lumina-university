@@ -6,7 +6,7 @@ import SlashForward from "svelte-material-icons/SlashForward.svelte"
 
 export let course: {
     name: string
-    slug: string
+    course_slug: string
 }
 
 </script>
@@ -27,7 +27,7 @@ export let course: {
         size={18}/>
     <a
         class="item"
-        href={`/courses/${course.slug}`}>
+        href={`/courses/${course.course_slug}`}>
         <Icon
             icon={CodeTags}
             size={18}/>

@@ -8,7 +8,7 @@ import Icon from "$lib/display/Icon.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
 import DashboardCourse from "./DashboardCourse.svelte"
 import { SubscriptionStatus } from "$lib/gql/graphql"
-import DashboardTopics from "./DashboardTopics.svelte";
+import DashboardTopics from "./DashboardTopics.svelte"
 
 export let data: PageData
 
@@ -82,7 +82,11 @@ $: user = data.user_store.user
             </div>
             <DashboardTopics/>
             <div class="view-courses">
-                <Button style="translucent" text="View Courses" right_icon={ChevronRight} href="/courses"/>
+                <Button
+                    style="translucent"
+                    href="/courses"
+                    right_icon={ChevronRight}
+                    text="View Courses"/>
             </div>
         </div>
     </div>

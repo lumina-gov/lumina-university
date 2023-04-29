@@ -17,7 +17,7 @@ const documents = {
     "\n        query LastUpdatedUnit {\n            last_updated_unit {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    ": types.LastUpdatedUnitDocument,
     "\n        query GetCourseProgress($course_slug: String!) {\n            course_progress(course_slug: $course_slug) {\n                id\n                status\n                user_id\n                unit_slug\n                course_slug\n                updated_at\n            }\n        }\n    ": types.GetCourseProgressDocument,
     "\n        query CustomerPortalUrl($return_url: String!) {\n            me {\n                customer_portal_url(return_url: $return_url)\n            }\n        }": types.CustomerPortalUrlDocument,
-    "\n        mutation CreateLightUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }": types.CreateLightUniversityCheckoutSessionDocument,
+    "\n        mutation CreateLuminaUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }": types.CreateLuminaUniversityCheckoutSessionDocument,
     "\n            query GetCourseProgress($course_slug: String!) {\n                course_progress(course_slug: $course_slug) {\n                    id\n                    status\n                    user_id\n                    unit_slug\n                    course_slug\n                    updated_at\n                }\n            }\n        ": types.GetCourseProgressDocument,
     "\n        mutation SetUnitProgress($course_slug: String!, $unit_slug: String!, $status: UnitStatus!) {\n            set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: $status) {\n                id\n            }\n        }\n    ": types.SetUnitProgressDocument,
 };
@@ -55,7 +55,7 @@ export function graphql(source: "\n        query CustomerPortalUrl($return_url: 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n        mutation CreateLightUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }"): (typeof documents)["\n        mutation CreateLightUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }"];
+export function graphql(source: "\n        mutation CreateLuminaUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }"): (typeof documents)["\n        mutation CreateLuminaUniversityCheckoutSession($return_url: String!) {\n            create_light_university_checkout_session(success_url: $return_url)\n        }"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,16 +1,21 @@
 import type { SvelteComponent } from "svelte"
 import type { Unit } from "./unit"
+import type Icon from "$lib/display/Icon.svelte"
+import type { Prop } from "$lib/utils/typed_props"
 
+type Modify<T, R> = Omit<T, keyof R> & R;
 
-export type Course = {
+export type CourseRaw = {
     name: string
+    color: Prop<Icon, "color">
+    icon: typeof SvelteComponent
     root_units: string[]
-    prerequisites: {name: string, slug: string}[]
-    next_up: {name: string, slug: string}[]
+    prerequisites: string[]
+    next_up: string[]
+    recommended: string[]
     description: string
     image: string
-    icon: typeof SvelteComponent
-    units_map: {
+    units_by_slug: {
         [key: string]: {
             name: string
             subunits?: string[]
@@ -19,15 +24,8 @@ export type Course = {
     }
 }
 
-export type CourseExtendedData = Course & {
-    course_slug: string
-}
-
-export type CourseWithProgress = {
+export type CourseFull = Modify<CourseRaw, {
     course_slug: string,
-    name: string,
-    description: string,
-    icon: typeof SvelteComponent,
     root_units: Unit[],
     units_by_slug: Record<string, Unit>,
-}
+}>

@@ -1,20 +1,22 @@
-import type { Course } from "$lib/types/course"
+import type { CourseRaw } from "$lib/types/course"
 import CodeTags from "svelte-material-icons/CodeTags.svelte"
+import CoursePlaceholder from "$lib/images/CoursePlaceholder.png"
 
-export const course: Course = {
+export const course: CourseRaw = {
     name: "Programmatic Thinking",
     root_units: [
         "introduction",
         "thinking-like-a-programmer",
         "programming-concepts",
-        "syntax-and-programming-languages"
     ],
     description: "Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
-    prerequisites: [{name: "Programming", slug: "programming"}],
-    next_up: [{name: "Programming", slug: "programming"}],
-    image: "src/routes/(app)/Courseplaceholder.png",
+    prerequisites: [],
+    next_up: [],
+    recommended: [],
+    image: CoursePlaceholder,
     icon: CodeTags,
-    units_map: {
+    color: "orange",
+    units_by_slug: {
         "introduction": {
             name: "Introduction",
             subunits: [],
@@ -237,28 +239,6 @@ export const course: Course = {
         },
         "programming-concepts/heap-vs-stack": {
             name: "Heap Vs Stack",
-        },
-        "syntax-and-programming-languages": {
-            name: "Syntax and Programming Languages",
-            subunits: [
-                "syntax-and-languages/how-programming-languages-work",
-            ]
-        },
-
-        "syntax-and-languages/how-programming-languages-work": {
-            name: "How Programming Languages Work",
-            subunits: [
-                "syntax-and-languages/how-programming-languages-work/interpreted-languages",
-                "syntax-and-languages/how-programming-languages-work/compiled-languages"
-            ]
-        },
-
-        "syntax-and-languages/how-programming-languages-work/interpreted-languages": {
-            name: "Interpreted Languages"
-        },
-
-        "syntax-and-languages/how-programming-languages-work/compiled-languages": {
-            name: "Compiled Languages"
         },
     }
 }

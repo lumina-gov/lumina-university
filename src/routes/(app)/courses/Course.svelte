@@ -1,15 +1,20 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import type { CourseExtendedData } from "$lib/types/course"
 import ImageOutline from "svelte-material-icons/ImageOutline.svelte"
+import CoursePlaceholder from "$lib/images/CoursePlaceholder.png"
+import type { CourseRaw } from "$lib/types/course"
 
-export let course: CourseExtendedData
+export let course: CourseRaw & {
+    course_slug: string
+}
 </script>
 <a
     class="course"
     href="/courses/{course.course_slug}">
-    <div class="image" style:background-image="url('{course.image}')">
+    <div
+        style:background-image="url('{ course.image || CoursePlaceholder }')"
+        class="image">
         {#if !course.image}
             <Icon
                 icon={ImageOutline}
@@ -20,7 +25,7 @@ export let course: CourseExtendedData
     <div class="contents">
         <h3>{ course.name }</h3>
         <div class="info">
-            <span>{ Object.keys(course.units_map).length } units</span>
+            <span>{ Object.keys(course.units_by_slug).length } units</span>
             <Tag>
                 Programming
             </Tag>

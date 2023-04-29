@@ -10,7 +10,7 @@ import ButtonSound from "$lib/sounds/ButtonSound.wav"
 
 export let direction: "next" | "previous"
 export let unit: Unit | null
-export let course: { slug: string }
+export let course: { course_slug: string }
 
 function pressed() {
     if(!unit) return
@@ -24,7 +24,7 @@ function pressed() {
     class="paginator"
     class:active={ unit !== null }
     class:next={ direction === "next" }
-    href={unit ? `/courses/${course.slug}/${unit.unit_slug}` : undefined}
+    href={unit ? `/courses/${course.course_slug}/${unit.unit_slug}` : undefined}
     on:click={ pressed }
     on:keyup={ e => e.key === "Enter" && pressed() }>
     {#if unit}

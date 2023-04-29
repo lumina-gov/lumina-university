@@ -33,7 +33,7 @@ async function detectServiceWorkerUpdate() {
                 await new Promise(resolve => setTimeout(resolve, 500))
                 status = Status.Installed
 
-                await new Promise(resolve => setTimeout(resolve, 1000))
+                await new Promise(resolve => setTimeout(resolve, 500))
 
                 window.location.reload()
             }

@@ -11,7 +11,7 @@ import { UnitStatus } from "$lib/gql/graphql"
 
 export let data: PageData
 
-$: units = flatten_units(data.root_units)
+$: units = flatten_units(data.course.root_units)
 
 $: {
     let first_unit = units.find(unit => unit.status !== UnitStatus.Completed)
@@ -38,9 +38,9 @@ $: {
         top_distance={78}
         translucent={false}>
         <OutlineSidebar
+            course_icon={data.course.icon}
             course_name={data.course.name}
-            unit_count={units.length}
-            course_icon={data.course.icon}/>
+            unit_count={units.length}/>
         <ExtrasSidebar course={data.course} />
     </GridItem>
     <GridItem
@@ -55,8 +55,8 @@ $: {
         padding="16px"
         translucent={false}>
         <CourseTree
-            course_slug={data.course.slug}
-            root_units={data.root_units}
+            course_slug={data.course.course_slug}
+            root_units={data.course.root_units}
             units={units}/>
     </GridItem>
 </Grid>

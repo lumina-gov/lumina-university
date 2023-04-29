@@ -3,22 +3,22 @@ import IconButton from "$lib/controls/IconButton.svelte"
 import type { Unit } from "$lib/types/unit"
 import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
-import type { PageData } from "./$types"
 import { flatten_unit } from "$lib/utils/unit"
 import { UnitStatus } from "$lib/gql/graphql"
 import { createEventDispatcher } from "svelte"
 import CheckboxMarkedCircle from "svelte-material-icons/CheckboxMarkedCircle.svelte"
 import type { Prop } from "$lib/utils/typed_props"
+import type { CourseFull } from "$lib/types/course"
 
 export let units: Unit[]
-export let data: PageData
+export let course: CourseFull
 export let unit: Unit
-export let course_slug: string
+export let current_unit: Unit
 
 let dispatch = createEventDispatcher<{ set_unit_progress: UnitStatus }>()
 
 function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
-    let units_flattened = data.root_units.flatMap(unit => flatten_unit(unit))
+    let units_flattened = course.root_units.flatMap(unit => flatten_unit(unit))
     let index = units_flattened.findIndex(u => u.unit_slug === unit.unit_slug)
     let relative_index = direction === "previous" ? index - 1 : index + 1
 
@@ -32,14 +32,14 @@ const progress_color: Record<UnitStatus, Prop<IconButton, "color">> = {
 }
 
 
-$: previous_unit = get_unit_relative(data.units_by_slug[data.unit.unit_slug], "previous")
-$: next_unit = get_unit_relative(data.units_by_slug[data.unit.unit_slug], "next")
+$: previous_unit = get_unit_relative(course.units_by_slug[current_unit.unit_slug], "previous")
+$: next_unit = get_unit_relative(course.units_by_slug[current_unit.unit_slug], "next")
 </script>
 
 <div class="wrapper">
     <IconButton
         style="transparent"
-        href={previous_unit ? `/courses/${course_slug}/${previous_unit.unit_slug}` : undefined}
+        href={previous_unit ? `/courses/${course.course_slug}/${previous_unit.unit_slug}` : undefined}
         icon={ChevronLeft}
         opacity={0.5}
         use_sound={true}
@@ -48,18 +48,18 @@ $: next_unit = get_unit_relative(data.units_by_slug[data.unit.unit_slug], "next"
         {#each units as unit}
             <a
                 class="seg"
-                class:active={ unit.unit_slug === data.unit.unit_slug }
+                class:active={ unit.unit_slug === current_unit.unit_slug }
                 class:completed={ unit.status === UnitStatus.Completed }
                 class:in-progress={ unit.status === UnitStatus.InProgress }
                 class:not-started={ unit.status === UnitStatus.NotStarted }
-                href={`/courses/${course_slug}/${unit.unit_slug}`}>
+                href={`/courses/${course.course_slug}/${unit.unit_slug}`}>
                 &nbsp;
             </a>
         {/each}
     </div>
     <IconButton
         style="transparent"
-        href={next_unit ? `/courses/${course_slug}/${next_unit.unit_slug}` : undefined}
+        href={next_unit ? `/courses/${course.course_slug}/${next_unit.unit_slug}` : undefined}
         icon={ChevronRight}
         opacity={0.5}
         use_sound={true}

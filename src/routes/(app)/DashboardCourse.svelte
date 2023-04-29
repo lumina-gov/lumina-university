@@ -1,33 +1,31 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import ProgressBar from "$lib/display/ProgressBar.svelte"
-import CodeTags from "svelte-material-icons/CodeTags.svelte"
+import CoursePlaceholder from "$lib/images/Courseplaceholder.png"
 import Circle from "svelte-material-icons/Circle.svelte"
 import Button from "$lib/controls/Button.svelte"
 import PlayOutline from "svelte-material-icons/PlayOutline.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
 import Plus from "svelte-material-icons/Plus.svelte"
-import type { CourseWithProgress } from "$lib/types/course"
 import { UnitStatus } from "$lib/gql/graphql"
 import { flatten_units } from "$lib/utils/unit"
+import type { CourseFull } from "$lib/types/course"
 
 
 export let enlarge = true
-export let course: CourseWithProgress
+export let course: CourseFull
 export let recent_unit: string
 
 $: units = flatten_units(course.root_units)
 $: current_unit_index = units.findIndex(unit => unit.unit_slug === recent_unit) + 1
 $: number_completed = units.filter(unit => unit.status === UnitStatus.Completed).length
-
 $: percentage_completed = (number_completed/units.length)*100
 
-function formatString(str: string | undefined): string {
+function format_string(str: string | undefined): string {
     if (!str) return ""
     const formattedStr = str.replace(/-/g, " ").replace(/\//g, " / ")
     return formattedStr.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
 }
-let unit_name = formatString(recent_unit)
 </script>
 
 {#if enlarge}
@@ -36,7 +34,7 @@ let unit_name = formatString(recent_unit)
         <div class="image">
             <img
                 alt="placeholder"
-                src="src/routes/(app)/Courseplaceholder.png"/>
+                src={CoursePlaceholder}/>
         </div>
         <div class="right-wrapper">
             <div class="button-text">
@@ -47,7 +45,7 @@ let unit_name = formatString(recent_unit)
                             icon={Circle}
                             opacity={0.5}
                             size={8}/>
-                        { unit_name }
+                        { format_string(recent_unit) }
                     </div>
                     <div class="title-text">
                         <Icon
@@ -76,17 +74,17 @@ let unit_name = formatString(recent_unit)
     <Grid
         columns={{
             "mobile": 1,
-            "tablet": 1,
-            "laptop": 3,}}
-        side_padding={false}
-    >
+            "tablet": 2,
+            "laptop": 3
+        }}
+        side_padding={false}>
         <a
             class="small-wrapper"
             href="/courses">
             <img
                 class="image"
                 alt="placeholder"
-                src="src/routes/(app)/Courseplaceholder.png"/>
+                src={CoursePlaceholder}/>
             <div class="description small">
                 <div class="top-text">
                     <div class="faded">Unit 7 of 32</div>
@@ -126,11 +124,8 @@ let unit_name = formatString(recent_unit)
         gap 16px
         padding 16px
         align-items center
-        max-width 450px
     .image
         display flex
-        max-width 390px
-        width 100%
         border-radius 8px
         background transparify(white, 8%)
     .right-wrapper
@@ -177,7 +172,7 @@ let unit_name = formatString(recent_unit)
     background transparify(white, 4%)
     border-radius 8px
     justify-content center
-    max-width 380px
+    width 100%
     @media screen and (max-width: $tablet)
         gap 16px
         padding 16px

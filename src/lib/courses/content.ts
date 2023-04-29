@@ -1,58 +1,33 @@
 import { UnitStatus } from "$lib/gql/graphql"
-import type { Course, CourseWithProgress } from "$lib/types/course"
+import type { CourseFull, CourseRaw } from "$lib/types/course"
 import type { Unit, UnitData } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
-import type { SvelteComponent } from "svelte"
 
 export const content = import.meta.glob("./**/*.md", { as: "raw" }) as {
     [key: string]: undefined | (() => Promise<string>)
 }
 
 export const courses = import.meta.glob("./*/course.ts") as {
-    [key: string]: (() => Promise<{ course: Course }>)
+    [key: string]: (() => Promise<{ course: CourseRaw }>)
 }
 
 type UnitDataMap = {
     [key: string]: UnitData
 }
 
-export async function get_full_course(course_slug: string, units_progress_map: Record<string, UnitStatus>): Promise<CourseWithProgress> {
+export async function get_full_course(course_slug: string, units_progress_map: Record<string, UnitStatus>): Promise<CourseFull> {
     const course_import = courses[`./${course_slug}/course.ts`]
     if (!course_import) {
         throw new Error("Course not found")
     }
     const course = (await course_import()).course
-    const {units_by_slug, root_units} = units_query_to_unit_tree(course.units_map, course.root_units, units_progress_map)
+    const {units_by_slug, root_units} = units_query_to_unit_tree(course.units_by_slug, course.root_units, units_progress_map)
     return {
         course_slug: course_slug,
-        name: course.name,
-        description: course.description,
-        icon: course.icon,
-        root_units: root_units,
-        units_by_slug: units_by_slug
+        ...course,
+        units_by_slug,
+        root_units
     }
-}
-
-export async function get_course_icon(course_slug: string): Promise<typeof SvelteComponent> {
-    const course_import = courses[`./${course_slug}/course.ts`]
-    if (!course_import) {
-        throw new Error("Course not found")
-    }
-    const course = (await course_import()).course
-    return course.icon
-}
-// this function needs to search through all courses and return the courses that have the given course slug as a prerequisite
-export async function get_up_next(course_slug: string): Promise<string[]> {
-    const up_next: string[] = [];
-
-    for (const slug in courses) {
-        const course = await courses[slug]();
-        if (course.course.prerequisites.some((prerequisite) => prerequisite.slug === course_slug)) {
-            up_next.push(course.course.name);
-        }
-    }
-
-    return up_next;
 }
 
 function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: Record<string, UnitStatus> ): { units_by_slug: Record<string, Unit>, root_units: Unit[] } {

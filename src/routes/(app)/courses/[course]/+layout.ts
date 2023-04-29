@@ -13,7 +13,6 @@ export const load: LayoutLoad = async ({ params, parent }) => {
             code: "COURSE_NOT_FOUND"
         })
     }
-    const course = (await course_import()).course
 
     let course_progresses: GetCourseProgressQuery["course_progress"] = []
 
@@ -49,17 +48,12 @@ export const load: LayoutLoad = async ({ params, parent }) => {
     }
 
     const units_progress_map: { [key: string]: UnitStatus } = {}
-    course_progresses.map(progress => {
-        units_progress_map[progress.unit_slug] = progress.status
-    })
 
-    const full_course = await get_full_course(params.course, units_progress_map)
+    for (const progress of course_progresses) {
+        units_progress_map[progress.unit_slug] = progress.status
+    }
 
     return {
-        course: {
-            ...course,
-            slug: params.course,
-        },
-        ...full_course
+        course: await get_full_course(params.course, units_progress_map),
     }
 }

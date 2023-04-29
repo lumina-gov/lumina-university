@@ -1,13 +1,13 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
-import LightUniversity from "$lib/icons/LightUniversity.svelte"
+import LuminaUniversity from "$lib/icons/LuminaUniversity.svelte"
 </script>
 <a
     class="logo"
     href="/">
     <Icon
         color="brand"
-        icon={LightUniversity}
+        icon={LuminaUniversity}
         size={48}/>
     <div class="text">
         <div class="Lumina">

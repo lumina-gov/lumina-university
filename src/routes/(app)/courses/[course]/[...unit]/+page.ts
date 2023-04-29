@@ -6,7 +6,7 @@ import { MessageType } from "$lib/types/message"
 
 export const load = (async ({ params, parent }) => {
     const data = await parent()
-    const unit = data.units_by_slug[params.unit]
+    const unit = data.course.units_by_slug[params.unit]
 
     if (!unit) {
         throw error(404, {

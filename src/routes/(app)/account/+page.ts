@@ -15,7 +15,7 @@ export const load: PageLoad = async ({ parent, url }) => {
         })
 
     const mutation = await data.graph.gmutation(graphql(`
-        mutation CreateLightUniversityCheckoutSession($return_url: String!) {
+        mutation CreateLuminaUniversityCheckoutSession($return_url: String!) {
             create_light_university_checkout_session(success_url: $return_url)
         }`), {
             return_url: url.toString()
