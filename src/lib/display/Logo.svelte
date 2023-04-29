@@ -10,8 +10,8 @@ import LightUniversity from "$lib/icons/LightUniversity.svelte"
         icon={LightUniversity}
         size={48}/>
     <div class="text">
-        <div class="stellar">
-            Stellar
+        <div class="Lumina">
+            Lumina
         </div>
         <div class="university">
             University
@@ -29,7 +29,7 @@ import LightUniversity from "$lib/icons/LightUniversity.svelte"
         color white
         font-weight 800
         text-transform uppercase
-        .stellar
+        .Lumina
             font-size 19px
             letter-spacing 0
         .university

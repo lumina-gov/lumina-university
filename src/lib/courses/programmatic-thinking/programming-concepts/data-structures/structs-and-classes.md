@@ -72,7 +72,7 @@ impl User {
         }
     }
 
-	  pub fn print_age(&self) {
+    pub fn print_age(&self) {
         println!("I am {} years old", self.age);
     }
 }

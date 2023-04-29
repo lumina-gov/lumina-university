@@ -147,6 +147,9 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
     margin auto
     padding 0 16px
     width 100%
+    @media (max-width $tablet)
+        flex-direction column
+        align-items center
 .section
     display flex
     flex-direction column
