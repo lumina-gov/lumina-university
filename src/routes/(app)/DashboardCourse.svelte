@@ -1,7 +1,7 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import ProgressBar from "$lib/display/ProgressBar.svelte"
-import CoursePlaceholder from "$lib/images/Courseplaceholder.png"
+import CoursePlaceholder from "$lib/images/course_placeholder.png"
 import Circle from "svelte-material-icons/Circle.svelte"
 import Button from "$lib/controls/Button.svelte"
 import PlayOutline from "svelte-material-icons/PlayOutline.svelte"
