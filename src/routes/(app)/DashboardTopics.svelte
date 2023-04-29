@@ -1,11 +1,11 @@
 <script lang="ts">
-import CodeTags from "svelte-material-icons/CodeTags.svelte";
-import Shape from "svelte-material-icons/Shape.svelte";
-import CogOutline from "svelte-material-icons/CogOutline.svelte";
-import CurrencyUsd from "svelte-material-icons/CurrencyUsd.svelte";
-import TagOutline from "svelte-material-icons/TagOutline.svelte";
-import Icon from "$lib/display/Icon.svelte";
-import type { SvelteComponent } from "svelte";
+import CodeTags from "svelte-material-icons/CodeTags.svelte"
+import Shape from "svelte-material-icons/Shape.svelte"
+import CogOutline from "svelte-material-icons/CogOutline.svelte"
+import CurrencyUsd from "svelte-material-icons/CurrencyUsd.svelte"
+import TagOutline from "svelte-material-icons/TagOutline.svelte"
+import Icon from "$lib/display/Icon.svelte"
+import type { SvelteComponent } from "svelte"
 
 let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white" | "red" | "yellow" | "orange" | "purple" | "blue" | undefined }[] =[
     {
@@ -38,12 +38,15 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
 
 <div class="wrapper">
     {#each topics as topic, i}
-        <a class="block" class:divider={i!==0} href="/courses">
+        <a
+            class="block"
+            class:divider={ i!==0 }
+            href="/courses">
             <Icon
-                icon={topic.icon}
                 color={topic.color}
+                icon={topic.icon}
                 size={72}/>
-            {topic.name}
+            { topic.name }
         </a>
     {/each}
 </div>

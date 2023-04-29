@@ -57,6 +57,15 @@ $: user = data.user_store.user
                 enlarge={false}
                 recent_unit={data.recent_data.unit}/>
         </Hero>
+    {:else}
+        <Hero
+            align="center"
+            divider={true}>
+            <div class="subheader">
+                Find a course
+            </div>
+            <DashboardTopics/>
+        </Hero>
     {/if}
 {:else}
     <div class="unauth-hero">
