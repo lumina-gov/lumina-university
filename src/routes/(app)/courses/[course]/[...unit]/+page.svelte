@@ -45,15 +45,19 @@ function check_completed(entries: IntersectionObserverEntry[], observer: Interse
 
 async function update_unit_progress(status: UnitStatus): Promise<void> {
     if (unit.status === status) return
-    let res = await data.graph.gmutation(graphql(`
+    if (data.user_store.user) {
+        let res = await data.graph.gmutation(graphql(`
         mutation SetUnitProgress($course_slug: String!, $unit_slug: String!, $status: UnitStatus!) {
             set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: $status) {
                 id
             }
         }
     `), {course_slug: data.course.course_slug, unit_slug: unit.unit_slug, status})
-    if (res.error) {
-        return $page.data.alerts.create_alert(MessageType.Error, res.error.message)
+        if (res.error) {
+            return $page.data.alerts.create_alert(MessageType.Error, res.error.message)
+        }
+    } else {
+        return $page.data.alerts.create_alert(MessageType.Warning, "Log in to track your progress")
     }
     unit.status = status
     unit = unit

@@ -1,9 +1,14 @@
 import { graphql } from "$lib/gql"
-import { error } from "@sveltejs/kit"
+import { error, redirect } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
+import { MessageType } from "$lib/types/message"
 
 export const load: PageLoad = async ({ parent, url }) => {
     const data = await parent()
+    if(!data.user_store.user) {
+        data.alerts.create_alert(MessageType.Error, "Log in to view your account")
+        throw redirect(307, "/")
+    }
 
     const query = await data.graph.gquery(graphql(`
         query CustomerPortalUrl($return_url: String!) {
@@ -13,14 +18,6 @@ export const load: PageLoad = async ({ parent, url }) => {
         }`), {
             return_url: url.toString()
         })
-
-    const mutation = await data.graph.gmutation(graphql(`
-        mutation CreateLuminaUniversityCheckoutSession($return_url: String!) {
-            create_light_university_checkout_session(success_url: $return_url)
-        }`), {
-            return_url: url.toString()
-        })
-
 
     if (query.error) {
         throw error(500, {
@@ -35,6 +32,13 @@ export const load: PageLoad = async ({ parent, url }) => {
             code: "CUSTOMER_PORTAL_URL_ERROR",
         })
     }
+
+    const mutation = await data.graph.gmutation(graphql(`
+        mutation CreateLuminaUniversityCheckoutSession($return_url: String!) {
+            create_light_university_checkout_session(success_url: $return_url)
+        }`), {
+            return_url: url.toString()
+        })
 
     if (mutation.error) {
         throw error(500, {
