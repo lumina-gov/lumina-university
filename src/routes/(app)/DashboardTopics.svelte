@@ -55,10 +55,12 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
 @import "variables"
 .wrapper
     display flex
-    justify-content space-between
-    align-items center
+    justify-content center
+    gap 12px
     width 100%
-    margin-top 160px
+    max-width 900px
+    margin 0 auto
+    flex-wrap wrap
 
 .block
     display flex
@@ -71,8 +73,8 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
     font-size 18px
     color white
     font-weight 500
-    &:focus
-        outline none
-    &.divider
-        border-left 1px solid rgba(255, 255, 255, 0.2)
+    outline none
+    border-radius 6px
+    &:hover
+        background transparify(white, 8%)
 </style>

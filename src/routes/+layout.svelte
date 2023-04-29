@@ -54,7 +54,4 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
         display flex
         flex-direction column
         z-index 1
-        @media (max-width $tablet)
-            overflow-y auto
-            height 100%
 </style>

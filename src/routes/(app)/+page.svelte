@@ -9,6 +9,7 @@ import Hero from "$lib/layouts/Hero.svelte"
 import DashboardCourse from "./DashboardCourse.svelte"
 import { SubscriptionStatus } from "$lib/gql/graphql"
 import DashboardTopics from "./DashboardTopics.svelte"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data: PageData
 
@@ -89,6 +90,7 @@ $: user = data.user_store.user
             <div class="span">
                 Ready for the real world?
             </div>
+            <div class="space"/>
             <DashboardTopics/>
             <div class="view-courses">
                 <Button
@@ -100,14 +102,17 @@ $: user = data.user_store.user
         </div>
     </div>
 {/if}
-<svelte:head>
-    <title>Light University - The next generation of education</title>
-    <meta
-        name="description"
-        content="The next generation of education - powered by the government of Lumina">
-</svelte:head>
+<PageHead
+    description="The next generation of education - powered by the Government of Lumina"
+    include_suffix={false}
+    title="Lumina University » Next Generation Education"
+/>
 <style lang="stylus">
 @import "variables"
+
+.space
+    padding-top 120px
+
 .auth-hero
     display flex
     flex-direction row
