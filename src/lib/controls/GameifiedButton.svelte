@@ -49,24 +49,23 @@ function handle_keyup(e: KeyboardEvent) {
     position relative
     transition top 0.05s ease-in, box-shadow 0.05s ease-in
     border-radius 8px
-    transform: translateY(0);
-    transition: transform 0.05s ease-in, box-shadow 0.05s ease-in;
+    top 0;
     &.pressed
         background $brand
         box-shadow 0 2px transparify($brand, 40%)
-        transform: translateY(6px)
+        top 6px
     &.translucent
         box-shadow 0 8px transparify(white, 10%)
         background transparify(white, 20%)
         &:active
             box-shadow 0 2px transparify(white, 10%)
-            transform: translateY(6px)
+            top 6px
     &.highlighted
         box-shadow 0 8px transparify($brand, 50%)
         background $brand
         &:active
             box-shadow 0 2px transparify($brand, 50%)
-            transform: translateY(6px)
+            top 6px
 
 
     </style>

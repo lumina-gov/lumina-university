@@ -12,15 +12,23 @@ export function get_paths_for_units(
         const current_el = elements[unit.unit_slug]
         const next_sibling_el = elements[next_sibling.unit_slug]
         if(!current_el || !next_sibling_el) return
+        const current_top = parseInt(window.getComputedStyle(current_el).getPropertyValue("top").replace("px", ""))
+        const next_sibling_top = parseInt(window.getComputedStyle(next_sibling_el).getPropertyValue("top").replace("px", ""))
         const current_rect = current_el.getBoundingClientRect()
         const next_sibling_rect = next_sibling_el.getBoundingClientRect()
 
         const startX = (current_rect.left + (current_rect.width / 2)) - container_el.getBoundingClientRect().left
-        const startY = (current_rect.bottom) - container_el.getBoundingClientRect().top + 8 //for the box shadow
-
+        const startY = (current_rect.bottom) - container_el.getBoundingClientRect().top + 8 - current_top//for the box shadow
         const endX = (next_sibling_rect.left + (next_sibling_rect.width / 2)) - container_el.getBoundingClientRect().left
-        const endY = next_sibling_rect.top - container_el.getBoundingClientRect().top
+        const endY = next_sibling_rect.top - container_el.getBoundingClientRect().top -next_sibling_top//for the box shadow
+        
 
+        // if (current_el.style.top === "6px"){ 
+        //     startY = startY - 6
+        // }
+        // if (window.getComputedStyle(next_sibling_el).top === "6px"){
+        //     endY = endY - 6
+        // }
         const intermediateX = startX
         const intermediateY = (endY + startY) / 2
         const path_data = `M ${startX} ${startY} L ${intermediateX} ${intermediateY} L ${endX} ${intermediateY} L ${endX} ${endY}`

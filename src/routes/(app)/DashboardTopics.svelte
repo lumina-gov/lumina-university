@@ -7,6 +7,7 @@ import TagOutline from "svelte-material-icons/TagOutline.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import type { SvelteComponent } from "svelte"
 
+
 let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white" | "red" | "yellow" | "orange" | "purple" | "blue" | undefined }[] =[
     {
         name: "Programming",
@@ -38,9 +39,11 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
 
 <div class="wrapper">
     {#each topics as topic, i}
+        {#if i !== 0}
+            <div class="breaker"/>
+        {/if}
         <a
             class="block"
-            class:divider={ i!==0 }
             href="/courses">
             <Icon
                 color={topic.color}
@@ -48,6 +51,7 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
                 size={72}/>
             { topic.name }
         </a>
+        
     {/each}
 </div>
 
@@ -58,23 +62,34 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
     justify-content center
     gap 12px
     width 100%
-    max-width 900px
-    margin 0 auto
+    margin-top 160px
+    gap 2px
     flex-wrap wrap
+    // @media (max-width: $tablet)
+    //     flex-direction column
+    //     align-items center
+
 
 .block
     display flex
     flex-direction column
     align-items center
     justify-content center
-    min-width 232px
+    flex 1
     padding 16px
     gap 9px
     font-size 18px
     color white
     font-weight 500
-    outline none
-    border-radius 6px
+    text-align center
+    border-radius 16px
+    &:focus
+        outline none
     &:hover
         background transparify(white, 8%)
+
+.breaker
+    width 2px
+    height 100px
+    background transparify(white, 8%)
 </style>
