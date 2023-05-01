@@ -39,9 +39,6 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
 
 <div class="wrapper">
     {#each topics as topic, i}
-        {#if i !== 0}
-            <div class="breaker"/>
-        {/if}
         <a
             class="block"
             href="/courses">
@@ -51,7 +48,7 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
                 size={72}/>
             { topic.name }
         </a>
-        
+
     {/each}
 </div>
 
@@ -65,10 +62,6 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
     margin-top 160px
     gap 2px
     flex-wrap wrap
-    // @media (max-width: $tablet)
-    //     flex-direction column
-    //     align-items center
-
 
 .block
     display flex
@@ -83,13 +76,7 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
     font-weight 500
     text-align center
     border-radius 16px
-    &:focus
-        outline none
-    &:hover
+    outline none
+    &:hover, &:focus
         background transparify(white, 8%)
-
-.breaker
-    width 2px
-    height 100px
-    background transparify(white, 8%)
 </style>

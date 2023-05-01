@@ -1,17 +1,11 @@
 import { courses, get_full_course } from "$lib/courses/content"
-import { error, redirect } from "@sveltejs/kit"
+import { error } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
 import { graphql } from "$lib/gql"
 import type { GetCourseProgressQuery, UnitStatus } from "$lib/gql/graphql"
-import { MessageType } from "$lib/types/message"
 
 export const load: LayoutLoad = async ({ params, parent }) => {
     const data = await parent()
-    
-    // if (data.user_store.user === null) {
-    //     data.alerts.create_alert(MessageType.Info, "You must be signed in to view this course")
-    //     throw redirect(307, data.user_store.login_url)
-    // }
 
     const course_import = courses[`./${params.course}/course.ts`]
     if (!course_import) {

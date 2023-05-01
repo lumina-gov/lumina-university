@@ -49,7 +49,7 @@ function handle_keyup(e: KeyboardEvent) {
     position relative
     transition top 0.05s ease-in, box-shadow 0.05s ease-in
     border-radius 8px
-    top 0;
+    top 0
     &.pressed
         background $brand
         box-shadow 0 2px transparify($brand, 40%)

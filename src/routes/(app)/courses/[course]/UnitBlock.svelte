@@ -2,14 +2,13 @@
 import Play from "svelte-material-icons/Play.svelte"
 import Check from "svelte-material-icons/Check.svelte"
 import type { Unit } from "$lib/types/unit"
-import { afterUpdate, onDestroy, onMount } from "svelte"
+import { afterUpdate, onDestroy } from "svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Text from "svelte-material-icons/Text.svelte"
 import { SubscriptionStatus, UnitStatus } from "$lib/gql/graphql"
 import GameifiedButton from "$lib/controls/GameifiedButton.svelte"
 import { page } from "$app/stores"
 import Lock from "svelte-material-icons/Lock.svelte"
-import { browser } from "$app/environment"
 
 $: user = $page.data.user_store.user
 $: subscription_status = user?.stripe_subscription_info.status ?? SubscriptionStatus.None
