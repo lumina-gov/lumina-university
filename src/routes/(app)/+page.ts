@@ -30,7 +30,7 @@ export const load = (async ({ parent }) => {
 
     const recent_unit = last_updated_unit_req.data.last_updated_unit
 
-    if (!recent_unit) return { recent_course: null }
+    if (!recent_unit) return { recent_data: null }
 
     const last_updated_course_progress = await data.graph.gquery(graphql(`
         query GetCourseProgress($course_slug: String!) {
@@ -51,8 +51,8 @@ export const load = (async ({ parent }) => {
             code: "COURSE_PROGRESS_ERROR"
         })
     }
-
     const course_progress = last_updated_course_progress.data.course_progress
+    if(course_progress.length === 0) return { recent_data: null }
 
     const units_progress_map: { [key: string]: UnitStatus } = {}
     for (const unit of course_progress) {

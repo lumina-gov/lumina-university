@@ -6,7 +6,7 @@ import CodeTags from "svelte-material-icons/CodeTags.svelte"
 import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import BookmarkCheck from "svelte-material-icons/BookmarkCheck.svelte"
 import ClockTimeFour from "svelte-material-icons/ClockTimeFour.svelte"
-import type { SvelteComponent } from "svelte";
+import type { SvelteComponent } from "svelte"
 export let course_name: string
 export let unit_count: number
 export let course_icon: typeof SvelteComponent
