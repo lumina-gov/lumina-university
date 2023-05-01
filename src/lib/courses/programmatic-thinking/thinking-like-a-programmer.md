@@ -34,7 +34,7 @@ Here are some techniques to help you approach problems systematically:
 - Or C++ when dealing with memory allocation, pointers and etc.
 - Some will just make you feel better earlier by abstracting away other things. `name = 'Albert'`
 - Some languages are better suited for certain types of purposes, but overall the language you choose typically doesn't matter much.
-- The hard part is that languages go in and out of fashion as paradigm shifts and trends happe
+- The hard part is that languages go in and out of fashion as paradigm shifts and trends happen
 - And the first one you learn will always be the hardest → so we’re here to help accelerate that process.
 
 :::warning
