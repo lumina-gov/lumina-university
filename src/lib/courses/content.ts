@@ -15,6 +15,10 @@ type UnitDataMap = {
     [key: string]: UnitData
 }
 
+export function has_course(course_slug: string): boolean {
+    return !!courses[`./${course_slug}/course.ts`]
+}
+
 export async function get_full_course(course_slug: string, units_progress_map: Record<string, UnitStatus>): Promise<CourseFull> {
     const course_import = courses[`./${course_slug}/course.ts`]
     if (!course_import) {
