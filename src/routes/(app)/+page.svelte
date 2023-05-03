@@ -39,7 +39,8 @@ $: user = data.user_store.user
     {#if data.recent_data}
         <Hero
             align="center"
-            divider={true}>
+            divider={true}
+            gap={24}>
             <div class="subheader">
                 Where you left off
             </div>
@@ -49,7 +50,8 @@ $: user = data.user_store.user
         </Hero>
         <Hero
             align="center"
-            divider={true}>
+            divider={true}
+            gap={24}>
             <div class="subheader">
                 Your courses
             </div>
@@ -58,16 +60,16 @@ $: user = data.user_store.user
                 enlarge={false}
                 recent_unit={data.recent_data.unit}/>
         </Hero>
-    {:else}
-        <Hero
-            align="center"
-            divider={true}>
-            <div class="subheader">
-                Find a course
-            </div>
-            <DashboardTopics/>
-        </Hero>
     {/if}
+    <Hero
+        align="center"
+        divider={true}
+        gap={24}>
+        <div class="subheader">
+            Find a course
+        </div>
+        <DashboardTopics/>
+    </Hero>
 {:else}
     <div class="unauth-hero">
         <div class="inner padding">

@@ -30,7 +30,6 @@ function format_string(str: string | undefined): string {
 
 {#if enlarge}
     <div class="wrapper">
-
         <div class="image">
             <img
                 alt="placeholder"
@@ -119,6 +118,7 @@ function format_string(str: string | undefined): string {
     padding 24px
     border-radius 8px
     gap 24px
+    width 100%
     @media screen and (max-width: $tablet)
         flex-direction column
         gap 16px

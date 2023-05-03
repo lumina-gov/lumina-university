@@ -14,7 +14,7 @@ export type CourseRaw = {
     next_up: string[]
     recommended: string[]
     description: string
-    image: string
+    image?: string
     units_by_slug: {
         [key: string]: {
             name: string

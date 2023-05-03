@@ -33,10 +33,11 @@ export async function get_full_course(course_slug: string, units_progress_map: R
 function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], units_progress_map: Record<string, UnitStatus> ): { units_by_slug: Record<string, Unit>, root_units: Unit[] } {
     // Create a map of units by id
     const units_by_slug: Record<string, Unit> = {}
-    // Create a list of root units
+
+    const entries = Object.entries(units)
 
     // Add units to map, and empty subunits array
-    Object.entries(units).map(([unit_slug, unit]) => {
+    entries.map(([unit_slug, unit]) => {
         units_by_slug[unit_slug] = {
             ...unit,
             unit_slug,
@@ -47,7 +48,7 @@ function units_query_to_unit_tree(units: UnitDataMap, root_units: string[], unit
     })
 
     // Add subunits to units
-    Object.entries(units).map(([slug, unit]) => {
+    entries.map(([slug, unit]) => {
         if (unit.subunits) {
             unit.subunits.map(subunit_slug => {
                 const subunit = units_by_slug[subunit_slug]

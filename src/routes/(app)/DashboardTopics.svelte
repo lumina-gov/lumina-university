@@ -59,7 +59,6 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
     justify-content center
     gap 12px
     width 100%
-    margin-top 160px
     gap 2px
     flex-wrap wrap
 

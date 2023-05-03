@@ -18,4 +18,6 @@ This is a error
 This is a note
 :::
 
+::question{slug="question-slug" question="What is 1+1?"}
+
 ***foo***

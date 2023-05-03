@@ -30,6 +30,13 @@ export type Scalars = {
   Uuid: string;
 };
 
+export enum Assessment {
+  Fail = 'FAIL',
+  Pass = 'PASS',
+  SoftPass = 'SOFT_PASS',
+  Unknown = 'UNKNOWN'
+}
+
 export type CitizenshipApplicationInput = {
   country_of_birth: Scalars['String'];
   country_of_citizenship: Array<Scalars['String']>;
@@ -79,6 +86,7 @@ export type Mutation = {
   create_user: Scalars['Uuid'];
   /** Returns a JWT token for the user */
   login: Scalars['String'];
+  question_assessment: QuestionAssessment;
   set_unit_progress: UnitProgress;
   test: Scalars['String'];
 };
@@ -104,6 +112,15 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationQuestion_AssessmentArgs = {
+  answer: Scalars['String'];
+  course_slug: Scalars['String'];
+  question: Scalars['String'];
+  question_slug: Scalars['String'];
+  unit_slug: Scalars['String'];
+};
+
+
 export type MutationSet_Unit_ProgressArgs = {
   course_slug: Scalars['String'];
   status: UnitStatus;
@@ -123,6 +140,7 @@ export type Query = {
   last_updated_unit?: Maybe<UnitProgress>;
   me?: Maybe<User>;
   ping: Scalars['String'];
+  question_assessment?: Maybe<QuestionAssessment>;
   user_count: Scalars['Int'];
   user_count_by_interval: Array<Scalars['Int']>;
 };
@@ -138,9 +156,29 @@ export type QueryCrack_TimeArgs = {
 };
 
 
+export type QueryQuestion_AssessmentArgs = {
+  course_slug: Scalars['String'];
+  question_slug: Scalars['String'];
+  unit_slug: Scalars['String'];
+};
+
+
 export type QueryUser_Count_By_IntervalArgs = {
   count: Scalars['Int'];
   interval: Scalars['Int'];
+};
+
+export type QuestionAssessment = {
+  __typename?: 'QuestionAssessment';
+  answer: Scalars['String'];
+  assessment: Assessment;
+  course_slug: Scalars['String'];
+  feedback: Scalars['String'];
+  id: Scalars['Uuid'];
+  question_slug: Scalars['String'];
+  unit_slug: Scalars['String'];
+  updated_at: Scalars['DateTime'];
+  user_id: Scalars['Uuid'];
 };
 
 export type SubscriptionInfo = {
@@ -194,6 +232,26 @@ export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, email: string, first_name: string, last_name: string, stripe_subscription_info: { __typename?: 'SubscriptionInfo', status: SubscriptionStatus, expiry_date?: any | null } } | null };
 
+export type GetQuestionAssessmentQueryVariables = Exact<{
+  course_slug: Scalars['String'];
+  unit_slug: Scalars['String'];
+  question_slug: Scalars['String'];
+}>;
+
+
+export type GetQuestionAssessmentQuery = { __typename?: 'Query', question_assessment?: { __typename?: 'QuestionAssessment', feedback: string, answer: string, assessment: Assessment } | null };
+
+export type SetQuestionAssessmentMutationVariables = Exact<{
+  question: Scalars['String'];
+  answer: Scalars['String'];
+  course_slug: Scalars['String'];
+  unit_slug: Scalars['String'];
+  question_slug: Scalars['String'];
+}>;
+
+
+export type SetQuestionAssessmentMutation = { __typename?: 'Mutation', question_assessment: { __typename?: 'QuestionAssessment', feedback: string, assessment: Assessment } };
+
 export type LastUpdatedUnitQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -231,6 +289,8 @@ export type SetUnitProgressMutation = { __typename?: 'Mutation', set_unit_progre
 
 
 export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"stripe_subscription_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"expiry_date"}}]}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const GetQuestionAssessmentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetQuestionAssessment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"course_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"unit_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"question_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question_assessment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"course_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"course_slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"unit_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"unit_slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"question_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"question_slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"feedback"}},{"kind":"Field","name":{"kind":"Name","value":"answer"}},{"kind":"Field","name":{"kind":"Name","value":"assessment"}}]}}]}}]} as unknown as DocumentNode<GetQuestionAssessmentQuery, GetQuestionAssessmentQueryVariables>;
+export const SetQuestionAssessmentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetQuestionAssessment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"question"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"answer"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"course_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"unit_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"question_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question_assessment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"question"},"value":{"kind":"Variable","name":{"kind":"Name","value":"question"}}},{"kind":"Argument","name":{"kind":"Name","value":"answer"},"value":{"kind":"Variable","name":{"kind":"Name","value":"answer"}}},{"kind":"Argument","name":{"kind":"Name","value":"course_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"course_slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"unit_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"unit_slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"question_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"question_slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"feedback"}},{"kind":"Field","name":{"kind":"Name","value":"assessment"}}]}}]}}]} as unknown as DocumentNode<SetQuestionAssessmentMutation, SetQuestionAssessmentMutationVariables>;
 export const LastUpdatedUnitDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LastUpdatedUnit"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"last_updated_unit"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_slug"}},{"kind":"Field","name":{"kind":"Name","value":"course_slug"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]} as unknown as DocumentNode<LastUpdatedUnitQuery, LastUpdatedUnitQueryVariables>;
 export const GetCourseProgressDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCourseProgress"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"course_slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"course_progress"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"course_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"course_slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_slug"}},{"kind":"Field","name":{"kind":"Name","value":"course_slug"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]} as unknown as DocumentNode<GetCourseProgressQuery, GetCourseProgressQueryVariables>;
 export const CustomerPortalUrlDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CustomerPortalUrl"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer_portal_url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"return_url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"return_url"}}}]}]}}]}}]} as unknown as DocumentNode<CustomerPortalUrlQuery, CustomerPortalUrlQueryVariables>;

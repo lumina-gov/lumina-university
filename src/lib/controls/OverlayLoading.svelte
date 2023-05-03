@@ -1,8 +1,12 @@
-<script>
+<script lang="ts">
 import LogoLoading from "$lib/display/LogoLoading.svelte"
 
+export let background = true
+
 </script>
-<div class="overlay-spinner">
+<div
+    style:background={ background ? "rgba(0,0,0,0.5)": "transparent" }
+    class="overlay-spinner">
     <LogoLoading/>
 </div>
 <style lang="stylus">

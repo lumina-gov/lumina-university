@@ -61,15 +61,12 @@ function handle_keyup(e: KeyboardEvent) {
     outline 0
     &.opacity
         color transparify(white, 40%)
-    &:hover
+    &:hover, &:focus
         background transparify(white, 12%)
         color white
     &:active
         background transparify(white, 8%)
         color white
-    &:focus-visible
-        outline $brand 2px dashed
-        outline-offset 2px
     &.branded
         background $brand
         &:hover, &:focus

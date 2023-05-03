@@ -10,6 +10,7 @@ import ListBlock from "./ListBlock.svelte"
 import BlockQuoteBlock from "./BlockQuoteBlock.svelte"
 import CodeBlock from "./CodeBlock.svelte"
 import TableBlock from "./TableBlock.svelte"
+import LeafDirective from "./LeafDirective.svelte"
 
 export let block: Block
 
@@ -17,6 +18,7 @@ let block_types: PartialRecord<Block["type"], typeof SvelteComponent> = {
     "heading": HeadingBlock,
     "paragraph": ParagraphBlock,
     "containerDirective": ContainerDirective,
+    "leafDirective": LeafDirective,
     "list": ListBlock,
     "blockquote": BlockQuoteBlock,
     "code": CodeBlock,
