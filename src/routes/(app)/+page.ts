@@ -3,66 +3,44 @@ import { get_full_course, has_course } from "$lib/courses/content"
 import { graphql } from "$lib/gql"
 import { error } from "@sveltejs/kit"
 import type { UnitStatus } from "$lib/gql/graphql"
+import type { CourseFull } from "$lib/types/course"
 
 export const load = (async ({ parent }) => {
     const data = await parent()
     if (data.user_store.user === null) return { recent_data: null }
-
-    const last_updated_unit_req = await data.graph.gquery(graphql(`
-        query LastUpdatedUnit {
-            last_updated_unit {
+    const all_progress_req = await data.graph.gquery(graphql(`
+        query AllCourseProgress {
+            all_course_progress {
                 id
-                status
                 user_id
                 unit_slug
                 course_slug
+                status
                 updated_at
             }
         }
     `), {})
 
-    if (last_updated_unit_req.error || !last_updated_unit_req.data) {
-        throw error(500, {
-            message: last_updated_unit_req.error?.message ?? "Error fetching last updated unit",
-            code: "LAST_UPDATED_UNIT_ERROR"
-        })
+    if (all_progress_req.error || !all_progress_req.data?.all_course_progress) {
+        return {recent_data: null}
     }
+    const recent_data: { unit_slug: string, course: CourseFull}[] = []
 
-    const recent_unit = last_updated_unit_req.data.last_updated_unit
-
-    if (!recent_unit || !has_course(recent_unit.course_slug)) return { recent_data: null }
-
-    const last_updated_course_progress = await data.graph.gquery(graphql(`
-        query GetCourseProgress($course_slug: String!) {
-            course_progress(course_slug: $course_slug) {
-                id
-                status
-                user_id
-                unit_slug
-                course_slug
-                updated_at
+    for (const course of all_progress_req.data.all_course_progress) {
+        if (has_course(course[0].course_slug)) {
+            const units_progress_map: { [key: string]: UnitStatus } = {}
+            for (const unit of course) {
+                units_progress_map[unit.unit_slug] = unit.status
             }
+            recent_data.push(
+                {
+                    unit_slug: course[0].unit_slug,
+                    course: await get_full_course(course[0].course_slug, units_progress_map),
+                }
+            )
         }
-    `), { course_slug: recent_unit.course_slug })
-
-    if (last_updated_course_progress.error || !last_updated_course_progress.data) {
-        throw error(500, {
-            message: last_updated_course_progress.error?.message ?? "Error fetching last updated course progress",
-            code: "COURSE_PROGRESS_ERROR"
-        })
     }
-    const course_progress = last_updated_course_progress.data.course_progress
-
-
-    const units_progress_map: { [key: string]: UnitStatus } = {}
-    for (const unit of course_progress) {
-        units_progress_map[unit.unit_slug] = unit.status
-    }
-
     return {
-        recent_data: {
-            unit: recent_unit.unit_slug,
-            course: await get_full_course(recent_unit.course_slug, units_progress_map),
-        }
+        recent_data: recent_data
     }
 }) satisfies PageLoad

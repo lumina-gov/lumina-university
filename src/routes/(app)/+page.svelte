@@ -10,11 +10,12 @@ import DashboardCourse from "./DashboardCourse.svelte"
 import { SubscriptionStatus } from "$lib/gql/graphql"
 import DashboardTopics from "./DashboardTopics.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
-
+import RecentCoursesGrid from "./RecentCoursesGrid.svelte"
+    
 export let data: PageData
-
+    
 $: user = data.user_store.user
-
+    
 </script>
 {#if user}
     <Hero divider={true}>
@@ -45,8 +46,8 @@ $: user = data.user_store.user
                 Where you left off
             </div>
             <DashboardCourse
-                course={data.recent_data.course}
-                recent_unit={data.recent_data.unit}/>
+                data={data.recent_data[0]}
+                enlarge={true}/>
         </Hero>
         <Hero
             align="center"
@@ -55,10 +56,7 @@ $: user = data.user_store.user
             <div class="subheader">
                 Your courses
             </div>
-            <DashboardCourse
-                course={data.recent_data.course}
-                enlarge={false}
-                recent_unit={data.recent_data.unit}/>
+            <RecentCoursesGrid recent_data={data.recent_data}/>
         </Hero>
     {/if}
     <Hero
@@ -110,56 +108,56 @@ $: user = data.user_store.user
     title="Lumina University » Next Generation Education"
 />
 <style lang="stylus">
-@import "variables"
-
-.space
-    padding-top 120px
-
-.auth-hero
-    display flex
-    flex-direction row
-    justify-content space-between
-    align-items center
-    width 100%
-    .greeting
+    @import "variables"
+    
+    .space
+        padding-top 120px
+    
+    .auth-hero
         display flex
-        gap 16px
-        font-size 36px
-        font-weight 800
+        flex-direction row
+        justify-content space-between
         align-items center
-.subheader
-    font-size 22px
-    font-weight 800
-    text-align center
-
-.unauth-hero
-    display flex
-    flex-direction column
-    align-items center
-    .inner
-        display flex
-        gap 16px
-        flex-direction column
-        align-items flex-start
         width 100%
-        justify-content center
-        max-width 1200px
-        &.padding
-            padding 140px 24px
-        h1
-            font-size 50px
-            max-width 600px
-            text-transform uppercase
+        .greeting
+            display flex
+            gap 16px
+            font-size 36px
             font-weight 800
-        .span
-            opacity 0.5
-            text-transform uppercase
-            font-weight 700
-        .para
-            opacity 0.8
-.view-courses
-    width 100%
-    display flex
-    justify-content center
-    padding 20px
-</style>
+            align-items center
+    .subheader
+        font-size 22px
+        font-weight 800
+        text-align center
+    
+    .unauth-hero
+        display flex
+        flex-direction column
+        align-items center
+        .inner
+            display flex
+            gap 16px
+            flex-direction column
+            align-items flex-start
+            width 100%
+            justify-content center
+            max-width 1200px
+            &.padding
+                padding 140px 24px
+            h1
+                font-size 50px
+                max-width 600px
+                text-transform uppercase
+                font-weight 800
+            .span
+                opacity 0.5
+                text-transform uppercase
+                font-weight 700
+            .para
+                opacity 0.8
+    .view-courses
+        width 100%
+        display flex
+        justify-content center
+        padding 20px
+    </style>
