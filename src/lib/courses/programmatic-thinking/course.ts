@@ -51,6 +51,7 @@ export const course: CourseRaw = {
         },
         "thinking-like-a-programmer/algorithmic-thinking": {
             name: "Algorithmic Thinking",
+            free: true
         },
         "thinking-like-a-programmer/abstraction-modularity-and-integration": {
             name: "Abstraction, Modularity, and Integration",

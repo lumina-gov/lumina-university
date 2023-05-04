@@ -32,6 +32,31 @@ When searching for programming solutions, it's important to use the right search
 
 Note that the good searches include specific error codes and relevant keywords. The bad searches are too general and don't provide enough information.
 
+## Exercise
+
+Given the following error, what would be a good search query to find a solution?
+
+```
+module.js:340
+    throw err;
+          ^
+Error: Cannot find module 'express'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (C:\ChatServer\Server\server.js:6:9)
+    at Object.<anonymous> (C:\ChatServer\Server\server.js:25:4)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+```
+
+::question{slug="good-search" question="What would be a good search query to find a solution to the above error?" context="Error is: `Error: Cannot find module 'express'`, user should search something along those lines"}
+
+::question{slug="good-search-answer" question="Now search Google for an answer to this error. What is the first solution you find?" context="User searches: `Error: Cannot find module 'express'`, correct answer would be to run `npm install express` but any answer that solves the problem is acceptable"}
+
 ## Conclusion
 
 Google is a powerful tool that can help you find solutions to programming problems. By removing irrelevant information when searching for solutions, using specific search queries and keywords, and focusing on error codes and relevant information, you can become a more efficient and effective problem solver. Remember, the key to successful Google searches is specificity and relevancy.

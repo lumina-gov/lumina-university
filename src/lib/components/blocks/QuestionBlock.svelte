@@ -2,7 +2,7 @@
 import Icon from "$lib/display/Icon.svelte"
 import ChatQuestion from "svelte-material-icons/ChatQuestion.svelte"
 import type { LeafDirective } from "mdast-util-directive"
-import type { SvelteComponent} from "svelte"
+import { tick, type SvelteComponent} from "svelte"
 import { onMount } from "svelte"
 import IconButton from "$lib/controls/IconButton.svelte"
 import Send from "svelte-material-icons/Send.svelte"
@@ -22,6 +22,16 @@ let response: null | {
     feedback: string
     assessment: "PASS" | "FAIL" | "SOFT_PASS" | "UNKNOWN"
 } = null
+
+$: attributes = block.attributes as {
+    question: string
+    slug: string
+    context?: string
+}
+
+let audio: HTMLAudioElement
+
+$: assessment = response?.assessment ?? "UNKNOWN"
 
 let textarea: HTMLTextAreaElement
 let answer = ""
@@ -44,7 +54,7 @@ const assessment_mappings: Record<string, {
     },
     "SOFT_PASS": {
         icon: CheckCircle,
-        color: "yellow",
+        color: "yellow_green",
         text: "Partially Correct"
     },
     "UNKNOWN": {
@@ -55,6 +65,7 @@ const assessment_mappings: Record<string, {
 }
 
 onMount(() => {
+    audio = new Audio(ButtonSound)
     resize_text_area()
     load_assessment()
 })
@@ -87,7 +98,7 @@ async function load_assessment() {
     `), {
         course_slug: $page.data.course.course_slug,
         unit_slug: $page.data.unit.unit_slug,
-        question_slug: block.attributes?.slug || ""
+        question_slug: attributes.slug
     })
 
     loading = false
@@ -103,6 +114,9 @@ async function load_assessment() {
 
     answer = data["answer"]
     response = data
+
+    await tick()
+    resize_text_area()
 }
 
 async function submit() {
@@ -110,6 +124,7 @@ async function submit() {
     if(loading) return
 
     loading = true
+    response = null
     let res = await $page.data.graph.gmutation(gql(`
             mutation SetQuestionAssessment(
                 $question: String!
@@ -117,38 +132,50 @@ async function submit() {
                 $course_slug: String!
                 $unit_slug: String!
                 $question_slug: String!
+                $context: String
             ) {
                 question_assessment(
                     question: $question
                     answer: $answer
                     course_slug: $course_slug
                     unit_slug: $unit_slug
-                    question_slug: $question_slug
+                    question_slug: $question_slug,
+                    question_context: $context
                 ) {
                     feedback
                     assessment
                 }
             }
         `), {
-        question: block.attributes?.question || "",
+        question: attributes.question,
         answer,
         course_slug: $page.data.course.course_slug,
         unit_slug: $page.data.unit.unit_slug,
-        question_slug: block.attributes?.slug || ""
+        question_slug: attributes.slug,
+        context: attributes.context
     })
 
     loading = false
+
 
     if(res["error"]) {
         $page.data.alerts.create_alert(MessageType.Error, res["error"]["message"])
         return
     }
 
+    audio.play()
+
     response = res["data"]["question_assessment"]
+    await tick()
+    resize_text_area()
 }
 
 </script>
-<div class="question">
+<div
+    class="question"
+    class:correct={ assessment === "PASS" }
+    class:incorrect={ assessment === "FAIL" }
+    class:partially-correct={ assessment === "SOFT_PASS" }>
     <div class="section">
         <div class="section-header">
             <Icon
@@ -166,7 +193,6 @@ async function submit() {
                 on:input={ resize_text_area }
                 on:keydown={ e => {
                     if (e.key === "Enter" && !e.shiftKey) {
-                        let audio = new Audio(ButtonSound)
                         audio.play()
                         e.preventDefault()
                         submit()
@@ -211,18 +237,7 @@ async function submit() {
 <style lang="stylus">
 @import "variables"
 
-textarea
-    padding 16px
-    cursor text
-    border 0
-    width 100%
-    color white
-    outline 0
-    resize none
-    overflow hidden
-    line-height 1.5em
-    height calc(1.5em + 32px)
-    background transparent
+
 
 .loading
     height 100px
@@ -234,6 +249,15 @@ textarea
     overflow hidden
     flex-direction column
     background transparify(white, 4%)
+    outline 2px solid transparify(white, 10%)
+    outline-offset 10px
+    border 1px solid transparify(white, 10%)
+    &.correct
+        outline-color $green
+    &.partially-correct
+        outline-color $yellow_green
+    &.incorrect
+        outline-color $red
 
 .section
     padding 16px
@@ -265,5 +289,18 @@ textarea
 
 .feedback
     opacity 0.7
+
+textarea
+    padding 16px
+    cursor text
+    border 0
+    width 100%
+    color white
+    outline 0
+    resize none
+    overflow hidden
+    line-height 1.5em
+    height calc(1.5em + 32px)
+    background transparent
 
 </style>

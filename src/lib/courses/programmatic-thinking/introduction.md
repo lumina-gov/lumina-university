@@ -1,4 +1,4 @@
-# Building Blocks for Your Future
+## Building Blocks for Your Future
 
 Welcome to our programming course! In this unit, you will learn the fundamental concepts of programming that form the building blocks of modern software development. By the end of this course, you will have a solid principles that guide software development, and be well on your way to becoming a skilled programmer.
 
@@ -21,3 +21,4 @@ Pseudocode is a simple to understand natural language that removes the complicat
 We will move into real programming in the later stages
 :::
 
+::question{slug="are-you-excited" question="What are you excited to learn about in this course?" context="Programmatic thinking course, how to think like a programmer and write code"}

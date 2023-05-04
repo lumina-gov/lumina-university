@@ -48,4 +48,10 @@ code
         padding 1px 6px
         margin 0 4px
         border-radius 4px
+
+strong
+    border 1px solid transparify(white, 20%)
+    border-radius 4px
+    padding 1px 6px
+    color white
 </style>

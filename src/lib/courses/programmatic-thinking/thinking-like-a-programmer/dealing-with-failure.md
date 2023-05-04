@@ -22,9 +22,11 @@ Here are some strategies for dealing with failure in programming:
 - **Ask for help**: Don't be afraid to ask for help from more experienced programmers. This can help you learn and grow as a programmer.
 - **Practice**: Practice programming regularly to improve your skills and develop your problem-solving abilities.
 
-note Reframing Failure and Mistakes
+:::note
+**Reframing Failure and Mistakes**
 
 One way to deal with failure is to reframe it as an opportunity for learning. Instead of seeing mistakes as failures, see them as opportunities to improve your skills and knowledge. Every mistake you make is a chance to learn something new and become a better programmer.
+:::
 
 ## Iterative Development and Testing
 

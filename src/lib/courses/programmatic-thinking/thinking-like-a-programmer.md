@@ -27,6 +27,8 @@ Here are some techniques to help you approach problems systematically:
 4. **Use Pseudocode**: Write out the steps of the solution in plain language, without worrying about the specific programming language syntax. This helps you to flesh out the logic of the solution before you start writing code.
 5. **Test your solution**: After you've written your code, test it with a variety of inputs. Make sure it works correctly in all cases.
 
+::question{ slug="problem-solving-techniques" question="What are some techniques you can use to solve problems?" }
+
 ## Programming is not about languages
 
 - The language you choose typically doesn't typically matter much (*although I prefer to use Rust and Typescript*)
@@ -38,11 +40,9 @@ Here are some techniques to help you approach problems systematically:
 - And the first one you learn will always be the hardest → so we’re here to help accelerate that process.
 
 :::warning
-
-**Computers are stupid**
+**Computers are stupid...**
 
 > The hard part about writing a computer program, isn't about trying to be as smart as the computer, it's about learning how to be as mind-numbingly stupid as a computer. - Andy Harris
-
 :::
 
 ## Programming languages are simpler than human ones

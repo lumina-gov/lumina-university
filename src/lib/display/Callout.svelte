@@ -25,29 +25,35 @@ export let type: keyof typeof icons
     </div>
 </div>
 <style lang="stylus">
-@import "variables.styl"
+@import "variables"
 
 .callout
     display flex
     gap 20px
     width 100%
     padding 20px
-    border-radius 4px
+    border-radius 8px
     background transparify(white, 10%)
+    border 2px solid transparify(white, 10%)
+
     &.note
         background transparify($blue, 10%)
+        border-color transparify($blue, 50%)
         .icon
             color $blue
     &.error
         background transparify($red, 10%)
+        border-color transparify($red, 50%)
         .icon
             color $red
     &.warning
         background transparify($yellow, 10%)
+        border-color transparify($yellow, 50%)
         .icon
             color $yellow
     &.success
         background transparify($green, 10%)
+        border-color transparify($green, 50%)
         .icon
             color $green
 

@@ -13,6 +13,8 @@ Abstraction is the process of hiding complexity behind a simple and easy-to-use 
 
 In programming, abstraction is used to simplify code by encapsulating complex logic into simple functions or modules. By doing this, you can reuse code across multiple projects, making your code more modular and easier to maintain.
 
+::question{slug="abstraction" question="Explain the benefits of abstraction" }
+
 ## Modularity
 
 Modularity is the concept of breaking down a complex problem into smaller, more manageable parts. By doing this, you can design solutions that are easier to understand and maintain.
@@ -25,6 +27,7 @@ Integration is the process of combining smaller, independent modules into a larg
 
 In programming, integration is achieved by combining smaller modules into larger systems. The modules should be designed to work together seamlessly, allowing you to create a solution that solves the problem efficiently and effectively.
 
+::question{slug="modularity" question="Why is it important to break down complex systems into smaller and reusable sub-systems?" }
 ## Blackbox Methodology
 
 Blackbox methodology is a technique used in programming to design and implement solutions. It involves breaking down a problem into smaller, more manageable parts, and designing each part as a **black box** that takes in **inputs and produces outputs**.

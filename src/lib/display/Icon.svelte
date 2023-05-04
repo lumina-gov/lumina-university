@@ -3,7 +3,7 @@ import type { SvelteComponent } from "svelte"
 
 export let icon: typeof SvelteComponent
 export let size: number | undefined = undefined
-export let color: "brand" | "white" | "red" | "yellow" | "orange" | "purple" | "blue" | undefined = undefined
+export let color: "brand" | "white" | "red" | "yellow" | "orange" | "purple" | "blue" | "yellow_green" | "green" | undefined = undefined
 export let opacity = 1
 </script>
 <div
@@ -34,5 +34,9 @@ export let opacity = 1
         color $purple
     &.blue
         color $blue
+    &.yellow_green
+        color $yellow_green
+    &.green
+        color $green
 
 </style>

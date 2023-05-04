@@ -11,7 +11,7 @@ Data is at the core of programming. As a programmer, you will work with data in 
 
 In programming, everything can be represented as data. Data can be any piece of information that can be stored, processed, and manipulated by a computer. To understand this concept, let's use an analogy of a person.
 
-Imagine a person named "John". John has various attributes, such as his height, weight, name, age, and more. Each of these attributes can be represented as data.
+Imagine a **person** named `John`. `John` has various **attributes**, such as his height, weight, name, age, and more. Each of these attributes can be represented as data.
 
 - **Height**: John's height can be represented as a number, such as "180 cm".
 - **Weight**: John's weight can also be represented as a number, such as "80 kg".
@@ -19,6 +19,8 @@ Imagine a person named "John". John has various attributes, such as his height, 
 - **Age**: John's age can be represented as a number, such as "25".
 
 These attributes are known as fields. A field is a specific piece of information in a data structure. In our analogy, the person's attributes are fields, and the person is the data structure.
+
+::question{ slug="example-of-data" question="What are a few examples of attribute that can be used to represent a country, and what data type would for each attribute?"}
 
 ## Representing the World as Data
 

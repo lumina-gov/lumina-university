@@ -48,3 +48,9 @@ Step 2: Add A and B together
 Step 3: Store the result in a variable called "sum"
 Step 4: Return the value of "sum"
 ```
+
+## Another Example
+
+Imagine we want to write some pseudo-code or "cooking recipie" for making a sandwich. We can break this down into a series of steps.
+
+::question{slug="write-pseudocode" question="Write pseudocode for making a peanut butter and jelly sandwich. Define the inputs, outputs and steps" context="Inputs should be bread, peanut butter, and jelly. The output should be a peanut butter and jelly sandwich."}

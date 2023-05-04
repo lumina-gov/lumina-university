@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
+import { onMount, type SvelteComponent } from "svelte"
 import { createEventDispatcher } from "svelte"
 import ButtonSound from "$lib/sounds/ButtonSound.wav"
 
@@ -16,11 +16,15 @@ export let use_sound = true
 $: tag = href ? "a" : "div"
 
 let dispatch = createEventDispatcher()
+let sound: HTMLAudioElement
+
+onMount(() => {
+    sound = new Audio(ButtonSound)
+})
 
 function clicked(e: Event) {
     !disabled && dispatch("click", e)
     if(use_sound) {
-        let sound = new Audio(ButtonSound)
         sound.play()
     }
 }

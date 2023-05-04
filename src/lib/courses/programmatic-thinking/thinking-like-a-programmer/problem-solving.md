@@ -19,21 +19,23 @@ The problem-solving process is a structured approach to solving problems. Here a
 6. **Test your solution**: After you've written your code, test it with a variety of inputs. Make sure it works correctly in all cases.
 7. **Debug your solution**: If your code doesn't work correctly, use debugging techniques to identify and fix the problem.
 
+### Understand the problem
 :::error
-
 Most beginners think they don't understand what code to write, but the real problem is that they don't understand the problem they're trying to solve.
 
-1. Do not try to do it before figuring out what to do
-2. Write out the concepts first, then convert to code after.
-    1. If you're lost in coding, it's probably because you shouldn't be coding yet
-    2. Have you been been stuck on a problem, and you start explaining it to somebody and instantly see holes in the logic you didn't see before?
-    3. Most programmers know this feeling.
-    4. If you're confused about what you are coding, try to write down your problem or try explain it to someone.
-    5. You may come across the term rubber-duck debugging, where it literally involves asking or explaining a problem to a rubber duck and finding the solution
-    6. This is because more often than not, your solution lies in the problem itself.
-    7. “If you can’t explain something in simple terms, you don’t understand it well enough.” — Richard Feynman
-
+Do not try to do it before figuring out what to do, *Write out the concepts first, then convert to code after.*
 :::
+
+ - If you're lost in coding, it's probably because you shouldn't be coding yet
+ - Have you been been stuck on a problem, and you start explaining it to somebody and instantly see holes in the logic you didn't see before?
+ - Most programmers know this feeling.
+ - If you're confused about what you are coding, try to write down your problem or try explain it to someone.
+ - You may come across the term rubber-duck debugging, where it literally involves asking or explaining a problem to a rubber duck and finding the solution
+ - This is because more often than not, your solution lies in the problem itself.
+
+> *If you can’t explain something in simple terms, you don’t understand it well enough*
+> **Richard Feynman**
+
 ### Rubber Duck Debugging
 
 Rubber duck debugging is a technique where you explain your code to a rubber duck as if it were a person. By talking through the code step-by-step, you may be able to spot errors or see the code in a new way. The rubber duck doesn't actually help you, but the act of explaining the code out loud can often help you find the solution to a problem.
@@ -82,6 +84,8 @@ If the user is 18 or older, print "You are old enough to vote"
 
 Pseudocode helps you to flesh out the logic of your solution before you start writing code. Once you have the steps written out, it's much easier to translate them into code.
 
+::question{slug="pseudocode" question="What is pseudocode, and how can it help you write better code?"}
+
 ## Testing and Debugging
 
 Testing and debugging are important parts of the problem-solving process. Here are some tips:
@@ -94,3 +98,5 @@ Testing and debugging are important parts of the problem-solving process. Here a
     3. **Write a test**: Write a test that fails because of the problem. This test will prevent the problem from happening again in the future.
     4. **Fix the problem**: Once you've identified the root cause of the problem, fix it by changing the code.
     5. **Run the test**: Run the test to make sure the problem has been fixed. If the test fails, repeat the process until it passes.
+
+::question{slug="testing-and-debugging" question="Why is it important to write a test before fixing the issue?" context="It is important to write a test before fixing the issue because it will prevent the problem from happening again in the future."}
