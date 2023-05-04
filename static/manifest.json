@@ -1,0 +1,27 @@
+{
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+    "short_name": "Lumina University",
+    "name": "Lumina University",
+    "id": "earth.luminauniversity",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/images/lumina-university-app-icon.svg",
+            "type": "image/svg+xml",
+            "sizes": "512x512"
+        },
+        {
+            "src": "/images/lumina-university-app-icon.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "background_color": "#15181C",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#00B473",
+    "shortcuts": [
+
+    ],
+    "description": "Lumina University > The next generation of education"
+}

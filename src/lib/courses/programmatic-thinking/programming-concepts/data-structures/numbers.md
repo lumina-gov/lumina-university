@@ -64,16 +64,22 @@ The word hexadecimal comes from the words: hex meaning six and decimal meaning t
 
 In programming, there are several different types of numbers that can be used to represent different types of values. The most common types include:
 
-- **Integers**: Integers are whole numbers that can be positive, negative, or zero. They are typically represented using a fixed number of bits, such as 8, 16, 32, or 64 bits.
-- **Unsigned Integers**: Unsigned integers are similar to integers, but they can only be positive or zero. They are typically represented using the same number of bits as integers.
+- **Integers**: Integers are whole numbers that can be positive, negative, or zero. They are typically represented using a fixed number of bits, such as 8, 16, 32, or 64 bits. Numbers that can sometimes go negative can be used for: temperatures, bank balances, or other things that can be positive and negative.
+- **Unsigned Integers**: Unsigned integers are similar to integers, but they can only be positive or zero. They are typically represented using the same number of bits as integers. They are generally used for values which are always positive, such as the number of items in a list, or a person's age.
 - **Floats**: Floats are used to represent numbers with a fractional component, such as 3.14159. They are represented using a fixed number of bits, such as 32 or 64 bits.
 - **Decimals**: Decimals are used to represent decimal numbers with a high level of precision. They are represented using a variable number of bits, depending on the precision required. CPUs generally don’t deal with these numbers directly and instead software is used to simulate these numbers with arbitrary precision. They are often slower for this reason and are generally only used when high integrity between decimal operations is needed such as for financial calculations.
+
+
+::question{slug="numbers-question" question="Explain the difference between integers and unsigned integers."}
+
 
 ## Why Different Number Types are Used
 
 Different number types are used in programming to represent different types of values and optimize the use of memory. For example, using an integer to represent a small value can be wasteful if the integer requires 32 bits. Using an 8-bit unsigned integer instead can save memory.
 
 Floats are often used when you need numbers that contain a decimal point, but suffer from accuracy issues and rounding issues after a certain point.
+
+::question{slug="example-of-number" question="Why would you not use a float to represent the number of items in a list? What would be the correct number type to use?" context="should be unsigned integer because you can't have 0.5 items in a list" }
 
 ## Numbers and Text are Different
 
@@ -82,7 +88,7 @@ It's important to note that a number and text that contains a number are two dif
 :::error
 When dealing with user inputs from any text-based inputs, be sure to convert the string (or text) into an actual number.
 
-There is a difference between the text "1" and the number/integer 1.
+There is a difference between the text `"1"` and the number/integer `1`.
 :::
 ## Colors in Hexadecimal
 
@@ -98,6 +104,8 @@ The colors white, grey and black, would be `#FFF`, `#888`, `#000` respectively, 
 
 24-bit color is represented in a similar way, except using 2 hexadecimal digits instead of 1, for example, red would be `#FF0000` and green would be `#00FF00`.
 
+::question{slug="colors-question" question="What would be the 6-digit hexadecimal representation of the color blue (not cyan)?" }
+
 > ![An example of how colors, or absence of can be combined to create all the colors.](https://upload.wikimedia.org/wikipedia/commons/2/28/RGB_illumination.jpg)
 >
 > An example of how colors, or absence of can be combined to create all the colors.
@@ -105,4 +113,5 @@ The colors white, grey and black, would be `#FFF`, `#888`, `#000` respectively, 
 ## When to Use Numbers
 
 Numbers are used in programming whenever a calculation or quantity needs to be represented. They can be used for mathematical calculations, counting, indexing, and many other purposes.
-::question{slug="numbers-question" question="Explain the difference between integers and unsigned integers. Provide an example of when each number type would be appropriate to use"}
+
+::question{slug="numbers-when-to-use" question="When would you use a number in programming?" }
