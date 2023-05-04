@@ -36,6 +36,19 @@ function copy() {
 
 </script>
 <pre bind:this={ pre }>
+    <div
+        class="header"
+        class:show-header={ block.lang }>
+        {#if block.lang}
+            <div class="language">{ block.lang }</div>
+        {/if}
+        <div
+            class="copy"
+            on:keypress={ e => e.key === "Enter" ? copy() : null }
+            on:click={ copy }>
+            <Icon icon={ContentCopy}/>
+        </div>
+    </div>
     <code>
         <div class="line">
             <div class="number small">{ Array(digits).fill(" ").join("") }</div>
@@ -51,21 +64,11 @@ function copy() {
             <div class="number small">{ Array(digits).fill(" ").join("") }</div>
         </div>
     </code>
-    <div
-        class="copy"
-        on:keypress={ e => e.key === "Enter" ? copy() : null }
-        on:click={ copy }>
-        <Icon icon={ContentCopy}/>
-    </div>
 </pre>
 <style lang="stylus">
 @import "variables"
 
 .copy
-    position absolute
-    right 0
-    top 0
-    margin 8px
     display inline-flex
     cursor pointer
     color white
@@ -75,9 +78,35 @@ function copy() {
     user-select none
     color transparify(white, 80%)
     background mix(white, $dark_app, 15%)
+    margin-left auto
     &:hover, &:active
         color white
         background mix(white, $dark_app, 25%)
+
+.header
+    border-bottom 1px solid transparify(white, 10%)
+    padding 4px
+    display contents
+    align-items center
+    justify-content space-between
+    &.show-header
+        display flex
+    &:not(.show-header)
+        .copy
+            position absolute
+            top 0
+            right 0
+            margin 10px
+
+
+
+.language
+    font-size 14px
+    background transparify(white, 10%)
+    padding 4px 8px
+    border-radius 4px
+    display inline-flex
+    line-height 1em
 
 .number
     white-space pre-wrap

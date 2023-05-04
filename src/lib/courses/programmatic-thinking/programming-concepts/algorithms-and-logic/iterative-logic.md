@@ -15,7 +15,7 @@ In a `for loop`, the loop executes a fixed number of times, based on a counter v
 
 The syntax for each type of loop varies between programming languages, but the basic principles are the same.
 
-Some languages, such as ********Rust******** support the `loop` keyword which will loop a block of code forever unless it is stopped.
+Some languages, such as **Rust** support the `loop` keyword which will loop a block of code forever unless it is stopped by a `break`, `return` or program crash.
 
 ## Using Iterative Logic
 
@@ -36,8 +36,7 @@ let total be 10
 let current be 1
 while current is less than total
 	add 1 to current
-print current
-
+print(current)
 ```
 
 This pseudo code uses a while loop to repeatedly increment the current value until it reaches 10, in which case it will stop executing the loop and go to the next instruction which will print the current variable, which will be 10
@@ -64,6 +63,8 @@ for each item in my_list:
 
 In this example, we are iterating through a list called `my_list`. If we encounter a negative number, we use `continue` to skip over that iteration and move on to the next one. If we find the number `42`, we use `break` to exit the loop early and print a message. Otherwise, we print the current item to the console.
 
+::question{slug="breaks-and-continues" question="What is the difference between a `break` and a `continue`?"}
+
 ## Iterative Methods and Map Methods
 
 Iterative methods and map methods are common techniques used in programming to manipulate data, especially when working with collections such as lists, arrays, and dictionaries. These methods can provide a more efficient and concise way to perform operations on data, as opposed to using traditional loops.
@@ -75,6 +76,7 @@ Iterative methods are functions or procedures that apply a specific operation to
 - `map`: Applies a given function to each element in a collection and returns a new collection containing the results.
 - `filter`: Filters a collection based on a given condition, returning a new collection containing only the elements that satisfy the condition.
 - `reduce`: Applies a given function to the elements in a collection in a cumulative way, reducing the collection to a single value.
+- `find`: Finds the first element in a collection that satisfies a given condition.
 
 For example, in Python, you can use the built-in `map` function to square every element in a list of numbers:
 
@@ -103,8 +105,9 @@ In this example, we use the `map` method to apply the anonymous function `x => x
 
 Iteration and iterative methods are used extensively in programming to process and transform data. They can help you write cleaner, more concise code and improve the readability of your programs. Some practical applications of these methods include:
 
-- Processing large data sets: By using iterative methods, you can process large data sets more efficiently, such as when analyzing or manipulating data for data science or machine learning applications.
-- Transforming data: Map methods can be used to apply a specific transformation or function to each element in a collection, making it easier to manipulate and process data.
-- Filtering data: By using filter methods, you can easily filter out elements in a collection that do not meet a certain condition, allowing you to work with only the relevant data.
+- **Processing large** data sets: By using iterative methods, you can process large data sets more efficiently, such as when analyzing or manipulating data for data science or machine learning applications.
+- **Transforming data**: Map methods can be used to apply a specific transformation or function to each element in a collection, making it easier to manipulate and process data.
+- **Filtering data**: By using filter methods, you can easily filter out elements in a collection that do not meet a certain condition, allowing you to work with only the relevant data.
+- **Finding specific elements**: By using find methods, you can easily find elements in a collection that meet a certain condition, allowing you to work with only the relevant data.
 
 In summary, Iteration and iterative methods are powerful techniques that can help you write more efficient, concise, and readable code when working with collections and processing data. By understanding how to use these methods, you can improve your programming skills and create more effective programs.

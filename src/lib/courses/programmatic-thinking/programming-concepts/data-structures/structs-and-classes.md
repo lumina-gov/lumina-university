@@ -11,20 +11,20 @@ In programming, structs and classes are used to define custom data types that ca
 
 Whether you use structs or classes to represent your data, depends on the language that you are using.
 
-Languages that use structs:
+Examples of languages that use structs:
 
-- C
-- Go
-- Rust
-- Swift
+- **C**
+- **Go**
+- **Rust**
+- **Swift**
 
-Languages that use classes:
+Some languages that use classes:
 
-- Java
-- C#
-- Python
-- Ruby
-- JavaScript (which also has a prototype-based object system that is similar to classes)
+- **Java**
+- **C#**
+- **Python**
+- **Ruby**
+- **JavaScript** (which also has a prototype-based object system that is similar to classes)
 
 Note that some languages, like C++, allow for both structs and classes. Additionally, some languages have similar concepts to structs and classes, but may use different terminology (for example, in Rust, "structs" are often used in place of "classes").
 

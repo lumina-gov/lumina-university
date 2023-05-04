@@ -41,7 +41,7 @@ Maps and dictionaries are useful when you need to store and access key-value pai
 Maps and dictionaries are often referred to by different names in different programming languages. Some common synonyms for maps and dictionaries include:
 
 - **Associative array**: A synonym used in languages such as PHP and Perl.
-- **Hash**: A synonym used in languages such as Ruby.
+- **HashMap**: A synonym used in languages such as Ruby, Rust, C++.
 - **Object**: A synonym used in languages such as JavaScript and Python.
 
 ## Example Use Cases
@@ -51,3 +51,5 @@ Here are some example use cases for maps and dictionaries:
 - **Phone book**: A phone book is a good example of a map or dictionary, where each name is associated with a phone number.
 - **Website cookies**: Websites often use cookies to store user preferences, such as language settings or login information. Cookies are typically stored as key-value pairs in a map or dictionary.
 - **Game scores**: Games often store high scores in a map or dictionary, where each player name is associated with a score.
+
+::question{slug="map-use-challenge" question="Give an example of when you would use a map or dictionary in a program."}

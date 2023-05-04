@@ -29,3 +29,9 @@ In an object-oriented program, objects are often created as references to a spec
 ## Memory Layout of References
 
 The size of a reference in a program will depend on what type of processor the program was compiled for. For example, a 64 bit processor will use 64 bit numbers for references in it’s program.
+
+## References are to move cheaper than values
+
+Passing references to functions is generally cheaper than passing values because it doesn't require copying or moving the data. This can make programs more efficient and save memory and time.
+
+The exception to this rule is when the data is small enough to fit in a register. In this case, passing values may be more efficient than passing references. This includes primitive types such as integers, floats, and booleans.

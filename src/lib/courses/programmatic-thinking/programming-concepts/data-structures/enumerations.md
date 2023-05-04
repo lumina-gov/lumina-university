@@ -25,9 +25,15 @@ enum Weekday {
   Saturday,
   Sunday
 }
-```
 
+let today = Weekday::Monday;
+```
 Once an enumeration is defined, its values can be used in the program just like any other variable.
+
+### Terminology
+
+- **Enumeration or Enum**: An enumeration is a data type used to define a set of named values.
+- **Variant or Enum Value**: An enumeration variant is one of the named values defined in an enumeration.
 
 ## Manipulating and Comparing Enumeration Values
 
@@ -41,6 +47,8 @@ Using enumerations in programming has several advantages:
 - **Type Safety**: Enumerations provide type safety by ensuring that only values from the enumeration can be assigned to variables or passed as arguments.
 - **Ease of Maintenance**: Enumerations make code easier to maintain by providing a single location to define and manage related values.
 
+::question{slug="advantages-of-using-enumerations" question="What are the advantages of using enumerations in programming?"}
+
 ## When to use enums
 
 Enums are particularly useful when you need to define a fixed set of related values that are known at compile time. Here are some specific use cases for enums:
@@ -52,3 +60,5 @@ Enums are particularly useful when you need to define a fixed set of related val
 5. Preventing errors: Enums can help prevent errors in a program by ensuring that only valid values are used for a specific variable. For example, if a function expects a specific enum value as an argument, it can check that the value is valid before performing any operations.
 
 Overall, enums are a useful tool in programming when you need to define a fixed set of related values that are known at compile time. They can enhance readability and maintainability, prevent errors, and provide a clear way to represent categories, states, options, and settings in a program.
+
+::question{slug="when-to-use-enums" question="Give a specific example of when you would use an enum in a program, and list the variants" context="Incorrect if another type is a more suitable representation, and suggest enum examples if the student is stuck."}

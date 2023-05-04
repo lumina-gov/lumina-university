@@ -32,12 +32,41 @@ Using sets in programming has several advantages:
 - **Efficiency**: Sets provide efficient operations for finding the intersection, union, or difference of two sets.
 - **Ease of Use**: Sets make it easy to store and manipulate a collection of related values.
 
-## Use cases of sets
+## Example use cases of sets
 
 1. A program that needs to store a collection of unique email addresses.
 2. A program that needs to find the common interests between two people.
 3. A program that needs to find the mutual friends between two people.
 4. A program that needs to check if a certain element exists in a large collection of elements.
 5. A program that needs to store a collection of unique tags for blog posts.
-6. A program that needs to check if any of the items in a shopping cart are out of stock.
-7. A program that needs to keep track of the unique IP addresses that access a web server.
+6. A program that needs to keep track of the unique IP addresses that access a web server.
+
+::question{slug="set-use-case" question="Can you come up with a unique example of when you would use a set?" context="Determine whether a set would be an appropriate and preferred data structure for the user's answer"}
+
+## Examples of sets in programming
+
+```rust
+// Create a new empty set
+let mut set = HashSet::new();
+
+// Add values to the set
+set.insert(1);
+set.insert(2);
+
+// Check if a value is in the set
+println!("{}", set.contains(&1)); // true
+println!("{}", set.contains(&3)); // false
+```
+
+```js
+// Create a new empty set
+const set = new Set();
+
+// Add values to the set
+set.add(1);
+set.add(2);
+
+// Check if a value is in the set
+console.log(set.has(1)); // true
+console.log(set.has(3)); // false
+```

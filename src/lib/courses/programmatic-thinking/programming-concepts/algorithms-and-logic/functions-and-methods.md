@@ -12,7 +12,7 @@
 
 ## Introduction to Functions and Methods
 
-Functions and methods are blocks of code that can be reused throughout a program. They are a fundamental building block of programming and allow for code reuse and modularity. Functions are generally used in procedural programming, while methods are used in object-oriented programming.
+**Functions** and **methods** are blocks of code that can be reused throughout a program. They are a fundamental building block of programming and allow for **code reuse** and **modularity**. Functions and methods are used to perform specific tasks, breaking down complex problems into smaller, more manageable pieces.
 
 ## Parameters and Arguments
 
@@ -20,7 +20,7 @@ Functions and methods can take inputs through parameters or arguments. These ter
 
 ## Synonyms for Functions
 
-Functions can be referred to by different names depending on the programming language or the specific use case. Some common synonyms include procedures, subroutines, and methods.
+Functions can be referred to by different names depending on the programming language or the specific use case. Some common synonyms include **procedures**, and **methods**.
 
 ## Returning
 
@@ -30,19 +30,25 @@ When a function or method is called, it may produce an output that can be used i
 
 A function is a block of code that performs a specific task. Functions have:
 
-- a name - a label used to call the function
-- a set of parameters - the inputs that the function expects to receive
-- a body (or block) - the statements or code that is executed when the function is called
-- a return value - the output that the function produces
+- a **name** - a label used to call the function
+- a **set of parameters** - the inputs that the function expects to receive
+- a **body (or block)** - the statements or code that is executed when the function is called
+- a **return value** - the output that the function produces, if any
 
 ```jsx
 // A function in JavaScript
 function functionName(parameter1, parameter2) {
     // function body
-    let output = "hello"
+    let output = "hello" // set output to a string of "hello"
     return output; // the return statement
 }
 ```
+
+::question{slug="function-challenge-name" question="What is the name of the function in the example above?" context="The answer is `functionName`"}
+
+::question{slug="function-challenge-parameter" question="What are the parameters of the function in the example above?" context="The answer is `parameter1` and `parameter2`"}
+
+::question{slug="function-challenge-return-value" question="What is the return value of the function in the example above?" context="The function outputs the variable `output` which contains the string `'hello'`"}
 
 ## Outputs
 
@@ -50,7 +56,7 @@ The output of a function is defined using the return statement. Some functions f
 
 ## Calling a Function
 
-Calling a function means to execute the code inside the function. When a function is called, the values of the arguments are passed into the parameters, and the code inside the function is executed. When the function has finished executing, it returns the output, if any, to the calling code.
+Calling a function means to execute the code inside the function. When a function is called, the values of the arguments are passed into the parameters, and the code inside the function is executed. When the function has finished executing, it returns the output, if any, to the **calling code**.
 
 ## Pseudocode functions
 
@@ -59,12 +65,14 @@ Calling a function means to execute the code inside the function. When a functio
 function calculate_sum(a, b)
 	return a + b
 
-# Calling a function in pseudo code
-let a be calculate_sum(5, 10)
+# Calling the calculate_sum function and storing the output in a variable
+let a = calculate_sum(5, 10)
 
-# prints 15
+# call the print function to print the value of a
 print(a)
 ```
+
+::question{slug="function-challenge-pseudocode" question="What is the printed output of the code above?" context="The `print(a)` function call outputs the variable `a` which is `15`"}
 
 ## When to Use Functions
 

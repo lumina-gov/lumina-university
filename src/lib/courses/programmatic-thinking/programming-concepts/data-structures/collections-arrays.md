@@ -22,6 +22,14 @@ There are several different types of arrays used in programming:
 - **Queues**: Queues are a type of list where the first element added is the first one to be removed. This is commonly referred to as a "first in, first out" (FIFO) data structure.
 - **Linked Lists**: Linked lists are similar to lists, but the elements in a linked list are not stored in contiguous memory locations. Instead, each element has a reference to the next element in the list.
 
+::question{slug="array-type-challenge-print-job" question="To implement a queue of print jobs for a printer, where the first print job submitted is the first to be printed. Which data structure do you use?" context="Answer is Queue"}
+
+::question{slug="array-type-challenge-shopping-cart" question="To store collection of items in a shopping cart, where the order of the items does not matter. Which data structure would you use?" context="Answer is List or Vec"}
+
+::question{slug="array-type-challenge-playlist" question="You need to implement a playlist for a music player, where the order of the songs matters and songs can be added or removed at any position. Which data structure would you use?" context="Answer is Linked List"}
+
+::question{slug="array-type-challenge-plates-stack" question="You need to implement a stack of plates for a restaurant, where the last plate added is the first one to be removed. Which data structure would you use?" context="Answer is Stack"}
+
 ## Arrays in Memory
 
 As fixed arrays are generally a collection of values of the same type (which we will call `T`), and fixed length, the size of an array is the `sizeof(T) * length`
@@ -43,6 +51,8 @@ Most people would answer 10 meters, but the answer is actually 9 meters.
 
 :::
 
+::question{slug="array-indexing" question="Assuming we have an array [1, 2, 3, 4], what is the index of the first and third item in the array?" context="The answer is 0 and 2 respectively"}
+
 ### Growable Arrays
 
 When growable arrays, often called `List`s or `Vec`s need to grow, they simply cannot just keep adding items at the end of the last item, as this will overwrite memory from other parts of the program, instead the array must be resized into a larger block of memory,
@@ -51,9 +61,20 @@ When an array needs to be resized, the computer must allocate a new block of mem
 
 Because this is an expensive operation, and potentially needs to happen a very large number of times, Vecs will generally always **double in size and capacity each time**, leaving spare capacity to insert items in the future.
 
+::question{slug="array-vs-vec" question="In languages that have a type called `Array` and a type called `Vec`, what is the difference between the two?" context="The answer is that `Array` is a fixed size array, and `Vec` is a growable array"}
+
 ## Multi-Dimensional Arrays
 
 Multi-dimensional arrays, or arrays inside of an array are arrays that have more than one dimension or depth. They are commonly used to represent matrices and other types of complex data structures. In a two-dimensional array, for example, each element is indexed using two indices, which correspond to its row and column positions in the matrix.
+
+Example of a 2D array in JavaScript:
+
+```js
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+];
+```
 
 ## When to use collections
 
@@ -68,15 +89,15 @@ Multi-dimensional arrays, or arrays inside of an array are arrays that have more
 
 Collections are a fundamental data structure in computer programming, and they have a wide range of general use cases. Here are some of the most common use cases for arrays:
 
-1. Storing a collection of related data: Arrays are often used to store a collection of related data, such as a list of names or ages. Each element in the array represents a single piece of data, and the entire array represents the collection.
-2. Accessing data by index: Arrays provide efficient access to elements by index, which makes them ideal for use cases where you need to access elements quickly based on their position in the array.
-3. Sorting and searching data: Arrays are often used for sorting and searching algorithms, such as binary search or bubble sort. Sorting and searching algorithms require efficient access to elements by index, which arrays provide.
-4. Implementing data structures: Many other data structures, such as stacks, queues, and hash tables, are implemented using arrays as their underlying data storage mechanism.
-5. Managing memory: Arrays are often used to manage memory in programs, such as allocating and deallocating memory for dynamic arrays or managing memory blocks in low-level programming languages.
-6. Interfacing with external systems: Arrays are a common data format used for interfacing with external systems, such as sending and receiving data over a network or reading and writing data to a file.
+1. **Storing a collection of related data**: Arrays are often used to store a collection of related data, such as a list of names or ages. Each element in the array represents a single piece of data, and the entire array represents the collection.
+2. **Accessing data by index**: Arrays provide efficient access to elements by index, which makes them ideal for use cases where you need to access elements quickly based on their position in the array.
+3. **Sorting and searching data**: Arrays are often used for sorting and searching algorithms, such as binary search or bubble sort. Sorting and searching algorithms require efficient access to elements by index, which arrays provide.
+4. **Implementing data structures**: Many other data structures, such as stacks, queues, and hash tables, are implemented using arrays as their underlying data storage mechanism.
+5. **Managing memory**: Arrays are often used to manage memory in programs, such as allocating and deallocating memory for dynamic arrays or managing memory blocks in low-level programming languages.
+6. **Interfacing with external systems**: Arrays are a common data format used for interfacing with external systems, such as sending and receiving data over a network or reading and writing data to a file.
 
 ## Terminology
 
-Often, especially in languages that abstract away all the array types into a single “array” type, the word list and array are used interchangeably, but in lower level languages, a Vec/List or array will refer to different types of collections of values.
+In dynamic languages (such as Javascript) that abstract away all the array types into a single “array” type, the word list and array are used interchangeably, but in lower level languages, a `Vec`/`List` or `array` will refer to different types of collections of values.
 
 Generally Arrays are static, and can’t grow in size, whereas lists or Vecs are more advanced versions that support the ability to grow in size.

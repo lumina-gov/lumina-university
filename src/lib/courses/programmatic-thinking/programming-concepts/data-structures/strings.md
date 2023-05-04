@@ -9,11 +9,19 @@ In programming, a string is a data type used to represent text. Strings are a fu
 
 ## Strings
 
-A string is a sequence of characters. In programming, a string is used to represent text, including letters, numbers, and special characters. Strings are a fundamental data type in many programming languages and are used extensively in many applications.
+A string is a **sequence of characters**. In programming, a string is used to represent text, including letters, numbers, and special characters. Strings are a fundamental data type in many programming languages and are used extensively in many applications.
+
+Strings are often internally implemented as an array or `Vec` of characters. For example, the string `"Hello, World!"` is represented as the following array of characters:
+
+```rust
+['H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!']
+```
+
+> This means that characters can be iterated in much the same way as other collections.
 
 ## Differences Between Strings and Characters
 
-A character is a single symbol, such as a letter, number, or special character. A string, on the other hand, is a sequence of characters. In programming, a string is represented using quotes, such as "Hello, World!". A single character is represented using single quotes, such as 'A'.
+A character is a single symbol, such as a letter, number, or special character. A string, on the other hand, is a sequence of characters. In programming, a string is represented using quotes, such as `"Hello, World!"`. A single character is represented using single quotes, such as `'A'`.
 
 ## Manipulating Strings
 

@@ -6,9 +6,9 @@ In general, an algorithm that takes less time and less space is considered to be
 
 ## Analyzing Time Complexity
 
-The time complexity of an algorithm is usually expressed in terms of big O notation. This notation provides an upper bound on the amount of time an algorithm will take to complete its task, in terms of the size of the input data.
+The time complexity of an algorithm is usually expressed in terms of **big O notation**. This notation provides an upper bound on the amount of time an algorithm will take to complete its task, in terms of the size of the input data.
 
-For example, an algorithm with a time complexity of O(n) will take roughly n operations to complete its task, where n is the size of the input data. An algorithm with a time complexity of O(n^2) will take roughly n^2 operations to complete its task, and so on.
+For example, an algorithm with a time complexity of **O(n)** will take roughly **n operations** to complete its task, where **n is the size of the input data**. An algorithm with a time complexity of **O(n^2)** will take roughly **n^2** operations to complete its task, and so on.
 
 ## Analyzing Space Complexity
 

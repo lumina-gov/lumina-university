@@ -24,6 +24,7 @@ Character encoding is the process of assigning a unique numerical value to each 
 
 - **ASCII**: The American Standard Code for Information Interchange (ASCII) is a widely-used character encoding system that assigns a unique numerical value to each character in the English alphabet, as well as numbers and some special characters.
 - **UTF-8**: The Unicode Transformation Format (UTF-8) is a variable-length character encoding system that can represent all possible characters in the Unicode standard.
+- **UTF-16**: The Unicode Transformation Format (UTF-16) is a variable-length character encoding system that can represent all possible characters in the Unicode standard.
 
 ## ASCII Table
 
@@ -31,22 +32,22 @@ The ASCII table is a chart that lists all of the characters and their correspond
 
 | Decimal | Hex | Character |
 | --- | --- | --- |
-| 32 | 20 | (space) |
-| 33 | 21 | ! |
-| 34 | 22 | " |
-| 35 | 23 | # |
-| 36 | 24 | $ |
-| 37 | 25 | % |
-| 38 | 26 | & |
-| 39 | 27 | ' |
+| 32 | 20 | ` `(space) |
+| 33 | 21 | `!` |
+| 34 | 22 | `"` |
+| 35 | 23 | `#` |
+| 36 | 24 | `$` |
+| 37 | 25 | `%` |
+| 38 | 26 | `&` |
+| 39 | 27 | `'` |
 | ... | ... | ... |
-| 65 | 41 | A |
-| 66 | 42 | B |
+| 65 | 41 | `A` |
+| 66 | 42 | `B` |
 | ... | ... | ... |
-| 97 | 61 | a |
-| 98 | 62 | b |
+| 97 | 61 | `a` |
+| 98 | 62 | `b` |
 | ... | ... | ... |
-| 127 | 7F | DEL |
+| 127 | 7F | `DEL` |
 
 The ASCII table lists each character in the English alphabet, along with its decimal and hexadecimal values. Some characters in `ASCII` are considered **control characters**, such as `DEL` which can work like a backspace, but I won’t get into this in detail because it’s not something you generally need to concern yourself with.
 

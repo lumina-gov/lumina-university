@@ -1,4 +1,4 @@
-Variables are one of the most fundamental concepts in programming. They are used to store data that can be referenced and modified throughout your program. In this unit, we will explore what variables are, how they work, and some common pitfalls and useful notes.
+Variables are one of the **most fundamental concepts** in programming. They are used to store data that can be referenced and modified throughout your program. In this unit, we will explore what variables are, how they work, and some common pitfalls and useful notes.
 
 ## What Will You Learn
 
@@ -12,6 +12,14 @@ Variables are one of the most fundamental concepts in programming. They are used
 ## Variables
 
 A variable is a named storage location in memory that holds a value. The value stored in a variable can be of any data type, including numbers, strings, booleans, and more complex data structures like arrays and objects.
+
+### Other Terminology
+
+- **Variable declaration**: A variable declaration is a statement that creates a new variable with a name and a type. For example, `let x: number;` declares a variable named `x` of type `number`.
+- **Variable initialization**: A variable initialization is a statement that assigns a value to a variable. For example, `x = 5;` initializes the variable `x` with the value `5`.
+- **Variable assignment**: A variable assignment is a statement that assigns a new value to a variable. For example, `x = 10;` assigns the value `10` to the variable `x`.
+- **Variable scope**: A variable scope is the part of a program where a variable is accessible. For example, a variable declared inside a function is only accessible within that function.
+- **Parameter or argument**: A parameter or argument is a type of variable and value that is passed to a function or method. For example, `x` is a parameter in the function `add(x, y)`.
 
 ## The Box Analogy
 
@@ -39,3 +47,5 @@ let isComplete: boolean = false; // isComplete is a variable of type boolean wit
 ## Data/Value versus Variables
 
 It's important to understand the difference between data and variables. Data is the information that is stored in a variable, while the variable is the named storage location that holds the data. When you manipulate a variable, you are actually manipulating the data that it stores.
+
+::question{slug="variable-question" question="What is the difference between data and variables?"}

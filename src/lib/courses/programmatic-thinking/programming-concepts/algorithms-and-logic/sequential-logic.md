@@ -9,7 +9,7 @@ Sequential logic is a fundamental concept in programming that refers to the orde
 
 ## Blocks
 
-A block is a group of **statements** that are executed together. In many programming languages, blocks are defined by curly braces `{}` or indentation. Blocks are used to group statements together and define the scope of variables and other program elements.
+A block is a group of **statements** that are executed together in sequence. In many programming languages, blocks are defined by curly braces `{}` or indentation. Blocks are used to group statements together and define the scope of variables and other program elements.
 
 Some languages such as Python use indentation to define blocks
 
@@ -29,6 +29,10 @@ For example, here's an pseudocode example of code that includes two statements:
 let x be 5
 let result be x multipled by x
 ```
+
+::question{slug="variable-what-is-x" question="What is `x` in this case? Is it a variable, or a value?" context="The answer is `x` is a variable that stores the numeric value `5`. It is not a value"}
+
+::question{slug="variable-what-is-expression" question="is `x multiplied by x` an expression?" context="The answer is `x multiplied by x` is an **expression** that evaluates to the value `25`"}
 
 
 ## Using Sequential Logic

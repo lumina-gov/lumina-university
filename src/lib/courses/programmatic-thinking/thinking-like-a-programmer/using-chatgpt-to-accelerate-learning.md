@@ -36,4 +36,4 @@ One of the main advantages of ChatGPT is its reasoning capability. Unlike Google
 
 Another benefit of ChatGPT is its ability to provide explanations and insights in natural language. Google can certainly provide you with answers to programming questions, but often the explanations are technical and difficult to understand. ChatGPT, on the other hand, can explain programming concepts in a way that is easier to understand, making it an excellent tool for beginners.
 
-::question{slug="chatgpt" question="What are some ways you can use ChatGPT to accelerate your learning in programming?" }
+::question{slug="chatgpt-accelerated" question="What are some ways you can use ChatGPT to accelerate your learning in programming?" }

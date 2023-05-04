@@ -16,6 +16,7 @@ import { MessageType } from "$lib/types/message"
 import CloseCircle from "svelte-material-icons/CloseCircle.svelte"
 import type { Prop } from "$lib/utils/typed_props"
 import AlertCircle from "svelte-material-icons/AlertCircle.svelte"
+import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 
 export let block: LeafDirective
 let response: null | {
@@ -182,7 +183,9 @@ async function submit() {
                 icon={ChatQuestion}
                 opacity={0.5}
                 size={24}/>
-            <div class="title">{ block.attributes?.question || "" }</div>
+            <div class="title">
+                <MarkdownRenderer markdown={attributes.question}/>
+            </div>
         </div>
     </div>
     {#if !loading}
@@ -215,7 +218,7 @@ async function submit() {
                     <div class="title">AI Assessment</div>
                 </div>
                 <div class="feedback">
-                    { response.feedback }
+                    <MarkdownRenderer markdown={response.feedback}/>
                 </div>
                 <div class="assessment">
                     <Icon
@@ -250,6 +253,8 @@ async function submit() {
     flex-direction column
     background transparify(white, 4%)
     outline 2px solid transparify(white, 10%)
+    margin-top 5px
+    margin-bottom 5px
     outline-offset 10px
     border 1px solid transparify(white, 10%)
     &.correct
