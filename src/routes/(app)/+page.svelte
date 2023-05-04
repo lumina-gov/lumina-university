@@ -119,6 +119,9 @@ $: user = data.user_store.user
         justify-content space-between
         align-items center
         width 100%
+        @media (max-width: $mobile)
+            flex-direction column
+            gap 24px
         .greeting
             display flex
             gap 16px

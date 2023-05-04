@@ -34,7 +34,11 @@ $: {
             mobile: "span 4",
         }}
         gap={16}
-        position="sticky"
+        position={{
+            laptop: "sticky",
+            tablet: "static",
+            mobile: "static",
+        }}
         top_distance={78}
         translucent={false}>
         <OutlineSidebar
