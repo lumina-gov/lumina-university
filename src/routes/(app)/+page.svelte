@@ -37,7 +37,7 @@ $: user = data.user_store.user
         </div>
     </Hero>
     <hr/>
-    {#if data.recent_data}
+    {#if data.recent_data && data.recent_data.length > 0}
         <Hero
             align="center"
             divider={true}
