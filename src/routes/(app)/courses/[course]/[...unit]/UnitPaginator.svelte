@@ -52,6 +52,7 @@ function pressed() {
 .paginator
     width 100%
     outline 0
+    min-width 0
     display flex
     flex 1
     align-items center

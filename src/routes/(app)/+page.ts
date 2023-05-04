@@ -31,10 +31,14 @@ export const load = (async ({ parent }) => {
             for (const unit of course) {
                 units_progress_map[unit.unit_slug] = unit.status
             }
+            // filter out any units that may have been deleted
+            const course_full = await get_full_course(course[0].course_slug, units_progress_map)
+            const units_which_exist = course.filter(unit => course_full.units_by_slug[unit.unit_slug])
+            if (units_which_exist.length === 0) continue
             recent_data.push(
                 {
-                    unit_slug: course[0].unit_slug,
-                    course: await get_full_course(course[0].course_slug, units_progress_map),
+                    unit_slug: units_which_exist[0].unit_slug,
+                    course: course_full,
                 }
             )
         }

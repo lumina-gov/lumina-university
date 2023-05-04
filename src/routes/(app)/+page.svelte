@@ -11,11 +11,11 @@ import { SubscriptionStatus } from "$lib/gql/graphql"
 import DashboardTopics from "./DashboardTopics.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 import RecentCoursesGrid from "./RecentCoursesGrid.svelte"
-    
+
 export let data: PageData
-    
+
 $: user = data.user_store.user
-    
+
 </script>
 {#if user}
     <Hero divider={true}>
@@ -109,10 +109,10 @@ $: user = data.user_store.user
 />
 <style lang="stylus">
     @import "variables"
-    
+
     .space
         padding-top 120px
-    
+
     .auth-hero
         display flex
         flex-direction row
@@ -129,7 +129,7 @@ $: user = data.user_store.user
         font-size 22px
         font-weight 800
         text-align center
-    
+
     .unauth-hero
         display flex
         flex-direction column

@@ -13,6 +13,7 @@ export let data: {
     unit_slug: string
     course: CourseFull
 }
+
 $: units = flatten_units(data.course.root_units)
 $: number_of_units = units.length
 $: current_unit_index = units.findIndex(unit => unit.unit_slug === data.unit_slug) + 1
