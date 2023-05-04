@@ -105,3 +105,4 @@ The colors white, grey and black, would be `#FFF`, `#888`, `#000` respectively, 
 ## When to Use Numbers
 
 Numbers are used in programming whenever a calculation or quantity needs to be represented. They can be used for mathematical calculations, counting, indexing, and many other purposes.
+::question{slug="numbers-question" question="Explain the difference between integers and unsigned integers. Provide an example of when each number type would be appropriate to use"}

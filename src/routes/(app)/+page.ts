@@ -1,7 +1,6 @@
 import type { PageLoad } from "./$types"
 import { get_full_course, has_course } from "$lib/courses/content"
 import { graphql } from "$lib/gql"
-import { error } from "@sveltejs/kit"
 import type { UnitStatus } from "$lib/gql/graphql"
 import type { CourseFull } from "$lib/types/course"
 

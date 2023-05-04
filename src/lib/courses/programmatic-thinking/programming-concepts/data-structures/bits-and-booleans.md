@@ -18,3 +18,5 @@ Because CPUs generally address memory as bytes, a boolean will typically occupy 
 Boolean logic is a type of logic that deals with true/false or yes/no decisions. It's named after George Boole, who developed the concept in the mid-19th century. In programming, boolean values are represented using the keywords "true" and "false". They are used to make decisions in a program and control the flow of execution.
 
 Boolean operators such as "and", "or", and "not" can be used to combine multiple boolean values and perform more complex operations.
+
+::question{slug="boolean-question" question="Explain the concept of boolean data type, and provide an example of a programming scenario where using boolean values would be appropriate."}

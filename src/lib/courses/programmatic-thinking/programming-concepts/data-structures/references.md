@@ -28,3 +28,5 @@ In an object-oriented program, objects are often created as references to a spec
 ## Memory Layout of References
 
 The size of a reference in a program will depend on what type of processor the program was compiled for. For example, a 64 bit processor will use 64 bit numbers for references in it’s program.
+
+::question{slug="numbers-question" question="Explain the difference between integers and unsigned integers. Provide an example of when each number type would be appropriate to use"}
