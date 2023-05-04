@@ -1,6 +1,6 @@
 import type { CourseRaw } from "$lib/types/course"
 import CodeTags from "svelte-material-icons/CodeTags.svelte"
-import CoursePlaceholder from "$lib/images/course_placeholder.png"
+import CoursePlaceholder from "$lib/images/course_placeholder.svg"
 
 export const course: CourseRaw = {
     name: "Programmatic Thinking",
