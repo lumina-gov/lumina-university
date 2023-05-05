@@ -2,7 +2,7 @@
 import Icon from "$lib/display/Icon.svelte"
 import ChatQuestion from "svelte-material-icons/ChatQuestion.svelte"
 import type { LeafDirective } from "mdast-util-directive"
-import { tick, type SvelteComponent} from "svelte"
+import { tick, type SvelteComponent, afterUpdate} from "svelte"
 import { onMount } from "svelte"
 import IconButton from "$lib/controls/IconButton.svelte"
 import Send from "svelte-material-icons/Send.svelte"
@@ -17,6 +17,7 @@ import CloseCircle from "svelte-material-icons/CloseCircle.svelte"
 import type { Prop } from "$lib/utils/typed_props"
 import AlertCircle from "svelte-material-icons/AlertCircle.svelte"
 import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
+import { afterNavigate } from "$app/navigation"
 
 export let block: LeafDirective
 let response: null | {
@@ -64,6 +65,10 @@ const assessment_mappings: Record<string, {
         text: "Unknown"
     }
 }
+
+afterNavigate(() => {
+    load_assessment()
+})
 
 onMount(() => {
     audio = new Audio(ButtonSound)

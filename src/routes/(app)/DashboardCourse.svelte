@@ -7,6 +7,7 @@ import PlayOutline from "svelte-material-icons/PlayOutline.svelte"
 import { UnitStatus } from "$lib/gql/graphql"
 import { flatten_units } from "$lib/utils/unit"
 import type { CourseFull } from "$lib/types/course"
+import ButtonSound from "$lib/sounds/ButtonSound.wav"
 
 export let enlarge: boolean
 export let data: {
@@ -23,7 +24,11 @@ $: percentage_completed = (units.filter(unit => unit.status === UnitStatus.Compl
 <a
     class="course"
     class:large={ enlarge }
-    href={`/courses/${data.course.course_slug}/${data.unit_slug}`}>
+    href={`/courses/${data.course.course_slug}/${data.unit_slug}`}
+    on:click={ () => {
+        let audio = new Audio(ButtonSound)
+        audio.play()
+    } }>
     <div
         style:background-image="url({ data.course.image })"
         class="course-image"/>
@@ -51,7 +56,8 @@ $: percentage_completed = (units.filter(unit => unit.status === UnitStatus.Compl
             </div>
             <Button
                 style="translucent"
-                left_icon={PlayOutline}>
+                left_icon={PlayOutline}
+                use_sound={false}>
                 Continue Course
             </Button>
         {/if}
@@ -74,7 +80,7 @@ $: percentage_completed = (units.filter(unit => unit.status === UnitStatus.Compl
     width 100%
     border-radius 4px
     &:hover, &:focus
-        outline 2px dashed $brand
+        outline 2px dashed transparify(white, 50%)
         outline-offset 4px
 
     &.large

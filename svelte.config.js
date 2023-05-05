@@ -20,6 +20,7 @@ const config = {
         allowed: ["PATCH", "DELETE"]
     },
     kit: {
+        inlineStyleThreshold: 2048,
         adapter: adapter()
     }
 }
