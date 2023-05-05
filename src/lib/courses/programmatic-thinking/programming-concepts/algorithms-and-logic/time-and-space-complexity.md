@@ -10,6 +10,18 @@ The time complexity of an algorithm is usually expressed in terms of **big O not
 
 For example, an algorithm with a time complexity of **O(n)** will take roughly **n operations** to complete its task, where **n is the size of the input data**. An algorithm with a time complexity of **O(n^2)** will take roughly **n^2** operations to complete its task, and so on.
 
+### Heres a table of common Big O notations:
+| Big O Notation | Name        | Description |
+| ---            | ---         | ---         |
+| O(1)           | Constant    | Algorithm's runtime remains the same, no matter the input size. E.g., accessing an array element by index. |
+| O(log n)       | Logarithmic | Runtime increases slowly as input size grows. E.g., binary search in a sorted array. |
+| O(n)           | Linear      | Runtime increases directly proportional to input size. E.g., searching an unsorted array for a specific value. |
+| O(n log n)     | Linearithmic | Runtime increases at a rate between linear and quadratic. E.g., efficient sorting algorithms like merge sort or quicksort. |
+| O(n^x)         | Power   | Runtime increases with the power of input size. E.g., nested loops, like common in 3D matrix operations. |
+| O(2^n)         | Exponential | Runtime doubles with each additional input element. E.g., solving the traveling salesman problem using brute force. |
+| O(n!)          | Factorial   | Runtime grows extremely fast, quickly becoming impractical. E.g., generating all possible permutations of an array. |
+
+
 ## Analyzing Space Complexity
 
 The space complexity of an algorithm is usually expressed in terms of the amount of memory it requires to complete its task. This can be expressed in terms of the size of the input data, as well as any additional memory required by the algorithm.
@@ -51,3 +63,19 @@ Below we have included the time and space complexities for various data structur
 | Insertion Sort | O(n) | O(n^2) | O(n^2) | O(1) |
 | Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) |
 | Quick Sort | O(n log n) | O(n log n) | O(n^2) | O(log n) |
+
+```c++
+void printArrayElements(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << ' ';
+    }
+}
+```
+```c++
+void printFirstElementOfArray(int arr[]) {
+    cout << "First element of array = " << arr[0];
+}
+```
+
+::question{slug="bigo-question" question="Given the two functions above, what are their Big O Notations?" context="The first function printArrayElements is O(n) and the second function printFirstElementOfArray is O(1)"}
+

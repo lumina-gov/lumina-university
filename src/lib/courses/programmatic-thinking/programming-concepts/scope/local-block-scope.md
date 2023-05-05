@@ -8,10 +8,10 @@ In programming, scope refers to the visibility and accessibility of variables in
 
 ## Local Variables
 
-Local variables are variables that are declared within a function or code block and are only accessible within that function or block. Here is an example of a local variable in pseudocode:
+Local variables are variables that are declared within a function or code block and are only accessible within that function or block. Here is an example of a local variable in python:
 
-```
-function main()
+```python
+def function main()
     local_variable = 10
     print(local_variable)
 ```
@@ -32,10 +32,10 @@ It’s useful to note that variables are generally always only accessible after 
 :::
 ## Declaring and Using Local Variables
 
-You can declare a local variable in your code by simply assigning a value to a variable within a function or code block. Here is an example of declaring and using a local variable in pseudocode:
+You can declare a local variable in your code by simply assigning a value to a variable within a function or code block. Here is the same example of declaring and using a local variable in python:
 
-```
-function main()
+```python
+def function main()
     local_variable = 10
     print(local_variable) // prints 10 to the console
 ```

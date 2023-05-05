@@ -32,3 +32,18 @@ Not all languages support closures, or if they do, careful management needs to e
 :::
 
 Certain languages, such as Rust use different syntax to define closures from functions, since functions in Rust can not access the parent scope. This is done to ensure memory safety and ensures the issues described above are detected by the code compiler.
+
+```javascript
+function apply_to_each(numbers_array, closure) {
+  let new_numbers_array = []
+  for (let number of numbers_array) {
+    let new_number = closure(number) // apply closure to number
+    new_numbers_array.push(new_number) // add it to new numbers array
+  }
+  return new_numbers_array
+}
+let numbers_array = [1, 2, 3, 4, 5]
+let unknown_1 = apply_to_each(numbers_array, (x) => x + 1)
+let unknown_2 = apply_to_each(numbers_array, (x) => x * 2)
+```
+::question{slug="closure-function-challenge" question="given the following code, what will be the two outputs?" context="function apply_to_each(numbers_array, closure) {  let new_numbers_array = []  for (let number of numbers_array) {    let new_number = closure(number) // apply closure to number    new_numbers_array.push(new_number) // add it to new numbers array  }  return new_numbers_array}let numbers_array = [1, 2, 3, 4, 5]let unknown_1 = apply_to_each(numbers_array, (x) => x + 1)let unknown_2 = apply_to_each(numbers_array, (x) => x * 2)"}
