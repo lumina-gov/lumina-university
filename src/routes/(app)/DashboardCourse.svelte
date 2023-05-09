@@ -24,10 +24,9 @@ $: percentage_completed = (units.filter(unit => unit.status === UnitStatus.Compl
 <a
     class="course"
     class:large={ enlarge }
-    href={`/courses/${data.course.course_slug}/${data.unit_slug}`}
+    href="/courses/{data.course.course_slug}"
     on:click={ () => {
-        let audio = new Audio(ButtonSound)
-        audio.play()
+        new Audio(ButtonSound).play()
     } }>
     <div
         style:background-image="url({ data.course.image })"
@@ -41,105 +40,91 @@ $: percentage_completed = (units.filter(unit => unit.status === UnitStatus.Compl
                 size={8}/>
             { data.course.units_by_slug[data.unit_slug].name }
         </div>
-        <a
-            class="name"
-            href="/courses/{data.course.course_slug}">
+        <div class="name">
             <Icon
                 color={data.course.color}
                 icon={data.course.icon}
                 size="1.2em"/>
             { data.course.name }
-        </a>
+        </div>
         {#if enlarge}
             <div class="description">
                 { data.course.description }
             </div>
-            <Button
-                style="translucent"
-                left_icon={PlayOutline}
-                use_sound={false}>
-                Continue Course
-            </Button>
         {/if}
         <div class="progress-bar">
             <ProgressBar width={percentage_completed}/>
         </div>
-
     </div>
 </a>
 
 <style lang="stylus">
 @import "variables"
+
 .course
     display flex
     background transparify(white, 4%)
-    padding 16px
     flex-direction column
-    gap 16px
     color white
     width 100%
     border-radius 4px
+    overflow hidden
     &:hover, &:focus
-        outline 2px dashed transparify(white, 50%)
-        outline-offset 4px
-
+        background transparify(white, 8%)
+        outline 0
     &.large
         flex-direction row
-        padding 24px
-        gap 24px
-        @media (max-width: $tablet)
-            flex-direction column
-            padding 16px
-            gap 16px
+        .name
+            font-size 22px
         .course-image
-            min-height 280px
+            min-height 300px
 
+@media (max-width $tablet)
+    .course.large
+        flex-direction column
         .name
             font-size 24px
-    .course-image
-        width 100%
-        min-height 200px
-        height 100%
-        background transparify(white, 8%)
-        background-size contain
-        background-position center
-        background-repeat no-repeat
-        border-radius 4px
-        flex 1
-    .course-data
-        flex 1
-        display flex
-        flex-direction column
-        gap 16px
-        align-items start
-        padding 16px 0
-    .progress-bar
-        width 100%
-        margin-top auto
-    .name
-        display flex
-        align-items center
-        font-weight 700
-        gap 12px
-        color white
-        border-radius 4px
-        padding 4px 8px
-        background transparify(white, 4%)
-        border 1px solid transparify(white, 8%)
-        &:hover
-            background transparify(white, 8%)
-    .description
-        font-size 18px
-        font-weight 600
-        color transparify(white, 50%)
-        line-height 1.2em
-    .breadcrumbs
-        display flex
-        align-items center
-        gap 8px
-        font-size 14px
-        font-weight 700
-        .faded
-            opacity 0.5
+
+.course-image
+    width 100%
+    min-height 200px
+    background transparify(white, 8%)
+    background-size cover
+    background-position center
+    background-repeat no-repeat
+    align-self stretch
+    flex 1
+.course-data
+    flex 1
+    display flex
+    flex-direction column
+    gap 16px
+    align-items start
+    padding 24px
+.progress-bar
+    width 100%
+    margin-top auto
+.name
+    display flex
+    align-items center
+    font-weight 700
+    font-size 18px
+    gap 12px
+    color white
+    border-radius 4px
+
+.description
+    font-size 18px
+    font-weight 400
+    color transparify(white, 50%)
+    line-height 1.2em
+.breadcrumbs
+    display flex
+    align-items center
+    gap 8px
+    font-size 14px
+    font-weight 700
+    .faded
+        opacity 0.5
 
 </style>

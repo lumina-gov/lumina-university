@@ -14,21 +14,24 @@ export let course: CourseRaw & {
     href="/courses/{course.course_slug}">
     <div
         style:background-image="url('{ course.image || CoursePlaceholder }')"
-        class="image">
-        {#if !course.image}
-            <Icon
-                icon={ImageOutline}
-                opacity={0.1}
-                size={64}/>
-        {/if}
-    </div>
+        class="image"/>
     <div class="contents">
-        <h3>{ course.name }</h3>
+        <h3>
+            <Icon
+                color={course.color}
+                icon={course.icon}
+                size="1.2em"/>
+            { course.name }
+        </h3>
         <div class="info">
             <span>{ Object.keys(course.units_by_slug).length } units</span>
-            <Tag>
-                Programming
-            </Tag>
+            <div class="tags">
+                {#each course.tags as tag}
+                    <Tag
+                        color={tag.color}
+                        text={tag.name}/>
+                {/each}
+            </div>
         </div>
     </div>
 </a>
@@ -58,6 +61,9 @@ export let course: CourseRaw & {
 h3
     font-size 16px
     font-weight 600
+    display flex
+    align-items center
+    gap 6px
 
 .info
     display flex
@@ -65,6 +71,11 @@ h3
     align-items center
     span
         opacity 0.5
+
+.tags
+    display flex
+    gap 8px
+    align-items center
 
 .contents
     padding 16px

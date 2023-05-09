@@ -2,22 +2,23 @@
 import ChevronDoubleLeft from "svelte-material-icons/ChevronDoubleLeft.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import BookOpenPageVariant from "svelte-material-icons/BookOpenPageVariant.svelte"
-import CodeTags from "svelte-material-icons/CodeTags.svelte"
 import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import BookmarkCheck from "svelte-material-icons/BookmarkCheck.svelte"
 import ClockTimeFour from "svelte-material-icons/ClockTimeFour.svelte"
-import type { SvelteComponent } from "svelte"
-export let course_name: string
-export let unit_count: number
-export let course_icon: typeof SvelteComponent
-let stats = [
+import type { CourseFull } from "$lib/types/course"
+
+export let course: CourseFull
+
+$: units = Object.values(course.units_by_slug).length
+
+$: stats = [
     {
         icon: AccountGroup,
         text: "251 Students"
     },
     {
         icon: BookmarkCheck,
-        text: `${unit_count} Units`
+        text: `${units} Units`
     },
     {
         icon: ClockTimeFour,
@@ -41,15 +42,17 @@ let stats = [
             size={18}/>
         <div class="text">ALL COURSES</div>
     </a>
+    <div
+        style:background-image="url('{ course.image }')"
+        class="image"/>
     <div class="course-details">
+
         <div class="name">
-            {#if course_icon}
-                <Icon
-                    color="brand"
-                    icon={course_icon}
-                    size={48}/>
-            {/if}
-            <div>{ course_name }</div>
+            <Icon
+                color="brand"
+                icon={course.icon}
+                size={48}/>
+            <div>{ course.name }</div>
         </div>
         <div class="stats">
             {#each stats as stat}
@@ -70,6 +73,16 @@ let stats = [
 
 a
     color white
+
+.image
+    background transparify(white, 4%)
+    height 200px
+    display flex
+    align-items center
+    justify-content center
+    overflow hidden
+    background-size cover
+    background-position center
 
 .wrapper
     display flex

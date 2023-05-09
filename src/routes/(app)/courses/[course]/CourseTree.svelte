@@ -65,7 +65,7 @@ afterNavigate(async () => {
     display flex
     flex-direction column
     align-items flex-start
-    gap 28px
+    gap 20px
     width 100%
     position relative
 

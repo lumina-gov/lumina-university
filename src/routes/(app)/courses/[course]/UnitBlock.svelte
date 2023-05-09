@@ -31,19 +31,19 @@ onDestroy(() => {
 
 </script>
 
-<a
+<div
     style:padding-left={ level * 40 + "px" }
     class="unit"
     class:completed={ unit.status === UnitStatus.Completed }
     class:in-progress={ unit.status === UnitStatus.InProgress }
-    class:not-started={ unit.status === UnitStatus.NotStarted }
-    href="/courses/{course_slug}/{unit.unit_slug}">
+    class:not-started={ unit.status === UnitStatus.NotStarted }>
     <GameifiedButton
         style={unit.status === UnitStatus.Completed
             ? "pressed"
             : unit.status === UnitStatus.InProgress
             ? "highlighted"
             : "translucent"}
+        href="/courses/{course_slug}/{unit.unit_slug}"
         icon={unit.status === UnitStatus.Completed ? Check : paywalled ? Lock : Play}
         bind:element/>
     <Icon
@@ -54,7 +54,7 @@ onDestroy(() => {
     <div class="text">
         { unit.name }
     </div>
-</a>
+</div>
 
 {#each unit.subunits as subunit}
     <svelte:self

@@ -8,6 +8,7 @@ let dispatch = createEventDispatcher()
 export let icon: typeof SvelteComponent
 export let style: "pressed" | "translucent" | "highlighted"
 export let element: HTMLElement
+export let href: string
 
 function clicked(e: Event) {
     let audio = new Audio(ButtonSound)
@@ -22,24 +23,24 @@ function handle_keyup(e: KeyboardEvent) {
 }
 </script>
 
-<div
+<a
     bind:this={ element }
     class="button {style}"
-    role="button"
-    tabindex="0"
+    href={href}
     on:click={ clicked }
     on:keyup={ handle_keyup }
 >
     <Icon
         icon={icon}
         opacity={style === "highlighted" ? 1 : 0.5} />
-</div>
+</a>
 
 <style lang="stylus">
 @import 'variables'
 
 .button
     padding 8px
+    margin-bottom 8px
     color white
     display inline-flex
     align-items center
@@ -49,7 +50,9 @@ function handle_keyup(e: KeyboardEvent) {
     position relative
     transition top 0.05s ease-in, box-shadow 0.05s ease-in
     border-radius 8px
-    top 0
+    top 0px
+    &:hover, &:focus
+        outline-offset 4px
     &.pressed
         background $brand
         box-shadow 0 2px transparify($brand, 40%)

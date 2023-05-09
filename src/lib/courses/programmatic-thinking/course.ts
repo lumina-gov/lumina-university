@@ -1,19 +1,20 @@
 import type { CourseRaw } from "$lib/types/course"
 import CodeTags from "svelte-material-icons/CodeTags.svelte"
-import CoursePlaceholder from "$lib/images/course_placeholder.svg"
+import CourseImage from "./CourseImage.png"
 
 export const course: CourseRaw = {
     name: "Programmatic Thinking",
+    tags: [{ name: "Programming", color: "green" }],
     root_units: [
         "introduction",
         "thinking-like-a-programmer",
         "programming-concepts",
     ],
-    description: "Learn how to limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
+    description: "Make use of the limitless possibilities of software engineering and learn to turn your ideas into reality with our expertly curated course.",
     prerequisites: [],
-    next_up: [],
+    next_up: ["html", "css"],
     recommended: [],
-    image: CoursePlaceholder,
+    image: CourseImage,
     icon: CodeTags,
     color: "orange",
     units_by_slug: {

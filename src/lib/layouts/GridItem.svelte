@@ -50,9 +50,9 @@ export let columns: BreakpointColumns<string>
     style:position={ typeof position == "string" ? position : undefined }
     style:text-align={ text_align }
     style:padding
-    style:gap='{ gap ? gap + "px" : undefined }}'
+    style:gap={ gap ? gap + "px" : undefined }
     style:align-self={ align_self }
-    style:top={ `${top_distance}px` }
+    style:top={ top_distance ? top_distance + "px" : undefined }
     class="grid-item"
     class:border_radius
     class:translucent>

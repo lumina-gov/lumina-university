@@ -59,6 +59,7 @@ $: related_courses = related.map(async related => await get_full_course(related,
     display flex
     gap 8px
     flex-direction column
+    width 100%
 
 .related-course
     color white
@@ -79,5 +80,16 @@ $: related_courses = related.map(async related => await get_full_course(related,
     height 50px
     border-radius 4px
     width 100%
-    background transparify(white, 4%)
+    background linear-gradient(to right, transparify(white, 8%), transparify(white, 15%), transparify(white, 8%))
+    animation: pulse 1.5s ease-in-out infinite
+
+@keyframes pulse
+    0%
+        background-position: -200px 0
+    50%
+        background-position: 200px 0
+    100%
+        background-position: -200px 0
+
+
 </style>
