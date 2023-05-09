@@ -1,11 +1,10 @@
 <script lang="ts">
 import type { Unit } from "$lib/types/unit"
 import { get_paths_for_units } from "$lib/utils/path"
-import { afterUpdate, onDestroy, onMount, tick } from "svelte"
+import { onDestroy, onMount, tick } from "svelte"
 import UnitBlock from "./UnitBlock.svelte"
 import { browser } from "$app/environment"
 import { afterNavigate, beforeNavigate } from "$app/navigation"
-import { navigating } from "$app/stores"
 
 export let course_slug: string
 export let root_units: Unit[]
