@@ -17,7 +17,6 @@ export default [
     {
         icon: Chat,
         name: "Tutoring",
-        href: "/tutoring",
         color: "#FF8947",
         subtext: "Accelerate your learning with tutoring"
     },

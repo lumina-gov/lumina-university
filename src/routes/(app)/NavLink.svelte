@@ -10,7 +10,7 @@ export let color: string | undefined = undefined
 export let href: string | undefined = undefined
 
 $: inactive = href == undefined
-$: tag = href ? "a" : "div"
+$: tag = href ? "a" : "div" as "a" | "div"
 </script>
 
 <svelte:element

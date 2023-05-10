@@ -13,7 +13,7 @@ export let text: string | null = null
 export let target: string | null = null
 export let use_sound = true
 
-$: tag = href ? "a" : "div"
+$: tag = (href ? "a" : "div") as "a" | "div"
 
 let dispatch = createEventDispatcher()
 let sound: HTMLAudioElement

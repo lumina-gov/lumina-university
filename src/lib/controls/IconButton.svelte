@@ -11,7 +11,7 @@ export let opacity = 1
 export let style: "translucent" | "transparent" | "branded" = "branded"
 export let color: Prop<Icon, "color"> = undefined
 export let use_sound = true
-$: tag = href ? "a" : "div"
+$: tag = href ? "a" : "div" as "a" | "div"
 
 function clicked(e: Event) {
     if (use_sound) {

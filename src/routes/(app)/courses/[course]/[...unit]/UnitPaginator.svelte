@@ -18,6 +18,12 @@ function pressed() {
     audio.play()
 }
 
+function keyup(e: KeyboardEvent) {
+    if(e.key === "Enter") {
+        pressed()
+    }
+}
+
 </script>
 <svelte:element
     this={ unit ? "a" : "div" }
@@ -26,7 +32,7 @@ function pressed() {
     class:next={ direction === "next" }
     href={unit ? `/courses/${course.course_slug}/${unit.unit_slug}` : undefined}
     on:click={ pressed }
-    on:keyup={ e => e.key === "Enter" && pressed() }>
+    on:keyup={ keyup }>
     {#if unit}
         <Icon
             color="brand"
