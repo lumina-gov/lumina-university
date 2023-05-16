@@ -1,10 +1,9 @@
-import type { PageLoad } from "./$types"
 import { get_full_course, has_course } from "$lib/courses/content"
 import { graphql } from "$lib/gql"
 import type { UnitStatus } from "$lib/gql/graphql"
 import type { CourseFull } from "$lib/types/course"
 
-export const load = (async ({ parent }) => {
+export async function load ({ parent }) {
     const data = await parent()
     if (data.user_store.user === null) return { recent_data: null }
     const all_progress_req = await data.graph.gquery(graphql(`
@@ -46,4 +45,4 @@ export const load = (async ({ parent }) => {
     return {
         recent_data: recent_data
     }
-}) satisfies PageLoad
+}

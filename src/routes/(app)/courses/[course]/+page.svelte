@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { PageData } from "./$types"
 import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
 import OutlineSidebar from "./OutlineSidebar.svelte"
@@ -14,7 +13,7 @@ import Button from "$lib/controls/Button.svelte"
 import Play from "svelte-material-icons/Play.svelte"
 import FlexWrap from "$lib/display/FlexWrap.svelte"
 import Tag from "$lib/display/Tag.svelte"
-export let data: PageData
+export let data
 
 $: units = flatten_units(data.course.root_units)
 

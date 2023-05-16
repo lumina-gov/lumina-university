@@ -1,7 +1,6 @@
 import { content } from "$lib/courses/content"
-import type { PageLoad } from "./$types"
 
-export const load = (async ({ params }) => {
+export async function load ({ params }) {
     // Get the markdown file as a string
     const file = content[`./${params.course}/course.md`]
 
@@ -13,4 +12,4 @@ export const load = (async ({ params }) => {
     return {
         markdown
     }
-}) satisfies PageLoad
+}

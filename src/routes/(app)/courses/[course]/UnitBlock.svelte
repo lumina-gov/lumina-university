@@ -21,7 +21,8 @@ export let course_slug: string
 export let el_map: Record<string, HTMLElement>
 
 let element: HTMLElement
-
+// could we try use $ reactive statements here?
+// let declarations which are not reactive are not reset (this component is re-used across re-renders)
 afterUpdate(() => {
     el_map[unit.unit_slug] = element
 })

@@ -1,10 +1,9 @@
 import { content } from "$lib/courses/content"
 import { error, redirect } from "@sveltejs/kit"
-import type { PageLoad } from "./$types"
 import { SubscriptionStatus } from "$lib/gql/graphql"
 import { MessageType } from "$lib/types/message"
 
-export const load = (async ({ params, parent }) => {
+export async function load({ params, parent }) {
     const data = await parent()
     const unit = data.course.units_by_slug[params.unit]
 
@@ -39,4 +38,4 @@ export const load = (async ({ params, parent }) => {
         unit,
         markdown
     }
-}) satisfies PageLoad
+}

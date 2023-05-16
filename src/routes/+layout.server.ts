@@ -1,7 +1,6 @@
 import { env } from "$env/dynamic/private"
-import type { LayoutServerLoad } from "./$types"
 
-export const load: LayoutServerLoad = async ({ url, cookies }) => {
+export async function load ({ url, cookies }) {
     const redirect_url = encodeURIComponent(`${url.protocol}//${url.host}/signin`)
 
     return {

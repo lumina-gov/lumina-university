@@ -1,8 +1,7 @@
 import satori from "satori"
-import type { RequestHandler } from "./$types"
 import { Resvg } from "@resvg/resvg-js"
 
-export const GET = (async ({ fetch, request }) => {
+export async function GET ({ fetch, request }) {
 
     const title = new URL(request.url).searchParams.get("title") || "No title provided"
 
@@ -120,4 +119,4 @@ export const GET = (async ({ fetch, request }) => {
             "Content-Type": "image/png",
         },
     })
-}) satisfies RequestHandler
+}

@@ -1,9 +1,8 @@
 import { graphql } from "$lib/gql"
 import { error, redirect } from "@sveltejs/kit"
-import type { PageLoad } from "./$types"
 import { MessageType } from "$lib/types/message"
 
-export const load: PageLoad = async ({ parent, url }) => {
+export async function load ({ parent, url }) {
     const data = await parent()
     if(!data.user_store.user) {
         data.alerts.create_alert(MessageType.Error, "Log in to view your account")

@@ -1,10 +1,9 @@
 <script lang="ts">
-import type { LayoutData } from "./$types"
 import Navigation from "./Navigation.svelte"
 import AppBar from "./AppBar.svelte"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 
-export let data: LayoutData
+export let data
 
 let nav_opened = false
 

@@ -1,7 +1,6 @@
 <script lang="ts">
 import Button from "$lib/controls/Button.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
-import type { PageData } from "./$types"
 import RocketLaunch from "svelte-material-icons/RocketLaunch.svelte"
 import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
 import Icon from "$lib/display/Icon.svelte"
@@ -12,7 +11,7 @@ import DashboardTopics from "./DashboardTopics.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 import RecentCoursesGrid from "./RecentCoursesGrid.svelte"
 
-export let data: PageData
+export let data
 
 $: user = data.user_store.user
 
@@ -108,59 +107,59 @@ $: user = data.user_store.user
     title="Lumina University » Next Generation Education"
 />
 <style lang="stylus">
-    @import "variables"
+@import "variables"
 
-    .space
-        padding-top 120px
+.space
+    padding-top 120px
 
-    .auth-hero
-        display flex
-        flex-direction row
-        justify-content space-between
-        align-items center
-        width 100%
-        @media (max-width: $mobile)
-            flex-direction column
-            gap 24px
-        .greeting
-            display flex
-            gap 16px
-            font-size 36px
-            font-weight 800
-            align-items center
-    .subheader
-        font-size 22px
-        font-weight 800
-        text-align center
-
-    .unauth-hero
-        display flex
+.auth-hero
+    display flex
+    flex-direction row
+    justify-content space-between
+    align-items center
+    width 100%
+    @media (max-width: $mobile)
         flex-direction column
-        align-items center
-        .inner
-            display flex
-            gap 16px
-            flex-direction column
-            align-items flex-start
-            width 100%
-            justify-content center
-            max-width 1200px
-            &.padding
-                padding 140px 24px
-            h1
-                font-size 50px
-                max-width 600px
-                text-transform uppercase
-                font-weight 800
-            .span
-                opacity 0.5
-                text-transform uppercase
-                font-weight 700
-            .para
-                opacity 0.8
-    .view-courses
-        width 100%
+        gap 24px
+    .greeting
         display flex
+        gap 16px
+        font-size 36px
+        font-weight 800
+        align-items center
+.subheader
+    font-size 22px
+    font-weight 800
+    text-align center
+
+.unauth-hero
+    display flex
+    flex-direction column
+    align-items center
+    .inner
+        display flex
+        gap 16px
+        flex-direction column
+        align-items flex-start
+        width 100%
         justify-content center
-        padding 20px
-    </style>
+        max-width 1200px
+        &.padding
+            padding 140px 24px
+        h1
+            font-size 50px
+            max-width 600px
+            text-transform uppercase
+            font-weight 800
+        .span
+            opacity 0.5
+            text-transform uppercase
+            font-weight 700
+        .para
+            opacity 0.8
+.view-courses
+    width 100%
+    display flex
+    justify-content center
+    padding 20px
+</style>

@@ -1,10 +1,9 @@
 import { courses, get_full_course } from "$lib/courses/content"
 import { error } from "@sveltejs/kit"
-import type { LayoutLoad } from "./$types"
 import { graphql } from "$lib/gql"
 import type { GetCourseProgressQuery, UnitStatus } from "$lib/gql/graphql"
 
-export const load: LayoutLoad = async ({ params, parent }) => {
+export async function load ({ params, parent }) {
     const data = await parent()
 
     const course_import = courses[`./${params.course}/course.ts`]

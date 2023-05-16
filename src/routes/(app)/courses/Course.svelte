@@ -1,7 +1,6 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import ImageOutline from "svelte-material-icons/ImageOutline.svelte"
 import CoursePlaceholder from "$lib/images/course_placeholder.svg"
 import type { CourseRaw } from "$lib/types/course"
 

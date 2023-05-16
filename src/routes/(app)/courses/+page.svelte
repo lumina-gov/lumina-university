@@ -5,10 +5,9 @@ import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
 import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import BookVariant from "svelte-material-icons/BookVariant.svelte"
-import type { PageData } from "./$types"
 import Course from "./Course.svelte"
 
-export let data: PageData
+export let data
 </script>
 <hr/>
 <Grid padding_vertical={60}>

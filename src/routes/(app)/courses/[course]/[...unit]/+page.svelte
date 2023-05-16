@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { PageData } from "./$types"
 import Subheading from "$lib/display/Subheading.svelte"
 import Button from "$lib/controls/Button.svelte"
 import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
@@ -20,7 +19,7 @@ import UnitCompletionSound from "$lib/sounds/UnitCompletion.wav"
 import Heading from "$lib/display/Heading.svelte"
 import Text from "svelte-material-icons/Text.svelte"
 
-export let data: PageData
+export let data
 
 $: unit = data.unit
 
@@ -140,7 +139,6 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
         </main>
     </ScrollbarRegion>
 </div>
-
 
 <style lang="stylus">
 @import "variables"
