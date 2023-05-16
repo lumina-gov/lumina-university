@@ -18,18 +18,26 @@ import { afterNavigate } from "$app/navigation"
 import UnitCompletionSound from "$lib/sounds/UnitCompletion.wav"
 import Heading from "$lib/display/Heading.svelte"
 import Text from "svelte-material-icons/Text.svelte"
+import CourseTree from "../CourseTree.svelte"
+import Sitemap from "svelte-material-icons/Sitemap.svelte"
 
 export let data
 
 $: unit = data.unit
-
 let end_of_content: HTMLElement
 let content: HTMLElement
 let content_container: HTMLElement
+let subunits_roots: Unit[] = []
+let flattened_subunits: Unit[] = []
 
 $: flattened_units = flatten_units(data.course.root_units)
 $: previous_unit = get_unit_relative(unit, "previous")
 $: next_unit = get_unit_relative(unit, "next")
+
+$: if(data.course.units_by_slug[unit.unit_slug].subunits.length > 0) {
+    subunits_roots = [data.course.units_by_slug[unit.unit_slug]]
+    flattened_subunits = flatten_units(subunits_roots)
+} else { subunits_roots = []; flattened_subunits = [] }
 
 function check_completed(entries: IntersectionObserverEntry[], observer: IntersectionObserver): void {
     if (entries[0].isIntersecting) {
@@ -106,6 +114,16 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                     <hr>
                     <MarkdownRenderer markdown={data.markdown}/>
                     <div bind:this={ end_of_content }/>
+                    {#if subunits_roots.length > 0}
+                        <div class="subunits">
+                            <Heading left_icon={Sitemap}>Subunits</Heading>
+                            <CourseTree
+                                course_slug={data.course.course_slug}
+                                root_units={subunits_roots}
+                                units={flattened_subunits}
+                            />
+                        </div>
+                    {/if}
                     <div class="section row">
                         <UnitPaginator
                             course={data.course}
@@ -116,6 +134,7 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                             direction="next"
                             unit={next_unit}/>
                     </div>
+                    
                     <div class="section">
                         <Button
                             style="transparent"
@@ -195,6 +214,12 @@ main
     max-width 300px
     @media (max-width 1400px)
         display none
+
+.subunits
+    display flex
+    flex-direction column
+    gap 16px
+    padding 32px 0px
 
 .inner-toc
     padding-top 40px
