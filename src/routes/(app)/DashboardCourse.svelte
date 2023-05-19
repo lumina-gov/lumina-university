@@ -2,12 +2,10 @@
 import Icon from "$lib/display/Icon.svelte"
 import ProgressBar from "$lib/display/ProgressBar.svelte"
 import Circle from "svelte-material-icons/Circle.svelte"
-import Button from "$lib/controls/Button.svelte"
-import PlayOutline from "svelte-material-icons/PlayOutline.svelte"
-import { UnitStatus } from "$lib/gql/graphql"
 import { flatten_units } from "$lib/utils/unit"
 import type { CourseFull } from "$lib/types/course"
 import ButtonSound from "$lib/sounds/ButtonSound.wav"
+import { UnitStatus } from "$lib/graphql/graphql-types"
 
 export let enlarge: boolean
 export let data: {

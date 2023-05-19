@@ -1,0 +1,51 @@
+query me {
+    me {
+        id
+        email
+        first_name
+        last_name,
+        stripe_subscription_info {
+            status
+            expiry_date
+        }
+    }
+}
+
+query allCourseProgress {
+    all_course_progress {
+        id
+        user_id
+        unit_slug
+        course_slug
+        status
+        updated_at
+    }
+}
+
+query customerPortalUrl($return_url: String!) {
+    me {
+        customer_portal_url(return_url: $return_url)
+    }
+}
+
+mutation createLuminaUniversityCheckoutSession($return_url: String!) {
+    create_light_university_checkout_session(success_url: $return_url)
+}
+
+query getCourseProgress($course_slug: String!) {
+    course_progress(course_slug: $course_slug) {
+        id
+        status
+        user_id
+        unit_slug
+        course_slug
+        updated_at
+    }
+}
+
+
+mutation setUnitProgress($course_slug: String!, $unit_slug: String!, $status: UnitStatus!) {
+    set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: $status) {
+        id
+    }
+}

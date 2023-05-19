@@ -1,4 +1,4 @@
-import type { UnitStatus } from "$lib/gql/graphql"
+import type { UnitStatus } from "$lib/graphql/graphql-types"
 
 export type UnitData = {
     name: string

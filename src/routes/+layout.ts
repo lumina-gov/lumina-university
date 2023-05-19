@@ -9,6 +9,7 @@ export async function load ({ data: { auth_token, login_url, lumina_domain }}) {
     const user_store = user_store_init(auth_token, login_url)
     const graph = init_urql(user_store)
     const alerts = alerts_init([])
+
     try {
         user_store.user = await get_me(graph, alerts)
     } catch (e) {

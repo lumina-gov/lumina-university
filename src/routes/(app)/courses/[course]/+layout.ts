@@ -1,7 +1,7 @@
 import { courses, get_full_course } from "$lib/courses/content"
 import { error } from "@sveltejs/kit"
-import { graphql } from "$lib/gql"
-import type { GetCourseProgressQuery, UnitStatus } from "$lib/gql/graphql"
+import type { UnitStatus} from "$lib/graphql/graphql-types.js"
+import { GetCourseProgressDocument, type GetCourseProgressQuery } from "$lib/graphql/graphql-types.js"
 
 export async function load ({ params, parent }) {
     const data = await parent()
@@ -17,18 +17,9 @@ export async function load ({ params, parent }) {
     let course_progresses: GetCourseProgressQuery["course_progress"] = []
 
     if (data.user_store.user) {
-        const req = await data.graph.gquery(graphql(`
-            query GetCourseProgress($course_slug: String!) {
-                course_progress(course_slug: $course_slug) {
-                    id
-                    status
-                    user_id
-                    unit_slug
-                    course_slug
-                    updated_at
-                }
-            }
-        `), {course_slug: params.course})
+        const req = await data.graph.gquery(GetCourseProgressDocument, {
+            course_slug: params.course
+        })
 
         if (req.error) {
             throw error(500, {

@@ -6,10 +6,10 @@ import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.sve
 import Icon from "$lib/display/Icon.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
 import DashboardCourse from "./DashboardCourse.svelte"
-import { SubscriptionStatus } from "$lib/gql/graphql"
 import DashboardTopics from "./DashboardTopics.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 import RecentCoursesGrid from "./RecentCoursesGrid.svelte"
+import { SubscriptionStatus } from "$lib/graphql/graphql-types"
 
 export let data
 

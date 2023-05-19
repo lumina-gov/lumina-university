@@ -10,16 +10,15 @@ import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
 import { flatten_units } from "$lib/utils/unit"
 import CourseProgressBar from "./CourseProgressBar.svelte"
-import { graphql } from "$lib/gql"
 import { page } from "$app/stores"
 import { MessageType } from "$lib/types/message"
-import { UnitStatus } from "$lib/gql/graphql"
 import { afterNavigate } from "$app/navigation"
 import UnitCompletionSound from "$lib/sounds/UnitCompletion.wav"
 import Heading from "$lib/display/Heading.svelte"
 import Text from "svelte-material-icons/Text.svelte"
 import CourseTree from "../CourseTree.svelte"
 import Sitemap from "svelte-material-icons/Sitemap.svelte"
+import { SetUnitProgressDocument, UnitStatus } from "$lib/graphql/graphql-types"
 
 export let data
 
@@ -53,13 +52,11 @@ function check_completed(entries: IntersectionObserverEntry[], observer: Interse
 async function update_unit_progress(status: UnitStatus): Promise<void> {
     if (unit.status === status) return
     if (data.user_store.user) {
-        let res = await data.graph.gmutation(graphql(`
-        mutation SetUnitProgress($course_slug: String!, $unit_slug: String!, $status: UnitStatus!) {
-            set_unit_progress(course_slug: $course_slug, unit_slug: $unit_slug, status: $status) {
-                id
-            }
-        }
-    `), {course_slug: data.course.course_slug, unit_slug: unit.unit_slug, status})
+        let res = await data.graph.gmutation(SetUnitProgressDocument, {
+            course_slug: data.course.course_slug,
+            unit_slug: unit.unit_slug, status
+        })
+
         if (res.error) {
             return $page.data.alerts.create_alert(MessageType.Error, res.error.message)
         }
@@ -134,7 +131,7 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                             direction="next"
                             unit={next_unit}/>
                     </div>
-                    
+
                     <div class="section">
                         <Button
                             style="transparent"

@@ -6,4 +6,8 @@ export let markdown: string
 
 $: ast = generate_ast(markdown)
 </script>
-<BlocksArray blocks={ast.children}/>
+<div
+    class="markdown"
+    contenteditable="true">
+    <BlocksArray blocks={ast.children}/>
+</div>

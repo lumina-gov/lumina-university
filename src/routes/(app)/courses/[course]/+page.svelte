@@ -6,13 +6,14 @@ import ExtrasSidebar from "./ExtrasSidebar.svelte"
 
 import CourseTree from "./CourseTree.svelte"
 import { flatten_units } from "$lib/utils/unit"
-import { UnitStatus } from "$lib/gql/graphql"
 import Heading from "$lib/display/Heading.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Play from "svelte-material-icons/Play.svelte"
 import FlexWrap from "$lib/display/FlexWrap.svelte"
 import Tag from "$lib/display/Tag.svelte"
+import { UnitStatus } from "$lib/graphql/graphql-types"
+
 export let data
 
 $: units = flatten_units(data.course.root_units)

@@ -1,6 +1,6 @@
-import { graphql } from "$lib/gql"
 import { error, redirect } from "@sveltejs/kit"
 import { MessageType } from "$lib/types/message"
+import { CreateLuminaUniversityCheckoutSessionDocument, CustomerPortalUrlDocument } from "$lib/graphql/graphql-types.js"
 
 export async function load ({ parent, url }) {
     const data = await parent()
@@ -9,14 +9,9 @@ export async function load ({ parent, url }) {
         throw redirect(307, "/")
     }
 
-    const query = await data.graph.gquery(graphql(`
-        query CustomerPortalUrl($return_url: String!) {
-            me {
-                customer_portal_url(return_url: $return_url)
-            }
-        }`), {
-            return_url: url.toString()
-        })
+    const query = await data.graph.gquery(CustomerPortalUrlDocument, {
+        return_url: url.toString()
+    })
 
     if (query.error) {
         throw error(500, {
@@ -32,12 +27,9 @@ export async function load ({ parent, url }) {
         })
     }
 
-    const mutation = await data.graph.gmutation(graphql(`
-        mutation CreateLuminaUniversityCheckoutSession($return_url: String!) {
-            create_light_university_checkout_session(success_url: $return_url)
-        }`), {
-            return_url: url.toString()
-        })
+    const mutation = await data.graph.gmutation(CreateLuminaUniversityCheckoutSessionDocument, {
+        return_url: url.toString()
+    })
 
     if (mutation.error) {
         throw error(500, {

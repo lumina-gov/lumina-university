@@ -8,7 +8,6 @@ import Settlement from "$lib/icons/Settlement.svelte"
 import Signin from "svelte-material-icons/ExitToApp.svelte"
 import Scrim from "$lib/controls/Scrim.svelte"
 import NotificationsPopout from "./NotificationsPopout.svelte"
-import { type MeQuery, SubscriptionStatus } from "$lib/gql/graphql"
 import { afterNavigate } from "$app/navigation"
 import { page } from "$app/stores"
 import Inside from "$lib/controls/Inside.svelte"
@@ -17,6 +16,7 @@ import Logo from "$lib/display/Logo.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import CreditCardOutline from "svelte-material-icons/CreditCardOutline.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
+import { SubscriptionStatus, type MeQuery } from "$lib/graphql/graphql-types"
 
 enum Dropdown {
     Notifications,

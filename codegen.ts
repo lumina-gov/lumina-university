@@ -6,12 +6,16 @@ const config: CodegenConfig = {
   schema: process.env.PUBLIC_GRAPH_ENDPOINT,
   emitLegacyCommonJSImports: false,
   documents: [
-    "src/**/*.ts",
-    "src/**/*.svelte"
+    "src/**/*.graphql",
+    "src/**/*.gql"
   ],
   generates: {
-    "src/lib/gql/": {
-      preset: "client",
+    "src/lib/graphql/graphql-types.ts": {
+      plugins: [
+        "typescript",
+        "typescript-operations",
+        "typed-document-node"
+      ],
       config: {
         useTypeImports: true,
         scalars: {

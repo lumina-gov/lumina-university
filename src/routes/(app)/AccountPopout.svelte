@@ -4,12 +4,12 @@ import Settings from "svelte-material-icons/Cog.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Profile from "$lib/display/Profile.svelte"
-import type { MeQuery } from "$lib/gql/graphql"
 import { delete_cookie } from "$lib/utils/cookie"
 import { goto, invalidateAll } from "$app/navigation"
+import type { MeQuery } from "$lib/graphql/graphql-types"
 
 export let user: NonNullable<MeQuery["me"]>
-$: name = `${user?.first_name ?? ""} ${user?.last_name ?? ""}`
+$: name = `${user.first_name} ${user.last_name}`
 $: email = user.email
 
 async function logout() {

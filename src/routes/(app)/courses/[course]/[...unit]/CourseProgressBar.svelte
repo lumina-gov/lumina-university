@@ -4,11 +4,11 @@ import type { Unit } from "$lib/types/unit"
 import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import { flatten_unit } from "$lib/utils/unit"
-import { UnitStatus } from "$lib/gql/graphql"
 import { createEventDispatcher } from "svelte"
 import CheckboxMarkedCircle from "svelte-material-icons/CheckboxMarkedCircle.svelte"
 import type { Prop } from "$lib/utils/typed_props"
 import type { CourseFull } from "$lib/types/course"
+import { UnitStatus } from "$lib/graphql/graphql-types"
 
 export let units: Unit[]
 export let course: CourseFull

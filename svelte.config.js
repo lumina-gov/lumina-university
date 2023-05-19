@@ -15,12 +15,7 @@ const config = {
             paths: [resolve(__dirname, "./src/stylus")]
         }
     }),
-    // Override http methods in the Todo forms
-    methodOverride: {
-        allowed: ["PATCH", "DELETE"]
-    },
     kit: {
-        inlineStyleThreshold: 2048,
         adapter: adapter()
     }
 }

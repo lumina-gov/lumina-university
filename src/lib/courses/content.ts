@@ -1,4 +1,4 @@
-import { UnitStatus } from "$lib/gql/graphql"
+import { UnitStatus } from "$lib/graphql/graphql-types"
 import type { CourseFull, CourseRaw } from "$lib/types/course"
 import type { Unit, UnitData } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"

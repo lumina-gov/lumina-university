@@ -8,7 +8,6 @@ import { afterNavigate } from "$app/navigation"
 import type { Props } from "$lib/utils/typed_props"
 import Inside from "$lib/controls/Inside.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
-import type { MeQuery } from "$lib/gql/graphql"
 import DashboardBlock from "./NavLink.svelte"
 import ResponsiveLayout from "$lib/layouts/ResponsiveLayout.svelte"
 import Home from "svelte-material-icons/Home.svelte"
@@ -22,8 +21,9 @@ import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.sve
 import Icon from "$lib/display/Icon.svelte"
 import { page } from "$app/stores"
 import Settings from "svelte-material-icons/Cog.svelte"
+import type { MeQuery } from "$lib/graphql/graphql-types"
 
-export let user: MeQuery["me"] | null
+export let user: MeQuery["me"]
 export let nav_opened: boolean
 
 let auth_settings: Array<Props<DashboardBlock>> = [

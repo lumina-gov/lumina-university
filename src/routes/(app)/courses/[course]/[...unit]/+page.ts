@@ -1,7 +1,7 @@
 import { content } from "$lib/courses/content"
 import { error, redirect } from "@sveltejs/kit"
-import { SubscriptionStatus } from "$lib/gql/graphql"
 import { MessageType } from "$lib/types/message"
+import { SubscriptionStatus } from "$lib/graphql/graphql-types.js"
 
 export async function load({ params, parent }) {
     const data = await parent()

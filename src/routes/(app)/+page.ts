@@ -1,23 +1,12 @@
 import { get_full_course, has_course } from "$lib/courses/content"
-import { graphql } from "$lib/gql"
-import type { UnitStatus } from "$lib/gql/graphql"
+import type { UnitStatus } from "$lib/graphql/graphql-types.js"
+import { AllCourseProgressDocument } from "$lib/graphql/graphql-types.js"
 import type { CourseFull } from "$lib/types/course"
 
 export async function load ({ parent }) {
     const data = await parent()
     if (data.user_store.user === null) return { recent_data: null }
-    const all_progress_req = await data.graph.gquery(graphql(`
-        query AllCourseProgress {
-            all_course_progress {
-                id
-                user_id
-                unit_slug
-                course_slug
-                status
-                updated_at
-            }
-        }
-    `), {})
+    const all_progress_req = await data.graph.gquery(AllCourseProgressDocument, {})
 
     if (all_progress_req.error || !all_progress_req.data?.all_course_progress) {
         return {recent_data: null}

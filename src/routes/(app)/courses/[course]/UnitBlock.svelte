@@ -5,10 +5,10 @@ import type { Unit } from "$lib/types/unit"
 import { afterUpdate, onDestroy } from "svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Text from "svelte-material-icons/Text.svelte"
-import { SubscriptionStatus, UnitStatus } from "$lib/gql/graphql"
 import GameifiedButton from "$lib/controls/GameifiedButton.svelte"
 import { page } from "$app/stores"
 import Lock from "svelte-material-icons/Lock.svelte"
+import { SubscriptionStatus, UnitStatus } from "$lib/graphql/graphql-types"
 
 $: user = $page.data.user_store.user
 $: subscription_status = user?.stripe_subscription_info.status ?? SubscriptionStatus.None
