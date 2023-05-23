@@ -32,6 +32,7 @@ let flattened_subunits: Unit[] = []
 $: flattened_units = flatten_units(data.course.root_units)
 $: previous_unit = get_unit_relative(unit, "previous")
 $: next_unit = get_unit_relative(unit, "next")
+$: user = data.user_store.user
 
 $: if(data.course.units_by_slug[unit.unit_slug].subunits.length > 0) {
     subunits_roots = [data.course.units_by_slug[unit.unit_slug]]
@@ -51,7 +52,7 @@ function check_completed(entries: IntersectionObserverEntry[], observer: Interse
 
 async function update_unit_progress(status: UnitStatus): Promise<void> {
     if (unit.status === status) return
-    if (data.user_store.user) {
+    if (user) {
         let res = await data.graph.gmutation(SetUnitProgressDocument, {
             course_slug: data.course.course_slug,
             unit_slug: unit.unit_slug, status

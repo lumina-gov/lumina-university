@@ -2,7 +2,7 @@
 import Icon from "$lib/display/Icon.svelte"
 import ChatQuestion from "svelte-material-icons/ChatQuestion.svelte"
 import type { LeafDirective } from "mdast-util-directive"
-import { tick, type SvelteComponent, afterUpdate} from "svelte"
+import { tick, type SvelteComponent} from "svelte"
 import { onMount } from "svelte"
 import IconButton from "$lib/controls/IconButton.svelte"
 import Send from "svelte-material-icons/Send.svelte"
@@ -34,6 +34,7 @@ $: attributes = block.attributes as {
 let audio: HTMLAudioElement
 
 $: assessment = response?.assessment ?? "UNKNOWN"
+$: user = $page.data.user_store.user
 
 let textarea: HTMLTextAreaElement
 let answer = ""
@@ -83,6 +84,7 @@ function resize_text_area() {
 }
 
 async function load_assessment() {
+    if(!user) return
     loading = true
 
     let res = await $page.data.graph.gquery(gql(`
@@ -234,6 +236,12 @@ async function submit() {
                 </div>
             </div>
         {/if}
+    {:else if !user}
+        <div class="section">
+            <div class="feedback">
+                <MarkdownRenderer markdown="You must be logged in use **AI assessments**"/>
+            </div>
+        </div>
     {:else}
         <div class="section">
             <div class="loading">
