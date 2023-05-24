@@ -18,6 +18,7 @@ import type { Prop } from "$lib/utils/typed_props"
 import AlertCircle from "svelte-material-icons/AlertCircle.svelte"
 import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 import { afterNavigate } from "$app/navigation"
+import { SetQuestionAssessmentDocument } from "$lib/graphql/graphql-types"
 
 export let block: LeafDirective
 let response: null | {
@@ -133,28 +134,7 @@ async function submit() {
 
     loading = true
     response = null
-    let res = await $page.data.graph.gmutation(gql(`
-            mutation SetQuestionAssessment(
-                $question: String!
-                $answer: String!
-                $course_slug: String!
-                $unit_slug: String!
-                $question_slug: String!
-                $context: String
-            ) {
-                question_assessment(
-                    question: $question
-                    answer: $answer
-                    course_slug: $course_slug
-                    unit_slug: $unit_slug
-                    question_slug: $question_slug,
-                    question_context: $context
-                ) {
-                    feedback
-                    assessment
-                }
-            }
-        `), {
+    let res = await $page.data.graph.gmutation(SetQuestionAssessmentDocument, {
         question: attributes.question,
         answer,
         course_slug: $page.data.course.course_slug,
