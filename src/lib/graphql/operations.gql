@@ -49,3 +49,24 @@ mutation setUnitProgress($course_slug: String!, $unit_slug: String!, $status: Un
         id
     }
 }
+
+mutation SetQuestionAssessment(
+    $question: String!
+    $answer: String!
+    $course_slug: String!
+    $unit_slug: String!
+    $question_slug: String!
+    $context: String
+) {
+    question_assessment(
+        question: $question
+        answer: $answer
+        course_slug: $course_slug
+        unit_slug: $unit_slug
+        question_slug: $question_slug,
+        question_context: $context
+    ) {
+        feedback
+        assessment
+    }
+}
