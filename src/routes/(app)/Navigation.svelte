@@ -132,7 +132,8 @@ afterNavigate(() => {
                             icon={Circle}
                             opacity={0.5}
                             size={6}/>
-                        <a href="/about">About Us</a>
+                        <!-- <a href="/about">About Us</a> -->
+                        <a href="https://lumina.earth">Lumina Website</a>
                     </div>
                     <div class="socials">
                         <a
