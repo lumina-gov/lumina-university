@@ -14,6 +14,7 @@ export type Scalars = {
   DateTime: any;
   JSON: any;
   UUID: any;
+  Void: any;
 };
 
 export enum Assessment {
@@ -22,6 +23,16 @@ export enum Assessment {
   SoftPass = 'SOFT_PASS',
   Unknown = 'UNKNOWN'
 }
+
+export type AuthApp = {
+  __typename?: 'AuthApp';
+  created: Scalars['DateTime'];
+  description: Scalars['String'];
+  name: Scalars['String'];
+  official: Scalars['Boolean'];
+  redirect_hostnames: Array<Scalars['String']>;
+  scopes: Array<Scalars['String']>;
+};
 
 export enum CitizenshipStatus {
   Approved = 'APPROVED',
@@ -53,15 +64,20 @@ export type Mutation = {
   create_citizenship_application: Scalars['UUID'];
   create_light_university_checkout_session: Scalars['String'];
   create_user: Scalars['UUID'];
+  issue_token: Scalars['String'];
   question_assessment: QuestionAssessment;
+  reset_password: Scalars['Void'];
+  reset_to_new_password: Scalars['Void'];
   set_unit_progress: UnitProgress;
   submit_application: Scalars['UUID'];
 };
 
 
 export type MutationAuth_TokenArgs = {
+  app_secret: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
+  scopes: Array<Scalars['String']>;
 };
 
 
@@ -96,6 +112,11 @@ export type MutationCreate_UserArgs = {
 };
 
 
+export type MutationIssue_TokenArgs = {
+  scopes: Array<Scalars['String']>;
+};
+
+
 export type MutationQuestion_AssessmentArgs = {
   answer: Scalars['String'];
   course_slug: Scalars['String'];
@@ -103,6 +124,17 @@ export type MutationQuestion_AssessmentArgs = {
   question_context?: InputMaybe<Scalars['String']>;
   question_slug: Scalars['String'];
   unit_slug: Scalars['String'];
+};
+
+
+export type MutationReset_PasswordArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationReset_To_New_PasswordArgs = {
+  new_password: Scalars['String'];
+  token_id: Scalars['UUID'];
 };
 
 
@@ -120,6 +152,7 @@ export type MutationSubmit_ApplicationArgs = {
 export type Query = {
   __typename?: 'Query';
   all_course_progress: Array<Array<UnitProgress>>;
+  auth_app?: Maybe<AuthApp>;
   course_progress: Array<UnitProgress>;
   /**
    * Returns the crack time of a password
@@ -133,6 +166,11 @@ export type Query = {
   question_assessment?: Maybe<QuestionAssessment>;
   user_count: Scalars['Int'];
   user_count_by_interval: Array<Scalars['Int']>;
+};
+
+
+export type QueryAuth_AppArgs = {
+  slug: Scalars['String'];
 };
 
 
