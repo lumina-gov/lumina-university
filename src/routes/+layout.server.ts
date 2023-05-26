@@ -5,7 +5,7 @@ export async function load ({ url, cookies }) {
 
     return {
         auth_token: cookies.get("token") || null,
-        login_url: `${env.LUMINA_DOMAIN}/signin?redirect=${redirect_url}`,
+        login_url: `${env.LUMINA_DOMAIN}/auth?app-slug=lumina-university&redirect=${redirect_url}`,
         lumina_domain: env.LUMINA_DOMAIN,
     }
 }
