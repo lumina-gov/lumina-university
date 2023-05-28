@@ -1,6 +1,7 @@
 <PageHead
     description={data.course.description}
     title={data.course.name}/>
+<SchemaComponent schema={schema}/>
 <script lang="ts">
 import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
@@ -17,8 +18,23 @@ import FlexWrap from "$lib/display/FlexWrap.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import { UnitStatus } from "$lib/graphql/graphql-types"
 import PageHead from "$lib/components/PageHead.svelte"
+import SchemaComponent from "$lib/components/SchemaComponent.svelte"
+import type { Course, WithContext} from "schema-dts"
 
 export let data
+
+$: schema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: data.course.name,
+    description: data.course.description,
+    provider: {
+        "@type": "Organization",
+        name: "Lumina University",
+        sameAs: "https://luminauniversity.earth",
+    },
+
+} satisfies WithContext<Course>
 
 $: units = flatten_units(data.course.root_units)
 
