@@ -1,3 +1,4 @@
+<PageHead title={data.course.name + "»" + unit.name}/>
 <script lang="ts">
 import Subheading from "$lib/display/Subheading.svelte"
 import Button from "$lib/controls/Button.svelte"
@@ -19,6 +20,7 @@ import Text from "svelte-material-icons/Text.svelte"
 import CourseTree from "../CourseTree.svelte"
 import Sitemap from "svelte-material-icons/Sitemap.svelte"
 import { SetUnitProgressDocument, UnitStatus } from "$lib/graphql/graphql-types"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data
 

@@ -1,3 +1,6 @@
+<PageHead
+    description="Find courses at Lumina University"
+    title="Find Courses"/>
 <script lang="ts">
 import Heading from "$lib/display/Heading.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
@@ -6,6 +9,7 @@ import GridItem from "$lib/layouts/GridItem.svelte"
 import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import BookVariant from "svelte-material-icons/BookVariant.svelte"
 import Course from "./Course.svelte"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data
 </script>
@@ -21,7 +25,7 @@ export let data
         <Heading left_icon={BookVariant}>Courses</Heading>
         <VerticalLayout max_width={600}>
             <Paragraph>
-                Welcome to Light University's courses page! Here you will find our courses,
+                Welcome to Lumina University's courses page! Here you will find our courses,
                 designed to provide you with the knowledge and skills you need to excel in your field.
                 Our course is taught by industry experts and covers the latest trends and technologies
             </Paragraph>

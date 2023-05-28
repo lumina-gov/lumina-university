@@ -1,3 +1,8 @@
+<PageHead
+    description="The next generation of education - powered by the Government of Lumina"
+    include_suffix={false}
+    title="Lumina University » Next Generation Education"
+/>
 <script lang="ts">
 import Button from "$lib/controls/Button.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
@@ -101,11 +106,6 @@ $: user = data.user_store.user
         </div>
     </div>
 {/if}
-<PageHead
-    description="The next generation of education - powered by the Government of Lumina"
-    include_suffix={false}
-    title="Lumina University » Next Generation Education"
-/>
 <style lang="stylus">
 @import "variables"
 

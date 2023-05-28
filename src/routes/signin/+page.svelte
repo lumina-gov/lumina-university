@@ -1,6 +1,10 @@
+<PageHead
+    description="Sign into lumina university"
+    title="Sign in"/>
 <script lang="ts">
 import { goto, invalidateAll } from "$app/navigation"
 import { page } from "$app/stores"
+import PageHead from "$lib/components/PageHead.svelte"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import { MessageType } from "$lib/types/message"
 import { set_cookie } from "$lib/utils/cookie"
