@@ -1,3 +1,6 @@
+<PageHead
+    description={data.course.description}
+    title={data.course.name}/>
 <script lang="ts">
 import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
@@ -13,6 +16,7 @@ import Play from "svelte-material-icons/Play.svelte"
 import FlexWrap from "$lib/display/FlexWrap.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import { UnitStatus } from "$lib/graphql/graphql-types"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data
 

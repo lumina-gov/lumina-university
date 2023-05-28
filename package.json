@@ -49,6 +49,7 @@
 		"micromark-extension-gfm-table": "^1.0.5",
 		"postcss": "8.4.15",
 		"satori": "^0.7.4",
+		"satori-html": "^0.3.2",
 		"schema-dts": "^1.1.2",
 		"stripe": "^12.4.0",
 		"stylus": "0.55.0",

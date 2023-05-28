@@ -1,5 +1,5 @@
-# Light University
-The codebase for Lumina's education platform, Light University.
+# Lumima University
+The codebase for Lumina's education platform, Lumina University.
 
 Powering the next generation of education.
 

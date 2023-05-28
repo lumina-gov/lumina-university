@@ -26,7 +26,7 @@ export let data: PageData
             vertical_padding={40}>
             <Heading left_icon={Lumina}>My Account</Heading>
             <Paragraph>
-                Your Light University account is managed through the Lumina Government Website
+                Your Lumina University account is managed through the Lumina Government Website
             </Paragraph>
             <div>
                 <Button
