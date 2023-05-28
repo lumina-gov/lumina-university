@@ -1,7 +1,7 @@
 <script lang="ts">
 import Card from "../Card.svelte"
 
-export let title = "Test OG Graph"
+export let title = "Test OG Graph lalala al alall al allaal "
 export let description = "This is a test of the OG Graph"
 
 </script>

@@ -52,7 +52,7 @@ export let description: string | null = null
     align-items flex-end
 
 .box
-    height 4em
+    height 100%
     margin-bottom 1.5em
     background $brand
     display flex

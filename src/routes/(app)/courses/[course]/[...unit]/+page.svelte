@@ -1,4 +1,4 @@
-<PageHead title={data.course.name + "»" + unit.name}/>
+<PageHead title={data.course.name + " » " + unit.name}/>
 <script lang="ts">
 import Subheading from "$lib/display/Subheading.svelte"
 import Button from "$lib/controls/Button.svelte"
