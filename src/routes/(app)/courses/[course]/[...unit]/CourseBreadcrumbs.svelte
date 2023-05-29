@@ -1,13 +1,10 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
+import type { CourseFull } from "$lib/types/course"
 import BookOpenVariant from "svelte-material-icons/BookOpenVariant.svelte"
-import CodeTags from "svelte-material-icons/CodeTags.svelte"
 import SlashForward from "svelte-material-icons/SlashForward.svelte"
 
-export let course: {
-    name: string
-    course_slug: string
-}
+export let course: CourseFull & { course_slug: string }
 
 </script>
 <div class="breadcrumbs">
@@ -29,7 +26,8 @@ export let course: {
         class="item"
         href={`/courses/${course.course_slug}`}>
         <Icon
-            icon={CodeTags}
+            color={course.color}
+            icon={course.icon}
             size={18}/>
         <div class="text">
             { course.name }

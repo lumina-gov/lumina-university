@@ -22,7 +22,7 @@ export let divider = false
     </Inner>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 .divider
     border-bottom 1px solid transparify(white, 8%)
 .hero

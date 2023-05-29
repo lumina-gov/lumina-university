@@ -9,7 +9,7 @@ export let block: Blockquote
     <BlocksArray blocks={block.children}/>
 </blockquote>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 blockquote
     margin 0

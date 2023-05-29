@@ -47,7 +47,7 @@ $: related_courses = related.map(async related => await get_full_course(related,
     {/if}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .wrapper
     display flex

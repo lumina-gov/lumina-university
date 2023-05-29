@@ -107,7 +107,7 @@ $: user = data.user_store.user
     </div>
 {/if}
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .space
     padding-top 120px

@@ -16,7 +16,7 @@ export let account_name = "Lumina"
         opacity={0.2}/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .account-picker
     display flex

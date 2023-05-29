@@ -38,7 +38,7 @@ export let recent_data: {
 </Grid>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 .add-course
     min-height 200px
     height 100%

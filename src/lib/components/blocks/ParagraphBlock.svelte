@@ -9,7 +9,7 @@ export let block: Paragraph
     <PhrasingContentArray children={block.children}/>
 </p>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 p
     margin 0

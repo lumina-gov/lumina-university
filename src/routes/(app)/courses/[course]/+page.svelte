@@ -122,7 +122,7 @@ $: {
     </GridItem>
 </Grid>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .image
     background transparify(white, 4%)

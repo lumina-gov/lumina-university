@@ -47,7 +47,7 @@ $: tag = href ? "a" : "div" as "a" | "div"
 </svelte:element>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 .nav-link
     display flex
     padding 12px

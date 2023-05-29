@@ -6,7 +6,7 @@ import { set_cookie } from "$lib/utils/cookie"
 import { user_store_init } from "$lib/stores/user_store"
 import type { GraphQLError } from "graphql"
 
-export async function load ({ data: { auth_token, login_url, lumina_domain }}) {
+export async function load ({ fetch, data: { auth_token, login_url, lumina_domain }}) {
     const user_store = user_store_init(auth_token, login_url)
     const graph = init_urql(user_store)
     const alerts = alerts_init([])

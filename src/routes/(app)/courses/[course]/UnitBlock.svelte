@@ -9,11 +9,13 @@ import GameifiedButton from "$lib/controls/GameifiedButton.svelte"
 import { page } from "$app/stores"
 import Lock from "svelte-material-icons/Lock.svelte"
 import { SubscriptionStatus, UnitStatus } from "$lib/graphql/graphql-types"
+import Tag from "$lib/display/Tag.svelte"
 
 $: user = $page.data.user_store.user
 $: subscription_status = user?.stripe_subscription_info.status ?? SubscriptionStatus.None
 $: subscribed = subscription_status !== SubscriptionStatus.None
 $: paywalled = unit.free === false && subscribed === false
+$: current = $page.url.pathname === `/courses/${course_slug}/${unit.unit_slug}`
 
 export let level: number
 export let unit: Unit
@@ -55,6 +57,11 @@ onDestroy(() => {
     <div class="text">
         { unit.name }
     </div>
+    {#if current}
+        <Tag color="brand">
+            Current Page
+        </Tag>
+    {/if}
 </div>
 
 {#each unit.subunits as subunit}
@@ -66,7 +73,7 @@ onDestroy(() => {
 {/each}
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .unit
     display flex
@@ -74,6 +81,7 @@ onDestroy(() => {
     align-items center
     outline 0
     color white
+    width 100%
 .text
     display flex
     gap 8px

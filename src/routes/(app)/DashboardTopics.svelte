@@ -53,7 +53,7 @@ let topics: {name: string, icon: typeof SvelteComponent, color: "brand" | "white
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 .wrapper
     display flex
     justify-content center

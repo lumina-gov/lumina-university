@@ -38,7 +38,7 @@ export let block: PhrasingContent
     <Unsupported/>
 {/if}
 <style lang="stylus">
-@import "variables"
+@import variables
 
 code
     font-family "Source Code Pro", monospace

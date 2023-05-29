@@ -12,7 +12,7 @@ export let block: ContainerDirective
     </div>
 </details>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 details
     border 1px solid transparify(white, 10%)

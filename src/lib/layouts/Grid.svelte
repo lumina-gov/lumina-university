@@ -34,7 +34,7 @@ export let max_width: string | undefined = undefined
     <slot/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .grid
     &.side_padding

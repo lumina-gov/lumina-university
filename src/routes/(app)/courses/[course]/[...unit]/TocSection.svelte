@@ -19,7 +19,7 @@ $: active = active_id === id
     { plain_text }
 </a>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .toc-section
     color transparify(white, 80%)

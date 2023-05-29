@@ -49,7 +49,7 @@ $: stats = [
 
         <div class="name">
             <Icon
-                color="brand"
+                color={course.color}
                 icon={course.icon}
                 size={48}/>
             <div>{ course.name }</div>
@@ -69,7 +69,7 @@ $: stats = [
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 a
     color white

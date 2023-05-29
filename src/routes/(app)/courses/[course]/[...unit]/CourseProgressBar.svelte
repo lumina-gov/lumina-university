@@ -76,7 +76,7 @@ $: next_unit = get_unit_relative(course.units_by_slug[current_unit.unit_slug], "
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .wrapper
     display flex

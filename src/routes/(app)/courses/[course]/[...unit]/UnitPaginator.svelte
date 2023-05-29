@@ -53,7 +53,7 @@ function keyup(e: KeyboardEvent) {
     {/if}
 </svelte:element>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .paginator
     width 100%

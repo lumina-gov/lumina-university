@@ -20,7 +20,7 @@ $: columns = block.children?.[0].children.length ?? 0
     {/each}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .grid-table
     display grid

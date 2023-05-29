@@ -77,7 +77,7 @@ onDestroy(() => {
     {/each}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .toc
     display flex

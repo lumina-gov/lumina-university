@@ -14,7 +14,7 @@ export let block: ListItem
     <BlocksArray blocks={block.children}/>
 </li>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 li
     margin 0

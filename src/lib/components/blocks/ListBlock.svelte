@@ -13,7 +13,7 @@ $: tag = block.ordered ? "ol" : "ul"
     {/each}
 </svelte:element>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 ol, ul
     margin-left 1.5em

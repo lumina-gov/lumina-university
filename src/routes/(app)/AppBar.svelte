@@ -114,7 +114,7 @@ afterNavigate(() => {
     </Scrim>
 {/if}
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .start-subscription
     height 40px
