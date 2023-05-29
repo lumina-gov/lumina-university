@@ -1,12 +1,10 @@
 <PageHead title={data.course.name + " » " + unit.name}/>
 <script lang="ts">
 import Subheading from "$lib/display/Subheading.svelte"
-import Button from "$lib/controls/Button.svelte"
 import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 import TableOfContents from "./TableOfContents.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
 import CourseBreadcrumbs from "./CourseBreadcrumbs.svelte"
-import Pencil from "svelte-material-icons/Pencil.svelte"
 import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
 import { flatten_units } from "$lib/utils/unit"
@@ -21,7 +19,6 @@ import CourseTree from "../CourseTree.svelte"
 import Sitemap from "svelte-material-icons/Sitemap.svelte"
 import { SetUnitProgressDocument, UnitStatus } from "$lib/graphql/graphql-types"
 import PageHead from "$lib/components/PageHead.svelte"
-import Grid from "$lib/layouts/Grid.svelte"
 
 export let data
 
