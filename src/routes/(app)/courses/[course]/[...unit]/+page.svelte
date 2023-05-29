@@ -21,6 +21,7 @@ import CourseTree from "../CourseTree.svelte"
 import Sitemap from "svelte-material-icons/Sitemap.svelte"
 import { SetUnitProgressDocument, UnitStatus } from "$lib/graphql/graphql-types"
 import PageHead from "$lib/components/PageHead.svelte"
+import Grid from "$lib/layouts/Grid.svelte"
 
 export let data
 
@@ -134,15 +135,6 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                             direction="next"
                             unit={next_unit}/>
                     </div>
-
-                    <div class="section">
-                        <Button
-                            style="transparent"
-                            href="https://github.com/lumina-gov/lumina-university/edit/main/src/lib/courses/{data.course.course_slug}/{data.unit.unit_slug}.md"
-                            left_icon={Pencil}>
-                            Edit this page on GitHub
-                        </Button>
-                    </div>
                 </div>
             </div>
             <div class="toc">
@@ -160,7 +152,7 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .crumb-bar
     display flex

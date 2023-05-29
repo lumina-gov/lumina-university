@@ -88,7 +88,7 @@ $: d = arc({
     {/if}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .play-icon
     position relative

@@ -59,7 +59,7 @@ afterNavigate(async () => {
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 .wrapper
     display flex
     flex-direction column

@@ -17,7 +17,7 @@ export let course: CourseFull
         related_type="RECOMMENDED"/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .wrapper
     display flex

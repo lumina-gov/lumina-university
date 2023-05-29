@@ -77,7 +77,7 @@ export let data: PageData
 </Grid>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .button-wrapper
     display flex

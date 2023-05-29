@@ -35,7 +35,7 @@ export let course: CourseRaw & {
     </div>
 </a>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 
 .course
@@ -43,6 +43,7 @@ export let course: CourseRaw & {
     flex-direction column
     background transparify(white, 4%)
     border-radius 6px
+    width 100%
     overflow hidden
     color white
     &:hover

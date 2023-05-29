@@ -6,18 +6,17 @@ import Icon from "$lib/display/Icon.svelte"
 import { page } from "$app/stores"
 import { MessageType } from "$lib/types/message"
 import ButtonSound from "$lib/sounds/ButtonSound.wav"
+import Tag from "$lib/display/Tag.svelte"
 export let block: Code
+export let editable = false
 
 let pre: HTMLPreElement
 
 $: highlighted_code = hljs.highlight(block.value, {
     language: block.lang || "plaintext",
 })
-
 $: lines = highlighted_code.value.split("\n")
-
 $: digits = lines.length.toString().length
-
 $: numbers = lines.map((_, i) => {
     const number = (i + 1).toString()
 
@@ -35,12 +34,14 @@ function copy() {
 }
 
 </script>
-<pre bind:this={ pre }>
+<pre
+    bind:this={ pre }
+    class:editable>
     <div
         class="header"
         class:show-header={ block.lang }>
         {#if block.lang}
-            <div class="language">{ block.lang }</div>
+            <Tag>{ block.lang }</Tag>
         {/if}
         <div
             class="copy"
@@ -49,7 +50,7 @@ function copy() {
             <Icon icon={ContentCopy}/>
         </div>
     </div>
-    <code>
+    <code contenteditable={true}>
         <div class="line">
             <div class="number small">{ Array(digits).fill(" ").join("") }</div>
         </div>
@@ -66,7 +67,7 @@ function copy() {
     </code>
 </pre>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .copy
     display inline-flex
@@ -98,22 +99,12 @@ function copy() {
             right 0
             margin 10px
 
-
-
-.language
-    font-size 14px
-    background transparify(white, 10%)
-    padding 4px 8px
-    border-radius 4px
-    display inline-flex
-    line-height 1em
-
 .number
     white-space pre-wrap
     color white
     user-select none
-    background transparify(white, 10%)
-    padding 0 8px
+    background transparify(white, 6%)
+    padding 0 6px
     letter-spacing 2px
     .zero
         display inline
@@ -125,11 +116,13 @@ function copy() {
 pre
     position relative
     font-size 14px
-    background transparify(white, 8%)
+    background transparify(white, 6%)
     font-family "Source Code Pro", monospace
     border-radius 4px
     width 100%
     white-space normal
+    &.editable
+        border-radius 0
 
 code
     width 100%

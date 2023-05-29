@@ -57,7 +57,7 @@ $: percentage_completed = (units.filter(unit => unit.status === UnitStatus.Compl
 </a>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .course
     display flex

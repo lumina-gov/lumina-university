@@ -145,7 +145,6 @@ async function submit() {
 
     loading = false
 
-
     if(res["error"]) {
         $page.data.alerts.create_alert(MessageType.Error, res["error"]["message"])
         return
@@ -231,7 +230,7 @@ async function submit() {
     {/if}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 
 

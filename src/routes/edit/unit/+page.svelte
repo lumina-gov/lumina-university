@@ -27,7 +27,7 @@ function changed(e: KeyboardEvent) {
     {@html markdown}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .editable
     white-space: pre-wrap

@@ -25,7 +25,7 @@ export let type: keyof typeof icons
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .callout
     display flex

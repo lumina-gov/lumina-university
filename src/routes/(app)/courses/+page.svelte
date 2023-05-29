@@ -8,7 +8,7 @@ import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
 import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import BookVariant from "svelte-material-icons/BookVariant.svelte"
-import Course from "./Course.svelte"
+import Course from "$lib/components/Course.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 
 export let data
