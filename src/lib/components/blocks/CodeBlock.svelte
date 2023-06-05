@@ -37,14 +37,6 @@ function copy() {
     audio.play()
 }
 
-async function resize() {
-    await tick()
-    if(!textarea) return
-    textarea.style.height = `${pre.scrollHeight}px`
-}
-
-onMount(resize)
-
 </script>
 <pre
     bind:this={ pre }
@@ -81,8 +73,7 @@ onMount(resize)
                 <div class="number">{ Array(digits).fill(" ").join("") }</div>
                 <textarea
                     bind:this={ textarea }
-                    bind:value={ block.value }
-                    on:input={ resize }/>
+                    bind:value={ block.value }/>
             </div>
         {/if}
         <div class="line">
@@ -175,6 +166,7 @@ textarea
     outline none
     caret-color white
     padding 0
+    height 100%
     margin 0
 
 code
