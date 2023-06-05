@@ -34,20 +34,20 @@ function loaded () {
 <div class="site">
     {#if css}
         <CodeBlock
-            block={css}
-            editable={true}/>
+            editable={true}
+            bind:block={ css }/>
         <hr>
     {/if}
     {#if js}
         <CodeBlock
-            block={js}
-            editable={true}/>
+            editable={true}
+            bind:block={ js }/>
         <hr>
     {/if}
     {#if html}
         <CodeBlock
-            block={html}
-            editable={true}/>
+            editable={true}
+            bind:block={ html }/>
         <hr>
     {/if}
     <div class="tab">
