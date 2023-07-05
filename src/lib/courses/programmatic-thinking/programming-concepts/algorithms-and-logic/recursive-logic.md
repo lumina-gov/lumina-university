@@ -47,6 +47,9 @@ function fib(n)
     if (n < 2)
         return n
     return fib(n-1) + fib(n-2)
+
+let result = fib(10)
+print(result) // Output: 55
 ```
 
 In this example, the `fib` function takes a single argument, `n`, which represents the index of the desired Fibonacci number in the sequence. The function first checks if `n` is less than 2, in which case it returns `n` as the result (since the first two numbers in the sequence are both 1). If `n` is greater than or equal to 2, the function returns the sum of the previous two Fibonacci numbers by calling `fib(n-1)` and `fib(n-2)` recursively.

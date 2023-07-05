@@ -1,34 +1,31 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
+import type { BasicCourseInfoFragment } from "$lib/hygraph/graphql-types"
 import CoursePlaceholder from "$lib/images/course_placeholder.svg"
-import type { CourseRaw } from "$lib/types/course"
 
-export let course: CourseRaw & {
-    course_slug: string
-}
+export let course: BasicCourseInfoFragment
 </script>
 <a
     class="course"
-    href="/courses/{course.course_slug}">
+    href="/courses/{course.slug}">
     <div
-        style:background-image="url('{ course.image || CoursePlaceholder }')"
+        style:background-image="url('{ course.image.url || CoursePlaceholder }')"
         class="image"/>
     <div class="contents">
         <h3>
             <Icon
-                color={course.color}
-                icon={course.icon}
+                color={course.color.hex}
+                icon={course.icon.url}
                 size="1.2em"/>
             { course.name }
         </h3>
         <div class="info">
-            <span>{ Object.keys(course.units_by_slug).length } units</span>
             <div class="tags">
-                {#each course.tags as tag}
+                {#each course.topics as topic}
                     <Tag
-                        color={tag.color}
-                        text={tag.name}/>
+                        color={topic.color.hex}
+                        text={topic.name}/>
                 {/each}
             </div>
         </div>
@@ -69,8 +66,6 @@ h3
     display flex
     justify-content space-between
     align-items center
-    span
-        opacity 0.5
 
 .tags
     display flex

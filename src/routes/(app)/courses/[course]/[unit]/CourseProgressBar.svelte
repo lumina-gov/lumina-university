@@ -1,28 +1,26 @@
 <script lang="ts">
 import IconButton from "$lib/controls/IconButton.svelte"
-import type { Unit } from "$lib/types/unit"
 import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
-import { flatten_unit } from "$lib/utils/unit"
 import { createEventDispatcher } from "svelte"
 import CheckboxMarkedCircle from "svelte-material-icons/CheckboxMarkedCircle.svelte"
 import type { Prop } from "$lib/utils/typed_props"
-import type { CourseFull } from "$lib/types/course"
 import { UnitStatus } from "$lib/graphql/graphql-types"
+import type { ExtendedUnit } from "$lib/types/unit"
+import type { GetCourseQuery } from "$lib/hygraph/graphql-types"
 
-export let units: Unit[]
-export let course: CourseFull
-export let unit: Unit
-export let current_unit: Unit
+export let units: ExtendedUnit[]
+export let unit_map: Record<string, ExtendedUnit>
+export let course: NonNullable<GetCourseQuery["course"]>
+export let unit: ExtendedUnit
 
 let dispatch = createEventDispatcher<{ set_unit_progress: UnitStatus }>()
 
-function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
-    let units_flattened = course.root_units.flatMap(unit => flatten_unit(unit))
-    let index = units_flattened.findIndex(u => u.unit_slug === unit.unit_slug)
+function get_unit_relative(unit: ExtendedUnit, direction: "previous" | "next"): ExtendedUnit | null {
+    let index = units.findIndex(u => u.slug === unit.slug)
     let relative_index = direction === "previous" ? index - 1 : index + 1
 
-    return units_flattened[relative_index] || null
+    return units[relative_index] || null
 }
 
 const progress_color: Record<UnitStatus, Prop<IconButton, "color">> = {
@@ -32,34 +30,34 @@ const progress_color: Record<UnitStatus, Prop<IconButton, "color">> = {
 }
 
 
-$: previous_unit = get_unit_relative(course.units_by_slug[current_unit.unit_slug], "previous")
-$: next_unit = get_unit_relative(course.units_by_slug[current_unit.unit_slug], "next")
+$: previous_unit = get_unit_relative(unit_map[unit.slug], "previous")
+$: next_unit = get_unit_relative(unit_map[unit.slug], "next")
 </script>
 
 <div class="wrapper">
     <IconButton
         style="transparent"
-        href={previous_unit ? `/courses/${course.course_slug}/${previous_unit.unit_slug}` : undefined}
+        href={previous_unit ? `/courses/${course.slug}/${previous_unit.slug}` : undefined}
         icon={ChevronLeft}
         opacity={0.5}
         use_sound={true}
     />
     <div class="bar">
-        {#each units as unit}
+        {#each units as other_unit}
             <a
                 class="seg"
-                class:active={ unit.unit_slug === current_unit.unit_slug }
-                class:completed={ unit.status === UnitStatus.Completed }
-                class:in-progress={ unit.status === UnitStatus.InProgress }
-                class:not-started={ unit.status === UnitStatus.NotStarted }
-                href={`/courses/${course.course_slug}/${unit.unit_slug}`}>
+                class:active={ other_unit.slug === unit.slug }
+                class:completed={ other_unit.status === UnitStatus.Completed }
+                class:in-progress={ other_unit.status === UnitStatus.InProgress }
+                class:not-started={ other_unit.status === UnitStatus.NotStarted }
+                href={`/courses/${course.slug}/${other_unit.slug}`}>
                 &nbsp;
             </a>
         {/each}
     </div>
     <IconButton
         style="transparent"
-        href={next_unit ? `/courses/${course.course_slug}/${next_unit.unit_slug}` : undefined}
+        href={next_unit ? `/courses/${course.slug}/${next_unit.slug}` : undefined}
         icon={ChevronRight}
         opacity={0.5}
         use_sound={true}

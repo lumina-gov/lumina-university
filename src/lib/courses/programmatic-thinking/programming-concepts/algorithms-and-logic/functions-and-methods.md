@@ -68,7 +68,7 @@ function calculate_sum(a, b)
 # Calling the calculate_sum function and storing the output in a variable
 let a = calculate_sum(5, 10)
 
-# call the print function to print the value of a
+# Call the print function to print the value of a
 print(a)
 ```
 

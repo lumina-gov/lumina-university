@@ -25,6 +25,7 @@ The `id` attribute provides a unique identifier for an element on the page. Each
 ```
 ```html
 <p id="intro">This is an introductory paragraph.</p>
+<p>This is a normal paragraph</p>
 ```
 :::
 

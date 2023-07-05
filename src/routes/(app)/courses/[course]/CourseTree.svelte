@@ -1,14 +1,14 @@
 <script lang="ts">
-import type { Unit } from "$lib/types/unit"
 import { get_paths_for_units } from "$lib/utils/path"
 import { onDestroy, onMount, tick } from "svelte"
 import UnitBlock from "./UnitBlock.svelte"
 import { browser } from "$app/environment"
 import { afterNavigate, beforeNavigate } from "$app/navigation"
+import type { ExtendedUnit } from "$lib/types/unit"
 
 export let course_slug: string
-export let root_units: Unit[]
-export let units: Unit[]
+export let root_units: ExtendedUnit[]
+export let units: ExtendedUnit[]
 
 let wrapper: HTMLElement
 let el_map = {}

@@ -1,19 +1,19 @@
 <script lang="ts">
-import type { CourseFull } from "$lib/types/course"
+import type { RelatedCoursesFragment } from "$lib/hygraph/graphql-types"
 import RelatedCourses from "./RelatedCourses.svelte"
 
-export let course: CourseFull
+export let course: RelatedCoursesFragment
 
 </script>
 <div class="wrapper">
     <RelatedCourses
-        related={course.prerequisites}
+        related={course.prerequisiteCourses}
         related_type="PREREQUISITES"/>
     <RelatedCourses
-        related={course.next_up}
+        related={course.nextUpCourses}
         related_type="NEXT UP"/>
     <RelatedCourses
-        related={course.recommended}
+        related={course.recommendedCourses}
         related_type="RECOMMENDED"/>
 </div>
 <style lang="stylus">

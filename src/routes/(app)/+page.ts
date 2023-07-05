@@ -11,6 +11,7 @@ export async function load ({ parent }) {
     if (all_progress_req.error || !all_progress_req.data?.all_course_progress) {
         return {recent_data: null}
     }
+
     const recent_data: { unit_slug: string, course: CourseFull}[] = []
 
     for (const course of all_progress_req.data.all_course_progress) {
@@ -31,6 +32,7 @@ export async function load ({ parent }) {
             )
         }
     }
+
     return {
         recent_data: recent_data
     }

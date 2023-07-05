@@ -26,6 +26,7 @@ A module is a self-contained unit of code that can be imported and used in other
 
 Modules can help organize code into logical units, making it easier to manage and maintain large codebases. They can also be used to share code between different programs or projects.
 
+### Python Example
 In many programming languages, modules are implemented using a file-based system. For example, in Python, each module is defined in a separate file with a `.py` extension. To use a module in a program, we simply import it:
 
 ```python
@@ -37,6 +38,30 @@ Once a module is imported, we can access the identifiers defined in the module u
 ```python
 import my_module
 result = my_module.my_function()
+```
+
+Here, `my_module` is a module that defines a function `my_function`. By importing the module and using the dot notation, we can call the `my_function` function within our program.
+
+### Rust Example
+In Rust, modules are defined using the `mod` keyword. For example, we can define a module called `my_module` in a file called `my_module.rs`:
+
+```rust
+// my_module.rs
+// pub keyword makes the module public to the rest of the program
+pub fn my_function() {
+    println!("Hello, world!");
+}
+```
+
+We can then import the module into our program using the `use` keyword:
+
+```rust
+// main.rs
+mod my_module;
+
+fn main() {
+    my_module::my_function();
+}
 ```
 
 Here, `my_module` is a module that defines a function `my_function`. By importing the module and using the dot notation, we can call the `my_function` function within our program.

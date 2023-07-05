@@ -7,19 +7,17 @@ import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
 import OutlineSidebar from "./OutlineSidebar.svelte"
 import ExtrasSidebar from "./ExtrasSidebar.svelte"
-
 import CourseTree from "./CourseTree.svelte"
-import { flatten_units } from "$lib/utils/unit"
 import Heading from "$lib/display/Heading.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Play from "svelte-material-icons/Play.svelte"
 import FlexWrap from "$lib/display/FlexWrap.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import { UnitStatus } from "$lib/graphql/graphql-types"
 import PageHead from "$lib/components/PageHead.svelte"
 import SchemaComponent from "$lib/components/SchemaComponent.svelte"
 import type { Course, WithContext} from "schema-dts"
+import { UnitStatus } from "$lib/graphql/graphql-types"
 
 export let data
 
@@ -36,8 +34,10 @@ $: schema = {
 
 } satisfies WithContext<Course>
 
-$: units = flatten_units(data.course.root_units)
+$: root_units = units.filter(unit => unit.parentUnit === null)
+$: units = data.units
 
+// make sure there is at least one unit in progress
 $: {
     let first_unit = units.find(unit => unit.status !== UnitStatus.Completed)
 
@@ -50,7 +50,7 @@ $: {
 <hr>
 <div class="header">
     <div
-        style:background-image="url('{ data.course.image }')"
+        style:background-image="url('{ data.course.image.url }')"
         class="image"/>
     <Grid padding_vertical={60}>
         <GridItem
@@ -65,13 +65,15 @@ $: {
             padding="16px"
             translucent={false}>
             <FlexWrap>
-                {#each data.course.tags as tag}
+                {#each data.course.topics as tag}
                     <Tag
-                        color={tag.color}
+                        color={tag.color.hex}
                         filled={true}>{ tag.name.toUpperCase() }</Tag>
                 {/each}
             </FlexWrap>
-            <Heading left_icon={data.course.icon}>{ data.course.name }</Heading>
+            <Heading
+                left_icon={data.course.icon.url}
+                left_icon_color={data.course.color.hex}>{ data.course.name }</Heading>
             <Paragraph>
                 { data.course.description }
             </Paragraph>
@@ -116,8 +118,8 @@ $: {
         padding="16px"
         translucent={false}>
         <CourseTree
-            course_slug={data.course.course_slug}
-            root_units={data.course.root_units}
+            course_slug={data.course.slug}
+            root_units={root_units}
             units={units}/>
     </GridItem>
 </Grid>

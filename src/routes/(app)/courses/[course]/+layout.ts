@@ -1,50 +1,73 @@
-import { courses, get_full_course } from "$lib/courses/content"
+import { GetCourseProgressDocument, UnitStatus } from "$lib/graphql/graphql-types.js"
+import { GetCourseDocument } from "$lib/hygraph/graphql-types.js"
+import type { ExtendedUnit } from "$lib/types/unit"
 import { error } from "@sveltejs/kit"
-import type { UnitStatus} from "$lib/graphql/graphql-types.js"
-import { GetCourseProgressDocument, type GetCourseProgressQuery } from "$lib/graphql/graphql-types.js"
 
-export async function load ({ params, parent }) {
+export async function load ({ parent, params }) {
     const data = await parent()
 
-    const course_import = courses[`./${params.course}/course.ts`]
-    if (!course_import) {
+    const res = await data.hygraph.gquery(GetCourseDocument, {
+        slug: params.course
+    })
+
+    if (res.error || !res.data) {
+        throw error(500, {
+            message: "Could not load courses",
+            code: "COURSES_LOAD_ERROR",
+        })
+    }
+
+    if (!res.data.course) {
         throw error(404, {
             message: "Course not found",
-            code: "COURSE_NOT_FOUND"
+            code: "COURSE_NOT_FOUND",
         })
     }
 
-    let course_progresses: GetCourseProgressQuery["course_progress"] = []
+    // transform units into a tree structure
+    const units = res.data.course.units as ExtendedUnit[]
+const unit_map: Record<string, ExtendedUnit> = {}
+    units.map(u => {
+        u.status = UnitStatus.NotStarted
+        u.unitProgressUpdatedAt = null
+        u.subunits_extended = []
+        unit_map[u.slug] = u
+    })
+    units.map(u => {
+        if (u.parentUnit) {
+            const parent = unit_map[u.parentUnit.slug]
+            if (parent) {
+                parent.subunits_extended.push(u)
+            }
+        }
+    })
 
+    // if user is logged in, load unit progress
     if (data.user_store.user) {
-        const req = await data.graph.gquery(GetCourseProgressDocument, {
-            course_slug: params.course
+        const res = await data.graph.gquery(GetCourseProgressDocument, {
+            course_slug: params.course,
+            userID: data.user_store.user.id,
         })
 
-        if (req.error) {
+        if (res.error || !res.data) {
             throw error(500, {
-                message: req.error.message,
-                code: "COURSE_PROGRESS_ERROR"
+                message: "Could not load unit progress",
+                code: "UNIT_PROGRESS_LOAD_ERROR",
             })
         }
 
-        if (!req.data) {
-            throw error(500, {
-                message: "No data returned from course progress query",
-                code: "COURSE_PROGRESS_ERROR"
-            })
+        for (const up of res.data.course_progress) {
+            const unit = unit_map[up.unit_slug]
+            if (!unit) continue
+            unit.status = up.status
+            unit.unitProgressUpdatedAt = up.updated_at
         }
-
-        course_progresses = req.data.course_progress
-    }
-
-    const units_progress_map: { [key: string]: UnitStatus } = {}
-
-    for (const progress of course_progresses) {
-        units_progress_map[progress.unit_slug] = progress.status
     }
 
     return {
-        course: await get_full_course(params.course, units_progress_map),
+        course: res.data.course,
+        units,
+        unit_map,
     }
 }
+

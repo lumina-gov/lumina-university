@@ -1,24 +1,26 @@
 <script lang="ts">
 import Play from "svelte-material-icons/Play.svelte"
 import Check from "svelte-material-icons/Check.svelte"
-import type { Unit } from "$lib/types/unit"
 import { afterUpdate, onDestroy } from "svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Text from "svelte-material-icons/Text.svelte"
 import GameifiedButton from "$lib/controls/GameifiedButton.svelte"
 import { page } from "$app/stores"
 import Lock from "svelte-material-icons/Lock.svelte"
-import { SubscriptionStatus, UnitStatus } from "$lib/graphql/graphql-types"
+import { SubscriptionStatus } from "$lib/graphql/graphql-types"
 import Tag from "$lib/display/Tag.svelte"
+import type { ExtendedUnit } from "$lib/types/unit"
+import { UnitStatus } from "$lib/graphql/graphql-types"
 
 $: user = $page.data.user_store.user
 $: subscription_status = user?.stripe_subscription_info.status ?? SubscriptionStatus.None
 $: subscribed = subscription_status !== SubscriptionStatus.None
 $: paywalled = unit.free === false && subscribed === false
-$: current = $page.url.pathname === `/courses/${course_slug}/${unit.unit_slug}`
+$: current = $page.url.pathname === `/courses/${course_slug}/${unit.slug}`
+$: updated = unit.unitProgressUpdatedAt ? new Date(unit.unitProgressUpdatedAt) < new Date(unit.updatedAt) : false
 
 export let level: number
-export let unit: Unit
+export let unit: ExtendedUnit
 export let course_slug: string
 export let el_map: Record<string, HTMLElement>
 
@@ -26,10 +28,10 @@ let element: HTMLElement
 // could we try use $ reactive statements here?
 // let declarations which are not reactive are not reset (this component is re-used across re-renders)
 afterUpdate(() => {
-    el_map[unit.unit_slug] = element
+    el_map[unit.slug] = element
 })
 onDestroy(() => {
-    delete el_map[unit.unit_slug]
+    delete el_map[unit.slug]
 })
 
 </script>
@@ -46,7 +48,7 @@ onDestroy(() => {
             : unit.status === UnitStatus.InProgress
             ? "highlighted"
             : "translucent"}
-        href="/courses/{course_slug}/{unit.unit_slug}"
+        href="/courses/{course_slug}/{unit.slug}"
         icon={unit.status === UnitStatus.Completed ? Check : paywalled ? Lock : Play}
         bind:element/>
     <Icon
@@ -62,9 +64,15 @@ onDestroy(() => {
             Current Page
         </Tag>
     {/if}
+    {#if updated}
+        <Tag color="brand">
+            Updated
+        </Tag>
+    {/if}
+
 </div>
 
-{#each unit.subunits as subunit}
+{#each unit.subunits_extended as subunit}
     <svelte:self
         {course_slug}
         el_map={el_map}
@@ -89,4 +97,5 @@ onDestroy(() => {
     font-weight 700
     align-items center
     opacity 0.5
+    flex 1
 </style>

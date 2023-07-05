@@ -55,7 +55,7 @@ When writing pseudo code that uses conditional logic, you should clearly outline
 
 Here is an example of pseudo code that uses an if and else block:
 
-```jsx
+```js
 // Example if else block using boolean operators
 if x > 5 && y < 10
     // code to execute if x is greater than 5 AND y is less than 10

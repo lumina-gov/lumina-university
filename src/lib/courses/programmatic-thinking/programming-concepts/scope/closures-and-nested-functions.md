@@ -37,8 +37,8 @@ Certain languages, such as Rust use different syntax to define closures from fun
 function apply_to_each(numbers_array, closure) {
   let new_numbers_array = []
   for (let number of numbers_array) {
-    let new_number = closure(number) // apply closure to number
-    new_numbers_array.push(new_number) // add it to new numbers array
+    // push the result of closure(number) into new_numbers_array
+    new_numbers_array.push(closure(number))
   }
   return new_numbers_array
 }

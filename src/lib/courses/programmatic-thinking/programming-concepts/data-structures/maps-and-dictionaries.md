@@ -42,7 +42,8 @@ Maps and dictionaries are often referred to by different names in different prog
 
 - **Associative array**: A synonym used in languages such as PHP and Perl.
 - **HashMap**: A synonym used in languages such as Ruby, Rust, C++.
-- **Object**: A synonym used in languages such as JavaScript and Python.
+- **Object**: A synonym used in languages such as JavaScript.
+- **Dictionary**: A synonym used in languages such as Python, C#, and Java.
 
 ## Example Use Cases
 

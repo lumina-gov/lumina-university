@@ -1,22 +1,15 @@
 <script lang="ts">
-import type { ContainerDirective } from "mdast-util-directive"
-import type { Code } from "mdast-util-from-markdown/lib"
-import html_renderer from "./html_renderer"
-import CodeBlock from "./CodeBlock.svelte"
+import html_renderer from "./blocks/html_renderer"
 import Tag from "$lib/display/Tag.svelte"
+import CodeEditor from "./CodeEditor.svelte"
 
-export let block: ContainerDirective
 let iframe: HTMLIFrameElement
 
-$: html = get_code("html", block)
-$: css = get_code("css", block)
-$: js = get_code("js", block)
+export let html: string | undefined
+export let css: string | undefined
+export let javascript: string | undefined
 
-function get_code(lang: string, block: ContainerDirective): Code | undefined {
-    return block.children.find(child => child.type === "code" && child.lang === lang) as Code | undefined
-}
-
-$: full_html = html_renderer(html?.value, css?.value, js?.value)
+$: full_html = html_renderer(html, css, javascript)
 
 let document_title: string | undefined
 
@@ -33,21 +26,24 @@ function loaded () {
 
 <div class="site">
     {#if css}
-        <CodeBlock
+        <CodeEditor
             editable={true}
-            bind:block={ css }/>
+            language="css"
+            bind:code={ css }/>
         <hr>
     {/if}
-    {#if js}
-        <CodeBlock
+    {#if javascript}
+        <CodeEditor
             editable={true}
-            bind:block={ js }/>
+            language="javascript"
+            bind:code={ javascript }/>
         <hr>
     {/if}
     {#if html}
-        <CodeBlock
+        <CodeEditor
             editable={true}
-            bind:block={ html }/>
+            language="html"
+            bind:code={ html }/>
         <hr>
     {/if}
     <div class="tab">

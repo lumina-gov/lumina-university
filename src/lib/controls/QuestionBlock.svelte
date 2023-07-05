@@ -1,7 +1,6 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import ChatQuestion from "svelte-material-icons/ChatQuestion.svelte"
-import type { LeafDirective } from "mdast-util-directive"
 import { tick, type SvelteComponent} from "svelte"
 import { onMount } from "svelte"
 import IconButton from "$lib/controls/IconButton.svelte"
@@ -11,26 +10,24 @@ import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import ButtonSound from "$lib/sounds/ButtonSound.wav"
 import CheckCircle from "svelte-material-icons/CheckCircle.svelte"
 import { page } from "$app/stores"
-import { gql } from "@urql/core"
 import { MessageType } from "$lib/types/message"
 import CloseCircle from "svelte-material-icons/CloseCircle.svelte"
 import type { Prop } from "$lib/utils/typed_props"
 import AlertCircle from "svelte-material-icons/AlertCircle.svelte"
 import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 import { afterNavigate } from "$app/navigation"
-import { SetQuestionAssessmentDocument } from "$lib/graphql/graphql-types"
+import { GetQuestionAssessmentDocument, SetQuestionAssessmentDocument } from "$lib/graphql/graphql-types"
 
-export let block: LeafDirective
+export let question: string
+export let slug: string
+export let context: string | null = null
+export let course_slug: string
+export let unit_slug: string
+
 let response: null | {
     feedback: string
     assessment: "PASS" | "FAIL" | "SOFT_PASS" | "UNKNOWN"
 } = null
-
-$: attributes = block.attributes as {
-    question: string
-    slug: string
-    context?: string
-}
 
 let audio: HTMLAudioElement
 
@@ -69,6 +66,8 @@ const assessment_mappings: Record<string, {
 }
 
 afterNavigate(() => {
+    answer = ""
+    response = null
     load_assessment()
 })
 
@@ -88,32 +87,16 @@ async function load_assessment() {
     if(!user) return
     loading = true
 
-    let res = await $page.data.graph.gquery(gql(`
-        query GetQuestionAssessment(
-            $course_slug: String!
-            $unit_slug: String!
-            $question_slug: String!
-        ) {
-            question_assessment(
-                course_slug: $course_slug
-                unit_slug: $unit_slug
-                question_slug: $question_slug
-            ) {
-                feedback
-                answer
-                assessment
-            }
-        }
-    `), {
-        course_slug: $page.data.course.course_slug,
-        unit_slug: $page.data.unit.unit_slug,
-        question_slug: attributes.slug
+    let res = await $page.data.graph.gquery(GetQuestionAssessmentDocument, {
+        course_slug,
+        unit_slug,
+        question_slug: slug
     })
 
     loading = false
 
-    if(res["error"]) {
-        $page.data.alerts.create_alert(MessageType.Error, res["error"]["message"])
+    if(res.error || !res.data) {
+        $page.data.alerts.create_alert(MessageType.Error, res.error?.message ?? "An unknown error occurred")
         return
     }
 
@@ -135,18 +118,18 @@ async function submit() {
     loading = true
     response = null
     let res = await $page.data.graph.gmutation(SetQuestionAssessmentDocument, {
-        question: attributes.question,
+        question,
         answer,
-        course_slug: $page.data.course.course_slug,
-        unit_slug: $page.data.unit.unit_slug,
-        question_slug: attributes.slug,
-        context: attributes.context
+        course_slug,
+        unit_slug,
+        question_slug: slug,
+        context
     })
 
     loading = false
 
-    if(res["error"]) {
-        $page.data.alerts.create_alert(MessageType.Error, res["error"]["message"])
+    if(res.error || !res.data) {
+        $page.data.alerts.create_alert(MessageType.Error, res.error?.message ?? "An unknown error occurred")
         return
     }
 
@@ -170,7 +153,7 @@ async function submit() {
                 opacity={0.5}
                 size={24}/>
             <div class="title">
-                <MarkdownRenderer markdown={attributes.question}/>
+                <MarkdownRenderer markdown={question}/>
             </div>
         </div>
     </div>

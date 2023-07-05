@@ -64,18 +64,19 @@ Below we have included the time and space complexities for various data structur
 | Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) |
 | Quick Sort | O(n log n) | O(n log n) | O(n^2) | O(log n) |
 
-```c++
-void printArrayElements(int arr[], int n) {
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << ' ';
+```typescript
+function printArrayElements(arr: number[]) {
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
     }
 }
 ```
-```c++
-void printFirstElementOfArray(int arr[]) {
-    cout << "First element of array = " << arr[0];
+
+```typescript
+function printFirstElementOfArray(arr: number[]) {
+    console.log(arr[0]);
 }
 ```
 
-::question{slug="bigo-question" question="Given the two functions above, what are their Big O Notations?" context="The first function printArrayElements is O(n) and the second function printFirstElementOfArray is O(1)"}
+::question{slug="bigo-question" question="Given the two functions above, what are their Big O Notations?" context="The first function `printArrayElements` is O(n) and the second function `printFirstElementOfArray` is O(1)"}
 

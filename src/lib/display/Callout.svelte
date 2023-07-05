@@ -35,6 +35,8 @@ export let type: keyof typeof icons
     border-radius 8px
     background transparify(white, 10%)
     border 2px solid transparify(white, 10%)
+    .content
+        width 100%
 
     &.note
         background transparify($blue, 10%)

@@ -1,5 +1,5 @@
 <script lang="ts">
-export let color:  "brand" | "white" | "red" | "yellow" | "orange" | "purple" | "blue" | "yellow_green" | "green" | undefined = undefined
+export let color:  "brand" | "white" | "red" | "yellow" | "orange" | "purple" | "blue" | "yellow_green" | "green" | undefined | string = undefined
 export let opacity = false
 export let text = ""
 export let small = false
@@ -7,6 +7,8 @@ export let filled = false
 </script>
 
 <span
+    style:background={ filled ? color : `color-mix(in srgb, ${ color  } 16%, transparent)` }
+    style:color={ filled ? "white" : color?.[0] === "#" ? color : undefined }
     class="tag {color}"
     class:filled
     class:opacity>

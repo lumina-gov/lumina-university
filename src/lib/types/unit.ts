@@ -1,17 +1,8 @@
 import type { UnitStatus } from "$lib/graphql/graphql-types"
+import type { BasicUnitInfoFragment } from "$lib/hygraph/graphql-types"
 
-export type UnitData = {
-    name: string
-    subunits?: string[],
-    free?: boolean
+export type ExtendedUnit = BasicUnitInfoFragment & {
+    status: UnitStatus,
+    unitProgressUpdatedAt: string | null,
+    subunits_extended: ExtendedUnit[],
 }
-
-export type Unit = {
-    name: string
-    unit_slug: string
-    status: UnitStatus
-    subunits: Unit[]
-    free: boolean
-}
-
-export type UnitMap = Record<string, Unit>

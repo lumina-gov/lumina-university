@@ -1,0 +1,110 @@
+fragment BasicUnitInfo on Unit {
+    name
+    slug
+    updatedAt
+    parentUnit {
+        slug
+    }
+    free
+}
+
+fragment RelatedCourse on Course {
+    name
+    slug
+    icon {
+        url
+    }
+    color {
+        hex
+    }
+}
+
+fragment RelatedCourses on Course {
+    nextUpCourses {
+        ...RelatedCourse
+    }
+    prerequisiteCourses {
+        ...RelatedCourse
+    }
+    recommendedCourses {
+        ...RelatedCourse
+    }
+}
+
+fragment BasicCourseInfo on Course {
+    ...RelatedCourse
+    updatedAt
+    image {
+        url(
+            transformation: {
+                image: {
+                    resize: { width: 600 }
+                }
+            }
+        )
+    }
+    topics {
+        name
+        slug
+        color {
+            hex
+        }
+    }
+}
+
+query GetCourses {
+    courses {
+        ...BasicCourseInfo
+    }
+}
+
+query GetCourse($slug: String!) {
+    course(where: { slug: $slug }) {
+        ...BasicCourseInfo
+        ...RelatedCourses
+        description
+        units(first: 100) {
+            ...BasicUnitInfo
+        }
+    }
+}
+
+
+query GetUnit($unit_slug: String!) {
+    unit(where: { slug: $unit_slug }) {
+        ...BasicUnitInfo
+        content {
+            __typename
+            ... on MarkdownBlock {
+                markdown
+            }
+            ... on AssetBlock {
+                asset {
+
+                    url(
+                        transformation: {
+                            image: {
+                                resize: { width: 800 }
+                            }
+                        }
+                    )
+                }
+            }
+            ... on QuestionBlock {
+                id
+                question
+                context
+            }
+            ... on WebRenderer {
+                html
+                css
+                javascript
+            }
+            ... on CourseBlock {
+                course {
+                    ...BasicCourseInfo
+                }
+            }
+        }
+    }
+}

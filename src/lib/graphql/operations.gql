@@ -70,3 +70,19 @@ mutation SetQuestionAssessment(
         assessment
     }
 }
+
+query GetQuestionAssessment(
+    $course_slug: String!
+    $unit_slug: String!
+    $question_slug: String!
+) {
+    question_assessment(
+        course_slug: $course_slug
+        unit_slug: $unit_slug
+        question_slug: $question_slug
+    ) {
+        feedback
+        answer
+        assessment
+    }
+}

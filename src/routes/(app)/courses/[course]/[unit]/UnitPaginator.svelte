@@ -1,16 +1,16 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import Subheading from "$lib/display/Subheading.svelte"
-import type { Unit } from "$lib/types/unit"
 import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Text from "svelte-material-icons/Text.svelte"
 import ButtonSound from "$lib/sounds/ButtonSound.wav"
+import type { ExtendedUnit } from "$lib/types/unit"
 
 
 export let direction: "next" | "previous"
-export let unit: Unit | null
-export let course: { course_slug: string }
+export let unit: ExtendedUnit | null
+export let course: { slug: string }
 
 function pressed() {
     if(!unit) return
@@ -30,7 +30,7 @@ function keyup(e: KeyboardEvent) {
     class="paginator"
     class:active={ unit !== null }
     class:next={ direction === "next" }
-    href={unit ? `/courses/${course.course_slug}/${unit.unit_slug}` : undefined}
+    href={unit ? `/courses/${course.slug}/${unit.slug}` : undefined}
     on:click={ pressed }
     on:keyup={ keyup }>
     {#if unit}

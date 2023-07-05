@@ -2,14 +2,15 @@
 import ChevronDoubleLeft from "svelte-material-icons/ChevronDoubleLeft.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import BookOpenPageVariant from "svelte-material-icons/BookOpenPageVariant.svelte"
-import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import BookmarkCheck from "svelte-material-icons/BookmarkCheck.svelte"
 import ClockTimeFour from "svelte-material-icons/ClockTimeFour.svelte"
-import type { CourseFull } from "$lib/types/course"
+import type { GetCourseQuery } from "$lib/hygraph/graphql-types"
+import { format_human_date } from "$lib/utils/date_human"
+import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 
-export let course: CourseFull
+export let course: NonNullable<GetCourseQuery["course"]>
 
-$: units = Object.values(course.units_by_slug).length
+$: units = course.units.length
 
 $: stats = [
     {
@@ -22,7 +23,8 @@ $: stats = [
     },
     {
         icon: ClockTimeFour,
-        text: "Updated 1 Day Ago"
+        // find the last updated unit
+        text: "Updated " + format_human_date(new Date([...course.units].sort((a, b) => a.updatedAt > b.updatedAt ? 1 : -1)[0]?.updatedAt || course.updatedAt))
     },
 ]
 </script>
@@ -43,15 +45,14 @@ $: stats = [
         <div class="text">ALL COURSES</div>
     </a>
     <div
-        style:background-image="url('{ course.image }')"
+        style:background-image="url('{ course.image.url }')"
         class="image"/>
     <div class="course-details">
-
         <div class="name">
             <Icon
-                color={course.color}
-                icon={course.icon}
-                size={48}/>
+                color={course.color.hex}
+                icon={course.icon.url}
+                size="48px"/>
             <div>{ course.name }</div>
         </div>
         <div class="stats">

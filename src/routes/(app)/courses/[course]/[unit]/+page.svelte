@@ -5,9 +5,7 @@ import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
 import TableOfContents from "./TableOfContents.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
 import CourseBreadcrumbs from "./CourseBreadcrumbs.svelte"
-import type { Unit } from "$lib/types/unit"
 import UnitPaginator from "./UnitPaginator.svelte"
-import { flatten_units } from "$lib/utils/unit"
 import CourseProgressBar from "./CourseProgressBar.svelte"
 import { page } from "$app/stores"
 import { MessageType } from "$lib/types/message"
@@ -19,30 +17,29 @@ import CourseTree from "../CourseTree.svelte"
 import Sitemap from "svelte-material-icons/Sitemap.svelte"
 import { SetUnitProgressDocument, UnitStatus } from "$lib/graphql/graphql-types"
 import PageHead from "$lib/components/PageHead.svelte"
+import type { ExtendedUnit } from "$lib/types/unit"
+import QuestionBlock from "$lib/controls/QuestionBlock.svelte"
+import SiteRenderer from "$lib/components/SiteRenderer.svelte"
+import Course from "$lib/components/Course.svelte"
 
 export let data
 
 $: unit = data.unit
+$: extended_unit = data.unit_map[unit.slug]
 let end_of_content: HTMLElement
 let content: HTMLElement
 let content_container: HTMLElement
-let subunits_roots: Unit[] = []
-let flattened_subunits: Unit[] = []
 
-$: flattened_units = flatten_units(data.course.root_units)
-$: previous_unit = get_unit_relative(unit, "previous")
-$: next_unit = get_unit_relative(unit, "next")
+$: units = data.units
+$: subunits = units.filter(other_unit => other_unit.parentUnit?.slug === unit.slug)
+$: previous_unit = get_unit_relative(extended_unit, "previous")
+$: next_unit = get_unit_relative(extended_unit, "next")
 $: user = data.user_store.user
-
-$: if(data.course.units_by_slug[unit.unit_slug].subunits.length > 0) {
-    subunits_roots = [data.course.units_by_slug[unit.unit_slug]]
-    flattened_subunits = flatten_units(subunits_roots)
-} else { subunits_roots = []; flattened_subunits = [] }
 
 function check_completed(entries: IntersectionObserverEntry[], observer: IntersectionObserver): void {
     if (entries[0].isIntersecting) {
         observer.disconnect()
-        if(unit.status === UnitStatus.Completed) return
+        if(extended_unit.status === UnitStatus.Completed) return
         let sound = new Audio(UnitCompletionSound)
         sound.volume = 0.3
         sound.play()
@@ -51,11 +48,15 @@ function check_completed(entries: IntersectionObserverEntry[], observer: Interse
 }
 
 async function update_unit_progress(status: UnitStatus): Promise<void> {
-    if (unit.status === status) return
+    let should_update_progress = extended_unit.unitProgressUpdatedAt ? new Date(extended_unit.unitProgressUpdatedAt) < new Date(unit.updatedAt) : true
+    if(!should_update_progress) {
+        if (extended_unit.status === UnitStatus.Completed) return
+        if (extended_unit.status === status) return
+    }
     if (user) {
         let res = await data.graph.gmutation(SetUnitProgressDocument, {
-            course_slug: data.course.course_slug,
-            unit_slug: unit.unit_slug, status
+            course_slug: data.course.slug,
+            unit_slug: extended_unit.slug, status
         })
 
         if (res.error) {
@@ -64,8 +65,8 @@ async function update_unit_progress(status: UnitStatus): Promise<void> {
     } else {
         return $page.data.alerts.create_alert(MessageType.Warning, "Log in to track your progress")
     }
-    unit.status = status
-    unit = unit
+    extended_unit.status = status
+    extended_unit = extended_unit
 }
 
 afterNavigate(() => {
@@ -74,18 +75,16 @@ afterNavigate(() => {
     let observer = new IntersectionObserver(check_completed, {threshold: 1.0})
     observer.observe(end_of_content)
 
-    if (data.unit.status === UnitStatus.Completed) return
     update_unit_progress(UnitStatus.InProgress)
 })
 
 
-function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | null {
-    let index = flattened_units.findIndex(u => u.unit_slug === unit.unit_slug)
+function get_unit_relative(unit: ExtendedUnit, direction: "previous" | "next"): ExtendedUnit | null {
+    let index = units.findIndex(u => u.slug === unit.slug)
     let relative_index = direction === "previous" ? index - 1 : index + 1
 
-    return flattened_units[relative_index] || null
+    return units[relative_index] || null
 }
-
 
 </script>
 <hr>
@@ -93,9 +92,9 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
     <CourseBreadcrumbs course={data.course}/>
     <CourseProgressBar
         course={data.course}
-        current_unit={data.unit}
-        units={flattened_units}
-        bind:unit={ data.unit }
+        unit_map={data.unit_map}
+        units={units}
+        bind:unit={ extended_unit }
         on:set_unit_progress={ e => update_unit_progress(e.detail) }/>
 </div>
 <hr>
@@ -110,15 +109,36 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                     class="content">
                     <Heading left_icon={Text}>{ data.unit.name }</Heading>
                     <hr>
-                    <MarkdownRenderer markdown={data.markdown}/>
+                    {#each data.unit.content as content}
+                        {#if content.__typename === "MarkdownBlock"}
+                            <MarkdownRenderer markdown={content.markdown}/>
+                        {:else if content.__typename === "QuestionBlock"}
+                            <QuestionBlock
+                                context={content.context}
+                                course_slug={data.course.slug}
+                                question={content.question}
+                                slug={content.id}
+                                unit_slug={data.unit.slug}
+                            />
+                        {:else if content.__typename === "WebRenderer"}
+                            <SiteRenderer
+                                css={content.css || undefined}
+                                html={content.html || undefined}
+                                javascript={content.javascript || undefined}/>
+                        {:else if content.__typename === "CourseBlock" && content.course}
+                            <Course course={content.course}/>
+                        {:else}
+                            <p>Unknown content type: { content.__typename }</p>
+                        {/if}
+                    {/each}
                     <div bind:this={ end_of_content }/>
-                    {#if subunits_roots.length > 0}
+                    {#if subunits.length > 0}
                         <div class="subunits">
                             <Heading left_icon={Sitemap}>Subunits</Heading>
                             <CourseTree
-                                course_slug={data.course.course_slug}
-                                root_units={subunits_roots}
-                                units={flattened_subunits}
+                                course_slug={data.course.slug}
+                                root_units={subunits}
+                                units={units}
                             />
                         </div>
                     {/if}
@@ -139,7 +159,7 @@ function get_unit_relative(unit: Unit, direction: "previous" | "next"): Unit | n
                     <div class="inner-toc">
                         <Subheading>On this page</Subheading>
                         <TableOfContents
-                            markdown={data.markdown}
+                            markdown={data.unit.content.map(c => c.__typename === "MarkdownBlock" ? c.markdown : "").join("")}
                             bind:content/>
                     </div>
                 </ScrollbarRegion>
@@ -193,7 +213,7 @@ main
     margin 0 auto
     display flex
     flex-direction column
-    gap 16px
+    gap 1.8em
 
 .toc
     width 100%
@@ -208,7 +228,6 @@ main
     display flex
     flex-direction column
     gap 16px
-    padding 32px 0px
 
 .inner-toc
     padding-top 40px
