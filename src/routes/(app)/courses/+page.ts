@@ -1,14 +1,19 @@
-import { courses } from "$lib/courses/content"
+import { GetCoursesDocument } from "$lib/hygraph/graphql-types.js"
+import { error } from "@sveltejs/kit"
 
-export async function load () {
-    const course_items = await Promise.all(
-        Object.entries(courses).map(async ([file, course_import]) => ({
-            ...(await course_import()).course,
-            course_slug: file.replace("./", "").replace("/course.ts", ""),
-        }))
-    )
+export async function load ({ parent }) {
+    const data = await parent()
+
+    const res = await data.hygraph.gquery(GetCoursesDocument, {})
+
+    if (res.error || !res.data?.courses) {
+        throw error(500, {
+            message: "Could not load courses",
+            code: "COURSES_LOAD_ERROR",
+        })
+    }
 
     return {
-        courses: course_items,
+        courses: res.data.courses
     }
 }

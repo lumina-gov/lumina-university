@@ -16,12 +16,9 @@ export let description: string | null = null
             Lumina University
         </div>
     </div>
-    <div class="title-area">
-        <div class="box"/>
-        <h1>
-            { title }
-        </h1>
-    </div>
+    <h1>
+        { title }
+    </h1>
     <div class="fake-button">
         <div class="text">Start learning</div> <div class="icon"><Settlement size="1.5em"/></div>
     </div>
@@ -47,26 +44,17 @@ export let description: string | null = null
 .icon
     display flex
 
-.title-area
-    display flex
-    align-items flex-end
-
-.box
-    height 100%
-    margin-bottom 1.5em
-    background $brand
-    display flex
-    width 1em
-
 .text
     padding-bottom 0.3em
 
 h1
     display flex
-    font-size 4.5em
+    font-size 4em
     font-weight 600
     line-height 100%
     padding-left 0.4em
+    border-left 0.3em solid $brand
+    padding-bottom 0.3em
 
 .card
     background linear-gradient(90deg, mix($brand, $dark_app, 15%), $dark_app)

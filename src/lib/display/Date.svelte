@@ -3,7 +3,7 @@ import Calendar from "svelte-material-icons/Calendar.svelte"
 import { onMount, onDestroy } from "svelte"
 
 // if the date difference is less than 3 days, we want to show something like:
-// "3 hours ago", "2 days ago", "10 minutes ago", etc.
+// "3 hours ago", "10 days ago", "10 minutes ago".
 
 export let date: Date
 

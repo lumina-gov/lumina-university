@@ -149,7 +149,7 @@ Here's how we can rewrite the above code to be cleaner and more readable:
 ```rust
 fn classify_age_and_activity(age: u32, active: bool) -> String {
     let age_group = match age {
-        age if age > 120 => panic!("invalid age"),
+        age if age > 120 => panic!("invalid age"), // this might change if we live longer
         0..=17 => "young",
         18..=64 => "adult",
         _ => "senior",

@@ -1,6 +1,8 @@
 import type { AlertsStore } from "$lib/stores/alerts"
 import type { GraphClient } from "$lib/stores/graphql"
+import type { HygraphClient } from "$lib/stores/hygraph"
 import type { UserStore } from "$lib/stores/user_store"
+
 declare global {
     // See https://kit.svelte.dev/docs/types#app
     // for information about these interfaces
@@ -11,6 +13,7 @@ declare global {
             alerts: AlertsStore,
             user_store: UserStore,
             graph: GraphClient
+            hygraph: HygraphClient
         }
 
         interface Error {

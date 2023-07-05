@@ -19,11 +19,14 @@ An input element can have many attributes that define its properties and behavio
 | `autocomplete` | on, off | Indicates whether input fields should have autocomplete functionality. |
 | `autofocus` | autofocus | Specifies that an input field should automatically get focus when the page loads. |
 
-Here's an example of an input element with several attributes:
+Here's an example of an input elements with several attributes:
 
 :::renderer
 ```html
 <input type="text" name="username" value="JohnDoe" size="20" placeholder="Enter your username" />
+<input type="password" name="password" value="password" size="20" placeholder="Enter your password" />
+<input type="checkbox" name="remember" checked /> Remember me
+<input type="submit" value="Submit" />
 ```
 :::
 

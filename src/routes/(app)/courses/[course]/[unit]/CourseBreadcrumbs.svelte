@@ -1,10 +1,10 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
-import type { CourseFull } from "$lib/types/course"
+import type { GetCourseQuery } from "$lib/hygraph/graphql-types"
 import BookOpenVariant from "svelte-material-icons/BookOpenVariant.svelte"
 import SlashForward from "svelte-material-icons/SlashForward.svelte"
 
-export let course: CourseFull & { course_slug: string }
+export let course: NonNullable<GetCourseQuery["course"]>
 
 </script>
 <div class="breadcrumbs">
@@ -24,11 +24,11 @@ export let course: CourseFull & { course_slug: string }
         size={18}/>
     <a
         class="item"
-        href={`/courses/${course.course_slug}`}>
+        href={`/courses/${course.slug}`}>
         <Icon
-            color={course.color}
-            icon={course.icon}
-            size={18}/>
+            color={course.color.hex}
+            icon={course.icon.url}
+            size="18px"/>
         <div class="text">
             { course.name }
         </div>

@@ -1,7 +1,7 @@
-import type { Unit } from "$lib/types/unit"
+import type { BasicUnitInfoFragment } from "$lib/hygraph/graphql-types"
 
 export function get_paths_for_units(
-    units: Unit[],
+    units: BasicUnitInfoFragment[],
     container_el: HTMLElement,
     elements: Record<string, HTMLElement>,
 ): string[] {
@@ -9,8 +9,8 @@ export function get_paths_for_units(
     units.map((unit, i) => {
         const next_sibling = units[i + 1]
         if (!next_sibling) return
-        const current_el = elements[unit.unit_slug]
-        const next_sibling_el = elements[next_sibling.unit_slug]
+        const current_el = elements[unit.slug]
+        const next_sibling_el = elements[next_sibling.slug]
         if(!current_el || !next_sibling_el) return
         const current_top = parseInt(window.getComputedStyle(current_el).getPropertyValue("top").replace("px", ""))
         const next_sibling_top = parseInt(window.getComputedStyle(next_sibling_el).getPropertyValue("top").replace("px", ""))
@@ -21,9 +21,9 @@ export function get_paths_for_units(
         const startY = (current_rect.bottom) - container_el.getBoundingClientRect().top + 8 - current_top//for the box shadow
         const endX = (next_sibling_rect.left + (next_sibling_rect.width / 2)) - container_el.getBoundingClientRect().left
         const endY = next_sibling_rect.top - container_el.getBoundingClientRect().top -next_sibling_top//for the box shadow
-        
 
-        // if (current_el.style.top === "6px"){ 
+
+        // if (current_el.style.top === "6px"){
         //     startY = startY - 6
         // }
         // if (window.getComputedStyle(next_sibling_el).top === "6px"){

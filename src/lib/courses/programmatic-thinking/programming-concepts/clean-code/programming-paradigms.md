@@ -33,7 +33,7 @@ Concurrent programming is a type of programming in which multiple tasks are exec
 
 - Choose the paradigm that best fits the problem you are trying to solve.
 - Understand the strengths and weaknesses of each paradigm.
-- Avoid mixing paradigms within a single program.
+- Avoid mixing paradigms within a single program (but some paradigms are compatible).
 - Use appropriate design patterns and coding practices for the paradigm you are using.
 - Follow the conventions and idioms of the language you are using for the paradigm.
 - Keep code modular and well-organized to improve readability and maintainability.

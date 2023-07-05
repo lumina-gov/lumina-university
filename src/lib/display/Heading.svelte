@@ -1,12 +1,11 @@
 <script lang="ts">
 import type { Prop } from "$lib/utils/typed_props"
-import type { SvelteComponent } from "svelte"
 
 import Icon from "./Icon.svelte"
 
-export let left_icon: typeof SvelteComponent | null = null
+export let left_icon: Prop<Icon, "icon"> | null = null
 export let left_icon_color: Prop<Icon, "color"> = "brand"
-export let right_icon: typeof SvelteComponent | null = null
+export let right_icon: Prop<Icon, "icon"> | null = null
 export let right_icon_color: Prop<Icon, "color"> = "brand"
 export let level: 1 | 2 | 3 | 4 | 5 | 6 = 1
 export let id: string | null = null
