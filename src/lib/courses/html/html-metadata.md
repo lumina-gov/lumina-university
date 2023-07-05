@@ -36,7 +36,7 @@ The `<meta>` tag represents metadata that can't be represented by other HTML met
 
 The `charset` attribute is used to specify the character encoding for the HTML document.
 
-```
+```html
 <head>
   <meta charset="UTF-8">
 </head>

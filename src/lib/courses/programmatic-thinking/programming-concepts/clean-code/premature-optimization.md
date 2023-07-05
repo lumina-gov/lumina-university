@@ -27,7 +27,7 @@ Another important aspect of clean code is readability. When you optimize your co
 There are several tools you can use to improve the performance of your code. Here are a few examples:
 
 - **Profiling tools**: As mentioned before, profiling tools can help you identify performance bottlenecks and areas of your code that are taking the most time to execute.
-- **Compiler flags**: Some compilers offer flags that can be used to optimize the code during compilation. When debugging, the compiler often skips these steps in order to compile faster, but often a program compiled **************************and optimised************************** will give you lots of performance improvements.
+- **Compiler flags**: Some compilers offer flags that can be used to optimize the code during compilation. When debugging, the compiler often skips these steps in order to compile faster, but often a program compiled **and optimised** will give you lots of performance improvements.
 - **Caching**: Caching is a technique where you store the result of a computation so that you don't have to perform the computation again. This can greatly improve performance, especially for computationally expensive operations.
 - **Parallelism**: Parallelism is the technique of dividing a problem into smaller subproblems that can be solved simultaneously. This can be achieved using threads, processes, or other parallel computing techniques.
 
