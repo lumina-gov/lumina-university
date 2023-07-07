@@ -1,5 +1,7 @@
+import { SubscriptionStatus } from "$lib/graphql/graphql-types"
 import { GetUnitDocument } from "$lib/hygraph/graphql-types.js"
-import { error } from "@sveltejs/kit"
+import { MessageType } from "$lib/types/message"
+import { error, redirect } from "@sveltejs/kit"
 
 export async function load({ params, parent }) {
     const data = await parent()
@@ -20,6 +22,15 @@ export async function load({ params, parent }) {
             message: "Unit not found",
             code: "UNIT_NOT_FOUND",
         })
+    }
+
+    const user = data.user_store.user
+    const subscription_status = user?.stripe_subscription_info.status ?? SubscriptionStatus.None
+
+
+    if (!res.data.unit.free && subscription_status === SubscriptionStatus.None) {
+        data.alerts.create_alert(MessageType.Warning, "You must be subscribed to view this unit")
+        throw redirect(307, "/account")
     }
 
     return {
