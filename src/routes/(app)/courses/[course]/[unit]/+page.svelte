@@ -21,6 +21,9 @@ import type { ExtendedUnit } from "$lib/types/unit"
 import QuestionBlock from "$lib/controls/QuestionBlock.svelte"
 import SiteRenderer from "$lib/components/SiteRenderer.svelte"
 import Course from "$lib/components/Course.svelte"
+import { env } from "$env/dynamic/public"
+import { PUBLIC_BUILDER_IO_KEY } from "$env/static/public"
+import { Content } from "@builder.io/sdk-svelte"
 
 export let data
 
@@ -109,6 +112,10 @@ function get_unit_relative(unit: ExtendedUnit, direction: "previous" | "next"): 
                     class="content">
                     <Heading left_icon={Text}>{ data.unit.name }</Heading>
                     <hr>
+                    <Content
+                        apiKey={env.PUBLIC_BUILDER_IO_KEY}
+                        content={data.content}
+                        model="page"/>
                     {#each data.unit.content as content}
                         {#if content.__typename === "MarkdownBlock"}
                             <MarkdownRenderer markdown={content.markdown}/>

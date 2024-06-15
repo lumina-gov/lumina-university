@@ -1,9 +1,11 @@
+import { env } from "$env/dynamic/public"
 import { SubscriptionStatus } from "$lib/graphql/graphql-types"
 import { GetUnitDocument } from "$lib/hygraph/graphql-types.js"
 import { MessageType } from "$lib/types/message"
+import { fetchOneEntry } from "@builder.io/sdk-svelte"
 import { error, redirect } from "@sveltejs/kit"
 
-export async function load({ params, parent }) {
+export async function load({ params, parent, url }) {
     const data = await parent()
 
     const res = await data.hygraph.gquery(GetUnitDocument, {
@@ -33,7 +35,17 @@ export async function load({ params, parent }) {
         throw redirect(307, "/account")
     }
 
+    const content = await fetchOneEntry({
+        model: "page",
+        apiKey: env.PUBLIC_BUILDER_IO_KEY,
+        userAttributes: {
+            urlPath: url.pathname,
+        },
+    })
+
+
     return {
         unit: res.data.unit,
+        content
     }
 }

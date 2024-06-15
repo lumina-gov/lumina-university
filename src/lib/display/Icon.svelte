@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
+import type { ComponentType } from "svelte"
 
-export let icon: typeof SvelteComponent | string
+export let icon: ComponentType | string
 export let size: number | string | undefined = "1em"
 export let color: "brand" | "white" | "red" | "yellow" | "orange" | "purple" | "blue" | "yellow_green" | "green" | string | undefined = undefined
 export let opacity = 1

@@ -14,6 +14,7 @@ import DashboardCourse from "./DashboardCourse.svelte"
 import DashboardTopics from "./DashboardTopics.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 import RecentCoursesGrid from "./RecentCoursesGrid.svelte"
+import Circle from "svelte-material-icons/Circle.svelte"
 import { SubscriptionStatus } from "$lib/graphql/graphql-types"
 
 export let data
@@ -106,8 +107,43 @@ $: user = data.user_store.user
         </div>
     </div>
 {/if}
+<footer>
+    <inner>
+        <a href="https://lumina.earth">
+            A service of the Government of Lumina
+        </a>
+        <Icon
+            icon={Circle}
+            opacity={0.2}
+            size="8px"/>
+        <a href="https://warpdigital.com.au">
+            SEO by Warp Digital
+        </a>
+    </inner>
+</footer>
 <style lang="stylus">
 @import variables
+
+footer {
+    margin-top auto
+    padding 24px
+    background rgba(255, 255, 255, 0.05)
+    border-top 1px solid rgba(255, 255, 255, 0.1)
+    inner {
+        display flex
+        align-items center
+        gap 24px
+        width 100%
+        margin 0 auto
+        max-width 1200px
+    }
+
+    a {
+        color rgba(255, 255, 255, 0.5)
+        font-size 14px
+
+    }
+}
 
 .space
     padding-top 120px
